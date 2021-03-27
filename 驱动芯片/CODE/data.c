@@ -17,7 +17,7 @@
 /*======================*/
 //	编码器
 short lcod = 0,rcod = 0;
-short spd = 0;
+short spd = 100;
 short rad = 0;
 //	PID
 struct pidpara speed;
@@ -56,8 +56,8 @@ unsigned char wireless_flag[WIRELESS_FLAG] = {0, 0};//无线数据
 void Init_para(void){
 //	速度
 	speed.alpha = 0.3;
-	speed.Kp = 0.5;//反应快慢 | 超调
-	speed.Ki = 0.1;//反应力度
+	speed.Kp = 0.1;//反应快慢 | 超调
+	speed.Ki = 0.05;//反应力度
 	speed.Kd = 0;
 	speed.I = 0;
 	speed.e1 = 0, speed.e2 = 0, speed.e3 = 0;
@@ -65,17 +65,17 @@ void Init_para(void){
 	
 //	转向
 	steer.alpha = 0.3;
-	steer.Kp = 20;//反应快慢 | 超调
-	steer.Ki = 4;//反应力度
+	steer.Kp = 10;//反应快慢 | 超调
+	steer.Ki = 1;//反应力度
 	steer.Kd = 1;
 	steer.I = 0;
 	steer.e1 = 0, steer.e2 = 0, steer.e3 = 0;
 	steer.rs = 0;
 	
 //	角度
-	angle.Kp = 1.9;//力度
+	angle.Kp = 1.2;//力度
 	angle.Ki = 0;
-	angle.Kd = 10;//抖动
+	angle.Kd = 2;//抖动
 	angle.e1 = 0, angle.e2 = 0, angle.e3 = 0; 
 	angle.rs = 0;
 

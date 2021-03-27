@@ -40,8 +40,8 @@ void angle_ctrl(void){
 	if(imu_count == 3){
 	//	计算航向角、车身倾角
 		yawa[1] = yawa[0];
-		yawa[0] = atan2(2*(q1*q2 + q0*q3), q0*q0 + q1*q1 -q2*q2 -q3*q3)*5730;
-//		inc_pid(&steer, rad, yawa[0]-yawa[1], 800);
+		yawa[0] = atan2(2*(q1*q2 + q0*q3), q0*q0 + q1*q1 -q2*q2 -q3*q3)*573;
+		inc_pid(&steer, rad, yawa[0]-yawa[1], 200);
 		inc_pid(&speed, -spd, (lcod+rcod)>>1, 50);
 	}
 //	角度
@@ -52,14 +52,15 @@ void angle_ctrl(void){
 		for(i = 2; i >= 0; i--) pflit[i+1] = pflit[i];
 		pflit[0] = (asin(-2*q1*q3 + 2*q0*q2))*573;
 		pita = (pflit[0]+pflit[1]+pflit[2]+pflit[3])/4;
-		pos_pid(&angle, blcp-speed.rs, pita, 15, -15);
+		pos_pid(&angle, blcp+speed.rs, pita, 10, -10);
 	}
 //	角速度、转向速度、电机控制	
 	inc_pid(&acw, angle.rs, gy, 6000);
 	motor_act();
 //	角度显示
-//	ips200_showint16(0, 3, pita);
-//	ips200_showint16(0, 4, yawa[0]);
+	ips200_showint16(0, 3, steer.rs);
+	ips200_showint16(0, 4, yawa[0]);
+	ips200_showint16(0, 5, blcp+speed.rs);
 //	无线数据传输
 //	data_conversion(gy, acw.rs, angle.rs, pita, temp);
 }

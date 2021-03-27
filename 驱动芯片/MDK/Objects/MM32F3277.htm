@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\MM32F3277.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\MM32F3277.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sat Mar 27 21:50:45 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sat Mar 27 22:53:24 2021
 <BR><P>
 <H3>Maximum Stack Usage =        300 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -287,7 +287,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_infnan2
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
 <LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
 </UL>
@@ -297,7 +297,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
+<BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan2
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
 </UL>
@@ -307,7 +307,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
+<BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan2
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
 </UL>
@@ -319,7 +319,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;angle_ctrl
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
 </UL>
 
@@ -330,7 +330,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;angle_ctrl
 <LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_invalid
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan2
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
 </UL>
@@ -421,17 +421,17 @@ Global Symbols
 <P><STRONG><a name="[c1]"></a>__I$use$fp</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, iusefp.o(.text), UNUSED)
 
 <P><STRONG><a name="[4f]"></a>_float_round</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, fepilogue.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
-<LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
+<BR><BR>[Called By]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
 </UL>
 
 <P><STRONG><a name="[4e]"></a>_float_epilogue</STRONG> (Thumb, 92 bytes, Stack size 4 bytes, fepilogue.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = _float_epilogue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2f
-<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2f
+<BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2f
 <LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2f
 </UL>
 
 <P><STRONG><a name="[57]"></a>_double_round</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, depilogue.o(.text))
@@ -460,7 +460,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_underflow
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_infnan
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
 </UL>
 
@@ -472,7 +472,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
 <LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
+<BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
 </UL>
 
 <P><STRONG><a name="[4c]"></a>__scatterload</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, init.o(.text))
@@ -713,7 +713,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[72]"></a>Init_para</STRONG> (Thumb, 120 bytes, Stack size 0 bytes, data.o(i.Init_para))
+<P><STRONG><a name="[72]"></a>Init_para</STRONG> (Thumb, 116 bytes, Stack size 0 bytes, data.o(i.Init_para))
 <BR><BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_motor
 </UL>
 
@@ -822,8 +822,8 @@ Global Symbols
 <P><STRONG><a name="[5]"></a>UsageFault_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, common.o(i.UsageFault_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_mm32f327x_keil.o(RESET)
 </UL>
-<P><STRONG><a name="[8e]"></a>__ARM_fpclassify</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, fpclassify.o(i.__ARM_fpclassify))
-<BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
+<P><STRONG><a name="[8f]"></a>__ARM_fpclassify</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, fpclassify.o(i.__ARM_fpclassify))
+<BR><BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
 </UL>
 
@@ -833,7 +833,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
+<BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
 </UL>
 
@@ -842,7 +842,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
 </UL>
-<BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
+<BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
 </UL>
 
@@ -867,7 +867,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
 </UL>
-<BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
+<BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
 </UL>
 
@@ -877,26 +877,27 @@ Global Symbols
 
 <P><STRONG><a name="[c8]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
-<P><STRONG><a name="[8d]"></a>__set_errno</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, errno.o(i.__set_errno))
-<BR><BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
+<P><STRONG><a name="[8e]"></a>__set_errno</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, errno.o(i.__set_errno))
+<BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
 </UL>
 
 <P><STRONG><a name="[aa]"></a>afio_init</STRONG> (Thumb, 218 bytes, Stack size 20 bytes, zf_gpio.o(i.afio_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = afio_init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_pin_init
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pwm_pin_init
-<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
+<BR>[Called By]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_pin_init
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_encoder_pin_init
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_pin_init
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pwm_pin_init
 </UL>
 
-<P><STRONG><a name="[7e]"></a>angle_ctrl</STRONG> (Thumb, 798 bytes, Stack size 72 bytes, imu.o(i.angle_ctrl))
+<P><STRONG><a name="[7e]"></a>angle_ctrl</STRONG> (Thumb, 870 bytes, Stack size 72 bytes, imu.o(i.angle_ctrl))
 <BR><BR>[Stack]<UL><LI>Max Depth = 292<LI>Call Chain = angle_ctrl &rArr; MadgwickAHRSupdateIMU &rArr; invSqrt &rArr; __aeabi_frsub &rArr; __aeabi_fadd &rArr; _float_epilogue
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pos_pid
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;motor_act
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
 <LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;inc_pid
 <LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fsub
@@ -920,13 +921,13 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
 <LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_fpclassify
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_fpclassify
 <LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_underflow
 <LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_invalid
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_infnan
-<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
 <LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
@@ -934,14 +935,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;angle_ctrl
 </UL>
 
-<P><STRONG><a name="[90]"></a>atan</STRONG> (Thumb, 474 bytes, Stack size 40 bytes, atan.o(i.atan))
+<P><STRONG><a name="[91]"></a>atan</STRONG> (Thumb, 474 bytes, Stack size 40 bytes, atan.o(i.atan))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = atan &rArr; __kernel_poly &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
 <LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_fpclassify
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_fpclassify
 <LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_underflow
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_infnan
 <LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
@@ -957,16 +958,16 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
 <LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_infnan2
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
 <LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;angle_ctrl
 </UL>
 
-<P><STRONG><a name="[91]"></a>board_init</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, board.o(i.board_init))
+<P><STRONG><a name="[92]"></a>board_init</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, board.o(i.board_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = board_init &rArr; uart_init &rArr; uart_pin_init &rArr; afio_init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_init
+<BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -974,8 +975,8 @@ Global Symbols
 <P><STRONG><a name="[7d]"></a>encoder_get</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, motor.o(i.encoder_get))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = encoder_get &rArr; ips200_showint16 &rArr; ips200_showchar &rArr; ips200_address_set &rArr; ips200_wr_data16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_encoder_get_count
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
+<BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_encoder_get_count
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
 </UL>
 <BR>[Called By]<UL><LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_IRQHandler
 </UL>
@@ -1018,12 +1019,12 @@ Global Symbols
 <P><STRONG><a name="[9c]"></a>icm20602_init_spi</STRONG> (Thumb, 150 bytes, Stack size 24 bytes, seekfree_icm20602.o(i.icm20602_init_spi))
 <BR><BR>[Stack]<UL><LI>Max Depth = 100<LI>Call Chain = icm20602_init_spi &rArr; spi_init &rArr; spi_pin_init &rArr; afio_init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_init
-<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init
+<BR>[Calls]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;icm_spi_w_reg_byte
 <LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;icm_spi_r_reg_byte
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;icm20602_self3_check
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;systick_delay_ms
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1088,15 +1089,16 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data16
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_address_set
 </UL>
-<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
+<BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
 </UL>
 
-<P><STRONG><a name="[94]"></a>ips200_showint16</STRONG> (Thumb, 190 bytes, Stack size 28 bytes, seekfree_ips200_parallel8.o(i.ips200_showint16))
+<P><STRONG><a name="[8d]"></a>ips200_showint16</STRONG> (Thumb, 190 bytes, Stack size 28 bytes, seekfree_ips200_parallel8.o(i.ips200_showint16))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = ips200_showint16 &rArr; ips200_showchar &rArr; ips200_address_set &rArr; ips200_wr_data16
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showchar
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_get
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;angle_ctrl
 </UL>
 
 <P><STRONG><a name="[ad]"></a>ips200_w_data</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, seekfree_ips200_parallel8.o(i.ips200_w_data))
@@ -1133,14 +1135,14 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_init_ms
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;icm20602_init_spi
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_init
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_init
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_motor
 <LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_encoder
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
 <P><STRONG><a name="[8c]"></a>motor_act</STRONG> (Thumb, 170 bytes, Stack size 16 bytes, motor.o(i.motor_act))
-<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = motor_act &rArr; pwm_duty_updata &rArr; __aeabi_fdiv
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = motor_act &rArr; pwm_duty_updata &rArr; __aeabi_fmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pwm_duty_updata
 </UL>
@@ -1191,12 +1193,12 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[af]"></a>pwm_duty_updata</STRONG> (Thumb, 168 bytes, Stack size 40 bytes, zf_pwm.o(i.pwm_duty_updata))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = pwm_duty_updata &rArr; __aeabi_fdiv
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = pwm_duty_updata &rArr; __aeabi_fmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2f
+<BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2f
 <LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
 <LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2uiz
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;motor_act
 </UL>
@@ -1204,11 +1206,11 @@ Global Symbols
 <P><STRONG><a name="[71]"></a>pwm_init</STRONG> (Thumb, 632 bytes, Stack size 48 bytes, zf_pwm.o(i.pwm_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = pwm_init &rArr; pwm_pin_init &rArr; afio_init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2f
+<BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2f
 <LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
 <LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2uiz
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pwm_pin_init
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
 </UL>
 <BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_motor
 </UL>
@@ -1229,10 +1231,10 @@ Global Symbols
 <LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;icm_spi_r_reg_byte
 </UL>
 
-<P><STRONG><a name="[8f]"></a>sqrt</STRONG> (Thumb, 76 bytes, Stack size 24 bytes, sqrt.o(i.sqrt))
+<P><STRONG><a name="[90]"></a>sqrt</STRONG> (Thumb, 76 bytes, Stack size 24 bytes, sqrt.o(i.sqrt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = sqrt &rArr; _dsqrt &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
+<BR>[Calls]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsqrt
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
@@ -1252,7 +1254,7 @@ Global Symbols
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;icm20602_self3_check
 </UL>
 
-<P><STRONG><a name="[93]"></a>tim_encoder_get_count</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, zf_tim.o(i.tim_encoder_get_count))
+<P><STRONG><a name="[94]"></a>tim_encoder_get_count</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, zf_tim.o(i.tim_encoder_get_count))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = tim_encoder_get_count
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_get
@@ -1274,12 +1276,12 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[92]"></a>uart_init</STRONG> (Thumb, 392 bytes, Stack size 24 bytes, zf_uart.o(i.uart_init))
+<P><STRONG><a name="[93]"></a>uart_init</STRONG> (Thumb, 392 bytes, Stack size 24 bytes, zf_uart.o(i.uart_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = uart_init &rArr; uart_pin_init &rArr; afio_init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_pin_init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_init
+<BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_init
 </UL>
 <P>
 <H3>
@@ -1335,7 +1337,7 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;afio_init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_init
+<BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_init
 </UL>
 
 <P><STRONG><a name="[a0]"></a>icm20602_self3_check</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, seekfree_icm20602.o(i.icm20602_self3_check))
