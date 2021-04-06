@@ -30,8 +30,8 @@ void encoder_get(void){
 	lcod = tim_encoder_get_count(TIM_3);
 	rcod = -tim_encoder_get_count(TIM_4);
 //	在屏幕上显示编码器计数值	
-	ips200_showint16(0, 0, lcod);                 
-	ips200_showint16(0, 1, rcod);
+//	ips200_showint16(0, 0, lcod);                 
+//	ips200_showint16(0, 1, rcod);
 //	无线串口发送数据
 //	data_conversion(lcod, ltcod, rcod, rtcod, temp);
 }

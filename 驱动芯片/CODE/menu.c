@@ -3,7 +3,7 @@
 /*==============================================================*/
 #include "menu.h"
 #include "Init.h"
-#include "menu_2.h"
+//#include "menu_2.h"
 #include "string.h"
 #include "zf_gpio.h"
 #include "SEEKFREE_IPS200_PARALLEL8.h"
@@ -189,60 +189,60 @@ static char menu_limit(char index, char num){
 /*------------------------------*/
 /*		 按键过渡菜单模块		*/
 /*==============================*/
-static void menu_selection(unsigned char event){
-//	变量定义
-	static char menu[4];
-	static char index;
-	static char menu_level;
-//	一级菜单
-	if(!menu_level){
-	//	菜单事件分支
-		switch(event){
-			case 6://右按键
-				if(menu_limit(index, menu[index])) menu[index]++;
-				else return;
-				break;
-			
-			case 4://左按键
-				if(menu[index] > 0) menu[index]--;
-				else return;
-				break;
-			
-			case 2://上按键
-				if(index>0) index--;
-				else index = index_limit;
-				break;
-			
-			case 5://下按键
-				if(index<index_limit) index++;
-				else index = 0;
-				break;
-			
-			case 1://确定键
-			//	初始化二级菜单
-				menu2_init(index, menu[index]);
-				menu2display(index);
-				menu_level = 1;
-				return;
-			case 3:break;
-		}
-		display(index, &menu[0]);
-	}
-//	次级菜单
-	else{	
-		switch(event){
-			case 3://返回键 
-				menu_level = 0;
-				menu2_slect(event);
-				display(index, &menu[0]);
-				break;
-			
-			default://其他按键
-				menu2_slect(event);
-				break; 
-		}
-	}
-}
+//static void menu_selection(unsigned char event){
+////	变量定义
+//	static char menu[4];
+//	static char index;
+//	static char menu_level;
+////	一级菜单
+//	if(!menu_level){
+//	//	菜单事件分支
+//		switch(event){
+//			case 6://右按键
+//				if(menu_limit(index, menu[index])) menu[index]++;
+//				else return;
+//				break;
+//			
+//			case 4://左按键
+//				if(menu[index] > 0) menu[index]--;
+//				else return;
+//				break;
+//			
+//			case 2://上按键
+//				if(index>0) index--;
+//				else index = index_limit;
+//				break;
+//			
+//			case 5://下按键
+//				if(index<index_limit) index++;
+//				else index = 0;
+//				break;
+//			
+//			case 1://确定键
+//			//	初始化二级菜单
+//				menu2_init(index, menu[index]);
+//				menu2display(index);
+//				menu_level = 1;
+//				return;
+//			case 3:break;
+//		}
+//		display(index, &menu[0]);
+//	}
+////	次级菜单
+//	else{	
+//		switch(event){
+//			case 3://返回键 
+//				menu_level = 0;
+//				menu2_slect(event);
+//				display(index, &menu[0]);
+//				break;
+//			
+//			default://其他按键
+//				menu2_slect(event);
+//				break; 
+//		}
+//	}
+//}
 
 //----------------------------分割线----------------------------//
 /*--------------------------------------------------------------*/
@@ -251,67 +251,67 @@ static void menu_selection(unsigned char event){
 /*------------------------------*/
 /*		 引脚状态反转模块		*/
 /*==============================*/
-void dir(unsigned char dirc){
-	switch(dirc){
-	//	默认方向
-		case 0:
-		//	变更方向
-			gpio_dir(column1,GPO);
-			gpio_dir(column2,GPO);
-			gpio_dir(column3,GPO);		
-			gpio_dir(row1,GPI);
-			gpio_dir(row2,GPI);
-		//	变更状态
-			gpio_set(column1, 0);
-			gpio_set(column2, 0);
-			gpio_set(column3, 0);
-			gpio_set(row1, 1);
-			gpio_set(row2, 1);
-		break;
-	//	反转方向
-		case 1:	
-		//	变更方向
-			gpio_dir(column1,GPI);
-			gpio_dir(column2,GPI);
-			gpio_dir(column3,GPI);			
-			gpio_dir(row1,GPO);
-			gpio_dir(row2,GPO);			
-		//	变更状态
-			gpio_set(column1, 1);
-			gpio_set(column2, 1);
-			gpio_set(column3, 1);
-			gpio_set(row1, 0);
-			gpio_set(row2, 0);
-		break;
-	}
-}
+//void dir(unsigned char dirc){
+//	switch(dirc){
+//	//	默认方向
+//		case 0:
+//		//	变更方向
+//			gpio_dir(column1,GPO);
+//			gpio_dir(column2,GPO);
+//			gpio_dir(column3,GPO);		
+//			gpio_dir(row1,GPI);
+//			gpio_dir(row2,GPI);
+//		//	变更状态
+//			gpio_set(column1, 0);
+//			gpio_set(column2, 0);
+//			gpio_set(column3, 0);
+//			gpio_set(row1, 1);
+//			gpio_set(row2, 1);
+//		break;
+//	//	反转方向
+//		case 1:	
+//		//	变更方向
+//			gpio_dir(column1,GPI);
+//			gpio_dir(column2,GPI);
+//			gpio_dir(column3,GPI);			
+//			gpio_dir(row1,GPO);
+//			gpio_dir(row2,GPO);			
+//		//	变更状态
+//			gpio_set(column1, 1);
+//			gpio_set(column2, 1);
+//			gpio_set(column3, 1);
+//			gpio_set(row1, 0);
+//			gpio_set(row2, 0);
+//		break;
+//	}
+//}
 /*------------------------------*/
 /*		   列值判断模块			*/
 /*==============================*/
-static unsigned char col_jug(void){
-//	返回触发列数
-	if(gpio_get(column1) == 0) return 1;                                      				
-	else if(gpio_get(column2) == 0) return 2;                                       			
-	else return 3;                                       			
-}
+//static unsigned char col_jug(void){
+////	返回触发列数
+//	if(gpio_get(column1) == 0) return 1;                                      				
+//	else if(gpio_get(column2) == 0) return 2;                                       			
+//	else return 3;                                       			
+//}
 /*------------------------------*/
 /*		   按键判断模块			*/
 /*==============================*/
-void trig_jug(void){
-//	char menu[4] = {0,1,2,0};
-//	display(2, menu);
-//	第一行触发
-	if(!(gpio_get(row1))){
-		dir(1);
-		menu_selection(0+col_jug());
-		dir(0);
-		while(!(gpio_get(row1)));
-	}
-//	第二行触发
-	if(!(gpio_get(row2))){
-		dir(1);
-		menu_selection(3+col_jug());
-		dir(0);
-		while(!(gpio_get(row2)));
-	}
-}
+//void trig_jug(void){
+////	char menu[4] = {0,1,2,0};
+////	display(2, menu);
+////	第一行触发
+//	if(!(gpio_get(row1))){
+//		dir(1);
+//		menu_selection(0+col_jug());
+//		dir(0);
+//		while(!(gpio_get(row1)));
+//	}
+////	第二行触发
+//	if(!(gpio_get(row2))){
+//		dir(1);
+//		menu_selection(3+col_jug());
+//		dir(0);
+//		while(!(gpio_get(row2)));
+//	}
+//}

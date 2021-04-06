@@ -24,7 +24,11 @@
 #include "common.h"
 #include "SEEKFREE_FONT.h"
 
-     
+/*--------------------------------------------------------------*/
+/* 							 变量定义 							*/
+/*==============================================================*/
+extern unsigned short ips200_pencolor;
+extern unsigned short ips200_bgcolor;     
 // 常用颜色在SEEKFREE_FONT.h文件中定义
 #define IPS200_BGCOLOR		WHITE	//背景颜色
 #define IPS200_PENCOLOR		RED		//画笔颜色

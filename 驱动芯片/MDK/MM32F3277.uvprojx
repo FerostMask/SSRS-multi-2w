@@ -452,6 +452,11 @@
               <FileType>1</FileType>
               <FilePath>..\CODE\CSI.c</FilePath>
             </File>
+            <File>
+              <FileName>menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CODE\menu.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

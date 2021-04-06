@@ -53,6 +53,12 @@
 
 #include "hal_fsmc.h"
 #include "hal_rcc.h"
+/*--------------------------------------------------------------*/
+/* 							 变量定义 							*/
+/*==============================================================*/
+//	颜色定义
+unsigned short ips200_pencolor = 0xB6DB;
+unsigned short ips200_bgcolor = 0xFFFF;
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      内部调用，用户无需关心
@@ -327,8 +333,8 @@ void ips200_showchar(uint16 x,uint16 y,const int8 dat)
 		temp = tft_ascii[(uint16)dat-32][i];//减32因为是取模是从空格开始取得 空格在ascii中序号是32
 		for(j=0; j<8; j++)
 		{
-			if(temp&0x01)	ips200_wr_data16(IPS200_PENCOLOR);
-			else			ips200_wr_data16(IPS200_BGCOLOR);
+			if(temp&0x01)	ips200_wr_data16(ips200_pencolor);
+			else			ips200_wr_data16(ips200_bgcolor);
 			temp>>=1;
 		}
 	}
