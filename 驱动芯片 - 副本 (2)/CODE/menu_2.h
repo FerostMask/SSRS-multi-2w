@@ -9,10 +9,9 @@
 /*------------------------------*/
 /*		    菜单基础部分		*/
 /*==============================*/
-void menu2_init(unsigned char index, unsigned char num);
-static void menu2value(unsigned char index, unsigned char menu_level);
-void menu2display(unsigned char index);
-void menu2_slect(unsigned char event);
+void menu2_init(void);
+void menu2_display(void);
+void menu2_select(unsigned char event);
 /*------------------------------*/
 /*		   数值监视模块			*/
 /*==============================*/

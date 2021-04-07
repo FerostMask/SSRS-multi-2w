@@ -38,16 +38,22 @@ short blcp = 245;
 /*----------------------*/
 /*	 	 菜单模块		*/
 /*======================*/
-//	一级菜单名
-unsigned char first_nom[128];
+//	汉字数组
+unsigned char nom[128];
+//	一级菜单
+unsigned char menu[ROWS];
+unsigned char menu_level;
+unsigned char menu_index = 0;
+//	二级菜单
+unsigned char menu2_index = 0;
+unsigned char menu2_level = 0;
 //	标志位
 unsigned char fixedflag = 0;//固定显示
 unsigned char monitorflag = 0;//监视器
 unsigned char csimenu_flag[CSIMENU_FLAG] = {0, 0};//摄像头
 unsigned char wireless_flag[WIRELESS_FLAG] = {0, 0};//无线数据
-unsigned char menu_level;
-
-void(*menu_pfc[])(unsigned char) = {menu_selection, menu2_slect};
+//	函数指针
+void(*menu_pfc[])(unsigned char) = {menu_select, menu2_select};
 
 /*--------------------------------------------------------------*/
 /* 							 函数定义 							*/

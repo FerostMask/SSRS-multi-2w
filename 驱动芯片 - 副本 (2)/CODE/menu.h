@@ -9,9 +9,9 @@
 /*----------------------*/
 /*	 	 菜单部分		*/
 /*======================*/
-static void display(char index, char menu[4]);
+void menu_display(void);
 static char menu_limit(char index, char num);
-void menu_selection(unsigned char event);
+void menu_select(unsigned char event);
 /*----------------------*/
 /*	 	 按键部分		*/
 /*======================*/

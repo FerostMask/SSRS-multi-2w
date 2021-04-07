@@ -45,17 +45,6 @@ void Init_motor(void){
 /*------------------------------*/
 /*		  按键初始化模块		*/
 /*==============================*/
-//void Init_button(void){
-////	列引脚下拉输出
-//	gpio_init(column1, GPO, 0, GPIO_PIN_CONFIG);
-//	gpio_init(column2, GPO, 0, GPIO_PIN_CONFIG);
-//	gpio_init(column3, GPO, 0, GPIO_PIN_CONFIG);
-////	行引脚上拉输入
-//	gpio_init(row1, GPI, 1, GPIO_PIN_CONFIG);
-//	gpio_init(row2, GPI, 1, GPIO_PIN_CONFIG);
-//	dir(0);
-//}
-
 void Init_button(void){
 //	按键中断初始化 | 最低优先级
 	exti_interrupt_init(KEY1, EXTI_Trigger_Falling, 3, 3);

@@ -58,9 +58,9 @@ void angle_ctrl(void){
 	inc_pid(&acw, angle.rs, gy, 6000);
 	motor_act();
 //	角度显示
-	ips200_showint16(0, 3, steer.rs);
-	ips200_showint16(0, 4, yawa[0]);
-	ips200_showint16(0, 5, blcp+speed.rs);
+//	ips200_showint16(0, 3, steer.rs);
+//	ips200_showint16(0, 4, yawa[0]);
+//	ips200_showint16(0, 5, blcp+speed.rs);
 //	无线数据传输
 //	data_conversion(gy, acw.rs, angle.rs, pita, temp);
 }
