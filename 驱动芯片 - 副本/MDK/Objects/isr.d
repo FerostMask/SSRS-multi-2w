@@ -89,4 +89,5 @@
 .\objects\isr.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_WIRELESS.h
 .\objects\isr.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_MT9V03X.h
 .\objects\isr.o: ..\USER\inc\isr.h
+.\objects\isr.o: ..\CODE\data.h
 .\objects\isr.o: ..\CODE\motor.h

@@ -26,8 +26,6 @@ void Init_motor(void){
 	pwm_init(TIM_5, MOTOR_R0, 17000, 0);
 	pwm_init(TIM_5, MOTOR_L1, 17000, 0);
 	pwm_init(TIM_5, MOTOR_L0, 17000, 0);
-//	参数初始化
-	Init_para();
 }
 /*------------------------------*/
 /*		按键中断初始化模块		*/

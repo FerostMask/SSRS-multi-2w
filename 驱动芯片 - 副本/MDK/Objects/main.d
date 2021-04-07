@@ -89,3 +89,4 @@
 .\objects\main.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_WIRELESS.h
 .\objects\main.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_MT9V03X.h
 .\objects\main.o: ..\CODE\Init.h
+.\objects\main.o: ..\CODE\data.h
