@@ -53,12 +53,11 @@ extern struct pidpara acw;
 /*----------------------*/
 /*	   角度控制模块		*/
 /*======================*/
-extern short pita;
-extern short yawa[2];
-extern short yfilt[4];
-extern short gy;
-extern short pflit[4];
 extern short blcp;
+extern short pita;
+extern short gy, gz;
+extern short yfilt[4];
+extern short pflit[4];
 
 /*----------------------*/
 /*	 	 菜单模块		*/

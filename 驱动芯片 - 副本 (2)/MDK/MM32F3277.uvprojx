@@ -433,11 +433,6 @@
               <FilePath>..\CODE\MadgwickAHRS.c</FilePath>
             </File>
             <File>
-              <FileName>model.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\CODE\model.c</FilePath>
-            </File>
-            <File>
               <FileName>motor.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\CODE\motor.c</FilePath>
@@ -446,11 +441,6 @@
               <FileName>pid.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\CODE\pid.c</FilePath>
-            </File>
-            <File>
-              <FileName>CSI.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\CODE\CSI.c</FilePath>
             </File>
             <File>
               <FileName>menu.c</FileName>

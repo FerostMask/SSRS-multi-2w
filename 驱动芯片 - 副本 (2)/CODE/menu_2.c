@@ -106,6 +106,7 @@ void menu2_init(void){
 		case 3://监视器
 		//	开启中断显示
 //			pit_interrupt_ms(PIT_CH2,40);
+			tim_interrupt_init_ms(TIM_6, 40, 1, 3);
 			menu2flag = 2;
 			monitorflag = 1;
 			break;
@@ -429,7 +430,7 @@ void monitor(void){
 	switch(menu[menu_index]){
 		case 0:
 			ips200_showint16(120, 15, pita);
-			ips200_showint16(120, 16, yawa[0]);
+			ips200_showint16(120, 16, gz);
 			ips200_showint16(120, 17, lcod);
 			ips200_showint16(120, 18, rcod);
 			break;
@@ -448,7 +449,7 @@ void fixed_monitor(void){
 			ips200_display_chinese(0, 48, 16, nom, info(menu_index, 3), 0XFDF8);
 		//	数值显示
 			ips200_showint16(120, 0, pita);
-			ips200_showint16(120, 1, yawa[0]);
+			ips200_showint16(120, 1, gz);
 			ips200_showint16(120, 2, lcod);
 			ips200_showint16(120, 3, rcod);
 			break;
@@ -577,7 +578,7 @@ void menu2_select(unsigned char event){
 		menu_level = 0;
 		menu_display();
 	//	操作定时器
-//		if(!fixedflag) pit_close(PIT_CH2);
+		if(!fixedflag) tim_interrupt_disabnle(TIM_6);
 //		pit_interrupt_ms(PIT_CH0,2);
 		return;
 	}

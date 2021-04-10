@@ -1,5 +1,0 @@
---c99 --gnu -c --cpu Cortex-M3 -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections --signed_chars -I ..\CODE -I ..\USER\src -I ..\USER\inc -I ..\..\Libraries\seekfree_libraries\common -I ..\..\\Libraries\seekfree_libraries\board -I ..\..\Libraries\seekfree_libraries\system -I ..\..\Libraries\seekfree_libraries -I ..\..\Libraries\seekfree_peripheral -I ..\..\Libraries\Device\CMSIS\KEIL_Core -I ..\..\Libraries\Device\MM32F327x\Include -I ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc
--I.\RTE\_MM32F3277_Demo
--ID:\Software\Keil_MDK5\ARM\CMSIS\Include
--D__UVISION_VERSION="528" -DENABLEFSMC
--o .\objects\menu_2.o --omf_browse .\objects\menu_2.crf --depend .\objects\menu_2.d "..\CODE\menu_2.c"

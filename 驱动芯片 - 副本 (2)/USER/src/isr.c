@@ -16,13 +16,17 @@
 * @Taobao			https://seekfree.taobao.com/
 * @date				2021-02-22
 ********************************************************************************************************************/
-
+/*--------------------------------------------------------------*/
+/*							头文件加载							*/
+/*==============================================================*/
 #include "headfile.h"
 #include "isr.h"
 #include "motor.h"
 #include "menu.h"
 #include "data.h"
-
+/*------------------------------*/
+/*		    定时器中断			*/
+/*==============================*/
 void TIM1_UP_IRQHandler (void)
 {
 	uint32 state = TIM1->SR;														// 读取中断状态
@@ -44,20 +48,20 @@ void TIM2_IRQHandler (void)
 //	get_icm20602_gyro_spi();
 //	获取编码器数据
 	encoder_get();
-	angle_ctrl();
+//	angle_ctrl();
 }
-
+//	电机
 void TIM5_IRQHandler (void){
 	uint32 state = TIM5->SR;														// 读取中断状态
 	TIM5->SR &= ~state;																// 清空中断状态
 }
-
+//	编码器
 void TIM3_IRQHandler (void)
 {
 	uint32 state = TIM3->SR;														// 读取中断状态
 	TIM3->SR &= ~state;																// 清空中断状态
 }
-
+//	编码器
 void TIM4_IRQHandler (void)
 {
 	uint32 state = TIM4->SR;														// 读取中断状态
@@ -68,6 +72,7 @@ void TIM6_IRQHandler (void)
 {
 	uint32 state = TIM6->SR;														// 读取中断状态
 	TIM6->SR &= ~state;																// 清空中断状态
+	if(monitorflag) monitor();
 }
 
 void TIM7_IRQHandler (void)
@@ -75,7 +80,9 @@ void TIM7_IRQHandler (void)
 	uint32 state = TIM7->SR;														// 读取中断状态
 	TIM7->SR &= ~state;																// 清空中断状态
 }
-
+/*------------------------------*/
+/*		     串口中断			*/
+/*==============================*/
 void UART1_IRQHandler(void)
 {
 	if(UART1->ISR & UART_ISR_TX_INTF)												// 串口发送缓冲空中断
@@ -182,12 +189,14 @@ void UART8_IRQHandler(void)
 		}
 	}
 }
-
+/*------------------------------*/
+/*		     外部中断			*/
+/*==============================*/
 void EXTI0_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line0);														// 清除 line0 触发标志
-	(*menu_pfc[menu_level])(2);
+	(*menu_pfc[menu_level])(1);
 	
 }
 
@@ -195,7 +204,7 @@ void EXTI1_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line1);														// 清除 line1 触发标志
-	(*menu_pfc[menu_level])(1);
+	(*menu_pfc[menu_level])(2);
 }
 
 void EXTI2_IRQHandler(void)
@@ -209,7 +218,7 @@ void EXTI3_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line3);														// 清除 line3 触发标志
-	(*menu_pfc[menu_level])(5);
+	(*menu_pfc[menu_level])(4);
 }
 
 void EXTI4_IRQHandler(void)
@@ -279,10 +288,12 @@ void EXTI15_10_IRQHandler (void)
 	if(EXTI_GetITStatus(EXTI_Line14))												// 检测 line14 是否触发
 	{
 		EXTI_ClearFlag(EXTI_Line14);												// 清除 line14 触发标志
+		(*menu_pfc[menu_level])(5);
 	}
 	if(EXTI_GetITStatus(EXTI_Line15))												// 检测 line15 是否触发
 	{
 		EXTI_ClearFlag(EXTI_Line15);												// 清除 line15 触发标志
+		(*menu_pfc[menu_level])(6);
 	}
 }
 

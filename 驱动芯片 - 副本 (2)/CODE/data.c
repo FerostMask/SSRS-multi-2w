@@ -28,12 +28,11 @@ struct pidpara acw;
 /*----------------------*/
 /*	   角度控制模块		*/
 /*======================*/
-short pita = 0;
-short yawa[2] = {0 ,0};
-short yfilt[4] = {0, 0, 0, 0};
-short gy = 0;
-short pflit[4] = {0,0,0,0};
 short blcp = 245;
+short pita;
+short gy, gz;
+short yfilt[4] = {0, 0, 0, 0};
+short pflit[4] = {0, 0, 0, 0};
 
 /*----------------------*/
 /*	 	 菜单模块		*/
