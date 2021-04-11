@@ -3,7 +3,8 @@
 .\objects\init.o: ..\CODE\Init.h
 .\objects\init.o: ..\CODE\data.h
 .\objects\init.o: ..\CODE\menu_2.h
-.\objects\init.o: ..\..\Libraries\seekfree_libraries\zf_pwm.h
+.\objects\init.o: ..\CODE\data.h
+.\objects\init.o: ..\..\Libraries\seekfree_libraries\zf_adc.h
 .\objects\init.o: ..\..\Libraries\seekfree_libraries\common\common.h
 .\objects\init.o: ..\..\Libraries\Device\MM32F327x\Include\reg_common.h
 .\objects\init.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -25,8 +26,8 @@
 .\objects\init.o: ..\..\Libraries\Device\MM32F327x\Include\reg_fsmc.h
 .\objects\init.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\init.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\init.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_tim.h
 .\objects\init.o: ..\..\Libraries\seekfree_libraries\zf_tim.h
+.\objects\init.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_tim.h
 .\objects\init.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_misc.h
 .\objects\init.o: ..\..\Libraries\seekfree_libraries\zf_gpio.h
 .\objects\init.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_gpio.h

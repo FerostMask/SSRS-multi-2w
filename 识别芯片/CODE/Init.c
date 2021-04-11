@@ -3,9 +3,9 @@
 /*==============================================================*/
 #include "menu.h"
 #include "Init.h"
-#include "zf_pwm.h"
-#include "zf_gpio.h"
+#include "zf_adc.h"
 #include "zf_tim.h"
+#include "zf_gpio.h"
 #include "zf_exti.h"
 /*--------------------------------------------------------------*/
 /*							  宏定义							*/
@@ -21,28 +21,6 @@
 /* 							 函数定义 							*/
 /*==============================================================*/
 /*------------------------------*/
-/*		 编码器初始化模块		*/
-/*==============================*/
-void Init_encoder(void){
-//	编码器引脚初始化	
-	tim_encoder_init(TIM_3, TIM_3_ENC1_B04, TIM_3_ENC2_B05);
-	tim_encoder_init(TIM_4, TIM_4_ENC1_B06, TIM_4_ENC2_B07);
-}
-/*------------------------------*/
-/*		  电机初始化模块		*/
-/*==============================*/
-void Init_motor(void){
-//	端口初始化
-//	电机引脚初始化 默认频率17kHz 初始占空比 0%
-	pwm_init(TIM_5, MOTOR_R1, 17000, 0);
-	pwm_init(TIM_5, MOTOR_R0, 17000, 0);
-	pwm_init(TIM_5, MOTOR_L1, 17000, 0);
-	pwm_init(TIM_5, MOTOR_L0, 17000, 0);
-//	PID参数初始化
-	Init_para();
-}
-
-/*------------------------------*/
 /*		  按键初始化模块		*/
 /*==============================*/
 void Init_button(void){
@@ -53,4 +31,21 @@ void Init_button(void){
 	exti_interrupt_init(KEY4, EXTI_Trigger_Falling, 3, 3);
 	exti_interrupt_init(KEY5, EXTI_Trigger_Falling, 3, 3);
 	exti_interrupt_init(KEY6, EXTI_Trigger_Falling, 3, 3);
+}
+/*------------------------------*/
+/*		  电磁初始化模块		*/
+/*==============================*/
+void eident_init(void){
+//	电磁引脚初始化 | 分辨率：12位
+	adc_init(ADC_MOD1, ADC_PIN0, ADC_12BIT);
+	adc_init(ADC_MOD1, ADC_PIN1, ADC_12BIT);
+	adc_init(ADC_MOD1, ADC_PIN2, ADC_12BIT);
+	adc_init(ADC_MOD1, ADC_PIN3, ADC_12BIT);
+	adc_init(ADC_MOD1, ADC_PIN4, ADC_12BIT);
+//	引脚赋值
+	adc0.pin = ADC_PIN0;
+	adc1.pin = ADC_PIN1;
+	adc2.pin = ADC_PIN2;
+	adc3.pin = ADC_PIN3;
+	adc4.pin = ADC_PIN4;
 }

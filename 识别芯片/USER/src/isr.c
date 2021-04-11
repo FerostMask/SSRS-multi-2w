@@ -46,35 +46,53 @@ void TIM2_IRQHandler (void)
 	TIM2->SR &= ~state;																// 清空中断状态
 //	代码编写区域
 	single_ch_filter(&adc0);
+	single_ch_filter(&adc1);
+	single_ch_filter(&adc2);
+	single_ch_filter(&adc3);
+	single_ch_filter(&adc4);
 }
-
+//	电机
 void TIM5_IRQHandler (void){
 	uint32 state = TIM5->SR;														// 读取中断状态
 	TIM5->SR &= ~state;																// 清空中断状态
 }
-
+//	编码器
 void TIM3_IRQHandler (void)
 {
 	uint32 state = TIM3->SR;														// 读取中断状态
 	TIM3->SR &= ~state;																// 清空中断状态
 }
-
+//	编码器
 void TIM4_IRQHandler (void)
 {
 	uint32 state = TIM4->SR;														// 读取中断状态
 	TIM4->SR &= ~state;																// 清空中断状态
 }
-
+//	监视器、电磁极值采集
 void TIM6_IRQHandler (void)
 {
 	uint32 state = TIM6->SR;														// 读取中断状态
 	TIM6->SR &= ~state;																// 清空中断状态
+//	代码编写区域
+	if(excollflag)
+	//	电磁最值获取
+		switch(excollflag){
+			case 1:adc_extreme(&adc0);break;
+			case 2:adc_extreme(&adc1);break;
+			case 3:adc_extreme(&adc2);break;
+			case 4:adc_extreme(&adc3);break;
+			case 5:adc_extreme(&adc4);break;
+		}
+		if(monitorflag) monitor();
+		if(fixedflag) fixed_monitor();
 }
 
 void TIM7_IRQHandler (void)
 {
 	uint32 state = TIM7->SR;														// 读取中断状态
 	TIM7->SR &= ~state;																// 清空中断状态
+//	代码编写区域
+	
 }
 /*------------------------------*/
 /*		     串口中断			*/
@@ -192,28 +210,32 @@ void EXTI0_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line0);														// 清除 line0 触发标志
-
+	menu_pfc[menu_level](2);
+	while(!gpio_get(D0));
 }
 
 void EXTI1_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line1);														// 清除 line1 触发标志
-
+	menu_pfc[menu_level](1);
+	while(!gpio_get(D1));
 }
 
 void EXTI2_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line2);														// 清除 line2 触发标志
-
+	menu_pfc[menu_level](3);
+	while(!gpio_get(D2));
 }
 
 void EXTI3_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line3);														// 清除 line3 触发标志
-
+	menu_pfc[menu_level](5);
+	while(!gpio_get(D3));
 }
 
 void EXTI4_IRQHandler(void)

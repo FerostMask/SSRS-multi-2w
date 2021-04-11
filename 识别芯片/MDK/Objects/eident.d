@@ -1,8 +1,10 @@
 .\objects\eident.o: ..\CODE\eident.c
-.\objects\eident.o: ..\CODE\eident.h
+.\objects\eident.o: ..\CODE\Init.h
 .\objects\eident.o: ..\CODE\data.h
 .\objects\eident.o: ..\CODE\menu.h
 .\objects\eident.o: ..\CODE\menu_2.h
+.\objects\eident.o: ..\CODE\data.h
+.\objects\eident.o: ..\CODE\eident.h
 .\objects\eident.o: ..\..\Libraries\seekfree_libraries\zf_adc.h
 .\objects\eident.o: ..\..\Libraries\seekfree_libraries\common\common.h
 .\objects\eident.o: ..\..\Libraries\Device\MM32F327x\Include\reg_common.h

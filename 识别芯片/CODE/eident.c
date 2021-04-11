@@ -1,29 +1,14 @@
 /*--------------------------------------------------------------*/
 /*							头文件加载							*/
 /*==============================================================*/
+#include "Init.h"
+#include "menu_2.h"
 #include "eident.h"
 #include "zf_adc.h"
 #include "SEEKFREE_IPS200_PARALLEL8.h"
 /*--------------------------------------------------------------*/
 /* 							 函数定义 							*/
 /*==============================================================*/
-/*----------------------*/
-/*	 	电磁初始化		*/
-/*======================*/
-void eident_init(void){
-//	电磁引脚初始化 | 分辨率：12位
-	adc_init(ADC_MOD1, ADC_PIN0, ADC_12BIT);
-	adc_init(ADC_MOD1, ADC_PIN1, ADC_12BIT);
-	adc_init(ADC_MOD1, ADC_PIN2, ADC_12BIT);
-	adc_init(ADC_MOD1, ADC_PIN3, ADC_12BIT);
-	adc_init(ADC_MOD1, ADC_PIN4, ADC_12BIT);
-//	引脚赋值
-	adc0.pin = ADC_PIN0;
-	adc1.pin = ADC_PIN1;
-	adc2.pin = ADC_PIN2;
-	adc3.pin = ADC_PIN3;
-	adc4.pin = ADC_PIN4;
-}
 /*----------------------*/
 /*	    单通道滤波		*/
 /*======================*/
@@ -57,5 +42,21 @@ void single_ch_filter(struct adcpara *para){
 		if(para->value < para->min) para->value = para->min;
 	//	归一化
 		para->value = 100*(para->value-para->min)/(para->max-para->min);
-		ips200_showint16(0, 0, para->value);
+}
+/*----------------------*/
+/*	     电磁最值		*/
+/*======================*/
+void adc_extreme(struct adcpara *para){
+//	变量定义
+	unsigned short adc_colltemp;
+//	ADC采集、最值比较
+	adc_colltemp = adc_convert(ADC_MOD1, para->pin);
+	if(para->max < adc_colltemp) para->max = adc_colltemp;
+	if(para->min > adc_colltemp) para->min = adc_colltemp;
+//	刷新高亮数值
+	ips200_pencolor = 0xFFFF;
+	ips200_bgcolor = 0xB6DB;
+	menu2value_hl();
+	ips200_pencolor = 0xB6DB;
+	ips200_bgcolor = 0xFFFF;
 }

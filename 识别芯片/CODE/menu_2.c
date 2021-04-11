@@ -1,19 +1,21 @@
 /*--------------------------------------------------------------*/
 /*							头文件加载							*/
 /*==============================================================*/
-#include "data.h"
 #include "menu.h"
+#include "Init.h"
 #include "motor.h"
+#include "zf_adc.h"
 #include "menu_2.h"
 #include "zf_pit.h"
 #include "SEEKFREE_IPS200_PARALLEL8.h"
 /*--------------------------------------------------------------*/
 /* 							 变量定义 							*/
 /*==============================================================*/
+//	二级菜单相关	
 unsigned char menu2_limit = 0;
-unsigned char fixedindex;//固定显示| 列索引
 unsigned char menu2flag = 1;//次级菜单进入标志位
 unsigned char menu2mode = 0;//菜单显示模式
+unsigned char fixedindex = 0;
 //	修改倍数相关
 unsigned char magflag = 1;
 unsigned char magindex = 1;
@@ -31,7 +33,7 @@ float *value0, *value1, *value2, *value3, *value4;
 void menu2_init(void){
 //	初始化数值
 	menu2flag = 1;
-	magflag = 1;
+	magflag = 0;
 	menu2_index = 0;
 //	初始化模块
 	switch(menu_index){
@@ -40,84 +42,57 @@ void menu2_init(void){
 			menu2flag = 3;//切换为开关
 			switch(menu[menu_index]){
 				case 0:
-					menu2mode = 0;//显示模式
+					menu2mode = 0;//显示页面0
 					menu2_limit = CSIMENU_FLAG-1;//索引限制
 					break;
 				case 1:
-					menu2mode = 1;//显示模式
+					menu2mode = 1;//显示页面1
 					menu2_limit = WIRELESS_FLAG-1;//索引限制
 					break;
 			}
 			break;
 		case 1:
-		//	关闭角度控制
-			acw.rs = 0;
-			steer.rs = 0;
-			motor_act();
-//			pit_close(PIT_CH0);
 			switch(menu[menu_index]){
-				case 0://角速度
-					value0 = &acw.alpha;
-					value1 = &acw.Kp;
-					value2 = &acw.Ki;
-					value3 = &acw.Kd;
-					menu2_limit = 3;
+				case 0://电磁设置
+					magflag = 0;
+					menu2flag = 4;
+					menu2_limit = 4;
 					menu2mode = 0;
 					break;
-				case 1://角度
-					value0 = &angle.Kp;
-					value1 = &angle.Kd;
-					menu2_limit = 1;
-					menu2mode = 1;
-					break;
-				case 2://速度
-					value0 = &speed.alpha;
-					value1 = &speed.Kp;
-					value2 = &speed.Ki;
-					value3 = &speed.Kd;
-					menu2_limit = 3;
-					menu2mode = 0;
-					break;
-				case 3://转向
-					value0 = &steer.alpha;
-					value1 = &steer.Kp;
-					value2 = &steer.Ki;
-					value3 = &steer.Kd;
-					menu2_limit = 3;
-					menu2mode = 0;
-					break;
+//				case 1://转向
+//					value0 = &angle.Kp;
+//					value1 = &angle.Kd;
+//					menu2_limit = 1;
+//					menu2mode = 1;
+//					magflag = 1;
+//					break;
 			}
 			break;
 		case 2://姿态
-			acw.rs = 0;
-			steer.rs = 0;
-			motor_act();
 //			pit_close(PIT_CH0);
 			switch(menu[menu_index]){
 				case 0:
-					shortvalue0 = &spd;
-					shortvalue1 = &rad;
-					shortvalue2 = &blcp;
+//					shortvalue0 = &spd;
+//					shortvalue1 = &rad;
+//					shortvalue2 = &blcp;
 					menu2_limit = 2;
 					menu2mode = 0;
+					magflag = 1;
 					break;
 			}
 			break;
 		case 3://监视器
 		//	开启中断显示
-//			pit_interrupt_ms(PIT_CH2,40);
+			tim_interrupt_init(TIM_6, 40, 0, 3);
 			menu2flag = 2;
 			monitorflag = 1;
 			break;
 	}
 }
 /*------------------------------*/
-/*		   数值显示模块			*/
+/*		 数值显示辅助模块		*/
 /*==============================*/
-static void menu2value(void){
-//	显示级别
-	if(magflag) ips200_showfloat(180, 14, mag[magindex], 2, 3);
-//	显示数值
+static void menu2value_sup(void){
 	switch(menu_index){
 		case 0:
 			swdisplay();
@@ -125,10 +100,16 @@ static void menu2value(void){
 		case 1:
 			switch(menu2mode){
 				case 0:
-					ips200_showfloat(120, 15, *value0, 2, 3);
-					ips200_showfloat(120, 16, *value1, 2, 3);
-					ips200_showfloat(120, 17, *value2, 2, 3);
-					ips200_showfloat(120, 18, *value3, 2, 3);
+					ips200_showint16(100, 15, adc0.max);
+					ips200_showint16(170, 15, adc0.min);
+					ips200_showint16(100, 16, adc1.max);
+					ips200_showint16(170, 16, adc1.min);
+					ips200_showint16(100, 17, adc2.max);
+					ips200_showint16(170, 17, adc2.min);
+					ips200_showint16(100, 18, adc3.max);
+					ips200_showint16(170, 18, adc3.min);
+					ips200_showint16(100, 19, adc4.max);
+					ips200_showint16(170, 19, adc4.min);
 					break;
 				case 1:
 					ips200_showfloat(120, 15, *value0, 2, 3);
@@ -145,18 +126,34 @@ static void menu2value(void){
 					break;
 			}
 	}
-//	高亮数值
-	if(!menu2_level){
-	//	选择
-		ips200_pencolor = 0xFFFF;
-		ips200_bgcolor = 0xFDF8;
-		switch(menu_index){
+}
+/*------------------------------*/
+/*		 菜单高亮显示模块		*/
+/*==============================*/
+void menu2value_hl(void){
+	switch(menu_index){
 			case 1:
 				switch(menu2_index){
-					case 0:ips200_showfloat(120, 15, *value0, 2, 3);break;
-					case 1:ips200_showfloat(120, 16, *value1, 2, 3);break;
-					case 2:ips200_showfloat(120, 17, *value2, 2, 3);break;
-					case 3:ips200_showfloat(120, 18, *value3, 2, 3);break;
+					case 0:
+						ips200_showint16(100, 15, adc0.max);
+						ips200_showint16(170, 15, adc0.min);
+						break;
+					case 1:
+						ips200_showint16(100, 16, adc1.max);
+						ips200_showint16(170, 16, adc1.min);
+						break;
+					case 2:
+						ips200_showint16(100, 17, adc2.max);
+						ips200_showint16(170, 17, adc2.min);
+						break;
+					case 3:
+						ips200_showint16(100, 18, adc3.max);
+						ips200_showint16(170, 18, adc3.min);
+						break;
+					case 4:
+						ips200_showint16(100, 19, adc4.max);
+						ips200_showint16(170, 19, adc4.min);
+						break;
 				}
 				break;
 			case 2:
@@ -167,6 +164,21 @@ static void menu2value(void){
 				}
 				break;
 		}
+}
+/*------------------------------*/
+/*		   数值显示模块			*/
+/*==============================*/
+static void menu2value(void){
+//	显示级别
+	if(magflag) ips200_showfloat(180, 14, mag[magindex], 2, 3);
+//	显示数值
+	menu2value_sup();
+//	高亮数值
+	if(!menu2_level){
+	//	选择
+		ips200_pencolor = 0xFFFF;
+		ips200_bgcolor = 0xFDF8;
+		menu2value_hl();
 		ips200_pencolor = 0xB6DB;
 		ips200_bgcolor = 0xFFFF;
 	}
@@ -174,23 +186,7 @@ static void menu2value(void){
 	//	修改
 		ips200_pencolor = 0xFFFF;
 		ips200_bgcolor = 0xAE9C;
-		switch(menu_index){
-			case 1:
-				switch(menu2_index){
-					case 0:ips200_showfloat(120, 15, *value0, 2, 3);break;
-					case 1:ips200_showfloat(120, 16, *value1, 2, 3);break;
-					case 2:ips200_showfloat(120, 17, *value2, 2, 3);break;
-					case 3:ips200_showfloat(120, 18, *value3, 2, 3);break;
-				}
-				break;
-			case 2:
-				switch(menu2_index){
-					case 0:ips200_showint16(120, 15, *shortvalue0);break;
-					case 1:ips200_showint16(120, 16, *shortvalue1);break;
-					case 2:ips200_showint16(120, 17, *shortvalue2);break;
-				}
-				break;
-		}
+		menu2value_hl();
 		ips200_pencolor = 0xB6DB;
 		ips200_bgcolor = 0xFFFF;
 	}
@@ -232,6 +228,11 @@ static char info(unsigned char index, unsigned char num){
 	unsigned char state0[] = {0x00,0x00,0x00,0x00,0x7F,0xFF,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x7F,0xFF};/*"□"*/
 	unsigned char state1[] = {0x00,0x00,0x00,0x00,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF};/*"■"*/
 	unsigned char xiang2[] = {0x00,0x00,0x00,0x00,0x10,0xFE,0x11,0x02,0x11,0x02,0x7F,0x02,0x19,0xFE,0x15,0x02,0x35,0x02,0x33,0x02,0x51,0xFE,0x51,0x02,0x11,0x02,0x11,0x02,0x11,0x02,0x00,0xFC};/*"相"*/
+	unsigned char tong0[] = {0x00,0x00,0x00,0x00,0x27,0xFC,0x23,0x08,0x10,0xF0,0x01,0xF8,0x06,0x46,0x74,0x42,0x17,0xFE,0x14,0x42,0x17,0xFE,0x14,0x42,0x14,0x42,0x14,0x12,0x28,0x0C,0x47,0xFE};/*"通"*/
+	unsigned char dao0[] = {0x00,0x00,0x00,0x00,0x41,0x10,0x2F,0xFE,0x10,0x40,0x01,0xF8,0x06,0x04,0x74,0x04,0x17,0xFC,0x14,0x04,0x17,0xFC,0x14,0x04,0x14,0x04,0x13,0xF8,0x2C,0x00,0x43,0xFE};/*"道"*/
+	unsigned char zui0[] = {0x00,0x00,0x00,0x00,0x3F,0xF8,0x3F,0xF8,0x20,0x08,0x3F,0xF8,0x00,0x00,0x7F,0xFE,0x21,0x00,0x3F,0xFC,0x21,0x44,0x3F,0x28,0x21,0x28,0x21,0x90,0x7F,0x2C,0x01,0xC2};/*"最"*/
+	unsigned char da0[] = {0x00,0x00,0x00,0x00,0x01,0x00,0x01,0x00,0x01,0x00,0x7F,0xFE,0x01,0x00,0x01,0x80,0x01,0x80,0x02,0x40,0x02,0x40,0x04,0x20,0x04,0x20,0x08,0x10,0x10,0x08,0x60,0x06};/*"大"*/
+	unsigned char xiao0[] = {0x00,0x00,0x00,0x00,0x01,0x00,0x01,0x00,0x01,0x00,0x11,0x08,0x11,0x08,0x11,0x04,0x21,0x04,0x21,0x04,0x21,0x04,0x41,0x02,0x41,0x02,0x81,0x02,0x01,0x00,0x0F,0x00};/*"小"*/
 //	变量定义
 	register unsigned char i;
 	switch(index){
@@ -272,6 +273,20 @@ static char info(unsigned char index, unsigned char num){
 				case 1://参数值
 					for(i = 0; i < 32; i++) nom[i] = can0[i];
 					for(i = 0; i < 32; i++) nom[32+i] = shu0[i];
+					for(i = 0; i < 32; i++) nom[64+i] = zhi0[i];
+					return 3;
+				case 2://通道
+					for(i = 0; i < 32; i++) nom[i] = tong0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = dao0[i];
+					return 2;
+				case 3://最大值
+					for(i = 0; i < 32; i++) nom[i] = zui0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = da0[i];
+					for(i = 0; i < 32; i++) nom[64+i] = zhi0[i];
+					return 3;
+				case 4://最小值
+					for(i = 0; i < 32; i++) nom[i] = zui0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = xiao0[i];
 					for(i = 0; i < 32; i++) nom[64+i] = zhi0[i];
 					return 3;
 			}
@@ -358,6 +373,7 @@ void menu2_display(void){
 	switch(menu_index){
 		case 0:
 			switch(menu2mode){
+			//	页面模板选择
 				case 0:
 					ips200_display_chinese(0, 208, 16, nom, info(100, 4), 0XFDF8);
 					ips200_display_chinese(120, 208, 16, nom, info(100, 5), 0XFDF8);
@@ -378,14 +394,15 @@ void menu2_display(void){
 			break;
 		case 1:
 			switch(menu2mode){
-			//	面板选择
 				case 0:
-					ips200_display_chinese(0, 208, 16, nom, info(menu_index, 0), 0XFDF8);
-					ips200_display_chinese(120, 208, 16, nom, info(menu_index, 1), 0XFDF8);
-					ips200_showstr(0, 15, "alpha");
-					ips200_showstr(0, 16, "Kp");
-					ips200_showstr(0, 17, "Ki");
-					ips200_showstr(0, 18, "Kd");
+					ips200_display_chinese(0, 208, 16, nom, info(menu_index, 2), 0XFDF8);
+					ips200_display_chinese(100, 208, 16, nom, info(menu_index, 3), 0XFDF8);
+					ips200_display_chinese(170, 208, 16, nom, info(menu_index, 4), 0XFDF8);
+					ips200_showstr(0, 15, "ADC0");
+					ips200_showstr(0, 16, "ADC1");
+					ips200_showstr(0, 17, "ADC2");
+					ips200_showstr(0, 18, "ADC3");
+					ips200_showstr(0, 19, "ADC4");
 					break;
 				case 1:
 					ips200_display_chinese(0, 208, 16, nom, info(menu_index, 0), 0XFDF8);
@@ -407,7 +424,7 @@ void menu2_display(void){
 			}
 			break;
 		case 3:
-			switch(menu2mode){
+			switch(menu[menu_index]){
 				case 0:
 					ips200_display_chinese(0, 208, 16, nom, info(1, 0), 0XFDF8);
 					ips200_display_chinese(120, 208, 16, nom, info(1, 1), 0XFDF8);
@@ -416,22 +433,38 @@ void menu2_display(void){
 					ips200_display_chinese(0, 272, 16, nom, info(menu_index, 2), 0xB6DB);
 					ips200_display_chinese(0, 288, 16, nom, info(menu_index, 3), 0xB6DB);
 					break;
+				case 1:
+					ips200_display_chinese(0, 208, 16, nom, info(1, 2), 0XFDF8);//通道
+					ips200_display_chinese(120, 208, 16, nom, info(1, 1), 0XFDF8);//参数值
+					ips200_showstr(0, 15, "ADC0");
+					ips200_showstr(0, 16, "ADC1");
+					ips200_showstr(0, 17, "ADC2");
+					ips200_showstr(0, 18, "ADC3");
+					ips200_showstr(0, 19, "ADC4");
+					break;
 			}
 			break;
 	}
 //	显示数值
 	menu2value();
-}
+} 
 /*------------------------------*/
 /*		   数值监视模块			*/
 /*==============================*/
 void monitor(void){
-	switch(menu[menu_index]){
+	switch(fixedindex){
 		case 0:
-			ips200_showint16(120, 15, pita);
-			ips200_showint16(120, 16, gz);
-			ips200_showint16(120, 17, lcod);
-			ips200_showint16(120, 18, rcod);
+//			ips200_showint16(120, 15, pita);
+//			ips200_showint16(120, 16, gz);
+//			ips200_showint16(120, 17, lcod);
+//			ips200_showint16(120, 18, rcod);
+			break;
+		case 1:
+			ips200_showuint8(120, 15, adc0.value);
+			ips200_showuint8(120, 16, adc1.value);
+			ips200_showuint8(120, 17, adc2.value);
+			ips200_showuint8(120, 18, adc3.value);
+			ips200_showuint8(120, 19, adc4.value);
 			break;
 	}
 }
@@ -447,10 +480,24 @@ void fixed_monitor(void){
 			ips200_display_chinese(0, 32, 16, nom, info(menu_index, 2), 0XFDF8);
 			ips200_display_chinese(0, 48, 16, nom, info(menu_index, 3), 0XFDF8);
 		//	数值显示
-			ips200_showint16(120, 0, pita);
-			ips200_showint16(120, 1, gz);
-			ips200_showint16(120, 2, lcod);
-			ips200_showint16(120, 3, rcod);
+//			ips200_showint16(120, 0, pita);
+//			ips200_showint16(120, 1, gz);
+//			ips200_showint16(120, 2, lcod);
+//			ips200_showint16(120, 3, rcod);
+			break;
+		case 1:
+		//	名称显示
+			ips200_showstr(0, 0, "ADC0");
+			ips200_showstr(0, 1, "ADC1");
+			ips200_showstr(0, 2, "ADC2");
+			ips200_showstr(0, 3, "ADC3");
+			ips200_showstr(0, 4, "ADC4");
+		//	数值显示
+			ips200_showuint8(120, 0, adc0.value);
+			ips200_showuint8(120, 1, adc1.value);
+			ips200_showuint8(120, 2, adc2.value);
+			ips200_showuint8(120, 3, adc3.value);
+			ips200_showuint8(120, 4, adc4.value);
 			break;
 	}
 }
@@ -576,9 +623,10 @@ void menu2_select(unsigned char event){
 		monitorflag = 0;
 		menu_level = 0;
 		menu_display();
+		excollflag = 0;
 	//	操作定时器
-//		if(!fixedflag) pit_close(PIT_CH2);
-//		pit_interrupt_ms(PIT_CH0,2);
+		tim_interrupt_init_ms(TIM_2, 2, 0, 0);//开启采集通道
+		if(!fixedflag) tim_interrupt_disabnle(TIM_6);//除固定显示外关闭监视通道
 		return;
 	}
 	if(!menu2_level){
@@ -599,17 +647,31 @@ void menu2_select(unsigned char event){
 			
 			case 1://确定键
 				switch(menu2flag){
-					case 1:
+					case 1://	数值修改
 						menu2_level = 1;
 						break;
-					case 2:
+					case 2://	监视器固定显示
 						fixedflag = !fixedflag;
 						fixedindex = menu[menu_index];
-						if(fixedflag) for(i=0; i<CSIMENU_FLAG; i++) csimenu_flag[i] = 0;
-						break;//切换固定显示
-					case 3:
+						if(fixedflag) for(i=0; i<CSIMENU_FLAG; i++) csimenu_flag[i] = 0;//关闭图像显示
+						break;
+					case 3://	按钮
 						swmode();
 						swdisplay();
+						break;
+					case 4://	电磁设置
+					//	重置最值
+						if(!excollflag){
+							switch(menu2_index){
+								case 0:adc0.max = 0, adc0.min = 4095, excollflag = 1;break;
+								case 1:adc1.max = 0, adc1.min = 4095, excollflag = 2;break;
+								case 2:adc2.max = 0, adc2.min = 4095, excollflag = 3;break;
+								case 3:adc3.max = 0, adc3.min = 4095, excollflag = 4;break;
+								case 4:adc4.max = 0, adc4.min = 4095, excollflag = 5;break;
+							}
+							tim_interrupt_init(TIM_6, 40, 0, 3);
+						}
+						else{excollflag = 0;tim_interrupt_disabnle(TIM_6);} 
 						break;
 					case 0:break;
 				}

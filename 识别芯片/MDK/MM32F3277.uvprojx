@@ -427,6 +427,21 @@
               <FileType>1</FileType>
               <FilePath>..\CODE\pid.c</FilePath>
             </File>
+            <File>
+              <FileName>menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CODE\menu.c</FilePath>
+            </File>
+            <File>
+              <FileName>menu_2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CODE\menu_2.c</FilePath>
+            </File>
+            <File>
+              <FileName>Init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CODE\Init.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

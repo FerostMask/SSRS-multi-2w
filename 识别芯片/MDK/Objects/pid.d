@@ -3,6 +3,7 @@
 .\objects\pid.o: ..\CODE\data.h
 .\objects\pid.o: ..\CODE\menu.h
 .\objects\pid.o: ..\CODE\menu_2.h
+.\objects\pid.o: ..\CODE\data.h
 .\objects\pid.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\pid.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_IPS200_PARALLEL8.h
 .\objects\pid.o: ..\..\Libraries\seekfree_libraries\common\common.h
