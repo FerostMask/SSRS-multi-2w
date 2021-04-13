@@ -4,6 +4,8 @@
 .\objects\eident.o: ..\CODE\menu.h
 .\objects\eident.o: ..\CODE\menu_2.h
 .\objects\eident.o: ..\CODE\data.h
+.\objects\eident.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\eident.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\eident.o: ..\CODE\eident.h
 .\objects\eident.o: ..\..\Libraries\seekfree_libraries\zf_adc.h
 .\objects\eident.o: ..\..\Libraries\seekfree_libraries\common\common.h
@@ -25,7 +27,6 @@
 .\objects\eident.o: ..\..\Libraries\Device\MM32F327x\Include\reg_tim.h
 .\objects\eident.o: ..\..\Libraries\Device\MM32F327x\Include\reg_uart.h
 .\objects\eident.o: ..\..\Libraries\Device\MM32F327x\Include\reg_fsmc.h
-.\objects\eident.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\eident.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\eident.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_IPS200_PARALLEL8.h
 .\objects\eident.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_FONT.h

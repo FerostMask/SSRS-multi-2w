@@ -21,18 +21,19 @@ struct adcpara adc1;
 struct adcpara adc2;
 struct adcpara adc3;
 struct adcpara adc4;
+struct adcerrpa adc_err;
 /*----------------------*/
-/*	 	 MOTOR模块		*/
+/*	 	 控制模块		*/
 /*======================*/
 //	PID
-
+struct pidpara adc_steering;
 /*----------------------*/
 /*	 	 菜单模块		*/
 /*======================*/
 //	汉字数组
 unsigned char nom[128];
 //	一级菜单
-unsigned char menu[ROWS] = {0, 0, 0, 1};
+unsigned char menu[ROWS] = {0, 2, 0, 1};
 unsigned char menu_level;
 unsigned char menu_index = 0;
 //	二级菜单
@@ -59,7 +60,14 @@ void Init_para(void){
 	adc2.max = 4095, adc2.min = 0;
 	adc3.max = 4095, adc3.min = 0;
 	adc4.max = 4095, adc4.min = 0;
-	
+//	差比和差
+	adc_err.alpha = 10;
+	adc_err.beta = 10;
+	adc_err.omega = 0.1;
+	adc_err.P = 20;
+//	ADC转向
+	adc_steering.Kp = 2;
+	adc_steering.Kd = 3;
 ////	速度
 //	speed.alpha = 0.3;
 //	speed.Kp = 0.1;//反应快慢 | 超调

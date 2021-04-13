@@ -50,6 +50,7 @@ void TIM2_IRQHandler (void)
 	single_ch_filter(&adc2);
 	single_ch_filter(&adc3);
 	single_ch_filter(&adc4);
+	adc_suminus();
 }
 //	电机
 void TIM5_IRQHandler (void){
@@ -77,6 +78,13 @@ void TIM6_IRQHandler (void)
 	if(excollflag)
 	//	电磁最值获取
 		switch(excollflag){
+			case 6:
+				adc_extreme(&adc0);
+				adc_extreme(&adc1);
+				adc_extreme(&adc2);
+				adc_extreme(&adc3);
+				adc_extreme(&adc4);
+				break;
 			case 1:adc_extreme(&adc0);break;
 			case 2:adc_extreme(&adc1);break;
 			case 3:adc_extreme(&adc2);break;

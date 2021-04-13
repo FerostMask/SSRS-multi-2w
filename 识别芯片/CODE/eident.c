@@ -2,6 +2,8 @@
 /*							头文件加载							*/
 /*==============================================================*/
 #include "Init.h"
+#include "math.h"
+#include "stdlib.h"
 #include "menu_2.h"
 #include "eident.h"
 #include "zf_adc.h"
@@ -9,6 +11,30 @@
 /*--------------------------------------------------------------*/
 /* 							 函数定义 							*/
 /*==============================================================*/
+/*----------------------*/
+/*	   电磁识别模块		*/
+/*======================*/
+void adc_jug(void){
+//	变量定义
+	char mid_dif, out_dif;
+//	差值计算
+	mid_dif = adc1.value - adc3.value;
+	out_dif = adc0.value - adc4.value;
+//	元素判断
+}
+/*----------------------*/
+/*	   差比和差算法		*/
+/*======================*/
+void adc_suminus(void){
+//	变量定义
+	float divd, divs, mid_val;
+//	差比和差算法
+	mid_val = adc1.value - adc3.value;
+	divd = adc_err.alpha*(float)(adc0.value-adc4.value) + adc_err.beta*(float)mid_val;
+	divs = adc_err.alpha*(float)(adc0.value+adc4.value) + adc_err.omega*abs((float)mid_val);
+	adc_err.rs = adc_err.P*divd/divs;
+	pos_pid(&adc_steering, 0, adc_err.rs, 1200, -1200);
+}
 /*----------------------*/
 /*	    单通道滤波		*/
 /*======================*/

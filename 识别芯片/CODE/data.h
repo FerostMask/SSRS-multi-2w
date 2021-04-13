@@ -21,18 +21,24 @@
 /*	 	 电磁模块		*/
 /*======================*/
 //	结构体声明
-typedef struct adcpara{
+typedef struct adcpara{//电磁基本参数
 	unsigned short value;
 	unsigned short max;
 	unsigned short min;
 	unsigned short pin;
 }adcpara;
+typedef struct adcerrpa{//差比和差参数
+	float alpha, beta, omega;
+	float P;
+	short rs;
+}adcerrpa;
 //	全局结构体声明
 extern struct adcpara adc0;
 extern struct adcpara adc1;
 extern struct adcpara adc2;
 extern struct adcpara adc3;
 extern struct adcpara adc4;
+extern struct adcerrpa adc_err;
 /*----------------------*/
 /*	 	 MOTOR模块		*/
 /*======================*/
@@ -54,7 +60,7 @@ typedef struct pidpara{
 	int e3;
 	short rs;
 }pidpara;
-
+extern struct pidpara adc_steering;
 
 /*----------------------*/
 /*	 	 菜单模块		*/
