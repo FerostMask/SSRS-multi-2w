@@ -50,6 +50,7 @@ void TIM2_IRQHandler (void)
 	single_ch_filter(&adc2);
 	single_ch_filter(&adc3);
 	single_ch_filter(&adc4);
+	adc_jug();
 	adc_suminus();
 }
 //	µç»ú

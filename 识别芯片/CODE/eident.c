@@ -16,11 +16,18 @@
 /*======================*/
 void adc_jug(void){
 //	变量定义
-	char mid_dif, out_dif;
+	short mid_dif, out_dif;
+	short oai_dif;
 //	差值计算
-	mid_dif = adc1.value - adc3.value;
-	out_dif = adc0.value - adc4.value;
-//	元素判断
+	mid_dif = adc1.value*adc1.value - adc3.value*adc3.value;
+	out_dif = adc0.value*adc0.value - adc4.value*adc4.value;
+	oai_dif = adc0.value*adc0.value+adc4.value*adc4.value - adc1.value*adc1.value-adc3.value*adc3.value;
+//	元素识别
+	if(abs(mid_dif) < 600)
+		if(abs(out_dif) < 1800)	ajug_sta = 0;//直道
+		else ajug_sta = 1;//弯道
+	if(oai_dif > 15000) ajug_sta = 3;//环道
+	if(oai_dif < 1000) ajug_sta = 2;//十字
 }
 /*----------------------*/
 /*	   差比和差算法		*/

@@ -39,6 +39,8 @@ extern struct adcpara adc2;
 extern struct adcpara adc3;
 extern struct adcpara adc4;
 extern struct adcerrpa adc_err;
+//	状态标志位
+extern unsigned char ajug_sta;
 /*----------------------*/
 /*	 	 MOTOR模块		*/
 /*======================*/

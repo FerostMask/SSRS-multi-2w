@@ -533,6 +533,12 @@ void monitor(void){
 		case 0:
 			ips200_showint16(120, 15, adc_err.rs);
 			ips200_showint16(120, 16, adc_steering.rs);
+			switch(ajug_sta){
+				case 0:ips200_showstr(120, 17, "direct");break;
+				case 1:ips200_showstr(120, 17, "bend  ");break;
+				case 2:ips200_showstr(120, 17, "cross ");break;
+				case 3:ips200_showstr(120, 17, "ring  ");break;
+			}
 			break;
 		case 1:
 			ips200_showuint8(120, 15, adc0.value);

@@ -22,6 +22,8 @@ struct adcpara adc2;
 struct adcpara adc3;
 struct adcpara adc4;
 struct adcerrpa adc_err;
+//	状态标志位
+unsigned char ajug_sta;
 /*----------------------*/
 /*	 	 控制模块		*/
 /*======================*/
@@ -33,7 +35,7 @@ struct pidpara adc_steering;
 //	汉字数组
 unsigned char nom[128];
 //	一级菜单
-unsigned char menu[ROWS] = {0, 2, 0, 1};
+unsigned char menu[ROWS] = {0, 0, 0, 0};
 unsigned char menu_level;
 unsigned char menu_index = 0;
 //	二级菜单
