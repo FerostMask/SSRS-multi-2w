@@ -24,6 +24,7 @@
 #include "motor.h"
 #include "menu.h"
 #include "data.h"
+#include "pid.h"
 /*------------------------------*/
 /*		    定时器中断			*/
 /*==============================*/
@@ -44,11 +45,11 @@ void TIM2_IRQHandler (void)
 	uint32 state = TIM2->SR;														// 读取中断状态
 	TIM2->SR &= ~state;																// 清空中断状态
 //	获取陀螺仪、加速度计数据
-//	get_icm20602_accdata_spi();
-//	get_icm20602_gyro_spi();
+	get_icm20602_accdata_spi();
+	get_icm20602_gyro_spi();
 //	获取编码器数据
 	encoder_get();
-//	angle_ctrl();
+	angle_ctrl();
 }
 //	电机
 void TIM5_IRQHandler (void){
@@ -197,7 +198,7 @@ void EXTI0_IRQHandler(void)
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line0);														// 清除 line0 触发标志
 	(*menu_pfc[menu_level])(1);
-	
+	while(!gpio_get(D0));
 }
 
 void EXTI1_IRQHandler(void)
@@ -205,6 +206,7 @@ void EXTI1_IRQHandler(void)
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line1);														// 清除 line1 触发标志
 	(*menu_pfc[menu_level])(2);
+	while(!gpio_get(D1));
 }
 
 void EXTI2_IRQHandler(void)
@@ -212,6 +214,7 @@ void EXTI2_IRQHandler(void)
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line2);														// 清除 line2 触发标志
 	(*menu_pfc[menu_level])(3);
+	while(!gpio_get(D2));
 }
 
 void EXTI3_IRQHandler(void)
@@ -219,6 +222,7 @@ void EXTI3_IRQHandler(void)
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line3);														// 清除 line3 触发标志
 	(*menu_pfc[menu_level])(4);
+	while(!gpio_get(D3));
 }
 
 void EXTI4_IRQHandler(void)
@@ -289,11 +293,13 @@ void EXTI15_10_IRQHandler (void)
 	{
 		EXTI_ClearFlag(EXTI_Line14);												// 清除 line14 触发标志
 		(*menu_pfc[menu_level])(5);
+		while(!gpio_get(D14));
 	}
 	if(EXTI_GetITStatus(EXTI_Line15))												// 检测 line15 是否触发
 	{
 		EXTI_ClearFlag(EXTI_Line15);												// 清除 line15 触发标志
 		(*menu_pfc[menu_level])(6);
+		while(!gpio_get(D15));
 	}
 }
 

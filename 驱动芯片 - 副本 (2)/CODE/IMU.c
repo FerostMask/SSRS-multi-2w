@@ -39,9 +39,9 @@ void angle_ctrl(void){
 //	串级PID
 	if(imu_count == 3){
 	//	偏转角速度、速度PID
-		gz = icm_gyro_z/(16.4*57.3);
-		inc_pid(&steer, rad, gz, 200);
-		inc_pid(&speed, -spd, (lcod+rcod)>>1, 50);
+		gz = icm_gyro_z/(16.4*5.73);
+		pos_pid(&steer, rad, gz, 200, -200);
+		inc_pid(&speed, spd, (lcod+rcod)>>1, 50);
 	}
 //	角度
 	if(imu_count == 1 || imu_count == 3){

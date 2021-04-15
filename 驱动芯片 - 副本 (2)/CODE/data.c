@@ -28,7 +28,7 @@ struct pidpara acw;
 /*----------------------*/
 /*	   角度控制模块		*/
 /*======================*/
-short blcp = 245;
+short blcp = 330;
 short pita;
 short gy, gz;
 short yfilt[4] = {0, 0, 0, 0};
@@ -73,9 +73,9 @@ void Init_para(void){
 	
 //	转向
 	steer.alpha = 0.3;
-	steer.Kp = 10;//反应快慢 | 超调
-	steer.Ki = 1;//反应力度
-	steer.Kd = 1;
+	steer.Kp = 5;//反应快慢 | 超调
+	steer.Ki = 0;//反应力度
+	steer.Kd = 10;
 	steer.I = 0;
 	steer.e1 = 0, steer.e2 = 0, steer.e3 = 0;
 	steer.rs = 0;

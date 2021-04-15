@@ -30,8 +30,8 @@ void encoder_get(void){
 	lcod = tim_encoder_get_count(TIM_3);
 	rcod = -tim_encoder_get_count(TIM_4);
 //	显示计数值
-	ips200_showint16(0, 0, lcod);
-	ips200_showint16(0, 1, rcod);
+//	ips200_showint16(0, 0, lcod);
+//	ips200_showint16(0, 1, rcod);
 }
 /*------------------------------*/
 /*		   电机驱动模块			*/
@@ -39,18 +39,18 @@ void encoder_get(void){
 void motor_act(void){
 	if(acw.rs >= 0){	//正转
 	//	左电机
-		pwm_duty_updata(TIM_5, MOTOR_L1, acw.rs+steer.rs);     		
+		pwm_duty_updata(TIM_5, MOTOR_L1, acw.rs-steer.rs);     		
 		pwm_duty_updata(TIM_5, MOTOR_L0, 0);
 	//	右电机
-		pwm_duty_updata(TIM_5, MOTOR_R1, acw.rs-steer.rs);     		
+		pwm_duty_updata(TIM_5, MOTOR_R1, acw.rs+steer.rs);     		
 		pwm_duty_updata(TIM_5, MOTOR_R0, 0);
 	}
 	else{	//反转
 	//	左电机
 		pwm_duty_updata(TIM_5, MOTOR_L1, 0);                      		
-		pwm_duty_updata(TIM_5, MOTOR_L0, -acw.rs-steer.rs);
+		pwm_duty_updata(TIM_5, MOTOR_L0, -acw.rs+steer.rs);
 	//	右电机
 		pwm_duty_updata(TIM_5, MOTOR_R1, 0);                      		
-		pwm_duty_updata(TIM_5, MOTOR_R0, -acw.rs+steer.rs);
+		pwm_duty_updata(TIM_5, MOTOR_R0, -acw.rs-steer.rs);
 	}
 }
