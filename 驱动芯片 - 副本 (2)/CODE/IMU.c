@@ -7,15 +7,10 @@
 #include "motor.h"
 #include "MadgwickAHRS.h"
 #include "SEEKFREE_VIRSCO.h"
+#include "SEEKFREE_TSL1401.h"
 #include "SEEKFREE_WIRELESS.h"
 #include "SEEKFREE_ICM20602.h"
 #include "SEEKFREE_IPS200_PARALLEL8.h"
-/*--------------------------------------------------------------*/
-/*							  宏定义							*/
-/*==============================================================*/
-#define u8 unsigned char                                    //8位数据
-#define u16 unsigned short                                  //16位数据
-#define u32 unsigned int                                    //32位数据
 /*--------------------------------------------------------------*/
 /* 							 变量定义 							*/
 /*==============================================================*/

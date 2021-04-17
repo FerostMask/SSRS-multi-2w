@@ -37,7 +37,6 @@ int main(void){
 /*	 	 逐飞初始化		*/
 /*======================*/
 	board_init(true);																// 初始化 debug 输出串口
-
 	//此处编写用户代码(例如：外设初始化代码等)
 	icm20602_init_spi();
 	ips200_init();

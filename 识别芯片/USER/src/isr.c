@@ -21,6 +21,7 @@
 /*==============================================================*/
 #include "headfile.h"
 #include "isr.h"
+#include "CAM.h"
 #include "motor.h"
 #include "menu.h"
 #include "data.h"
@@ -38,7 +39,6 @@ void TIM8_UP_IRQHandler (void)
 {
 	uint32 state = TIM8->SR;														// 读取中断状态
 	TIM8->SR &= ~state;																// 清空中断状态
-	ccd_collect();
 }
 
 void TIM2_IRQHandler (void)
@@ -46,13 +46,20 @@ void TIM2_IRQHandler (void)
 	uint32 state = TIM2->SR;														// 读取中断状态
 	TIM2->SR &= ~state;																// 清空中断状态
 //	代码编写区域
+/*----------------------*/
+/*	 	摄像头部分		*/
+/*======================*/
+
+/*----------------------*/
+/*	 	 电磁部分		*/
+/*======================*/
+//	电磁识别
 	single_ch_filter(&adc0);
 	single_ch_filter(&adc1);
 //	single_ch_filter(&adc2);
 	single_ch_filter(&adc3);
 	single_ch_filter(&adc4);
 	adc_jug();
-	ccd_ident;
 	adc_suminus();
 //	if(adc_steering.rs > 0)// 右弯外
 //		if(adc0.value < adc4.value)

@@ -40,6 +40,7 @@ void menu2_init(void){
 		case 0:
 			magflag = 0;
 			menu2flag = 3;//切换为开关
+//			tim_interrupt_init(TIM_8, 20, 0, 3);
 			switch(menu[menu_index]){
 				case 0:
 					menu2mode = 0;//显示页面0
@@ -628,7 +629,7 @@ static void swmode(void){
 	switch(menu[menu_index]){
 		case 0:
 			fixedflag = 0;
-//			pit_close(PIT_CH2);
+			tim_interrupt_disabnle(TIM_6);
 			temp = csimenu_flag[menu2_index];
 			for(i=0; i<CSIMENU_FLAG; i++) csimenu_flag[i] = 0;
 			csimenu_flag[menu2_index] = !temp;
@@ -637,8 +638,8 @@ static void swmode(void){
 			temp = wireless_flag[menu2_index];
 			for(i=0; i<WIRELESS_FLAG; i++) wireless_flag[i] = 0;
 			wireless_flag[menu2_index] = !temp;
-//			if(!temp) pit_interrupt_ms(PIT_CH3,20);
-//			else pit_close(PIT_CH3);
+//			if(!temp) tim_interrupt_init(TIM_8, 20, 0, 3);
+//			else tim_interrupt_disabnle(TIM_8);
 			break;
 	}
 }

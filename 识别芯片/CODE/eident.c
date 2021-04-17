@@ -7,31 +7,10 @@
 #include "menu_2.h"
 #include "eident.h"
 #include "zf_adc.h"
-#include "SEEKFREE_TSL1401.h"
 #include "SEEKFREE_IPS200_PARALLEL8.h"
 /*--------------------------------------------------------------*/
 /* 							 函数定义 							*/
 /*==============================================================*/
-/*----------------------*/
-/*	    线性CCD模块		*/
-/*======================*/
-void ccd_ident(void){
-//	变量定义
-	register unsigned char i;
-	unsigned char border[2];
-	unsigned char bo_num = 0, mp;
-//	跳变点识别
-	for(i = 0; i < 127; i++)
-		if(ccd_data[0][i+1]- ccd_data[0][i] > 800){
-			border[bo_num] = i;
-			bo_num++;
-			if(bo_num == 2){
-				mp = (border[0]+border[1])>>1;
-				ips200_showint16(0, 0, mp);
-				return;
-			}
-		}
-}
 /*----------------------*/
 /*	   电磁识别模块		*/
 /*======================*/

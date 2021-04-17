@@ -28,6 +28,17 @@
 .\objects\imu.o: ..\..\Libraries\Device\MM32F327x\Include\reg_uart.h
 .\objects\imu.o: ..\..\Libraries\Device\MM32F327x\Include\reg_fsmc.h
 .\objects\imu.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\imu.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_TSL1401.h
+.\objects\imu.o: ..\..\Libraries\seekfree_libraries\zf_adc.h
+.\objects\imu.o: ..\..\Libraries\seekfree_libraries\zf_gpio.h
+.\objects\imu.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_gpio.h
+.\objects\imu.o: ..\..\Libraries\seekfree_libraries\zf_uart.h
+.\objects\imu.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\imu.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_uart.h
+.\objects\imu.o: ..\..\Libraries\seekfree_libraries\zf_pit.h
+.\objects\imu.o: ..\..\Libraries\seekfree_libraries\zf_tim.h
+.\objects\imu.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_tim.h
+.\objects\imu.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_misc.h
 .\objects\imu.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_WIRELESS.h
 .\objects\imu.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_ICM20602.h
 .\objects\imu.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_IPS200_PARALLEL8.h

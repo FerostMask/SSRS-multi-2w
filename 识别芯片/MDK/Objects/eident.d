@@ -28,15 +28,5 @@
 .\objects\eident.o: ..\..\Libraries\Device\MM32F327x\Include\reg_uart.h
 .\objects\eident.o: ..\..\Libraries\Device\MM32F327x\Include\reg_fsmc.h
 .\objects\eident.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\eident.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_TSL1401.h
-.\objects\eident.o: ..\..\Libraries\seekfree_libraries\zf_gpio.h
-.\objects\eident.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_gpio.h
-.\objects\eident.o: ..\..\Libraries\seekfree_libraries\zf_uart.h
-.\objects\eident.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\eident.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_uart.h
-.\objects\eident.o: ..\..\Libraries\seekfree_libraries\zf_pit.h
-.\objects\eident.o: ..\..\Libraries\seekfree_libraries\zf_tim.h
-.\objects\eident.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_tim.h
-.\objects\eident.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_misc.h
 .\objects\eident.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_IPS200_PARALLEL8.h
 .\objects\eident.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_FONT.h
