@@ -16,8 +16,15 @@
 /*----------------------*/
 /*	 	摄像头模块		*/
 /*======================*/
-unsigned char border[160];
-unsigned char ident_bias = 20;
+//	边界（存行）、边界ID
+unsigned char border[160], borderid[160];
+//	痕迹
+unsigned char lbomp, rbomp;
+unsigned char ltra[80], rtra[80];
+unsigned char efflp, effrp;
+//	偏置值、识别状态
+unsigned char ident_bias = 29;
+unsigned char cjug_sta;
 /*----------------------*/
 /*	 	 电磁模块		*/
 /*======================*/

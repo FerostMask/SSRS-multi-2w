@@ -20,8 +20,12 @@
 /*----------------------*/
 /*	 	摄像头模块		*/
 /*======================*/
-extern unsigned char border[160];
+extern unsigned char border[160], borderid[160];
+extern unsigned char lbomp, rbomp;
+extern unsigned char ltra[80], rtra[80];
+extern unsigned char efflp, effrp;
 extern unsigned char ident_bias;
+extern unsigned char cjug_sta;
 /*----------------------*/
 /*	 	 电磁模块		*/
 /*======================*/
