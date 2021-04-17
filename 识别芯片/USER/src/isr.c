@@ -61,15 +61,7 @@ void TIM2_IRQHandler (void)
 	single_ch_filter(&adc4);
 	adc_jug();
 	adc_suminus();
-//	if(adc_steering.rs > 0)// 右弯外
-//		if(adc0.value < adc4.value)
-//			if(adc3.value > adc1.value)
-//			adc_steering.rs = -adc_steering.rs;
-//	else// 左弯外
-//		if(adc0.value < adc4.value)
-//			if(adc3.value < adc1.value)
-//			adc_steering.rs = abs(adc_steering.rs);
-//	uart_putchar(UART_7, adc_steering.rs);
+	uart_putchar(UART_7, adc_steering.rs);
 }
 //	电机
 void TIM5_IRQHandler (void){

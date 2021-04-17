@@ -41,7 +41,12 @@ void adc_suminus(void){
 	divs = adc_err.alpha*(float)(adc0.value+adc4.value) + adc_err.omega*abs((float)mid_val);
 	adc_err.rs = adc_err.P*divd/divs;
 	pos_pid(&adc_steering, 0, adc_err.rs, 30, -30);
-
+	if(cjug_sta == 1)
+		if(adc_steering.rs < 0)
+			adc_steering.rs = -adc_steering.rs;
+	if(cjug_sta == 2)
+		if(adc_steering.rs > 0)
+			adc_steering.rs = -adc_steering.rs;
 }
 /*----------------------*/
 /*	    µ¥Í¨µÀÂË²¨		*/

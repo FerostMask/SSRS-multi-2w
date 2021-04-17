@@ -8,7 +8,7 @@
 /*--------------------------------------------------------------*/
 /* 							 变量定义 							*/
 /*==============================================================*/
-
+unsigned char mid_point;
 /*--------------------------------------------------------------*/
 /* 							 函数定义 							*/
 /*==============================================================*/
@@ -46,8 +46,13 @@ static void cam_sow(void){
 	for(j = 0; j < 160; j++) borderid[j] = 0;
 	borderid[lbomp] = 1, borderid[rbomp] = 1;
 //	判断赛道类型
-	if(border[lbomp] > 60) cjug_sta = 2;//右转
-	if(border[rbomp] > 60) cjug_sta = 1;//左转
+	if(border[lbomp] < 67) cjug_sta = 1;//左转
+	if(border[rbomp] < 67) cjug_sta = 2;//右转
+	mid_point = (rbomp+lbomp)/2;
+	if(cjug_sta == 0){
+		if(mid_point > 85) cjug_sta =2;
+		if(mid_point < 75) cjug_sta =1;		
+	}
 }
 /*------------------------------*/
 /*		摄像头边线识别模块		*/
@@ -100,9 +105,12 @@ void cam_draw(void){
 			}
 		}
 	}
+	ips200_drawpoint(j, border[mid_point], 0xfd10);
+//	赛道类型显示
 	switch(cjug_sta){
-		case 0:ips200_showstr(160, 0, "direct");break;
-		case 1:ips200_showstr(160, 0, "turn left");break;
+		case 0:ips200_showstr(160, 0, "direct    ");break;
+		case 1:ips200_showstr(160, 0, "turn left ");break;
 		case 2:ips200_showstr(160, 0, "turn right");break;
 	}
+	ips200_showint16(160, 1, mid_point);
 }
