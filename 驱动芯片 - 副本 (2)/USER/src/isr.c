@@ -152,6 +152,9 @@ void UART6_IRQHandler(void)
 	}
 	if(UART6->ISR & UART_ISR_RX_INTF)												// 串口接收缓冲中断
 	{
+		uart_getchar(UART_6, &buff_get6);
+		ips200_showstr(0, 0, "UART6 GET");
+		ips200_showint8(0, 1, buff_get6);
 		UART6->ICR |= UART_ICR_RXICLR;												// 清除中断标志位
 	}
 }
@@ -164,6 +167,11 @@ void UART7_IRQHandler(void)
 	}
 	if(UART7->ISR & UART_ISR_RX_INTF)												// 串口接收缓冲中断
 	{
+		uart_getchar(UART_7, &buff_get7);
+		rad = (char)buff_get7;
+		ips200_showint16(0, 0, rad);
+//		ips200_showstr(0, 2, "UART7 GET");
+//		ips200_showint8(0, 3, buff_get7);
 		UART7->ICR |= UART_ICR_RXICLR;												// 清除中断标志位
 	}
 }

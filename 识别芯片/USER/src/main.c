@@ -39,23 +39,32 @@ int main(void){
 /*======================*/
 	board_init(true);																// 初始化 debug 输出串口
 	//此处编写用户代码(例如：外设初始化代码等)
-//	icm20602_init_spi();
+//	外设初始化
 	ips200_init();
-	exti_interrupt_init(D0, EXTI_Trigger_Falling, 3, 3);
+	ccd_init();
+//	引脚状态初始化
+	gpio_init(B9, GPO, GPIO_HIGH, GPO_PUSH_PULL);
+//	串口初始化
+	uart_init(UART_7, 115200, UART7_TX_B06, UART7_RX_B07);
+	uart_init(UART_6, 115200, UART6_TX_C06, UART6_RX_C07);
+//	uart_init(UART_3, 115200, UART3_TX_B10, UART3_RX_B11);
+//	uart_rx_irq(UART_3, 1);
 /*----------------------*/
 /*	 	 用户初始化		*/
 /*======================*/
 	eident_init();
-	Init_button();
+	if(core_select()){
+		Init_button();
+		menu_display();
+	}
 	Init_para();
 	tim_interrupt_init_ms(TIM_2, 2, 0, 0);
 /*--------------------------------------------------------------*/
 /* 							 循环执行 							*/
 /*==============================================================*/	
-	while(1)
-	{
-		//此处编写需要循环执行的代码
-		//此处编写需要循环执行的代码
+	while(1){
+	//	此处编写需要循环执行的代码
+		
 	}
 }
 // **************************** 代码区域 ****************************

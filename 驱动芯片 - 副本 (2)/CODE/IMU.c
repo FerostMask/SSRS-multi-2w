@@ -40,7 +40,7 @@ void angle_ctrl(void){
 	if(imu_count == 3){
 	//	偏转角速度、速度PID
 		gz = icm_gyro_z/(16.4*5.73);
-		pos_pid(&steer, rad, gz, 200, -200);
+		pos_pid(&steer, rad, gz, 1200, -1200);
 		inc_pid(&speed, spd, (lcod+rcod)>>1, 50);
 	}
 //	角度

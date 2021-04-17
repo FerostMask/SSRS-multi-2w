@@ -42,7 +42,7 @@
 
 #define EXPOSURE_TIME		10												// 定义CCD曝光时间 单位MS
 #define PIT_TIMER_CH		TIM_8											// 使用周期中断
-#define AD_RESOLUTION		ADC_10BIT										// AD转换10位
+#define AD_RESOLUTION		ADC_12BIT										// AD转换10位
 	
 #define CCD_CLK(x)			(x? (GPIO_PIN_SET(CCD_CLK_PIN)): (GPIO_PIN_RESET(CCD_CLK_PIN)))
 #define CCD_SI(x)			(x? (GPIO_PIN_SET(CCD_SI_PIN)): (GPIO_PIN_RESET(CCD_SI_PIN)))

@@ -54,7 +54,7 @@ void menu2_init(void){
 			steer.rs = 0;
 			motor_act();
 			magflag = 1;
-//			pit_close(PIT_CH0);
+			tim_interrupt_disabnle(TIM_2);
 			switch(menu[menu_index]){
 				case 0://角速度
 					value0 = &acw.alpha;
@@ -93,7 +93,7 @@ void menu2_init(void){
 			steer.rs = 0;
 			motor_act();
 			magflag = 1;
-//			pit_close(PIT_CH0);
+			tim_interrupt_disabnle(TIM_2);
 			switch(menu[menu_index]){
 				case 0:
 					shortvalue0 = &spd;
@@ -614,7 +614,7 @@ void menu2_select(unsigned char event){
 		menu_display();
 	//	操作定时器
 		if(!fixedflag) tim_interrupt_disabnle(TIM_6);
-//		pit_interrupt_ms(PIT_CH0,2);
+		tim_interrupt_init_ms(TIM_2, 2, 0, 0);
 		return;
 	}
 	if(!menu2_level){

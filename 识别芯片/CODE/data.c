@@ -13,6 +13,10 @@
 /* 							 变量定义 							*/
 /*==============================================================*/
 /*----------------------*/
+/*	    线性CCD模块		*/
+/*======================*/
+unsigned cjug_sta;
+/*----------------------*/
 /*	 	 电磁模块		*/
 /*======================*/
 //	结构体定义
@@ -49,6 +53,12 @@ unsigned char csimenu_flag[CSIMENU_FLAG] = {0, 0};//摄像头
 unsigned char wireless_flag[WIRELESS_FLAG] = {0, 0};//无线数据
 //	函数指针
 void(*menu_pfc[])(unsigned char) = {menu_select, menu2_select};
+/*----------------------*/
+/*	 	 有来有去		*/
+/*======================*/
+unsigned char subuff_num = 0;
+unsigned char subuff_arr[3];
+unsigned short subuff_ranging;
 /*--------------------------------------------------------------*/
 /* 							 函数定义 							*/
 /*==============================================================*/
@@ -57,19 +67,19 @@ void(*menu_pfc[])(unsigned char) = {menu_select, menu2_select};
 /*======================*/
 void Init_para(void){
 //	电磁模块
-	adc0.max = 3801, adc0.min = 187;
-	adc1.max = 4095, adc1.min = 0;
+	adc0.max = 3823, adc0.min = 102;
+	adc1.max = 3815, adc1.min = 98;
 	adc2.max = 4095, adc2.min = 0;
-	adc3.max = 4095, adc3.min = 0;
-	adc4.max = 4095, adc4.min = 0;
+	adc3.max = 3815, adc3.min = 117;
+	adc4.max = 3827, adc4.min = 38;
 //	差比和差
-	adc_err.alpha = 10;
-	adc_err.beta = 10;
-	adc_err.omega = 0.1;
-	adc_err.P = 20;
+	adc_err.alpha = 15;
+	adc_err.beta = 90;
+	adc_err.omega = 0.2;
+	adc_err.P = 60;
 //	ADC转向
-	adc_steering.Kp = 2;
-	adc_steering.Kd = 3;
+	adc_steering.Kp = 0.21;
+	adc_steering.Kd = 0.6;
 ////	速度
 //	speed.alpha = 0.3;
 //	speed.Kp = 0.1;//反应快慢 | 超调

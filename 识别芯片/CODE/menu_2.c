@@ -205,8 +205,8 @@ void menu2value_hl(void){
 					switch(menu2_index){
 						case 0:ips200_showfloat(120, 15, *value0, 2, 3);break;
 						case 1:ips200_showfloat(120, 16, *value1, 2, 3);break;
-						case 2:ips200_showfloat(120, 17, *value0, 2, 3);break;
-						case 3:ips200_showfloat(120, 18, *value1, 2, 3);break;
+						case 2:ips200_showfloat(120, 17, *value2, 2, 3);break;
+						case 3:ips200_showfloat(120, 18, *value3, 2, 3);break;
 					}
 					break;
 			}

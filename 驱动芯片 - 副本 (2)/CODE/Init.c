@@ -4,9 +4,10 @@
 #include "menu.h"
 #include "Init.h"
 #include "zf_pwm.h"
-#include "zf_gpio.h"
 #include "zf_tim.h"
+#include "zf_gpio.h"
 #include "zf_exti.h"
+#include "SEEKFREE_IPS200_PARALLEL8.h"
 /*--------------------------------------------------------------*/
 /*							  宏定义							*/
 /*==============================================================*/
@@ -41,7 +42,21 @@ void Init_motor(void){
 //	PID参数初始化
 	Init_para();
 }
-
+/*------------------------------*/
+/*		 核心选择模块模块		*/
+/*==============================*/
+char core_select(void){
+	gpio_init(D0, GPI, GPIO_LOW, GPI_FLOATING_IN);
+	gpio_init(D2, GPI, GPIO_LOW, GPI_FLOATING_IN);
+	ips200_showstr(20, 7, "Press Button to Continue ->");
+	while(1){
+		if(!gpio_get(D0)) return 1;
+		if(!gpio_get(D2)){ 
+			ips200_clear(0x00);
+			return 0;
+		}
+	}
+}
 /*------------------------------*/
 /*		  按键初始化模块		*/
 /*==============================*/

@@ -99,3 +99,4 @@ void ccd_collect(void)
 	//采集完成标志位置1
 	tsl1401_finish_flag = 1;
 }
+

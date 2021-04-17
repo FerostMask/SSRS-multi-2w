@@ -11,7 +11,7 @@
 //	一级菜单
 #define ROWS 4
 #define menu_limit0 0
-#define menu_limit1 1
+#define menu_limit1 2
 #define menu_limit2 0
 #define menu_limit3 1
 /*------------------------------------------------------*/
@@ -63,7 +63,12 @@ typedef struct pidpara{
 	short rs;
 }pidpara;
 extern struct pidpara adc_steering;
-
+/*----------------------*/
+/*	 	 有来有去		*/
+/*======================*/
+extern unsigned char subuff_num;
+extern unsigned char subuff_arr[3];
+extern unsigned short subuff_ranging;
 /*----------------------*/
 /*	 	 菜单模块		*/
 /*======================*/

@@ -42,5 +42,6 @@
 /*======================================================*/
 void Init_encoder(void);
 void Init_motor(void);
+char core_select(void);
 void Init_button(void);
 #endif

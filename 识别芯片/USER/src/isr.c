@@ -38,6 +38,7 @@ void TIM8_UP_IRQHandler (void)
 {
 	uint32 state = TIM8->SR;														// 读取中断状态
 	TIM8->SR &= ~state;																// 清空中断状态
+	ccd_collect();
 }
 
 void TIM2_IRQHandler (void)
@@ -47,11 +48,21 @@ void TIM2_IRQHandler (void)
 //	代码编写区域
 	single_ch_filter(&adc0);
 	single_ch_filter(&adc1);
-	single_ch_filter(&adc2);
+//	single_ch_filter(&adc2);
 	single_ch_filter(&adc3);
 	single_ch_filter(&adc4);
 	adc_jug();
+	ccd_ident;
 	adc_suminus();
+//	if(adc_steering.rs > 0)// 右弯外
+//		if(adc0.value < adc4.value)
+//			if(adc3.value > adc1.value)
+//			adc_steering.rs = -adc_steering.rs;
+//	else// 左弯外
+//		if(adc0.value < adc4.value)
+//			if(adc3.value < adc1.value)
+//			adc_steering.rs = abs(adc_steering.rs);
+//	uart_putchar(UART_7, adc_steering.rs);
 }
 //	电机
 void TIM5_IRQHandler (void){
@@ -138,6 +149,15 @@ void UART3_IRQHandler(void)
 	}
 	if(UART3->ISR & UART_ISR_RX_INTF)												// 串口接收缓冲中断
 	{
+		uart_getchar(UART_3, &subuff_arr[subuff_arr[subuff_num]]);
+		if(subuff_arr[0]!=0xA5) subuff_num = 0;
+		else subuff_num++;
+		if(subuff_num == 3){
+			subuff_num = 0;
+			subuff_ranging = subuff_arr[1] << 8 | subuff_arr[2];
+			ips200_showstr(0, 0, "range:");
+			ips200_showint16(0, 1, subuff_ranging);
+		}
 		UART3->ICR |= UART_ICR_RXICLR;												// 清除中断标志位
 	}
 }
@@ -219,7 +239,7 @@ void EXTI0_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line0);														// 清除 line0 触发标志
-	menu_pfc[menu_level](2);
+	menu_pfc[menu_level](1);
 	while(!gpio_get(D0));
 }
 
@@ -227,7 +247,7 @@ void EXTI1_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line1);														// 清除 line1 触发标志
-	menu_pfc[menu_level](1);
+	menu_pfc[menu_level](2);
 	while(!gpio_get(D1));
 }
 
@@ -243,7 +263,7 @@ void EXTI3_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line3);														// 清除 line3 触发标志
-	menu_pfc[menu_level](5);
+	menu_pfc[menu_level](4);
 	while(!gpio_get(D3));
 }
 
@@ -314,10 +334,14 @@ void EXTI15_10_IRQHandler (void)
 	if(EXTI_GetITStatus(EXTI_Line14))												// 检测 line14 是否触发
 	{
 		EXTI_ClearFlag(EXTI_Line14);												// 清除 line14 触发标志
+		menu_pfc[menu_level](5);
+		while(!gpio_get(D14));
 	}
 	if(EXTI_GetITStatus(EXTI_Line15))												// 检测 line15 是否触发
 	{
 		EXTI_ClearFlag(EXTI_Line15);												// 清除 line15 触发标志
+		menu_pfc[menu_level](6);
+		while(!gpio_get(D15));
 	}
 }
 

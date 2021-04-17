@@ -76,6 +76,10 @@ extern unsigned char menu2_index;
 extern unsigned char menu2_level;
 //	函数指针
 extern void(*menu_pfc[])(unsigned char);
+/*----------------------*/
+/*	 	 通信模块		*/
+/*======================*/
+extern unsigned char buff_get6, buff_get7;
 /*------------------------------------------------------*/ 
 /* 						函数声明 						*/
 /*======================================================*/

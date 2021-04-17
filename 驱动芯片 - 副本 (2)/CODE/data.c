@@ -24,7 +24,6 @@ struct pidpara speed;
 struct pidpara steer;
 struct pidpara angle;
 struct pidpara acw;
-
 /*----------------------*/
 /*	   角度控制模块		*/
 /*======================*/
@@ -33,7 +32,6 @@ short pita;
 short gy, gz;
 short yfilt[4] = {0, 0, 0, 0};
 short pflit[4] = {0, 0, 0, 0};
-
 /*----------------------*/
 /*	 	 菜单模块		*/
 /*======================*/
@@ -53,7 +51,10 @@ unsigned char csimenu_flag[CSIMENU_FLAG] = {0, 0};//摄像头
 unsigned char wireless_flag[WIRELESS_FLAG] = {0, 0};//无线数据
 //	函数指针
 void(*menu_pfc[])(unsigned char) = {menu_select, menu2_select};
-
+/*----------------------*/
+/*	 	 通信模块		*/
+/*======================*/
+unsigned char buff_get6, buff_get7;
 /*--------------------------------------------------------------*/
 /* 							 函数定义 							*/
 /*==============================================================*/
@@ -73,9 +74,9 @@ void Init_para(void){
 	
 //	转向
 	steer.alpha = 0.3;
-	steer.Kp = 5;//反应快慢 | 超调
+	steer.Kp = 25;//反应快慢 | 超调
 	steer.Ki = 0;//反应力度
-	steer.Kd = 10;
+	steer.Kd = 30;
 	steer.I = 0;
 	steer.e1 = 0, steer.e2 = 0, steer.e3 = 0;
 	steer.rs = 0;

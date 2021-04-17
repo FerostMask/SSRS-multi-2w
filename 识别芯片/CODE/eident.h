@@ -12,6 +12,7 @@
 /*------------------------------------------------------*/ 
 /* 						º¯ÊıÉùÃ÷ 						*/
 /*======================================================*/
+void ccd_ident(void);
 void eident_init(void);
 void adc_jug(void);
 void single_ch_filter(struct adcpara *para);
