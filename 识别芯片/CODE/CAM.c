@@ -96,7 +96,7 @@ static void cam_sow(void){
 void cam_ident(void){
 //	变量定义
 	register unsigned char j1 = 80, j2 = 80, k;
-	unsigned char i;
+	unsigned char i, slope = 20;
 	unsigned int imax, imin;
 //	标志位
 	unsigned char foflag1 = 1, foflag2 = 1;
@@ -117,14 +117,23 @@ void cam_ident(void){
 			}
 			imax = imax<<1, imin = imin << 1;
 			if(imax*imax - imin*imin > 28000){
-				lefbor[i] = j1, lefp++, j1+=15, foflag1 = 1;
+				lefbor[i] = j1, lefp++;
+				if(lefp > 1) slope = lefbor[i] - lefbor[i+1] + 5;
+				if(abs(lefbor[i] - lefbor[i+1]) > 60){
+					foflag1 = 0, j1 = 0;
+					break;
+				}
+				j1+=slope, foflag1 = 1;
 				break;
 			}
 		}
 	//	没有找到边界，停止检测
-		if(j1 == 2)
-			if(!foflag1) 
-				foflag1 = 2;
+		if(j1 == 2){
+			if(!foflag1){
+				if(i > 45) foflag1 = 1;//继续寻找边线
+				else foflag1 = 2;
+			}
+		}
 	}
 	if(csimenu_flag[0]){
 		ips200_displayimage032(mt9v03x_image[0], MT9V03X_W, MT9V03X_H);
@@ -137,9 +146,10 @@ void cam_ident(void){
 void cam_draw(void){
 //	变量定义
 	register unsigned char i, j;
-	for(i = 0; i <= EFF_ROW; i++){
-		ips200_drawpoint(lefbor[i], i, 0xa75c);
+	for(i = 0; i <= lefp; i++){
+		ips200_drawpoint(lefbor[EFF_ROW - i], EFF_ROW - i, 0xa75c);
 	}
+	ips200_drawpoint(lefbor[EFF_ROW - lefp], EFF_ROW - lefp, 0xfd78);
 ////	变量定义
 //	register unsigned char j;
 //	for(j = 0; j < 160; j++){
