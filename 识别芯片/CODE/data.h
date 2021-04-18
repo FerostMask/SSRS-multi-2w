@@ -14,6 +14,8 @@
 #define menu_limit1 2
 #define menu_limit2 0
 #define menu_limit3 1
+//	摄像头
+#define EFF_ROW 54
 /*------------------------------------------------------*/
 /* 					  外部变量声明 						*/
 /*======================================================*/
@@ -26,6 +28,9 @@ extern unsigned char ltra[80], rtra[80];
 extern unsigned char efflp, effrp;
 extern unsigned char ident_bias;
 extern unsigned char cjug_sta;
+//	图像ver2
+extern unsigned char lefbor[EFF_ROW+1], rigbor[EFF_ROW+1];
+extern unsigned char lefp, rigp;
 /*----------------------*/
 /*	 	 电磁模块		*/
 /*======================*/

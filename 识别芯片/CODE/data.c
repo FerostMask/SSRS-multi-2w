@@ -22,9 +22,12 @@ unsigned char border[160], borderid[160];
 unsigned char lbomp, rbomp;
 unsigned char ltra[80], rtra[80];
 unsigned char efflp, effrp;
-//	偏置值、识别状态
-unsigned char ident_bias = 29;
+unsigned char ident_bias = 0;
+//	识别状态
 unsigned char cjug_sta;
+//	左右边界（存列）
+unsigned char lefbor[EFF_ROW+1], rigbor[EFF_ROW+1];
+unsigned char lefp, rigp;
 /*----------------------*/
 /*	 	 电磁模块		*/
 /*======================*/

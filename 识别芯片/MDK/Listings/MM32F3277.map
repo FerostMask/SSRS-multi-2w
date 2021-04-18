@@ -83,7 +83,7 @@ Section Cross References
     main.o(i.main) refers to menu.o(i.menu_display) for menu_display
     main.o(i.main) refers to data.o(i.Init_para) for Init_para
     main.o(i.main) refers to zf_pit.o(i.tim_interrupt_init_ms) for tim_interrupt_init_ms
-    main.o(i.main) refers to cam.o(i.camident) for camident
+    main.o(i.main) refers to cam.o(i.cam_ident) for cam_ident
     main.o(i.main) refers to seekfree_mt9v03x.o(.data) for mt9v03x_finish_flag
     data.o(i.Init_para) refers to data.o(.data) for adc0
     data.o(i.Init_para) refers to data.o(.bss) for adc_err
@@ -199,20 +199,15 @@ Section Cross References
     init.o(i.eident_init) refers to zf_adc.o(i.adc_init) for adc_init
     init.o(i.eident_init) refers to data.o(.data) for adc0
     cam.o(i.cam_draw) refers to seekfree_ips200_parallel8.o(i.ips200_drawpoint) for ips200_drawpoint
-    cam.o(i.cam_draw) refers to seekfree_ips200_parallel8.o(i.ips200_showstr) for ips200_showstr
-    cam.o(i.cam_draw) refers to seekfree_ips200_parallel8.o(i.ips200_showint16) for ips200_showint16
-    cam.o(i.cam_draw) refers to data.o(.bss) for border
-    cam.o(i.cam_draw) refers to cam.o(.data) for mid_point
-    cam.o(i.cam_draw) refers to data.o(.data) for cjug_sta
+    cam.o(i.cam_draw) refers to data.o(.bss) for lefbor
+    cam.o(i.cam_ident) refers to seekfree_ips200_parallel8.o(i.ips200_displayimage032) for ips200_displayimage032
+    cam.o(i.cam_ident) refers to cam.o(i.cam_draw) for cam_draw
+    cam.o(i.cam_ident) refers to data.o(.data) for lefp
+    cam.o(i.cam_ident) refers to seekfree_mt9v03x.o(.bss) for mt9v03x_image
+    cam.o(i.cam_ident) refers to data.o(.bss) for lefbor
     cam.o(i.cam_sow) refers to data.o(.data) for efflp
     cam.o(i.cam_sow) refers to data.o(.bss) for border
     cam.o(i.cam_sow) refers to cam.o(.data) for mid_point
-    cam.o(i.camident) refers to cam.o(i.cam_sow) for cam_sow
-    cam.o(i.camident) refers to seekfree_ips200_parallel8.o(i.ips200_displayimage032) for ips200_displayimage032
-    cam.o(i.camident) refers to cam.o(i.cam_draw) for cam_draw
-    cam.o(i.camident) refers to data.o(.data) for ident_bias
-    cam.o(i.camident) refers to seekfree_mt9v03x.o(.bss) for mt9v03x_image
-    cam.o(i.camident) refers to data.o(.bss) for border
     board.o(i.board_init) refers to zf_uart.o(i.uart_init) for uart_init
     common.o(i.nvic_init) refers to hal_misc.o(i.NVIC_Init) for NVIC_Init
     seekfree_printf.o(i.zf_sprintf) refers to seekfree_printf.o(i.number_conversion_ascii) for number_conversion_ascii
@@ -1000,7 +995,9 @@ Removing Unused input sections from the image.
     Removing cam.o(.rev16_text), (4 bytes).
     Removing cam.o(.revsh_text), (4 bytes).
     Removing cam.o(.rrx_text), (6 bytes).
+    Removing cam.o(i.cam_sow), (304 bytes).
     Removing cam.o(i.rise_ident), (2 bytes).
+    Removing cam.o(.data), (1 bytes).
     Removing board.o(.rev16_text), (4 bytes).
     Removing board.o(.revsh_text), (4 bytes).
     Removing board.o(.rrx_text), (6 bytes).
@@ -1966,7 +1963,7 @@ Removing Unused input sections from the image.
     Removing ffltui.o(.text), (10 bytes).
     Removing ffixui.o(.text), (40 bytes).
 
-995 unused section(s) (total 46595 bytes) removed from the image.
+997 unused section(s) (total 46900 bytes) removed from the image.
 
 ==============================================================================
 
@@ -1978,10 +1975,10 @@ Image Symbol Table
 
     ../clib/../cmprslib/zerorunl2.c          0x00000000   Number         0  __dczerorl2.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
@@ -1989,26 +1986,26 @@ Image Symbol Table
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
-    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
     ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
     ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
     ../fplib/microlib/f2d.c                  0x00000000   Number         0  f2d.o ABSOLUTE
-    ../fplib/microlib/fpadd.c                0x00000000   Number         0  fadd.o ABSOLUTE
     ../fplib/microlib/fpadd.c                0x00000000   Number         0  dadd.o ABSOLUTE
+    ../fplib/microlib/fpadd.c                0x00000000   Number         0  fadd.o ABSOLUTE
     ../fplib/microlib/fpdiv.c                0x00000000   Number         0  fdiv.o ABSOLUTE
-    ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  fepilogue.o ABSOLUTE
     ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
-    ../fplib/microlib/fpfix.c                0x00000000   Number         0  ffixi.o ABSOLUTE
+    ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  fepilogue.o ABSOLUTE
     ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixi.o ABSOLUTE
+    ../fplib/microlib/fpfix.c                0x00000000   Number         0  ffixi.o ABSOLUTE
     ../fplib/microlib/fpfix.c                0x00000000   Number         0  ffixui.o ABSOLUTE
-    ../fplib/microlib/fpflt.c                0x00000000   Number         0  fflti.o ABSOLUTE
-    ../fplib/microlib/fpflt.c                0x00000000   Number         0  dflti.o ABSOLUTE
     ../fplib/microlib/fpflt.c                0x00000000   Number         0  ffltui.o ABSOLUTE
+    ../fplib/microlib/fpflt.c                0x00000000   Number         0  dflti.o ABSOLUTE
+    ../fplib/microlib/fpflt.c                0x00000000   Number         0  fflti.o ABSOLUTE
     ../fplib/microlib/fpmul.c                0x00000000   Number         0  fmul.o ABSOLUTE
     ../fplib/microlib/fpmul.c                0x00000000   Number         0  dmul.o ABSOLUTE
     ..\..\Libraries\Device\MM32F327x\HAL_Lib\Src\hal_adc.c 0x00000000   Number         0  hal_adc.o ABSOLUTE
@@ -2183,8 +2180,8 @@ Image Symbol Table
     .text                                    0x080006d8   Section        0  llshl.o(.text)
     .text                                    0x080006f6   Section        0  llushr.o(.text)
     .text                                    0x08000716   Section        0  llsshr.o(.text)
-    .text                                    0x0800073a   Section        0  fepilogue.o(.text)
     .text                                    0x0800073a   Section        0  iusefp.o(.text)
+    .text                                    0x0800073a   Section        0  fepilogue.o(.text)
     .text                                    0x080007a8   Section        0  depilogue.o(.text)
     .text                                    0x08000864   Section       36  init.o(.text)
     .text                                    0x08000888   Section        0  __dczerorl2.o(.text)
@@ -2280,114 +2277,111 @@ Image Symbol Table
     i.afio_init                              0x08001cf4   Section        0  zf_gpio.o(i.afio_init)
     i.board_init                             0x08001dd8   Section        0  board.o(i.board_init)
     i.cam_draw                               0x08001df0   Section        0  cam.o(i.cam_draw)
-    i.cam_sow                                0x08001ecc   Section        0  cam.o(i.cam_sow)
-    cam_sow                                  0x08001ecd   Thumb Code   264  cam.o(i.cam_sow)
-    i.camera_dma_init                        0x08001ffc   Section        0  zf_camera.o(i.camera_dma_init)
-    i.camera_tim_etr_init                    0x08002078   Section        0  zf_camera.o(i.camera_tim_etr_init)
-    i.camident                               0x08002178   Section        0  cam.o(i.camident)
-    i.core_select                            0x0800224c   Section        0  init.o(i.core_select)
-    i.eident_init                            0x080022b4   Section        0  init.o(i.eident_init)
-    i.exti_interrupt_init                    0x08002330   Section        0  zf_exti.o(i.exti_interrupt_init)
-    i.fixed_monitor                          0x08002404   Section        0  menu_2.o(i.fixed_monitor)
-    i.fsmc_init                              0x08002510   Section        0  zf_fsmc.o(i.fsmc_init)
-    i.get_config                             0x08002568   Section        0  seekfree_mt9v03x.o(i.get_config)
-    i.gpio_get                               0x080025d0   Section        0  zf_gpio.o(i.gpio_get)
-    i.gpio_init                              0x080025f4   Section        0  zf_gpio.o(i.gpio_init)
-    i.info                                   0x08002740   Section        0  menu.o(i.info)
-    info                                     0x08002741   Thumb Code  1594  menu.o(i.info)
-    i.info                                   0x08002d80   Section        0  menu_2.o(i.info)
-    info                                     0x08002d81   Thumb Code  3028  menu_2.o(i.info)
-    i.info_found                             0x0800395c   Section        0  menu_2.o(i.info_found)
-    info_found                               0x0800395d   Thumb Code   214  menu_2.o(i.info_found)
-    i.ips200_address_set                     0x08003ab8   Section        0  seekfree_ips200_parallel8.o(i.ips200_address_set)
-    i.ips200_clear                           0x08003aee   Section        0  seekfree_ips200_parallel8.o(i.ips200_clear)
-    i.ips200_display_chinese                 0x08003b22   Section        0  seekfree_ips200_parallel8.o(i.ips200_display_chinese)
-    i.ips200_displayimage032                 0x08003bc6   Section        0  seekfree_ips200_parallel8.o(i.ips200_displayimage032)
-    i.ips200_drawpoint                       0x08003c54   Section        0  seekfree_ips200_parallel8.o(i.ips200_drawpoint)
-    i.ips200_init                            0x08003c70   Section        0  seekfree_ips200_parallel8.o(i.ips200_init)
-    i.ips200_showchar                        0x08003ed8   Section        0  seekfree_ips200_parallel8.o(i.ips200_showchar)
-    i.ips200_showfloat                       0x08003f50   Section        0  seekfree_ips200_parallel8.o(i.ips200_showfloat)
-    i.ips200_showint16                       0x0800400c   Section        0  seekfree_ips200_parallel8.o(i.ips200_showint16)
-    i.ips200_showstr                         0x080040ca   Section        0  seekfree_ips200_parallel8.o(i.ips200_showstr)
-    i.ips200_showuint8                       0x080040f8   Section        0  seekfree_ips200_parallel8.o(i.ips200_showuint8)
-    i.ips200_w_data                          0x0800415c   Section        0  seekfree_ips200_parallel8.o(i.ips200_w_data)
-    i.ips200_wr_data                         0x08004168   Section        0  seekfree_ips200_parallel8.o(i.ips200_wr_data)
-    i.ips200_wr_data16                       0x080041a8   Section        0  seekfree_ips200_parallel8.o(i.ips200_wr_data16)
-    i.ips200_wr_reg                          0x08004210   Section        0  seekfree_ips200_parallel8.o(i.ips200_wr_reg)
-    i.main                                   0x08004250   Section        0  main.o(i.main)
-    i.menu2_display                          0x080042c0   Section        0  menu_2.o(i.menu2_display)
-    i.menu2_init                             0x0800479c   Section        0  menu_2.o(i.menu2_init)
-    i.menu2_select                           0x080048f0   Section        0  menu_2.o(i.menu2_select)
-    i.menu2value                             0x08004b78   Section        0  menu_2.o(i.menu2value)
-    menu2value                               0x08004b79   Thumb Code   130  menu_2.o(i.menu2value)
-    i.menu2value_hl                          0x08004c14   Section        0  menu_2.o(i.menu2value_hl)
-    i.menu2value_sup                         0x08004f14   Section        0  menu_2.o(i.menu2value_sup)
-    menu2value_sup                           0x08004f15   Thumb Code   454  menu_2.o(i.menu2value_sup)
-    i.menu_display                           0x0800511c   Section        0  menu.o(i.menu_display)
-    i.menu_limit                             0x08005274   Section        0  menu.o(i.menu_limit)
-    menu_limit                               0x08005275   Thumb Code    64  menu.o(i.menu_limit)
-    i.menu_select                            0x080052b4   Section        0  menu.o(i.menu_select)
-    i.modify                                 0x08005384   Section        0  menu_2.o(i.modify)
-    modify                                   0x08005385   Thumb Code   654  menu_2.o(i.modify)
-    i.monitor                                0x0800563c   Section        0  menu_2.o(i.monitor)
-    i.mt9v03x_dma                            0x0800573c   Section        0  seekfree_mt9v03x.o(i.mt9v03x_dma)
-    i.mt9v03x_dma_init                       0x0800575c   Section        0  seekfree_mt9v03x.o(i.mt9v03x_dma_init)
-    i.mt9v03x_exti_init                      0x080057ac   Section        0  seekfree_mt9v03x.o(i.mt9v03x_exti_init)
-    i.mt9v03x_init                           0x080057d4   Section        0  seekfree_mt9v03x.o(i.mt9v03x_init)
-    i.mt9v03x_tim1_etr_init                  0x08005850   Section        0  seekfree_mt9v03x.o(i.mt9v03x_tim1_etr_init)
-    i.mt9v03x_uart_callback                  0x0800585c   Section        0  seekfree_mt9v03x.o(i.mt9v03x_uart_callback)
-    i.mt9v03x_vsync                          0x080058b0   Section        0  seekfree_mt9v03x.o(i.mt9v03x_vsync)
-    i.number_conversion_ascii                0x080058c8   Section        0  seekfree_printf.o(i.number_conversion_ascii)
-    i.nvic_init                              0x08005950   Section        0  common.o(i.nvic_init)
-    i.ov7725_cof_uart_interrupt              0x08005974   Section        0  seekfree_uart_7725.o(i.ov7725_cof_uart_interrupt)
-    i.ov7725_dma                             0x080059c8   Section        0  seekfree_7725.o(i.ov7725_dma)
-    i.ov7725_uart_dma                        0x080059e8   Section        0  seekfree_uart_7725.o(i.ov7725_uart_dma)
-    i.ov7725_uart_vsync                      0x08005a08   Section        0  seekfree_uart_7725.o(i.ov7725_uart_vsync)
-    i.ov7725_vsync                           0x08005a20   Section        0  seekfree_7725.o(i.ov7725_vsync)
-    i.pos_pid                                0x08005a38   Section        0  pid.o(i.pos_pid)
-    i.printf_reverse_order                   0x08005aa0   Section        0  seekfree_printf.o(i.printf_reverse_order)
-    i.set_config                             0x08005ac4   Section        0  seekfree_mt9v03x.o(i.set_config)
-    i.single_ch_filter                       0x08005b3c   Section        0  eident.o(i.single_ch_filter)
-    i.swdisplay                              0x08005c00   Section        0  menu_2.o(i.swdisplay)
-    i.swmode                                 0x08005e1c   Section        0  menu_2.o(i.swmode)
-    swmode                                   0x08005e1d   Thumb Code   122  menu_2.o(i.swmode)
-    i.systick_delay                          0x08005eb0   Section        0  zf_systick.o(i.systick_delay)
-    i.systick_delay_ms                       0x08005ed8   Section        0  zf_systick.o(i.systick_delay_ms)
-    i.tim_interrupt_disabnle                 0x08005f00   Section        0  zf_pit.o(i.tim_interrupt_disabnle)
-    i.tim_interrupt_init                     0x08005f24   Section        0  zf_pit.o(i.tim_interrupt_init)
-    i.tim_interrupt_init_ms                  0x08006010   Section        0  zf_pit.o(i.tim_interrupt_init_ms)
-    i.uart_getchar                           0x08006108   Section        0  zf_uart.o(i.uart_getchar)
-    i.uart_init                              0x0800612c   Section        0  zf_uart.o(i.uart_init)
-    i.uart_pin_init                          0x080062c0   Section        0  zf_uart.o(i.uart_pin_init)
-    uart_pin_init                            0x080062c1   Thumb Code    36  zf_uart.o(i.uart_pin_init)
-    i.uart_putbuff                           0x080062e4   Section        0  zf_uart.o(i.uart_putbuff)
-    i.uart_putchar                           0x08006314   Section        0  zf_uart.o(i.uart_putchar)
-    i.uart_rx_irq                            0x08006334   Section        0  zf_uart.o(i.uart_rx_irq)
-    i.zf_sprintf                             0x08006380   Section        0  seekfree_printf.o(i.zf_sprintf)
-    .constdata                               0x08006664   Section     7048  seekfree_font.o(.constdata)
+    i.cam_ident                              0x08001e14   Section        0  cam.o(i.cam_ident)
+    i.camera_dma_init                        0x08001f20   Section        0  zf_camera.o(i.camera_dma_init)
+    i.camera_tim_etr_init                    0x08001f9c   Section        0  zf_camera.o(i.camera_tim_etr_init)
+    i.core_select                            0x0800209c   Section        0  init.o(i.core_select)
+    i.eident_init                            0x08002104   Section        0  init.o(i.eident_init)
+    i.exti_interrupt_init                    0x08002180   Section        0  zf_exti.o(i.exti_interrupt_init)
+    i.fixed_monitor                          0x08002254   Section        0  menu_2.o(i.fixed_monitor)
+    i.fsmc_init                              0x08002360   Section        0  zf_fsmc.o(i.fsmc_init)
+    i.get_config                             0x080023b8   Section        0  seekfree_mt9v03x.o(i.get_config)
+    i.gpio_get                               0x08002420   Section        0  zf_gpio.o(i.gpio_get)
+    i.gpio_init                              0x08002444   Section        0  zf_gpio.o(i.gpio_init)
+    i.info                                   0x08002590   Section        0  menu.o(i.info)
+    info                                     0x08002591   Thumb Code  1594  menu.o(i.info)
+    i.info                                   0x08002bd0   Section        0  menu_2.o(i.info)
+    info                                     0x08002bd1   Thumb Code  3028  menu_2.o(i.info)
+    i.info_found                             0x080037ac   Section        0  menu_2.o(i.info_found)
+    info_found                               0x080037ad   Thumb Code   214  menu_2.o(i.info_found)
+    i.ips200_address_set                     0x08003908   Section        0  seekfree_ips200_parallel8.o(i.ips200_address_set)
+    i.ips200_clear                           0x0800393e   Section        0  seekfree_ips200_parallel8.o(i.ips200_clear)
+    i.ips200_display_chinese                 0x08003972   Section        0  seekfree_ips200_parallel8.o(i.ips200_display_chinese)
+    i.ips200_displayimage032                 0x08003a16   Section        0  seekfree_ips200_parallel8.o(i.ips200_displayimage032)
+    i.ips200_drawpoint                       0x08003aa4   Section        0  seekfree_ips200_parallel8.o(i.ips200_drawpoint)
+    i.ips200_init                            0x08003ac0   Section        0  seekfree_ips200_parallel8.o(i.ips200_init)
+    i.ips200_showchar                        0x08003d28   Section        0  seekfree_ips200_parallel8.o(i.ips200_showchar)
+    i.ips200_showfloat                       0x08003da0   Section        0  seekfree_ips200_parallel8.o(i.ips200_showfloat)
+    i.ips200_showint16                       0x08003e5c   Section        0  seekfree_ips200_parallel8.o(i.ips200_showint16)
+    i.ips200_showstr                         0x08003f1a   Section        0  seekfree_ips200_parallel8.o(i.ips200_showstr)
+    i.ips200_showuint8                       0x08003f48   Section        0  seekfree_ips200_parallel8.o(i.ips200_showuint8)
+    i.ips200_w_data                          0x08003fac   Section        0  seekfree_ips200_parallel8.o(i.ips200_w_data)
+    i.ips200_wr_data                         0x08003fb8   Section        0  seekfree_ips200_parallel8.o(i.ips200_wr_data)
+    i.ips200_wr_data16                       0x08003ff8   Section        0  seekfree_ips200_parallel8.o(i.ips200_wr_data16)
+    i.ips200_wr_reg                          0x08004060   Section        0  seekfree_ips200_parallel8.o(i.ips200_wr_reg)
+    i.main                                   0x080040a0   Section        0  main.o(i.main)
+    i.menu2_display                          0x08004110   Section        0  menu_2.o(i.menu2_display)
+    i.menu2_init                             0x080045ec   Section        0  menu_2.o(i.menu2_init)
+    i.menu2_select                           0x08004740   Section        0  menu_2.o(i.menu2_select)
+    i.menu2value                             0x080049c8   Section        0  menu_2.o(i.menu2value)
+    menu2value                               0x080049c9   Thumb Code   130  menu_2.o(i.menu2value)
+    i.menu2value_hl                          0x08004a64   Section        0  menu_2.o(i.menu2value_hl)
+    i.menu2value_sup                         0x08004d64   Section        0  menu_2.o(i.menu2value_sup)
+    menu2value_sup                           0x08004d65   Thumb Code   454  menu_2.o(i.menu2value_sup)
+    i.menu_display                           0x08004f6c   Section        0  menu.o(i.menu_display)
+    i.menu_limit                             0x080050c4   Section        0  menu.o(i.menu_limit)
+    menu_limit                               0x080050c5   Thumb Code    64  menu.o(i.menu_limit)
+    i.menu_select                            0x08005104   Section        0  menu.o(i.menu_select)
+    i.modify                                 0x080051d4   Section        0  menu_2.o(i.modify)
+    modify                                   0x080051d5   Thumb Code   654  menu_2.o(i.modify)
+    i.monitor                                0x0800548c   Section        0  menu_2.o(i.monitor)
+    i.mt9v03x_dma                            0x0800558c   Section        0  seekfree_mt9v03x.o(i.mt9v03x_dma)
+    i.mt9v03x_dma_init                       0x080055ac   Section        0  seekfree_mt9v03x.o(i.mt9v03x_dma_init)
+    i.mt9v03x_exti_init                      0x080055fc   Section        0  seekfree_mt9v03x.o(i.mt9v03x_exti_init)
+    i.mt9v03x_init                           0x08005624   Section        0  seekfree_mt9v03x.o(i.mt9v03x_init)
+    i.mt9v03x_tim1_etr_init                  0x080056a0   Section        0  seekfree_mt9v03x.o(i.mt9v03x_tim1_etr_init)
+    i.mt9v03x_uart_callback                  0x080056ac   Section        0  seekfree_mt9v03x.o(i.mt9v03x_uart_callback)
+    i.mt9v03x_vsync                          0x08005700   Section        0  seekfree_mt9v03x.o(i.mt9v03x_vsync)
+    i.number_conversion_ascii                0x08005718   Section        0  seekfree_printf.o(i.number_conversion_ascii)
+    i.nvic_init                              0x080057a0   Section        0  common.o(i.nvic_init)
+    i.ov7725_cof_uart_interrupt              0x080057c4   Section        0  seekfree_uart_7725.o(i.ov7725_cof_uart_interrupt)
+    i.ov7725_dma                             0x08005818   Section        0  seekfree_7725.o(i.ov7725_dma)
+    i.ov7725_uart_dma                        0x08005838   Section        0  seekfree_uart_7725.o(i.ov7725_uart_dma)
+    i.ov7725_uart_vsync                      0x08005858   Section        0  seekfree_uart_7725.o(i.ov7725_uart_vsync)
+    i.ov7725_vsync                           0x08005870   Section        0  seekfree_7725.o(i.ov7725_vsync)
+    i.pos_pid                                0x08005888   Section        0  pid.o(i.pos_pid)
+    i.printf_reverse_order                   0x080058f0   Section        0  seekfree_printf.o(i.printf_reverse_order)
+    i.set_config                             0x08005914   Section        0  seekfree_mt9v03x.o(i.set_config)
+    i.single_ch_filter                       0x0800598c   Section        0  eident.o(i.single_ch_filter)
+    i.swdisplay                              0x08005a50   Section        0  menu_2.o(i.swdisplay)
+    i.swmode                                 0x08005c6c   Section        0  menu_2.o(i.swmode)
+    swmode                                   0x08005c6d   Thumb Code   122  menu_2.o(i.swmode)
+    i.systick_delay                          0x08005d00   Section        0  zf_systick.o(i.systick_delay)
+    i.systick_delay_ms                       0x08005d28   Section        0  zf_systick.o(i.systick_delay_ms)
+    i.tim_interrupt_disabnle                 0x08005d50   Section        0  zf_pit.o(i.tim_interrupt_disabnle)
+    i.tim_interrupt_init                     0x08005d74   Section        0  zf_pit.o(i.tim_interrupt_init)
+    i.tim_interrupt_init_ms                  0x08005e60   Section        0  zf_pit.o(i.tim_interrupt_init_ms)
+    i.uart_getchar                           0x08005f58   Section        0  zf_uart.o(i.uart_getchar)
+    i.uart_init                              0x08005f7c   Section        0  zf_uart.o(i.uart_init)
+    i.uart_pin_init                          0x08006110   Section        0  zf_uart.o(i.uart_pin_init)
+    uart_pin_init                            0x08006111   Thumb Code    36  zf_uart.o(i.uart_pin_init)
+    i.uart_putbuff                           0x08006134   Section        0  zf_uart.o(i.uart_putbuff)
+    i.uart_putchar                           0x08006164   Section        0  zf_uart.o(i.uart_putchar)
+    i.uart_rx_irq                            0x08006184   Section        0  zf_uart.o(i.uart_rx_irq)
+    i.zf_sprintf                             0x080061d0   Section        0  seekfree_printf.o(i.zf_sprintf)
+    .constdata                               0x080064b4   Section     7048  seekfree_font.o(.constdata)
     .data                                    0x20000000   Section       78  data.o(.data)
     .data                                    0x20000050   Section       60  menu_2.o(.data)
-    .data                                    0x2000008c   Section        1  cam.o(.data)
-    .data                                    0x20000090   Section        8  common.o(.data)
-    .data                                    0x20000098   Section       20  system_mm32f327x.o(.data)
-    .data                                    0x200000ac   Section       15  zf_adc.o(.data)
-    .data                                    0x200000bc   Section       32  zf_gpio.o(.data)
-    .data                                    0x200000dc   Section       32  zf_tim.o(.data)
-    .data                                    0x200000fc   Section       40  zf_uart.o(.data)
-    .data                                    0x20000124   Section        4  seekfree_7725.o(.data)
-    ov7725_simiic_delay_time                 0x20000126   Data           2  seekfree_7725.o(.data)
-    .data                                    0x20000128   Section        4  seekfree_ips200_parallel8.o(.data)
-    .data                                    0x2000012c   Section       74  seekfree_mt9v03x.o(.data)
-    receive                                  0x2000012d   Data           3  seekfree_mt9v03x.o(.data)
-    receive_num                              0x20000130   Data           1  seekfree_mt9v03x.o(.data)
-    uart_receive_flag                        0x20000131   Data           1  seekfree_mt9v03x.o(.data)
-    .data                                    0x20000176   Section       51  seekfree_uart_7725.o(.data)
-    ov7725_uart_receive                      0x200001a4   Data           3  seekfree_uart_7725.o(.data)
-    ov7725_uart_receive_num                  0x200001a7   Data           1  seekfree_uart_7725.o(.data)
-    ov7725_uart_receive_flag                 0x200001a8   Data           1  seekfree_uart_7725.o(.data)
-    .bss                                     0x200001ac   Section      664  data.o(.bss)
-    .bss                                     0x20000444   Section    13760  seekfree_mt9v03x.o(.bss)
-    STACK                                    0x20003a08   Section     1024  startup_mm32f327x_keil.o(STACK)
+    .data                                    0x2000008c   Section        8  common.o(.data)
+    .data                                    0x20000094   Section       20  system_mm32f327x.o(.data)
+    .data                                    0x200000a8   Section       15  zf_adc.o(.data)
+    .data                                    0x200000b8   Section       32  zf_gpio.o(.data)
+    .data                                    0x200000d8   Section       32  zf_tim.o(.data)
+    .data                                    0x200000f8   Section       40  zf_uart.o(.data)
+    .data                                    0x20000120   Section        4  seekfree_7725.o(.data)
+    ov7725_simiic_delay_time                 0x20000122   Data           2  seekfree_7725.o(.data)
+    .data                                    0x20000124   Section        4  seekfree_ips200_parallel8.o(.data)
+    .data                                    0x20000128   Section       74  seekfree_mt9v03x.o(.data)
+    receive                                  0x20000129   Data           3  seekfree_mt9v03x.o(.data)
+    receive_num                              0x2000012c   Data           1  seekfree_mt9v03x.o(.data)
+    uart_receive_flag                        0x2000012d   Data           1  seekfree_mt9v03x.o(.data)
+    .data                                    0x20000172   Section       51  seekfree_uart_7725.o(.data)
+    ov7725_uart_receive                      0x200001a0   Data           3  seekfree_uart_7725.o(.data)
+    ov7725_uart_receive_num                  0x200001a3   Data           1  seekfree_uart_7725.o(.data)
+    ov7725_uart_receive_flag                 0x200001a4   Data           1  seekfree_uart_7725.o(.data)
+    .bss                                     0x200001a8   Section      776  data.o(.bss)
+    .bss                                     0x200004b0   Section     8960  seekfree_mt9v03x.o(.bss)
+    STACK                                    0x200027b0   Section     1024  startup_mm32f327x_keil.o(STACK)
 
     Global Symbols
 
@@ -2560,101 +2554,103 @@ Image Symbol Table
     adc_suminus                              0x08001bd9   Thumb Code   256  eident.o(i.adc_suminus)
     afio_init                                0x08001cf5   Thumb Code   218  zf_gpio.o(i.afio_init)
     board_init                               0x08001dd9   Thumb Code    24  board.o(i.board_init)
-    cam_draw                                 0x08001df1   Thumb Code   168  cam.o(i.cam_draw)
-    camera_dma_init                          0x08001ffd   Thumb Code   122  zf_camera.o(i.camera_dma_init)
-    camera_tim_etr_init                      0x08002079   Thumb Code   252  zf_camera.o(i.camera_tim_etr_init)
-    camident                                 0x08002179   Thumb Code   194  cam.o(i.camident)
-    core_select                              0x0800224d   Thumb Code    70  init.o(i.core_select)
-    eident_init                              0x080022b5   Thumb Code   104  init.o(i.eident_init)
-    exti_interrupt_init                      0x08002331   Thumb Code   206  zf_exti.o(i.exti_interrupt_init)
-    fixed_monitor                            0x08002405   Thumb Code   180  menu_2.o(i.fixed_monitor)
-    fsmc_init                                0x08002511   Thumb Code    88  zf_fsmc.o(i.fsmc_init)
-    get_config                               0x08002569   Thumb Code    96  seekfree_mt9v03x.o(i.get_config)
-    gpio_get                                 0x080025d1   Thumb Code    32  zf_gpio.o(i.gpio_get)
-    gpio_init                                0x080025f5   Thumb Code   322  zf_gpio.o(i.gpio_init)
-    ips200_address_set                       0x08003ab9   Thumb Code    54  seekfree_ips200_parallel8.o(i.ips200_address_set)
-    ips200_clear                             0x08003aef   Thumb Code    52  seekfree_ips200_parallel8.o(i.ips200_clear)
-    ips200_display_chinese                   0x08003b23   Thumb Code   164  seekfree_ips200_parallel8.o(i.ips200_display_chinese)
-    ips200_displayimage032                   0x08003bc7   Thumb Code   142  seekfree_ips200_parallel8.o(i.ips200_displayimage032)
-    ips200_drawpoint                         0x08003c55   Thumb Code    28  seekfree_ips200_parallel8.o(i.ips200_drawpoint)
-    ips200_init                              0x08003c71   Thumb Code   610  seekfree_ips200_parallel8.o(i.ips200_init)
-    ips200_showchar                          0x08003ed9   Thumb Code   106  seekfree_ips200_parallel8.o(i.ips200_showchar)
-    ips200_showfloat                         0x08003f51   Thumb Code   184  seekfree_ips200_parallel8.o(i.ips200_showfloat)
-    ips200_showint16                         0x0800400d   Thumb Code   190  seekfree_ips200_parallel8.o(i.ips200_showint16)
-    ips200_showstr                           0x080040cb   Thumb Code    46  seekfree_ips200_parallel8.o(i.ips200_showstr)
-    ips200_showuint8                         0x080040f9   Thumb Code   100  seekfree_ips200_parallel8.o(i.ips200_showuint8)
-    ips200_w_data                            0x0800415d   Thumb Code     8  seekfree_ips200_parallel8.o(i.ips200_w_data)
-    ips200_wr_data                           0x08004169   Thumb Code    60  seekfree_ips200_parallel8.o(i.ips200_wr_data)
-    ips200_wr_data16                         0x080041a9   Thumb Code    98  seekfree_ips200_parallel8.o(i.ips200_wr_data16)
-    ips200_wr_reg                            0x08004211   Thumb Code    58  seekfree_ips200_parallel8.o(i.ips200_wr_reg)
-    main                                     0x08004251   Thumb Code   106  main.o(i.main)
-    menu2_display                            0x080042c1   Thumb Code  1240  menu_2.o(i.menu2_display)
-    menu2_init                               0x0800479d   Thumb Code   282  menu_2.o(i.menu2_init)
-    menu2_select                             0x080048f1   Thumb Code   574  menu_2.o(i.menu2_select)
-    menu2value_hl                            0x08004c15   Thumb Code   696  menu_2.o(i.menu2value_hl)
-    menu_display                             0x0800511d   Thumb Code   332  menu.o(i.menu_display)
-    menu_select                              0x080052b5   Thumb Code   196  menu.o(i.menu_select)
-    monitor                                  0x0800563d   Thumb Code   184  menu_2.o(i.monitor)
-    mt9v03x_dma                              0x0800573d   Thumb Code    22  seekfree_mt9v03x.o(i.mt9v03x_dma)
-    mt9v03x_dma_init                         0x0800575d   Thumb Code    68  seekfree_mt9v03x.o(i.mt9v03x_dma_init)
-    mt9v03x_exti_init                        0x080057ad   Thumb Code    40  seekfree_mt9v03x.o(i.mt9v03x_exti_init)
-    mt9v03x_init                             0x080057d5   Thumb Code   100  seekfree_mt9v03x.o(i.mt9v03x_init)
-    mt9v03x_tim1_etr_init                    0x08005851   Thumb Code    12  seekfree_mt9v03x.o(i.mt9v03x_tim1_etr_init)
-    mt9v03x_uart_callback                    0x0800585d   Thumb Code    66  seekfree_mt9v03x.o(i.mt9v03x_uart_callback)
-    mt9v03x_vsync                            0x080058b1   Thumb Code    20  seekfree_mt9v03x.o(i.mt9v03x_vsync)
-    number_conversion_ascii                  0x080058c9   Thumb Code   136  seekfree_printf.o(i.number_conversion_ascii)
-    nvic_init                                0x08005951   Thumb Code    36  common.o(i.nvic_init)
-    ov7725_cof_uart_interrupt                0x08005975   Thumb Code    66  seekfree_uart_7725.o(i.ov7725_cof_uart_interrupt)
-    ov7725_dma                               0x080059c9   Thumb Code    22  seekfree_7725.o(i.ov7725_dma)
-    ov7725_uart_dma                          0x080059e9   Thumb Code    22  seekfree_uart_7725.o(i.ov7725_uart_dma)
-    ov7725_uart_vsync                        0x08005a09   Thumb Code    20  seekfree_uart_7725.o(i.ov7725_uart_vsync)
-    ov7725_vsync                             0x08005a21   Thumb Code    20  seekfree_7725.o(i.ov7725_vsync)
-    pos_pid                                  0x08005a39   Thumb Code   104  pid.o(i.pos_pid)
-    printf_reverse_order                     0x08005aa1   Thumb Code    34  seekfree_printf.o(i.printf_reverse_order)
-    set_config                               0x08005ac5   Thumb Code   110  seekfree_mt9v03x.o(i.set_config)
-    single_ch_filter                         0x08005b3d   Thumb Code   196  eident.o(i.single_ch_filter)
-    swdisplay                                0x08005c01   Thumb Code   514  menu_2.o(i.swdisplay)
-    systick_delay                            0x08005eb1   Thumb Code    38  zf_systick.o(i.systick_delay)
-    systick_delay_ms                         0x08005ed9   Thumb Code    34  zf_systick.o(i.systick_delay_ms)
-    tim_interrupt_disabnle                   0x08005f01   Thumb Code    30  zf_pit.o(i.tim_interrupt_disabnle)
-    tim_interrupt_init                       0x08005f25   Thumb Code   216  zf_pit.o(i.tim_interrupt_init)
-    tim_interrupt_init_ms                    0x08006011   Thumb Code   226  zf_pit.o(i.tim_interrupt_init_ms)
-    uart_getchar                             0x08006109   Thumb Code    30  zf_uart.o(i.uart_getchar)
-    uart_init                                0x0800612d   Thumb Code   392  zf_uart.o(i.uart_init)
-    uart_putbuff                             0x080062e5   Thumb Code    42  zf_uart.o(i.uart_putbuff)
-    uart_putchar                             0x08006315   Thumb Code    28  zf_uart.o(i.uart_putchar)
-    uart_rx_irq                              0x08006335   Thumb Code    66  zf_uart.o(i.uart_rx_irq)
-    zf_sprintf                               0x08006381   Thumb Code   736  seekfree_printf.o(i.zf_sprintf)
-    tft_ascii                                0x08006664   Data        1520  seekfree_font.o(.constdata)
-    gImage_qq                                0x08006c54   Data        3200  seekfree_font.o(.constdata)
-    chinese_test                             0x080078d4   Data         128  seekfree_font.o(.constdata)
-    oled_6x8                                 0x08007954   Data         552  seekfree_font.o(.constdata)
-    oled_8x16                                0x08007b7c   Data        1520  seekfree_font.o(.constdata)
-    oled_16x16_chinese                       0x0800816c   Data         128  seekfree_font.o(.constdata)
-    Region$$Table$$Base                      0x080081ec   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x0800820c   Number         0  anon$$obj.o(Region$$Table)
+    cam_draw                                 0x08001df1   Thumb Code    30  cam.o(i.cam_draw)
+    cam_ident                                0x08001e15   Thumb Code   246  cam.o(i.cam_ident)
+    camera_dma_init                          0x08001f21   Thumb Code   122  zf_camera.o(i.camera_dma_init)
+    camera_tim_etr_init                      0x08001f9d   Thumb Code   252  zf_camera.o(i.camera_tim_etr_init)
+    core_select                              0x0800209d   Thumb Code    70  init.o(i.core_select)
+    eident_init                              0x08002105   Thumb Code   104  init.o(i.eident_init)
+    exti_interrupt_init                      0x08002181   Thumb Code   206  zf_exti.o(i.exti_interrupt_init)
+    fixed_monitor                            0x08002255   Thumb Code   180  menu_2.o(i.fixed_monitor)
+    fsmc_init                                0x08002361   Thumb Code    88  zf_fsmc.o(i.fsmc_init)
+    get_config                               0x080023b9   Thumb Code    96  seekfree_mt9v03x.o(i.get_config)
+    gpio_get                                 0x08002421   Thumb Code    32  zf_gpio.o(i.gpio_get)
+    gpio_init                                0x08002445   Thumb Code   322  zf_gpio.o(i.gpio_init)
+    ips200_address_set                       0x08003909   Thumb Code    54  seekfree_ips200_parallel8.o(i.ips200_address_set)
+    ips200_clear                             0x0800393f   Thumb Code    52  seekfree_ips200_parallel8.o(i.ips200_clear)
+    ips200_display_chinese                   0x08003973   Thumb Code   164  seekfree_ips200_parallel8.o(i.ips200_display_chinese)
+    ips200_displayimage032                   0x08003a17   Thumb Code   142  seekfree_ips200_parallel8.o(i.ips200_displayimage032)
+    ips200_drawpoint                         0x08003aa5   Thumb Code    28  seekfree_ips200_parallel8.o(i.ips200_drawpoint)
+    ips200_init                              0x08003ac1   Thumb Code   610  seekfree_ips200_parallel8.o(i.ips200_init)
+    ips200_showchar                          0x08003d29   Thumb Code   106  seekfree_ips200_parallel8.o(i.ips200_showchar)
+    ips200_showfloat                         0x08003da1   Thumb Code   184  seekfree_ips200_parallel8.o(i.ips200_showfloat)
+    ips200_showint16                         0x08003e5d   Thumb Code   190  seekfree_ips200_parallel8.o(i.ips200_showint16)
+    ips200_showstr                           0x08003f1b   Thumb Code    46  seekfree_ips200_parallel8.o(i.ips200_showstr)
+    ips200_showuint8                         0x08003f49   Thumb Code   100  seekfree_ips200_parallel8.o(i.ips200_showuint8)
+    ips200_w_data                            0x08003fad   Thumb Code     8  seekfree_ips200_parallel8.o(i.ips200_w_data)
+    ips200_wr_data                           0x08003fb9   Thumb Code    60  seekfree_ips200_parallel8.o(i.ips200_wr_data)
+    ips200_wr_data16                         0x08003ff9   Thumb Code    98  seekfree_ips200_parallel8.o(i.ips200_wr_data16)
+    ips200_wr_reg                            0x08004061   Thumb Code    58  seekfree_ips200_parallel8.o(i.ips200_wr_reg)
+    main                                     0x080040a1   Thumb Code   106  main.o(i.main)
+    menu2_display                            0x08004111   Thumb Code  1240  menu_2.o(i.menu2_display)
+    menu2_init                               0x080045ed   Thumb Code   282  menu_2.o(i.menu2_init)
+    menu2_select                             0x08004741   Thumb Code   574  menu_2.o(i.menu2_select)
+    menu2value_hl                            0x08004a65   Thumb Code   696  menu_2.o(i.menu2value_hl)
+    menu_display                             0x08004f6d   Thumb Code   332  menu.o(i.menu_display)
+    menu_select                              0x08005105   Thumb Code   196  menu.o(i.menu_select)
+    monitor                                  0x0800548d   Thumb Code   184  menu_2.o(i.monitor)
+    mt9v03x_dma                              0x0800558d   Thumb Code    22  seekfree_mt9v03x.o(i.mt9v03x_dma)
+    mt9v03x_dma_init                         0x080055ad   Thumb Code    68  seekfree_mt9v03x.o(i.mt9v03x_dma_init)
+    mt9v03x_exti_init                        0x080055fd   Thumb Code    40  seekfree_mt9v03x.o(i.mt9v03x_exti_init)
+    mt9v03x_init                             0x08005625   Thumb Code   100  seekfree_mt9v03x.o(i.mt9v03x_init)
+    mt9v03x_tim1_etr_init                    0x080056a1   Thumb Code    12  seekfree_mt9v03x.o(i.mt9v03x_tim1_etr_init)
+    mt9v03x_uart_callback                    0x080056ad   Thumb Code    66  seekfree_mt9v03x.o(i.mt9v03x_uart_callback)
+    mt9v03x_vsync                            0x08005701   Thumb Code    20  seekfree_mt9v03x.o(i.mt9v03x_vsync)
+    number_conversion_ascii                  0x08005719   Thumb Code   136  seekfree_printf.o(i.number_conversion_ascii)
+    nvic_init                                0x080057a1   Thumb Code    36  common.o(i.nvic_init)
+    ov7725_cof_uart_interrupt                0x080057c5   Thumb Code    66  seekfree_uart_7725.o(i.ov7725_cof_uart_interrupt)
+    ov7725_dma                               0x08005819   Thumb Code    22  seekfree_7725.o(i.ov7725_dma)
+    ov7725_uart_dma                          0x08005839   Thumb Code    22  seekfree_uart_7725.o(i.ov7725_uart_dma)
+    ov7725_uart_vsync                        0x08005859   Thumb Code    20  seekfree_uart_7725.o(i.ov7725_uart_vsync)
+    ov7725_vsync                             0x08005871   Thumb Code    20  seekfree_7725.o(i.ov7725_vsync)
+    pos_pid                                  0x08005889   Thumb Code   104  pid.o(i.pos_pid)
+    printf_reverse_order                     0x080058f1   Thumb Code    34  seekfree_printf.o(i.printf_reverse_order)
+    set_config                               0x08005915   Thumb Code   110  seekfree_mt9v03x.o(i.set_config)
+    single_ch_filter                         0x0800598d   Thumb Code   196  eident.o(i.single_ch_filter)
+    swdisplay                                0x08005a51   Thumb Code   514  menu_2.o(i.swdisplay)
+    systick_delay                            0x08005d01   Thumb Code    38  zf_systick.o(i.systick_delay)
+    systick_delay_ms                         0x08005d29   Thumb Code    34  zf_systick.o(i.systick_delay_ms)
+    tim_interrupt_disabnle                   0x08005d51   Thumb Code    30  zf_pit.o(i.tim_interrupt_disabnle)
+    tim_interrupt_init                       0x08005d75   Thumb Code   216  zf_pit.o(i.tim_interrupt_init)
+    tim_interrupt_init_ms                    0x08005e61   Thumb Code   226  zf_pit.o(i.tim_interrupt_init_ms)
+    uart_getchar                             0x08005f59   Thumb Code    30  zf_uart.o(i.uart_getchar)
+    uart_init                                0x08005f7d   Thumb Code   392  zf_uart.o(i.uart_init)
+    uart_putbuff                             0x08006135   Thumb Code    42  zf_uart.o(i.uart_putbuff)
+    uart_putchar                             0x08006165   Thumb Code    28  zf_uart.o(i.uart_putchar)
+    uart_rx_irq                              0x08006185   Thumb Code    66  zf_uart.o(i.uart_rx_irq)
+    zf_sprintf                               0x080061d1   Thumb Code   736  seekfree_printf.o(i.zf_sprintf)
+    tft_ascii                                0x080064b4   Data        1520  seekfree_font.o(.constdata)
+    gImage_qq                                0x08006aa4   Data        3200  seekfree_font.o(.constdata)
+    chinese_test                             0x08007724   Data         128  seekfree_font.o(.constdata)
+    oled_6x8                                 0x080077a4   Data         552  seekfree_font.o(.constdata)
+    oled_8x16                                0x080079cc   Data        1520  seekfree_font.o(.constdata)
+    oled_16x16_chinese                       0x08007fbc   Data         128  seekfree_font.o(.constdata)
+    Region$$Table$$Base                      0x0800803c   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x0800805c   Number         0  anon$$obj.o(Region$$Table)
     lbomp                                    0x20000000   Data           1  data.o(.data)
     rbomp                                    0x20000001   Data           1  data.o(.data)
     efflp                                    0x20000002   Data           1  data.o(.data)
     effrp                                    0x20000003   Data           1  data.o(.data)
     ident_bias                               0x20000004   Data           1  data.o(.data)
     cjug_sta                                 0x20000005   Data           1  data.o(.data)
-    adc0                                     0x20000006   Data           8  data.o(.data)
-    adc1                                     0x2000000e   Data           8  data.o(.data)
-    adc2                                     0x20000016   Data           8  data.o(.data)
-    adc3                                     0x2000001e   Data           8  data.o(.data)
-    adc4                                     0x20000026   Data           8  data.o(.data)
-    ajug_sta                                 0x2000002e   Data           1  data.o(.data)
-    menu                                     0x2000002f   Data           4  data.o(.data)
-    menu_level                               0x20000033   Data           1  data.o(.data)
-    menu_index                               0x20000034   Data           1  data.o(.data)
-    menu2_index                              0x20000035   Data           1  data.o(.data)
-    menu2_level                              0x20000036   Data           1  data.o(.data)
-    excollflag                               0x20000037   Data           1  data.o(.data)
-    fixedflag                                0x20000038   Data           1  data.o(.data)
-    monitorflag                              0x20000039   Data           1  data.o(.data)
-    csimenu_flag                             0x2000003a   Data           2  data.o(.data)
-    wireless_flag                            0x2000003c   Data           2  data.o(.data)
+    lefp                                     0x20000006   Data           1  data.o(.data)
+    rigp                                     0x20000007   Data           1  data.o(.data)
+    adc0                                     0x20000008   Data           8  data.o(.data)
+    adc1                                     0x20000010   Data           8  data.o(.data)
+    adc2                                     0x20000018   Data           8  data.o(.data)
+    adc3                                     0x20000020   Data           8  data.o(.data)
+    adc4                                     0x20000028   Data           8  data.o(.data)
+    ajug_sta                                 0x20000030   Data           1  data.o(.data)
+    menu                                     0x20000031   Data           4  data.o(.data)
+    menu_level                               0x20000035   Data           1  data.o(.data)
+    menu_index                               0x20000036   Data           1  data.o(.data)
+    menu2_index                              0x20000037   Data           1  data.o(.data)
+    menu2_level                              0x20000038   Data           1  data.o(.data)
+    excollflag                               0x20000039   Data           1  data.o(.data)
+    fixedflag                                0x2000003a   Data           1  data.o(.data)
+    monitorflag                              0x2000003b   Data           1  data.o(.data)
+    csimenu_flag                             0x2000003c   Data           2  data.o(.data)
+    wireless_flag                            0x2000003e   Data           2  data.o(.data)
     menu_pfc                                 0x20000040   Data           8  data.o(.data)
     subuff_num                               0x20000048   Data           1  data.o(.data)
     subuff_arr                               0x20000049   Data           3  data.o(.data)
@@ -2674,35 +2670,36 @@ Image Symbol Table
     value2                                   0x20000080   Data           4  menu_2.o(.data)
     value3                                   0x20000084   Data           4  menu_2.o(.data)
     value4                                   0x20000088   Data           4  menu_2.o(.data)
-    mid_point                                0x2000008c   Data           1  cam.o(.data)
-    camera_type                              0x20000090   Data           1  common.o(.data)
-    camera_buffer_addr                       0x20000094   Data           4  common.o(.data)
-    SystemCoreClock                          0x20000098   Data           4  system_mm32f327x.o(.data)
-    AHBPrescTable                            0x2000009c   Data          16  system_mm32f327x.o(.data)
-    adc_index                                0x200000ac   Data          12  zf_adc.o(.data)
-    adc_resolution                           0x200000b8   Data           3  zf_adc.o(.data)
-    gpio_group                               0x200000bc   Data          32  zf_gpio.o(.data)
-    tim_index                                0x200000dc   Data          32  zf_tim.o(.data)
-    uart_index                               0x200000fc   Data          32  zf_uart.o(.data)
-    uart_irq                                 0x2000011c   Data           8  zf_uart.o(.data)
-    ov7725_finish_flag                       0x20000124   Data           1  seekfree_7725.o(.data)
-    ips200_pencolor                          0x20000128   Data           2  seekfree_ips200_parallel8.o(.data)
-    ips200_bgcolor                           0x2000012a   Data           2  seekfree_ips200_parallel8.o(.data)
-    mt9v03x_finish_flag                      0x2000012c   Data           1  seekfree_mt9v03x.o(.data)
-    MT9V03X_CFG                              0x20000132   Data          36  seekfree_mt9v03x.o(.data)
-    GET_CFG                                  0x20000156   Data          32  seekfree_mt9v03x.o(.data)
-    ov7725_uart_finish_flag                  0x20000176   Data           1  seekfree_uart_7725.o(.data)
-    OV7725_CFG                               0x20000178   Data          24  seekfree_uart_7725.o(.data)
-    OV7725_GET_CFG                           0x20000190   Data          20  seekfree_uart_7725.o(.data)
-    border                                   0x200001ac   Data         160  data.o(.bss)
-    borderid                                 0x2000024c   Data         160  data.o(.bss)
-    ltra                                     0x200002ec   Data          80  data.o(.bss)
-    rtra                                     0x2000033c   Data          80  data.o(.bss)
-    adc_err                                  0x2000038c   Data          20  data.o(.bss)
-    adc_steering                             0x200003a0   Data          36  data.o(.bss)
-    nom                                      0x200003c4   Data         128  data.o(.bss)
-    mt9v03x_image                            0x20000444   Data       13760  seekfree_mt9v03x.o(.bss)
-    __initial_sp                             0x20003e08   Data           0  startup_mm32f327x_keil.o(STACK)
+    camera_type                              0x2000008c   Data           1  common.o(.data)
+    camera_buffer_addr                       0x20000090   Data           4  common.o(.data)
+    SystemCoreClock                          0x20000094   Data           4  system_mm32f327x.o(.data)
+    AHBPrescTable                            0x20000098   Data          16  system_mm32f327x.o(.data)
+    adc_index                                0x200000a8   Data          12  zf_adc.o(.data)
+    adc_resolution                           0x200000b4   Data           3  zf_adc.o(.data)
+    gpio_group                               0x200000b8   Data          32  zf_gpio.o(.data)
+    tim_index                                0x200000d8   Data          32  zf_tim.o(.data)
+    uart_index                               0x200000f8   Data          32  zf_uart.o(.data)
+    uart_irq                                 0x20000118   Data           8  zf_uart.o(.data)
+    ov7725_finish_flag                       0x20000120   Data           1  seekfree_7725.o(.data)
+    ips200_pencolor                          0x20000124   Data           2  seekfree_ips200_parallel8.o(.data)
+    ips200_bgcolor                           0x20000126   Data           2  seekfree_ips200_parallel8.o(.data)
+    mt9v03x_finish_flag                      0x20000128   Data           1  seekfree_mt9v03x.o(.data)
+    MT9V03X_CFG                              0x2000012e   Data          36  seekfree_mt9v03x.o(.data)
+    GET_CFG                                  0x20000152   Data          32  seekfree_mt9v03x.o(.data)
+    ov7725_uart_finish_flag                  0x20000172   Data           1  seekfree_uart_7725.o(.data)
+    OV7725_CFG                               0x20000174   Data          24  seekfree_uart_7725.o(.data)
+    OV7725_GET_CFG                           0x2000018c   Data          20  seekfree_uart_7725.o(.data)
+    border                                   0x200001a8   Data         160  data.o(.bss)
+    borderid                                 0x20000248   Data         160  data.o(.bss)
+    ltra                                     0x200002e8   Data          80  data.o(.bss)
+    rtra                                     0x20000338   Data          80  data.o(.bss)
+    lefbor                                   0x20000388   Data          55  data.o(.bss)
+    rigbor                                   0x200003bf   Data          55  data.o(.bss)
+    adc_err                                  0x200003f8   Data          20  data.o(.bss)
+    adc_steering                             0x2000040c   Data          36  data.o(.bss)
+    nom                                      0x20000430   Data         128  data.o(.bss)
+    mt9v03x_image                            0x200004b0   Data        8960  seekfree_mt9v03x.o(.bss)
+    __initial_sp                             0x20002bb0   Data           0  startup_mm32f327x_keil.o(STACK)
 
 
 
@@ -2712,9 +2709,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000191
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000083b8, Max: 0x00080000, ABSOLUTE, COMPRESSED[0x000082d4])
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00008204, Max: 0x00080000, ABSOLUTE, COMPRESSED[0x00008120])
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x0000820c, Max: 0x00080000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x0000805c, Max: 0x00080000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -2842,113 +2839,109 @@ Memory Map of the image
     0x08001bd8   0x08001bd8   0x0000011c   Code   RO          617    i.adc_suminus       eident.o
     0x08001cf4   0x08001cf4   0x000000e4   Code   RO         1550    i.afio_init         zf_gpio.o
     0x08001dd8   0x08001dd8   0x00000018   Code   RO          972    i.board_init        board.o
-    0x08001df0   0x08001df0   0x000000dc   Code   RO          920    i.cam_draw          cam.o
-    0x08001ecc   0x08001ecc   0x00000130   Code   RO          921    i.cam_sow           cam.o
-    0x08001ffc   0x08001ffc   0x0000007a   Code   RO         1246    i.camera_dma_init   zf_camera.o
-    0x08002076   0x08002076   0x00000002   PAD
-    0x08002078   0x08002078   0x00000100   Code   RO         1247    i.camera_tim_etr_init  zf_camera.o
-    0x08002178   0x08002178   0x000000d4   Code   RO          922    i.camident          cam.o
-    0x0800224c   0x0800224c   0x00000068   Code   RO          885    i.core_select       init.o
-    0x080022b4   0x080022b4   0x0000007c   Code   RO          886    i.eident_init       init.o
-    0x08002330   0x08002330   0x000000d4   Code   RO         1281    i.exti_interrupt_init  zf_exti.o
-    0x08002404   0x08002404   0x0000010c   Code   RO          791    i.fixed_monitor     menu_2.o
-    0x08002510   0x08002510   0x00000058   Code   RO         1517    i.fsmc_init         zf_fsmc.o
-    0x08002568   0x08002568   0x00000068   Code   RO         3174    i.get_config        seekfree_mt9v03x.o
-    0x080025d0   0x080025d0   0x00000024   Code   RO         1552    i.gpio_get          zf_gpio.o
-    0x080025f4   0x080025f4   0x0000014c   Code   RO         1553    i.gpio_init         zf_gpio.o
-    0x08002740   0x08002740   0x00000640   Code   RO          744    i.info              menu.o
-    0x08002d80   0x08002d80   0x00000bdc   Code   RO          792    i.info              menu_2.o
-    0x0800395c   0x0800395c   0x0000015c   Code   RO          793    i.info_found        menu_2.o
-    0x08003ab8   0x08003ab8   0x00000036   Code   RO         2709    i.ips200_address_set  seekfree_ips200_parallel8.o
-    0x08003aee   0x08003aee   0x00000034   Code   RO         2710    i.ips200_clear      seekfree_ips200_parallel8.o
-    0x08003b22   0x08003b22   0x000000a4   Code   RO         2711    i.ips200_display_chinese  seekfree_ips200_parallel8.o
-    0x08003bc6   0x08003bc6   0x0000008e   Code   RO         2712    i.ips200_displayimage032  seekfree_ips200_parallel8.o
-    0x08003c54   0x08003c54   0x0000001c   Code   RO         2719    i.ips200_drawpoint  seekfree_ips200_parallel8.o
-    0x08003c70   0x08003c70   0x00000268   Code   RO         2720    i.ips200_init       seekfree_ips200_parallel8.o
-    0x08003ed8   0x08003ed8   0x00000078   Code   RO         2721    i.ips200_showchar   seekfree_ips200_parallel8.o
-    0x08003f50   0x08003f50   0x000000bc   Code   RO         2722    i.ips200_showfloat  seekfree_ips200_parallel8.o
-    0x0800400c   0x0800400c   0x000000be   Code   RO         2724    i.ips200_showint16  seekfree_ips200_parallel8.o
-    0x080040ca   0x080040ca   0x0000002e   Code   RO         2727    i.ips200_showstr    seekfree_ips200_parallel8.o
-    0x080040f8   0x080040f8   0x00000064   Code   RO         2729    i.ips200_showuint8  seekfree_ips200_parallel8.o
-    0x0800415c   0x0800415c   0x0000000c   Code   RO         2730    i.ips200_w_data     seekfree_ips200_parallel8.o
-    0x08004168   0x08004168   0x00000040   Code   RO         2732    i.ips200_wr_data    seekfree_ips200_parallel8.o
-    0x080041a8   0x080041a8   0x00000068   Code   RO         2733    i.ips200_wr_data16  seekfree_ips200_parallel8.o
-    0x08004210   0x08004210   0x00000040   Code   RO         2734    i.ips200_wr_reg     seekfree_ips200_parallel8.o
-    0x08004250   0x08004250   0x00000070   Code   RO          540    i.main              main.o
-    0x080042c0   0x080042c0   0x000004dc   Code   RO          794    i.menu2_display     menu_2.o
-    0x0800479c   0x0800479c   0x00000154   Code   RO          795    i.menu2_init        menu_2.o
-    0x080048f0   0x080048f0   0x00000288   Code   RO          796    i.menu2_select      menu_2.o
-    0x08004b78   0x08004b78   0x0000009c   Code   RO          797    i.menu2value        menu_2.o
-    0x08004c14   0x08004c14   0x00000300   Code   RO          798    i.menu2value_hl     menu_2.o
-    0x08004f14   0x08004f14   0x00000208   Code   RO          799    i.menu2value_sup    menu_2.o
-    0x0800511c   0x0800511c   0x00000158   Code   RO          745    i.menu_display      menu.o
-    0x08005274   0x08005274   0x00000040   Code   RO          746    i.menu_limit        menu.o
-    0x080052b4   0x080052b4   0x000000d0   Code   RO          747    i.menu_select       menu.o
-    0x08005384   0x08005384   0x000002b8   Code   RO          800    i.modify            menu_2.o
-    0x0800563c   0x0800563c   0x00000100   Code   RO          801    i.monitor           menu_2.o
-    0x0800573c   0x0800573c   0x00000020   Code   RO         3176    i.mt9v03x_dma       seekfree_mt9v03x.o
-    0x0800575c   0x0800575c   0x00000050   Code   RO         3177    i.mt9v03x_dma_init  seekfree_mt9v03x.o
-    0x080057ac   0x080057ac   0x00000028   Code   RO         3178    i.mt9v03x_exti_init  seekfree_mt9v03x.o
-    0x080057d4   0x080057d4   0x0000007c   Code   RO         3179    i.mt9v03x_init      seekfree_mt9v03x.o
-    0x08005850   0x08005850   0x0000000c   Code   RO         3180    i.mt9v03x_tim1_etr_init  seekfree_mt9v03x.o
-    0x0800585c   0x0800585c   0x00000054   Code   RO         3181    i.mt9v03x_uart_callback  seekfree_mt9v03x.o
-    0x080058b0   0x080058b0   0x00000018   Code   RO         3182    i.mt9v03x_vsync     seekfree_mt9v03x.o
-    0x080058c8   0x080058c8   0x00000088   Code   RO         1094    i.number_conversion_ascii  seekfree_printf.o
-    0x08005950   0x08005950   0x00000024   Code   RO         1011    i.nvic_init         common.o
-    0x08005974   0x08005974   0x00000054   Code   RO         3443    i.ov7725_cof_uart_interrupt  seekfree_uart_7725.o
-    0x080059c8   0x080059c8   0x00000020   Code   RO         2181    i.ov7725_dma        seekfree_7725.o
-    0x080059e8   0x080059e8   0x00000020   Code   RO         3447    i.ov7725_uart_dma   seekfree_uart_7725.o
-    0x08005a08   0x08005a08   0x00000018   Code   RO         3453    i.ov7725_uart_vsync  seekfree_uart_7725.o
-    0x08005a20   0x08005a20   0x00000018   Code   RO         2194    i.ov7725_vsync      seekfree_7725.o
-    0x08005a38   0x08005a38   0x00000068   Code   RO          712    i.pos_pid           pid.o
-    0x08005aa0   0x08005aa0   0x00000022   Code   RO         1095    i.printf_reverse_order  seekfree_printf.o
-    0x08005ac2   0x08005ac2   0x00000002   PAD
-    0x08005ac4   0x08005ac4   0x00000078   Code   RO         3184    i.set_config        seekfree_mt9v03x.o
-    0x08005b3c   0x08005b3c   0x000000c4   Code   RO          618    i.single_ch_filter  eident.o
-    0x08005c00   0x08005c00   0x0000021c   Code   RO          802    i.swdisplay         menu_2.o
-    0x08005e1c   0x08005e1c   0x00000094   Code   RO          803    i.swmode            menu_2.o
-    0x08005eb0   0x08005eb0   0x00000026   Code   RO         1762    i.systick_delay     zf_systick.o
-    0x08005ed6   0x08005ed6   0x00000002   PAD
-    0x08005ed8   0x08005ed8   0x00000028   Code   RO         1763    i.systick_delay_ms  zf_systick.o
-    0x08005f00   0x08005f00   0x00000024   Code   RO         1610    i.tim_interrupt_disabnle  zf_pit.o
-    0x08005f24   0x08005f24   0x000000ec   Code   RO         1612    i.tim_interrupt_init  zf_pit.o
-    0x08006010   0x08006010   0x000000f8   Code   RO         1613    i.tim_interrupt_init_ms  zf_pit.o
-    0x08006108   0x08006108   0x00000024   Code   RO         1888    i.uart_getchar      zf_uart.o
-    0x0800612c   0x0800612c   0x00000194   Code   RO         1889    i.uart_init         zf_uart.o
-    0x080062c0   0x080062c0   0x00000024   Code   RO         1890    i.uart_pin_init     zf_uart.o
-    0x080062e4   0x080062e4   0x00000030   Code   RO         1891    i.uart_putbuff      zf_uart.o
-    0x08006314   0x08006314   0x00000020   Code   RO         1892    i.uart_putchar      zf_uart.o
-    0x08006334   0x08006334   0x0000004c   Code   RO         1895    i.uart_rx_irq       zf_uart.o
-    0x08006380   0x08006380   0x000002e4   Code   RO         1096    i.zf_sprintf        seekfree_printf.o
-    0x08006664   0x08006664   0x00001b88   Data   RO         2371    .constdata          seekfree_font.o
-    0x080081ec   0x080081ec   0x00000020   Data   RO         7956    Region$$Table       anon$$obj.o
+    0x08001df0   0x08001df0   0x00000024   Code   RO          920    i.cam_draw          cam.o
+    0x08001e14   0x08001e14   0x0000010c   Code   RO          921    i.cam_ident         cam.o
+    0x08001f20   0x08001f20   0x0000007a   Code   RO         1246    i.camera_dma_init   zf_camera.o
+    0x08001f9a   0x08001f9a   0x00000002   PAD
+    0x08001f9c   0x08001f9c   0x00000100   Code   RO         1247    i.camera_tim_etr_init  zf_camera.o
+    0x0800209c   0x0800209c   0x00000068   Code   RO          885    i.core_select       init.o
+    0x08002104   0x08002104   0x0000007c   Code   RO          886    i.eident_init       init.o
+    0x08002180   0x08002180   0x000000d4   Code   RO         1281    i.exti_interrupt_init  zf_exti.o
+    0x08002254   0x08002254   0x0000010c   Code   RO          791    i.fixed_monitor     menu_2.o
+    0x08002360   0x08002360   0x00000058   Code   RO         1517    i.fsmc_init         zf_fsmc.o
+    0x080023b8   0x080023b8   0x00000068   Code   RO         3174    i.get_config        seekfree_mt9v03x.o
+    0x08002420   0x08002420   0x00000024   Code   RO         1552    i.gpio_get          zf_gpio.o
+    0x08002444   0x08002444   0x0000014c   Code   RO         1553    i.gpio_init         zf_gpio.o
+    0x08002590   0x08002590   0x00000640   Code   RO          744    i.info              menu.o
+    0x08002bd0   0x08002bd0   0x00000bdc   Code   RO          792    i.info              menu_2.o
+    0x080037ac   0x080037ac   0x0000015c   Code   RO          793    i.info_found        menu_2.o
+    0x08003908   0x08003908   0x00000036   Code   RO         2709    i.ips200_address_set  seekfree_ips200_parallel8.o
+    0x0800393e   0x0800393e   0x00000034   Code   RO         2710    i.ips200_clear      seekfree_ips200_parallel8.o
+    0x08003972   0x08003972   0x000000a4   Code   RO         2711    i.ips200_display_chinese  seekfree_ips200_parallel8.o
+    0x08003a16   0x08003a16   0x0000008e   Code   RO         2712    i.ips200_displayimage032  seekfree_ips200_parallel8.o
+    0x08003aa4   0x08003aa4   0x0000001c   Code   RO         2719    i.ips200_drawpoint  seekfree_ips200_parallel8.o
+    0x08003ac0   0x08003ac0   0x00000268   Code   RO         2720    i.ips200_init       seekfree_ips200_parallel8.o
+    0x08003d28   0x08003d28   0x00000078   Code   RO         2721    i.ips200_showchar   seekfree_ips200_parallel8.o
+    0x08003da0   0x08003da0   0x000000bc   Code   RO         2722    i.ips200_showfloat  seekfree_ips200_parallel8.o
+    0x08003e5c   0x08003e5c   0x000000be   Code   RO         2724    i.ips200_showint16  seekfree_ips200_parallel8.o
+    0x08003f1a   0x08003f1a   0x0000002e   Code   RO         2727    i.ips200_showstr    seekfree_ips200_parallel8.o
+    0x08003f48   0x08003f48   0x00000064   Code   RO         2729    i.ips200_showuint8  seekfree_ips200_parallel8.o
+    0x08003fac   0x08003fac   0x0000000c   Code   RO         2730    i.ips200_w_data     seekfree_ips200_parallel8.o
+    0x08003fb8   0x08003fb8   0x00000040   Code   RO         2732    i.ips200_wr_data    seekfree_ips200_parallel8.o
+    0x08003ff8   0x08003ff8   0x00000068   Code   RO         2733    i.ips200_wr_data16  seekfree_ips200_parallel8.o
+    0x08004060   0x08004060   0x00000040   Code   RO         2734    i.ips200_wr_reg     seekfree_ips200_parallel8.o
+    0x080040a0   0x080040a0   0x00000070   Code   RO          540    i.main              main.o
+    0x08004110   0x08004110   0x000004dc   Code   RO          794    i.menu2_display     menu_2.o
+    0x080045ec   0x080045ec   0x00000154   Code   RO          795    i.menu2_init        menu_2.o
+    0x08004740   0x08004740   0x00000288   Code   RO          796    i.menu2_select      menu_2.o
+    0x080049c8   0x080049c8   0x0000009c   Code   RO          797    i.menu2value        menu_2.o
+    0x08004a64   0x08004a64   0x00000300   Code   RO          798    i.menu2value_hl     menu_2.o
+    0x08004d64   0x08004d64   0x00000208   Code   RO          799    i.menu2value_sup    menu_2.o
+    0x08004f6c   0x08004f6c   0x00000158   Code   RO          745    i.menu_display      menu.o
+    0x080050c4   0x080050c4   0x00000040   Code   RO          746    i.menu_limit        menu.o
+    0x08005104   0x08005104   0x000000d0   Code   RO          747    i.menu_select       menu.o
+    0x080051d4   0x080051d4   0x000002b8   Code   RO          800    i.modify            menu_2.o
+    0x0800548c   0x0800548c   0x00000100   Code   RO          801    i.monitor           menu_2.o
+    0x0800558c   0x0800558c   0x00000020   Code   RO         3176    i.mt9v03x_dma       seekfree_mt9v03x.o
+    0x080055ac   0x080055ac   0x00000050   Code   RO         3177    i.mt9v03x_dma_init  seekfree_mt9v03x.o
+    0x080055fc   0x080055fc   0x00000028   Code   RO         3178    i.mt9v03x_exti_init  seekfree_mt9v03x.o
+    0x08005624   0x08005624   0x0000007c   Code   RO         3179    i.mt9v03x_init      seekfree_mt9v03x.o
+    0x080056a0   0x080056a0   0x0000000c   Code   RO         3180    i.mt9v03x_tim1_etr_init  seekfree_mt9v03x.o
+    0x080056ac   0x080056ac   0x00000054   Code   RO         3181    i.mt9v03x_uart_callback  seekfree_mt9v03x.o
+    0x08005700   0x08005700   0x00000018   Code   RO         3182    i.mt9v03x_vsync     seekfree_mt9v03x.o
+    0x08005718   0x08005718   0x00000088   Code   RO         1094    i.number_conversion_ascii  seekfree_printf.o
+    0x080057a0   0x080057a0   0x00000024   Code   RO         1011    i.nvic_init         common.o
+    0x080057c4   0x080057c4   0x00000054   Code   RO         3443    i.ov7725_cof_uart_interrupt  seekfree_uart_7725.o
+    0x08005818   0x08005818   0x00000020   Code   RO         2181    i.ov7725_dma        seekfree_7725.o
+    0x08005838   0x08005838   0x00000020   Code   RO         3447    i.ov7725_uart_dma   seekfree_uart_7725.o
+    0x08005858   0x08005858   0x00000018   Code   RO         3453    i.ov7725_uart_vsync  seekfree_uart_7725.o
+    0x08005870   0x08005870   0x00000018   Code   RO         2194    i.ov7725_vsync      seekfree_7725.o
+    0x08005888   0x08005888   0x00000068   Code   RO          712    i.pos_pid           pid.o
+    0x080058f0   0x080058f0   0x00000022   Code   RO         1095    i.printf_reverse_order  seekfree_printf.o
+    0x08005912   0x08005912   0x00000002   PAD
+    0x08005914   0x08005914   0x00000078   Code   RO         3184    i.set_config        seekfree_mt9v03x.o
+    0x0800598c   0x0800598c   0x000000c4   Code   RO          618    i.single_ch_filter  eident.o
+    0x08005a50   0x08005a50   0x0000021c   Code   RO          802    i.swdisplay         menu_2.o
+    0x08005c6c   0x08005c6c   0x00000094   Code   RO          803    i.swmode            menu_2.o
+    0x08005d00   0x08005d00   0x00000026   Code   RO         1762    i.systick_delay     zf_systick.o
+    0x08005d26   0x08005d26   0x00000002   PAD
+    0x08005d28   0x08005d28   0x00000028   Code   RO         1763    i.systick_delay_ms  zf_systick.o
+    0x08005d50   0x08005d50   0x00000024   Code   RO         1610    i.tim_interrupt_disabnle  zf_pit.o
+    0x08005d74   0x08005d74   0x000000ec   Code   RO         1612    i.tim_interrupt_init  zf_pit.o
+    0x08005e60   0x08005e60   0x000000f8   Code   RO         1613    i.tim_interrupt_init_ms  zf_pit.o
+    0x08005f58   0x08005f58   0x00000024   Code   RO         1888    i.uart_getchar      zf_uart.o
+    0x08005f7c   0x08005f7c   0x00000194   Code   RO         1889    i.uart_init         zf_uart.o
+    0x08006110   0x08006110   0x00000024   Code   RO         1890    i.uart_pin_init     zf_uart.o
+    0x08006134   0x08006134   0x00000030   Code   RO         1891    i.uart_putbuff      zf_uart.o
+    0x08006164   0x08006164   0x00000020   Code   RO         1892    i.uart_putchar      zf_uart.o
+    0x08006184   0x08006184   0x0000004c   Code   RO         1895    i.uart_rx_irq       zf_uart.o
+    0x080061d0   0x080061d0   0x000002e4   Code   RO         1096    i.zf_sprintf        seekfree_printf.o
+    0x080064b4   0x080064b4   0x00001b88   Data   RO         2371    .constdata          seekfree_font.o
+    0x0800803c   0x0800803c   0x00000020   Data   RO         7956    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x0800820c, Size: 0x00003e08, Max: 0x00020000, ABSOLUTE, COMPRESSED[0x000000c8])
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x0800805c, Size: 0x00002bb0, Max: 0x00020000, ABSOLUTE, COMPRESSED[0x000000c4])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000000   COMPRESSED   0x0000004e   Data   RW          573    .data               data.o
     0x2000004e   COMPRESSED   0x00000002   PAD
     0x20000050   COMPRESSED   0x0000003c   Data   RW          804    .data               menu_2.o
-    0x2000008c   COMPRESSED   0x00000001   Data   RW          924    .data               cam.o
-    0x2000008d   COMPRESSED   0x00000003   PAD
-    0x20000090   COMPRESSED   0x00000008   Data   RW         1014    .data               common.o
-    0x20000098   COMPRESSED   0x00000014   Data   RW         1149    .data               system_mm32f327x.o
-    0x200000ac   COMPRESSED   0x0000000f   Data   RW         1203    .data               zf_adc.o
-    0x200000bb   COMPRESSED   0x00000001   PAD
-    0x200000bc   COMPRESSED   0x00000020   Data   RW         1556    .data               zf_gpio.o
-    0x200000dc   COMPRESSED   0x00000020   Data   RW         1825    .data               zf_tim.o
-    0x200000fc   COMPRESSED   0x00000028   Data   RW         1897    .data               zf_uart.o
-    0x20000124   COMPRESSED   0x00000004   Data   RW         2196    .data               seekfree_7725.o
-    0x20000128   COMPRESSED   0x00000004   Data   RW         2735    .data               seekfree_ips200_parallel8.o
-    0x2000012c   COMPRESSED   0x0000004a   Data   RW         3188    .data               seekfree_mt9v03x.o
-    0x20000176   COMPRESSED   0x00000033   Data   RW         3456    .data               seekfree_uart_7725.o
-    0x200001a9   COMPRESSED   0x00000003   PAD
-    0x200001ac        -       0x00000298   Zero   RW          572    .bss                data.o
-    0x20000444        -       0x000035c0   Zero   RW         3187    .bss                seekfree_mt9v03x.o
-    0x20003a04   COMPRESSED   0x00000004   PAD
-    0x20003a08        -       0x00000400   Zero   RW         1189    STACK               startup_mm32f327x_keil.o
+    0x2000008c   COMPRESSED   0x00000008   Data   RW         1014    .data               common.o
+    0x20000094   COMPRESSED   0x00000014   Data   RW         1149    .data               system_mm32f327x.o
+    0x200000a8   COMPRESSED   0x0000000f   Data   RW         1203    .data               zf_adc.o
+    0x200000b7   COMPRESSED   0x00000001   PAD
+    0x200000b8   COMPRESSED   0x00000020   Data   RW         1556    .data               zf_gpio.o
+    0x200000d8   COMPRESSED   0x00000020   Data   RW         1825    .data               zf_tim.o
+    0x200000f8   COMPRESSED   0x00000028   Data   RW         1897    .data               zf_uart.o
+    0x20000120   COMPRESSED   0x00000004   Data   RW         2196    .data               seekfree_7725.o
+    0x20000124   COMPRESSED   0x00000004   Data   RW         2735    .data               seekfree_ips200_parallel8.o
+    0x20000128   COMPRESSED   0x0000004a   Data   RW         3188    .data               seekfree_mt9v03x.o
+    0x20000172   COMPRESSED   0x00000033   Data   RW         3456    .data               seekfree_uart_7725.o
+    0x200001a5   COMPRESSED   0x00000003   PAD
+    0x200001a8        -       0x00000308   Zero   RW          572    .bss                data.o
+    0x200004b0        -       0x00002300   Zero   RW         3187    .bss                seekfree_mt9v03x.o
+    0x200027b0        -       0x00000400   Zero   RW         1189    STACK               startup_mm32f327x_keil.o
 
 
 ==============================================================================
@@ -2959,9 +2952,9 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
         24          0          0          0          0        557   board.o
-       736        110          0          1          0       2330   cam.o
+       304         28          0          0          0       1415   cam.o
         68          0          0          8          0       7667   common.o
-       144         54          0         78        664       3182   data.o
+       144         54          0         78        776       3326   data.o
        736         56          0          0          0       7426   eident.o
        268         26          0          0          0       7873   hal_dma.o
        336         20          0          0          0       5652   hal_exti.o
@@ -2970,7 +2963,7 @@ Image component sizes
        128         24          0          0          0       2431   hal_rcc.o
        272         22          0          0          0      12667   hal_tim.o
        304         54          0          0          0       1410   init.o
-      1752        222          0          0          0      99467   isr.o
+      1752        222          0          0          0      99591   isr.o
        112          6          0          0          0        487   main.o
       2216        714          0          0          0       3701   menu.o
       8968       2044          0         60          0      12275   menu_2.o
@@ -2978,7 +2971,7 @@ Image component sizes
         56         14          0          4          0       2042   seekfree_7725.o
          0          0       7048          0          0       1097   seekfree_font.o
       1944         44          0          4          0      16449   seekfree_ips200_parallel8.o
-       620         86          0         74      13760       6334   seekfree_mt9v03x.o
+       620         86          0         74       8960       6334   seekfree_mt9v03x.o
        910          4          0          0          0       4650   seekfree_printf.o
        140         32          0         51          0       2864   seekfree_uart_7725.o
         36          8        400          0       1024        880   startup_mm32f327x_keil.o
@@ -2994,9 +2987,9 @@ Image component sizes
        632         46          0         40          0      17586   zf_uart.o
 
     ----------------------------------------------------------------------
-     23946       3774       7480        428      15452     317689   Object Totals
+     23514       3692       7480        424      10760     317042   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        12          0          0          9          4          0   (incl. Padding)
+        12          0          0          6          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -3054,15 +3047,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     25812       3790       7480        428      15452     310705   Grand Totals
-     25812       3790       7480        200      15452     310705   ELF Image Totals (compressed)
-     25812       3790       7480        200          0          0   ROM Totals
+     25380       3708       7480        424      10760     310110   Grand Totals
+     25380       3708       7480        196      10760     310110   ELF Image Totals (compressed)
+     25380       3708       7480        196          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                33292 (  32.51kB)
-    Total RW  Size (RW Data + ZI Data)             15880 (  15.51kB)
-    Total ROM Size (Code + RO Data + RW Data)      33492 (  32.71kB)
+    Total RO  Size (Code + RO Data)                32860 (  32.09kB)
+    Total RW  Size (RW Data + ZI Data)             11184 (  10.92kB)
+    Total ROM Size (Code + RO Data + RW Data)      33056 (  32.28kB)
 
 ==============================================================================
 

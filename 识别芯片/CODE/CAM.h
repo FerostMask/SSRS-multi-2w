@@ -7,5 +7,6 @@
 /* 						º¯ÊýÉùÃ÷ 						*/
 /*======================================================*/
 void camident(void);
+void cam_ident(void);
 void cam_draw(void);
 #endif
