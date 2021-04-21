@@ -21,6 +21,7 @@
 /*==============================================================*/
 #include "headfile.h"
 #include "isr.h"
+#include "CAM.h"
 #include "motor.h"
 #include "menu.h"
 #include "data.h"
@@ -38,15 +39,36 @@ void TIM8_UP_IRQHandler (void)
 {
 	uint32 state = TIM8->SR;														// 读取中断状态
 	TIM8->SR &= ~state;																// 清空中断状态
-	ccd_collect();
-	ccd_send_data(UART_4, ccd_data[0]);
 }
 
 void TIM2_IRQHandler (void)
 {
 	uint32 state = TIM2->SR;														// 读取中断状态
 	TIM2->SR &= ~state;																// 清空中断状态
+//	代码编写区域
+/*----------------------*/
+/*	 	摄像头部分		*/
+/*======================*/
 
+/*----------------------*/
+/*	 	 电磁部分		*/
+/*======================*/
+//	电磁识别
+	single_ch_filter(&adc0);
+	single_ch_filter(&adc1);
+//	single_ch_filter(&adc2);
+	single_ch_filter(&adc3);
+	single_ch_filter(&adc4);
+	adc_jug();
+	adc_suminus();
+	uart_putchar(UART_7, adc_steering.rs);
+//	安全锁
+	spd = 70;
+	if(adc0.value == adc1.value)
+		if(adc1.value == adc3.value)
+			if(adc3.value == adc4.value)
+				spd = 0;
+	uart_putchar(UART_6, spd);
 }
 //	电机
 void TIM5_IRQHandler (void){
@@ -71,6 +93,22 @@ void TIM6_IRQHandler (void)
 	uint32 state = TIM6->SR;														// 读取中断状态
 	TIM6->SR &= ~state;																// 清空中断状态
 //	代码编写区域
+	if(excollflag)
+	//	电磁最值获取
+		switch(excollflag){
+			case 6:
+				adc_extreme(&adc0);
+				adc_extreme(&adc1);
+				adc_extreme(&adc2);
+				adc_extreme(&adc3);
+				adc_extreme(&adc4);
+				break;
+			case 1:adc_extreme(&adc0);break;
+			case 2:adc_extreme(&adc1);break;
+			case 3:adc_extreme(&adc2);break;
+			case 4:adc_extreme(&adc3);break;
+			case 5:adc_extreme(&adc4);break;
+		}
 		if(monitorflag) monitor();
 		if(fixedflag) fixed_monitor();
 }

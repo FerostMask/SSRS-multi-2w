@@ -2,6 +2,7 @@
 #define _DATA_H
 #include "menu.h"
 #include "menu_2.h"
+#include "SEEKFREE_MT9V03X.h"
 /*--------------------------------------------------------------*/
 /*							  宏定义							*/
 /*==============================================================*/
@@ -11,12 +12,27 @@
 //	一级菜单
 #define ROWS 4
 #define menu_limit0 0
-#define menu_limit1 1
+#define menu_limit1 2
 #define menu_limit2 0
 #define menu_limit3 1
+//	摄像头
+#define EFF_ROW 54
 /*------------------------------------------------------*/
 /* 					  外部变量声明 						*/
 /*======================================================*/
+/*----------------------*/
+/*	 	摄像头模块		*/
+/*======================*/
+extern unsigned char cjug_sta;
+//	图像ver2
+extern unsigned char lefbor[EFF_ROW+1], rigbor[EFF_ROW+1], mid_point[EFF_ROW+1];
+extern unsigned char lefp, rigp, midp;
+extern unsigned short imgthrsod;
+extern float lefslope, rigslope, midslope;
+//	ver3
+extern float P[256], PK[256], MK[256];
+extern unsigned char gray_img[MT9V03X_H][MT9V03X_W];
+extern unsigned char img_thrsod;
 /*----------------------*/
 /*	 	 电磁模块		*/
 /*======================*/
@@ -63,6 +79,7 @@ typedef struct pidpara{
 	short rs;
 }pidpara;
 extern struct pidpara adc_steering;
+extern struct pidpara cam_steering;
 /*----------------------*/
 /*	 	 有来有去		*/
 /*======================*/

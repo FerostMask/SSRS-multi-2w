@@ -22,15 +22,12 @@
 /*----------------------*/
 /*	 	摄像头模块		*/
 /*======================*/
-extern unsigned char border[160], borderid[160];
-extern unsigned char lbomp, rbomp;
-extern unsigned char ltra[80], rtra[80];
-extern unsigned char efflp, effrp;
-extern unsigned char ident_bias;
 extern unsigned char cjug_sta;
 //	图像ver2
-extern unsigned char lefbor[EFF_ROW+1], rigbor[EFF_ROW+1];
-extern unsigned char lefp, rigp;
+extern unsigned char lefbor[EFF_ROW+1], rigbor[EFF_ROW+1], mid_point[EFF_ROW+1];
+extern unsigned char lefp, rigp, midp;
+extern unsigned short imgthrsod;
+extern float lefslope, rigslope, midslope;
 /*----------------------*/
 /*	 	 电磁模块		*/
 /*======================*/
@@ -77,6 +74,7 @@ typedef struct pidpara{
 	short rs;
 }pidpara;
 extern struct pidpara adc_steering;
+extern struct pidpara cam_steering;
 /*----------------------*/
 /*	 	 有来有去		*/
 /*======================*/

@@ -60,8 +60,15 @@ void TIM2_IRQHandler (void)
 	single_ch_filter(&adc3);
 	single_ch_filter(&adc4);
 	adc_jug();
-	adc_suminus();
-	uart_putchar(UART_7, adc_steering.rs);
+//	adc_suminus();
+//	uart_putchar(UART_7, adc_steering.rs);
+//	安全锁
+	spd = 70;
+	if(adc0.value == adc1.value)
+		if(adc1.value == adc3.value)
+			if(adc3.value == adc4.value)
+				spd = 0;
+	uart_putchar(UART_6, spd);
 }
 //	电机
 void TIM5_IRQHandler (void){

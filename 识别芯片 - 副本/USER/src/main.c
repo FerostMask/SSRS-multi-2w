@@ -20,6 +20,7 @@
 /*							头文件加载							*/
 /*==============================================================*/
 #include "headfile.h"
+#include "CAM.h"
 #include "Init.h"
 #include "data.h"
 #include "eident.h" 
@@ -41,8 +42,7 @@ int main(void){
 	//此处编写用户代码(例如：外设初始化代码等)
 //	外设初始化
 	ips200_init();
-	ccd_init();
-	seekfree_wireless_init();
+	mt9v03x_init();
 //	引脚状态初始化
 	gpio_init(B9, GPO, GPIO_HIGH, GPO_PUSH_PULL);
 //	串口初始化
@@ -65,7 +65,9 @@ int main(void){
 /*==============================================================*/	
 	while(1){
 	//	此处编写需要循环执行的代码
-
+		if(mt9v03x_finish_flag){
+			otsu();
+		}
 	}
 }
 // **************************** 代码区域 ****************************

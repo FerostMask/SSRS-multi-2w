@@ -40,6 +40,7 @@ void menu2_init(void){
 		case 0:
 			magflag = 0;
 			menu2flag = 3;//切换为开关
+//			tim_interrupt_init(TIM_8, 20, 0, 3);
 			switch(menu[menu_index]){
 				case 0:
 					menu2mode = 0;//显示页面0
@@ -60,8 +61,8 @@ void menu2_init(void){
 					menu2mode = 0;
 					break;
 				case 1://电磁转向
-					value0 = &adc_steering.Kp;
-					value1 = &adc_steering.Kd;
+					value0 = &cam_steering.Kp;
+					value1 = &cam_steering.Kd;
 					menu2_limit = 1;
 					menu2mode = 1;
 					magflag = 1;
@@ -205,8 +206,8 @@ void menu2value_hl(void){
 					switch(menu2_index){
 						case 0:ips200_showfloat(120, 15, *value0, 2, 3);break;
 						case 1:ips200_showfloat(120, 16, *value1, 2, 3);break;
-						case 2:ips200_showfloat(120, 17, *value0, 2, 3);break;
-						case 3:ips200_showfloat(120, 18, *value1, 2, 3);break;
+						case 2:ips200_showfloat(120, 17, *value2, 2, 3);break;
+						case 3:ips200_showfloat(120, 18, *value3, 2, 3);break;
 					}
 					break;
 			}
@@ -628,7 +629,7 @@ static void swmode(void){
 	switch(menu[menu_index]){
 		case 0:
 			fixedflag = 0;
-//			pit_close(PIT_CH2);
+			tim_interrupt_disabnle(TIM_6);
 			temp = csimenu_flag[menu2_index];
 			for(i=0; i<CSIMENU_FLAG; i++) csimenu_flag[i] = 0;
 			csimenu_flag[menu2_index] = !temp;
@@ -637,8 +638,8 @@ static void swmode(void){
 			temp = wireless_flag[menu2_index];
 			for(i=0; i<WIRELESS_FLAG; i++) wireless_flag[i] = 0;
 			wireless_flag[menu2_index] = !temp;
-//			if(!temp) pit_interrupt_ms(PIT_CH3,20);
-//			else pit_close(PIT_CH3);
+//			if(!temp) tim_interrupt_init(TIM_8, 20, 0, 3);
+//			else tim_interrupt_disabnle(TIM_8);
 			break;
 	}
 }

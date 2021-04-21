@@ -442,6 +442,11 @@
               <FileType>1</FileType>
               <FilePath>..\CODE\Init.c</FilePath>
             </File>
+            <File>
+              <FileName>CAM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CODE\CAM.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -49,6 +49,6 @@ void angle_ctrl(void){
 		pos_pid(&angle, blcp+speed.rs, pita, 10, -10);
 	}
 //	角速度、电机控制
-	inc_pid(&acw, angle.rs, gy, 7000);
+	inc_pid(&acw, angle.rs, gy, 5000);
 	motor_act();
 }

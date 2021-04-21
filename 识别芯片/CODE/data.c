@@ -16,18 +16,15 @@
 /*----------------------*/
 /*	 	摄像头模块		*/
 /*======================*/
-//	边界（存行）、边界ID
-unsigned char border[160], borderid[160];
-//	痕迹
-unsigned char lbomp, rbomp;
-unsigned char ltra[80], rtra[80];
-unsigned char efflp, effrp;
-unsigned char ident_bias = 0;
+//	阈值
+unsigned short imgthrsod = 28000;
 //	识别状态
 unsigned char cjug_sta;
 //	左右边界（存列）
-unsigned char lefbor[EFF_ROW+1], rigbor[EFF_ROW+1];
-unsigned char lefp, rigp;
+unsigned char lefbor[EFF_ROW+1], rigbor[EFF_ROW+1], mid_point[EFF_ROW+1];
+unsigned char lefp, rigp, midp;
+//	斜率
+float lefslope, rigslope, midslope;
 /*----------------------*/
 /*	 	 电磁模块		*/
 /*======================*/
@@ -40,11 +37,13 @@ struct adcpara adc4;
 struct adcerrpa adc_err;
 //	状态标志位
 unsigned char ajug_sta;
+short spd;
 /*----------------------*/
 /*	 	 控制模块		*/
 /*======================*/
 //	PID
 struct pidpara adc_steering;
+struct pidpara cam_steering;
 /*----------------------*/
 /*	 	 菜单模块		*/
 /*======================*/
@@ -92,6 +91,9 @@ void Init_para(void){
 //	ADC转向
 	adc_steering.Kp = 0.21;
 	adc_steering.Kd = 0.6;
+//	CAM转向
+	cam_steering.Kp = 1;
+	cam_steering.Kd = 1;
 ////	速度
 //	speed.alpha = 0.3;
 //	speed.Kp = 0.1;//反应快慢 | 超调

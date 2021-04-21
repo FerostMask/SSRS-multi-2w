@@ -4,8 +4,7 @@
 .\objects\pid.o: ..\CODE\menu.h
 .\objects\pid.o: ..\CODE\menu_2.h
 .\objects\pid.o: ..\CODE\data.h
-.\objects\pid.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\math.h
-.\objects\pid.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_IPS200_PARALLEL8.h
+.\objects\pid.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_MT9V03X.h
 .\objects\pid.o: ..\..\Libraries\seekfree_libraries\common\common.h
 .\objects\pid.o: ..\..\Libraries\Device\MM32F327x\Include\reg_common.h
 .\objects\pid.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -25,5 +24,10 @@
 .\objects\pid.o: ..\..\Libraries\Device\MM32F327x\Include\reg_tim.h
 .\objects\pid.o: ..\..\Libraries\Device\MM32F327x\Include\reg_uart.h
 .\objects\pid.o: ..\..\Libraries\Device\MM32F327x\Include\reg_fsmc.h
+.\objects\pid.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\pid.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\pid.o: ..\..\Libraries\seekfree_libraries\zf_uart.h
+.\objects\pid.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\pid.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_uart.h
+.\objects\pid.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_IPS200_PARALLEL8.h
 .\objects\pid.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_FONT.h

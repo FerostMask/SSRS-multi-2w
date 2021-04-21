@@ -41,12 +41,17 @@ void adc_suminus(void){
 	divs = adc_err.alpha*(float)(adc0.value+adc4.value) + adc_err.omega*abs((float)mid_val);
 	adc_err.rs = adc_err.P*divd/divs;
 	pos_pid(&adc_steering, 0, adc_err.rs, 30, -30);
-	if(cjug_sta == 1)
-		if(adc_steering.rs < 0)
-			adc_steering.rs = -adc_steering.rs;
-	if(cjug_sta == 2)
-		if(adc_steering.rs > 0)
-			adc_steering.rs = -adc_steering.rs;
+//	检测摄像头与电磁是否一致左转
+	if(cjug_sta == 21 || cjug_sta == 22)
+		if(adc_steering.rs < 0){
+			adc_steering.rs = - adc_steering.rs;
+			return;
+		}
+	if(cjug_sta == 29 || cjug_sta == 28)
+		if(adc_steering.rs > 0){
+			adc_steering.rs = - adc_steering.rs;
+			return;
+		}
 }
 /*----------------------*/
 /*	    单通道滤波		*/
