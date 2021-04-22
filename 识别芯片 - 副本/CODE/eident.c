@@ -40,9 +40,39 @@ void adc_suminus(void){
 	divd = adc_err.alpha*(float)(adc0.value-adc4.value) + adc_err.beta*(float)mid_val;
 	divs = adc_err.alpha*(float)(adc0.value+adc4.value) + adc_err.omega*abs((float)mid_val);
 	adc_err.rs = adc_err.P*divd/divs;
-	pos_pid(&adc_steering, 0, adc_err.rs, 30, -30);
-//	检测摄像头与电磁是否一致左转
-
+	if(adc_err.rs < 0) adc_err.rs = adc_err.rs*1.14;
+//	PID计算、数据发送
+	pos_pid(&adc_steering, 0, -adc_err.rs, 50, -50);
+	uart_putchar(UART_7, (char)adc_steering.rs);
+//	数据监视
+	if(csimenu_flag[1]){
+		ips200_showint16(0, 0, adc0.value);
+		ips200_showint16(0, 1, adc1.value);
+		ips200_showint16(0, 2, adc2.value);
+		ips200_showint16(0, 3, adc3.value);
+		ips200_showint16(0, 4, adc4.value);
+		ips200_showint16(0, 5, adc_convert(ADC_MOD1, ADC_PIN0));
+		ips200_showint16(0, 6, adc_convert(ADC_MOD1, ADC_PIN1));
+		ips200_showint16(0, 7, adc_convert(ADC_MOD1, ADC_PIN2));
+		ips200_showint16(0, 8, adc_convert(ADC_MOD1, ADC_PIN3));
+		ips200_showint16(0, 9, adc_convert(ADC_MOD1, ADC_PIN4));
+		ips200_showstr(100, 0, "divd");
+		ips200_showfloat(160, 0, divd, 4, 4);
+		ips200_showstr(100, 1, "divs");
+		ips200_showfloat(160, 1, divs, 4, 4);
+		ips200_showstr(100, 2, "rs");
+		ips200_showfloat(160, 2, adc_err.rs, 4, 3);
+		ips200_showstr(100, 3, "pid");
+		ips200_showfloat(160, 3, adc_steering.rs, 4, 3);
+		ips200_showstr(100, 4, "a1");
+		ips200_showfloat(160, 4, adc_err.alpha*(float)(adc0.value-adc4.value), 4, 4);
+		ips200_showstr(100, 5, "b");
+		ips200_showfloat(160, 5, adc_err.beta*(float)mid_val, 4, 4);
+		ips200_showstr(100, 6, "a2");
+		ips200_showfloat(160, 6, adc_err.alpha*(float)(adc0.value+adc4.value), 4, 4);
+		ips200_showstr(100, 7, "c");
+		ips200_showfloat(160, 7, adc_err.omega*abs((float)mid_val), 4, 4);
+	}
 }
 /*----------------------*/
 /*	    单通道滤波		*/

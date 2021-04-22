@@ -66,7 +66,7 @@ int main(void){
 	while(1){
 	//	此处编写需要循环执行的代码
 //			if(mt9v03x_finish_flag) camident();
-			if(mt9v03x_finish_flag) cam_ident();
+//			if(mt9v03x_finish_flag) cam_ident();
 	}
 }
 // **************************** 代码区域 ****************************

@@ -35,10 +35,10 @@ void Init_encoder(void){
 void Init_motor(void){
 //	端口初始化
 //	电机引脚初始化 默认频率17kHz 初始占空比 0%
-	pwm_init(TIM_5, MOTOR_R1, 17000, 0);
-	pwm_init(TIM_5, MOTOR_R0, 17000, 0);
-	pwm_init(TIM_5, MOTOR_L1, 17000, 0);
-	pwm_init(TIM_5, MOTOR_L0, 17000, 0);
+	pwm_init(TIM_5, MOTOR_R1, 14000, 0);
+	pwm_init(TIM_5, MOTOR_R0, 14000, 0);
+	pwm_init(TIM_5, MOTOR_L1, 14000, 0);
+	pwm_init(TIM_5, MOTOR_L0, 14000, 0);
 //	PID参数初始化
 	Init_para();
 }

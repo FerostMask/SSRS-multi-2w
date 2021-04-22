@@ -31,7 +31,7 @@ struct pidpara acw;
 /*----------------------*/
 /*	   ½Ç¶È¿ØÖÆÄ£¿é		*/
 /*======================*/
-short blcp = 330;
+short blcp = 350;
 short pita;
 short gy, gz;
 short yfilt[4] = {0, 0, 0, 0};

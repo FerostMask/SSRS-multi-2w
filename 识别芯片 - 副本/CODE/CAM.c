@@ -14,6 +14,24 @@
 /* 							 函数定义 							*/
 /*==============================================================*/
 /*------------------------------*/
+/*		  基准点寻找模块		*/
+/*==============================*/
+static unsigned char found_point(char num){
+//	变量定义
+	register unsigned char j;
+	unsigned char row = MT9V03X_H-1;
+//	基点寻找
+	switch(num){
+		case 1://左基点寻找
+			for(j = 0; j < 159; j++){
+				if(gray_img[row][j] != gray_img[row][j+1]);
+			}
+			break;
+		case 2:
+			break;
+	}
+}
+/*------------------------------*/
 /*		 大津法二值化模块		*/
 /*==============================*/
 void otsu(void){
@@ -49,8 +67,5 @@ void otsu(void){
 			if(mt9v03x_image[i][j]>img_thrsod) gray_img[i][j] = 255;
 			else gray_img[i][j] = 0; 
 		}
-	ips200_displayimage032(gray_img[0], MT9V03X_W, MT9V03X_H);
+	if(csimenu_flag[0]) ips200_displayimage032(mt9v03x_image[0], MT9V03X_W, MT9V03X_H);
 }
-/*------------------------------*/
-/*		  基准点寻找模块		*/
-/*==============================*/

@@ -60,8 +60,8 @@ void TIM2_IRQHandler (void)
 	single_ch_filter(&adc3);
 	single_ch_filter(&adc4);
 	adc_jug();
-//	adc_suminus();
-//	uart_putchar(UART_7, adc_steering.rs);
+	adc_suminus();
+	uart_putchar(UART_7, adc_steering.rs);
 //	°²È«Ëø
 	spd = 70;
 	if(adc0.value == adc1.value)

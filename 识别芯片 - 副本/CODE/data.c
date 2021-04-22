@@ -87,13 +87,13 @@ void Init_para(void){
 	adc3.max = 3815, adc3.min = 117;
 	adc4.max = 3827, adc4.min = 38;
 //	差比和差
-	adc_err.alpha = 15;
-	adc_err.beta = 90;
-	adc_err.omega = 0.2;
-	adc_err.P = 60;
+	adc_err.alpha = 1.969;//内外环转向角度变化
+	adc_err.beta = 60;//转弯角度变化
+	adc_err.omega = 3.6;//转弯平滑度
+	adc_err.P = 20;//放大倍数
 //	ADC转向
-	adc_steering.Kp = 0.21;
-	adc_steering.Kd = 0.6;
+	adc_steering.Kp = 0.86;
+	adc_steering.Kd = 1.1;
 //	CAM转向
 	cam_steering.Kp = 1;
 	cam_steering.Kd = 1;

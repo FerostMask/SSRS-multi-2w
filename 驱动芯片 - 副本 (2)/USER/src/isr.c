@@ -160,7 +160,7 @@ void UART6_IRQHandler(void)
 			motor_act();
 		}
 		else spd = (char)buff_get6;
-		ips200_showint16(0, 1, spd);
+//		ips200_showint16(0, 1, spd);
 //		ips200_showstr(0, 0, "UART6 GET");
 //		ips200_showint8(0, 1, buff_get6);
 		UART6->ICR |= UART_ICR_RXICLR;												// 清除中断标志位
@@ -177,7 +177,7 @@ void UART7_IRQHandler(void)
 	{
 		uart_getchar(UART_7, &buff_get7);
 		rad = (char)buff_get7;
-		ips200_showint16(0, 0, rad);
+//		ips200_showint16(0, 0, rad);
 //		ips200_showstr(0, 2, "UART7 GET");
 //		ips200_showint8(0, 3, buff_get7);
 		UART7->ICR |= UART_ICR_RXICLR;												// 清除中断标志位
