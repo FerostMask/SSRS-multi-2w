@@ -9,6 +9,7 @@
 ".\objects\pid.o"
 ".\objects\menu.o"
 ".\objects\menu_2.o"
+".\objects\logo.o"
 ".\objects\board.o"
 ".\objects\common.o"
 ".\objects\seekfree_printf.o"

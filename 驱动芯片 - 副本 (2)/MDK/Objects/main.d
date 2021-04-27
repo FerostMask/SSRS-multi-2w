@@ -92,3 +92,4 @@
 .\objects\main.o: ..\CODE\data.h
 .\objects\main.o: ..\CODE\menu.h
 .\objects\main.o: ..\CODE\menu_2.h
+.\objects\main.o: ..\CODE\logo.h

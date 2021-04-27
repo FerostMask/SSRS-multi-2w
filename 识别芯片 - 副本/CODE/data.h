@@ -57,11 +57,13 @@ extern struct adcpara adc4;
 extern struct adcerrpa adc_err;
 //	状态标志位
 extern unsigned char ajug_sta;
+//	指针函数
+extern void(*adc_pfc[])(void);
 /*----------------------*/
 /*	 	 MOTOR模块		*/
 /*======================*/
 //	电机
-extern short spd;
+extern short spd, spd_bias;
 extern short rad;
 /*----------------------*/
 /*	 	  PID模块		*/
@@ -79,6 +81,7 @@ typedef struct pidpara{
 	short rs;
 }pidpara;
 extern struct pidpara adc_steering;
+extern struct pidpara adc_straight;
 extern struct pidpara cam_steering;
 /*----------------------*/
 /*	 	 有来有去		*/

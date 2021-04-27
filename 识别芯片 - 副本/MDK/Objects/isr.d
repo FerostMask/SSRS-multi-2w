@@ -96,3 +96,4 @@
 .\objects\isr.o: ..\CODE\menu_2.h
 .\objects\isr.o: ..\CODE\data.h
 .\objects\isr.o: ..\CODE\eident.h
+.\objects\isr.o: ..\CODE\Init.h

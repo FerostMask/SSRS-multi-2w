@@ -26,6 +26,7 @@
 #include "menu.h"
 #include "data.h"
 #include "eident.h"
+#include "Init.h"
 /*------------------------------*/
 /*		    定时器中断			*/
 /*==============================*/
@@ -56,19 +57,27 @@ void TIM2_IRQHandler (void)
 //	电磁识别
 	single_ch_filter(&adc0);
 	single_ch_filter(&adc1);
-//	single_ch_filter(&adc2);
+	single_ch_filter(&adc2);
 	single_ch_filter(&adc3);
 	single_ch_filter(&adc4);
-	adc_jug();
 	adc_suminus();
-//	uart_putchar(UART_7, adc_steering.rs);
+	adc_jug();
+	uart_putchar(UART_7, adc_steering.rs);
 //	安全锁
-	spd = 100;
-	if(adc0.value == adc1.value)
-		if(adc1.value == adc3.value)
-			if(adc3.value == adc4.value)
-				spd = 0;
-	uart_putchar(UART_6, spd-abs(adc_err.rs*0.1));
+	spd = 90;
+	if(!adc0.value)
+		if(!adc1.value)
+			if(!adc3.value)
+				if(!adc4.value)
+					spd = 0, spd_bias = 0;
+	uart_putchar(UART_6, spd+spd_bias);
+//	if(csimenu_flag[1]){
+//		ips200_showint16(0, 5, adc_convert(ADC_MOD1, ADC_PIN0));
+//		ips200_showint16(0, 6, adc_convert(ADC_MOD1, ADC_PIN1));
+//		ips200_showint16(0, 7, adc_convert(ADC_MOD1, ADC_PIN2));
+//		ips200_showint16(0, 8, adc_convert(ADC_MOD1, ADC_PIN3));
+//		ips200_showint16(0, 9, adc_convert(ADC_MOD1, ADC_PIN4));
+//	}
 }
 //	电机
 void TIM5_IRQHandler (void){

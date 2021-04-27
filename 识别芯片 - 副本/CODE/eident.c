@@ -24,26 +24,34 @@ void adc_jug(void){
 	oai_dif = adc0.value*adc0.value+adc4.value*adc4.value - adc1.value*adc1.value-adc3.value*adc3.value;
 //	元素识别
 	if(abs(mid_dif) < 600)
-		if(abs(out_dif) < 1800)	ajug_sta = 0;//直道
+		if(abs(out_dif) < 1800) ajug_sta = 0;
 		else ajug_sta = 1;//弯道
 	if(oai_dif > 15000) ajug_sta = 3;//环道
 	if(oai_dif < 1000) ajug_sta = 2;//十字
+//	adc_pfc[1]();
+}
+/*----------------------*/
+/*	   	 十字直走		*/
+/*======================*/
+void cross_road(void){
+	uart_putchar(UART_7, 0);
+	spd_bias = 5;
 }
 /*----------------------*/
 /*	   差比和差算法		*/
 /*======================*/
 void adc_suminus(void){
 //	变量定义
-	float divd, divs, mid_val;
+	float divd, divs;
+	short mid_val;
 //	差比和差算法
 	mid_val = adc1.value - adc3.value;
-	divd = adc_err.alpha*(float)(adc0.value-adc4.value) + adc_err.beta*(float)mid_val;
+	divd = adc_err.alpha*(float)(adc0.value - adc4.value) + adc_err.beta*(float)mid_val;
 	divs = adc_err.alpha*(float)(adc0.value+adc4.value) + adc_err.omega*abs((float)mid_val);
 	adc_err.rs = adc_err.P*divd/divs;
-	if(adc_err.rs < 0) adc_err.rs = adc_err.rs*1.14;
+//	if(adc_err.rs < 0) adc_err.rs = adc_err.rs*1.14;
 //	PID计算、数据发送
 	pos_pid(&adc_steering, 0, -adc_err.rs, 50, -50);
-	uart_putchar(UART_7, (char)adc_steering.rs);
 //	数据监视
 	if(csimenu_flag[1]){
 		ips200_showint16(0, 0, adc0.value);

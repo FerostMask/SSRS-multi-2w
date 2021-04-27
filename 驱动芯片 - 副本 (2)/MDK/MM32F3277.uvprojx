@@ -452,6 +452,11 @@
               <FileType>1</FileType>
               <FilePath>..\CODE\menu_2.c</FilePath>
             </File>
+            <File>
+              <FileName>logo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CODE\logo.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

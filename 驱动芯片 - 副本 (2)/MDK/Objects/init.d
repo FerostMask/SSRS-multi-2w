@@ -3,6 +3,7 @@
 .\objects\init.o: ..\CODE\Init.h
 .\objects\init.o: ..\CODE\data.h
 .\objects\init.o: ..\CODE\menu_2.h
+.\objects\init.o: ..\CODE\logo.h
 .\objects\init.o: ..\..\Libraries\seekfree_libraries\zf_pwm.h
 .\objects\init.o: ..\..\Libraries\seekfree_libraries\common\common.h
 .\objects\init.o: ..\..\Libraries\Device\MM32F327x\Include\reg_common.h

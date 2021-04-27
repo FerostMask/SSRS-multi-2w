@@ -129,14 +129,14 @@ static void menu2value_sup(void){
 					ips200_showint16(170, 19, adc4.min);
 					break;
 				case 1:
-					ips200_showfloat(120, 15, *value0, 2, 3);
-					ips200_showfloat(120, 16, *value1, 2, 3);
+					ips200_showfloat(120, 15, *value0, 3, 3);
+					ips200_showfloat(120, 16, *value1, 3, 3);
 					break;
 				case 2:
-					ips200_showfloat(120, 15, *value0, 2, 3);
-					ips200_showfloat(120, 16, *value1, 2, 3);
-					ips200_showfloat(120, 17, *value2, 2, 3);
-					ips200_showfloat(120, 18, *value3, 2, 3);
+					ips200_showfloat(120, 15, *value0, 3, 3);
+					ips200_showfloat(120, 16, *value1, 3, 3);
+					ips200_showfloat(120, 17, *value2, 3, 3);
+					ips200_showfloat(120, 18, *value3, 3, 3);
 					break;
 			}
 			break;

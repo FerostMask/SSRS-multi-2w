@@ -2,6 +2,7 @@
 /*							头文件加载							*/
 /*==============================================================*/
 #include "data.h"
+#include "eident.h"
 /*--------------------------------------------------------------*/
 /*							  宏定义							*/
 /*==============================================================*/
@@ -40,12 +41,15 @@ struct adcpara adc4;
 struct adcerrpa adc_err;
 //	状态标志位
 unsigned char ajug_sta;
-short spd;
+short spd, spd_bias;
+//	指针函数
+void(*adc_pfc[])(void) = {cross_road};
 /*----------------------*/
 /*	 	 控制模块		*/
 /*======================*/
 //	PID
 struct pidpara adc_steering;
+struct pidpara adc_straight;
 struct pidpara cam_steering;
 /*----------------------*/
 /*	 	 菜单模块		*/
@@ -65,7 +69,7 @@ unsigned char fixedflag = 0;//固定显示
 unsigned char monitorflag = 0;//监视器
 unsigned char csimenu_flag[CSIMENU_FLAG] = {0, 0};//摄像头
 unsigned char wireless_flag[WIRELESS_FLAG] = {0, 0};//无线数据
-//	函数指针
+//	指针函数
 void(*menu_pfc[])(unsigned char) = {menu_select, menu2_select};
 /*----------------------*/
 /*	 	 有来有去		*/
@@ -87,13 +91,16 @@ void Init_para(void){
 	adc3.max = 3815, adc3.min = 117;
 	adc4.max = 3827, adc4.min = 38;
 //	差比和差
-	adc_err.alpha = 1.969;//内外环转向角度变化
-	adc_err.beta = 60;//转弯角度变化
+	adc_err.alpha = 21.969;//内外环转向角度变化、原差比和参数
+	adc_err.beta = 20;//转弯角度变化
 	adc_err.omega = 3.6;//转弯平滑度
-	adc_err.P = 20;//放大倍数
+	adc_err.P = 160;//放大倍数
 //	ADC转向
-	adc_steering.Kp = 0.86;
+	adc_steering.Kp = 1.86;
 	adc_steering.Kd = 1.1;
+//	ADC直道
+	adc_straight.Kp = 1;
+	adc_straight.Kd = 1;
 //	CAM转向
 	cam_steering.Kp = 1;
 	cam_steering.Kd = 1;

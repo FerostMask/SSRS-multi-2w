@@ -868,25 +868,25 @@ void ips200_display_chinese(uint16 x, uint16 y, uint8 size, const uint8 *p, uint
     
     temp2 = size/8;
     
-    ips200_address_set(x,y,number*size-1+x,y+size-1);
+    ips200_address_set(x,y,number*size-1+x,y+size-1);//设置显示区域
     
     for(i=0;i<size;i++)
     {
         temp1 = number;
-        p_data = p+i*temp2;
-        while(temp1--)
+        p_data = p+i*temp2;//换行
+        while(temp1--)//显示字数个数
         {
-            for(k=0;k<temp2;k++)
+            for(k=0;k<temp2;k++)//单行
             {
-                for(j=8;j>0;j--)
+                for(j=8;j>0;j--)//读取8bit并显示
                 {
-                    temp = (*p_data>>(j-1)) & 0x01;
+                    temp = (*p_data>>(j-1)) & 0x01;//j = 7~0
                     if(temp)    ips200_wr_data16(color);
                     else        ips200_wr_data16(IPS200_BGCOLOR);
                 }
-                p_data++;
+                p_data++;//切换下一个字节（16x16每行两个字节
             }
-            p_data = p_data - temp2 + temp2*size;
+            p_data = p_data - temp2 + temp2*size;//切换到下一个字模数组
         }   
     }
 }
