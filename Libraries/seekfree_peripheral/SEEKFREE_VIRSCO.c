@@ -83,7 +83,7 @@ void data_conversion(int16 data1, int16 data2, int16 data3, int16 data4, uint8 *
 	dat[8] = (uint8)(CRC16&0xff);
 	dat[9] = (uint8)(CRC16>>8);
 
-//	seekfree_wireless_send_buff(dat, 10);
+	seekfree_wireless_send_buff(dat, 10);
 
 //	uart_putbuff(UART_4,dat,10);  //数据转换完成后，使用串口发送将数组的内容发送出去
 }

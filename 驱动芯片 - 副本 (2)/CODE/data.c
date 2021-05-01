@@ -21,7 +21,7 @@ unsigned cjug_sta;
 /*======================*/
 //	编码器
 short lcod = 0,rcod = 0;
-short spd = 100;
+short spd = 110;
 short rad = 0;
 //	PID
 struct pidpara speed;
@@ -31,7 +31,7 @@ struct pidpara acw;
 /*----------------------*/
 /*	   角度控制模块		*/
 /*======================*/
-short blcp = 350;
+short blcp = 315;
 short pita;
 short gy, gz;
 short yfilt[4] = {0, 0, 0, 0};
@@ -69,7 +69,7 @@ unsigned char buff_get6, buff_get7;
 void Init_para(void){
 //	速度
 	speed.alpha = 0.3;
-	speed.Kp = 0.1;//反应快慢 | 超调
+	speed.Kp = 0.2;//反应快慢 | 超调
 	speed.Ki = 0.05;//反应力度
 	speed.Kd = 0;
 	speed.I = 0;
@@ -78,24 +78,24 @@ void Init_para(void){
 	
 //	转向
 	steer.alpha = 0.3;
-	steer.Kp = 25;//反应快慢 | 超调
+	steer.Kp = 37;//反应快慢 | 超调
 	steer.Ki = 0;//反应力度
-	steer.Kd = 30;
+	steer.Kd = 10;
 	steer.I = 0;
 	steer.e1 = 0, steer.e2 = 0, steer.e3 = 0;
 	steer.rs = 0;
 	
 //	角度
-	angle.Kp = 1.2;//力度
+	angle.Kp = 4.2;//力度
 	angle.Ki = 0;
-	angle.Kd = 2;//抖动
+	angle.Kd = 14;//抖动
 	angle.e1 = 0, angle.e2 = 0, angle.e3 = 0; 
 	angle.rs = 0;
 
 //	角速度
 	acw.alpha = 0.3;
-	acw.Kp = 30;//反应快慢 | 超调
-	acw.Ki = 1.7;//反应力度
+	acw.Kp = 26;//反应快慢 | 超调
+	acw.Ki = 0.9;//反应力度
 	acw.Kd = 2.4;
 	acw.I = 0;
 	acw.e1 = 0, acw.e2 = 0, acw.e3 = 0;

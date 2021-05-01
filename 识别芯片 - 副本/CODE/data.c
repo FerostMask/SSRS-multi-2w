@@ -42,6 +42,7 @@ struct adcerrpa adc_err;
 //	状态标志位
 unsigned char ajug_sta;
 short spd, spd_bias;
+short spd_set = 100;
 //	指针函数
 void(*adc_pfc[])(void) = {cross_road};
 /*----------------------*/
@@ -91,12 +92,12 @@ void Init_para(void){
 	adc3.max = 3815, adc3.min = 117;
 	adc4.max = 3827, adc4.min = 38;
 //	差比和差
-	adc_err.alpha = 21.969;//内外环转向角度变化、原差比和参数
-	adc_err.beta = 20;//转弯角度变化
-	adc_err.omega = 3.6;//转弯平滑度
-	adc_err.P = 160;//放大倍数
+	adc_err.alpha = 21;//内外环转向角度变化、原差比和参数
+	adc_err.beta = 11;//转弯角度变化
+	adc_err.omega = 7.6;//转弯平滑度
+	adc_err.P = 40;//放大倍数
 //	ADC转向
-	adc_steering.Kp = 1.86;
+	adc_steering.Kp = 5.86;
 	adc_steering.Kd = 1.1;
 //	ADC直道
 	adc_straight.Kp = 1;

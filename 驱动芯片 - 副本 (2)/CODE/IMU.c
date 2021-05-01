@@ -14,7 +14,7 @@
 /*--------------------------------------------------------------*/
 /* 							 变量定义 							*/
 /*==============================================================*/
-//unsigned char temp[4] = {0, 0, 0, 0};
+
 /*--------------------------------------------------------------*/
 /* 							 函数定义 							*/
 /*==============================================================*/
@@ -32,12 +32,9 @@ void angle_ctrl(void){
 	yfilt[0] = icm_gyro_y;
 	gy = (yfilt[0] + yfilt[1] + yfilt[2] + yfilt[3])/65.6;
 //	串级PID
-	if(imu_count == 3){
-	//	偏转角速度、速度PID
-		gz = icm_gyro_z/(16.4*5.73);
-		pos_pid(&steer, rad, gz, 1200, -1200);
+	if(imu_count == 3)
+	//	速度PID
 		inc_pid(&speed, spd, (lcod+rcod)>>1, 50);
-	}
 //	角度
 	if(imu_count == 1 || imu_count == 3){
 	//	姿态解算
@@ -46,9 +43,11 @@ void angle_ctrl(void){
 		for(i = 2; i >= 0; i--) pflit[i+1] = pflit[i];
 		pflit[0] = (asin(-2*q1*q3 + 2*q0*q2))*573;
 		pita = (pflit[0]+pflit[1]+pflit[2]+pflit[3])/4;
-		pos_pid(&angle, blcp+speed.rs, pita, 10, -10);
+		pos_pid(&angle, blcp+speed.rs, pita, 30, -30);
 	}
-//	角速度、电机控制
+//	角速度、电机、航向角控制
+	gz = icm_gyro_z/(16.4*5.73);
+	pos_pid(&steer, rad, gz, 1700, -1700);
 	inc_pid(&acw, angle.rs, gy, 5000);
 	motor_act();
 }

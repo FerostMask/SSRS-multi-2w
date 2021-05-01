@@ -49,9 +49,9 @@ void adc_suminus(void){
 	divd = adc_err.alpha*(float)(adc0.value - adc4.value) + adc_err.beta*(float)mid_val;
 	divs = adc_err.alpha*(float)(adc0.value+adc4.value) + adc_err.omega*abs((float)mid_val);
 	adc_err.rs = adc_err.P*divd/divs;
-//	if(adc_err.rs < 0) adc_err.rs = adc_err.rs*1.14;
+	if(adc_err.rs > 0) adc_err.rs = adc_err.rs*1.04;
 //	PID计算、数据发送
-	pos_pid(&adc_steering, 0, -adc_err.rs, 50, -50);
+	pos_pid(&adc_steering, 0, -adc_err.rs, 60, -60);
 //	数据监视
 	if(csimenu_flag[1]){
 		ips200_showint16(0, 0, adc0.value);

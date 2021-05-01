@@ -88,9 +88,9 @@ void menu2_init(void){
 //			pit_close(PIT_CH0);
 			switch(menu[menu_index]){
 				case 0:
-//					shortvalue0 = &spd;
-//					shortvalue1 = &rad;
-//					shortvalue2 = &blcp;
+					shortvalue0 = &spd_set;
+					shortvalue1 = &spd_set;
+					shortvalue2 = &spd_set;
 					menu2_limit = 2;
 					menu2mode = 0;
 					magflag = 1;

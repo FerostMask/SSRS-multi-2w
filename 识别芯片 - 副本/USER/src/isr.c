@@ -64,7 +64,7 @@ void TIM2_IRQHandler (void)
 	adc_jug();
 	uart_putchar(UART_7, adc_steering.rs);
 //	°²È«Ëø
-	spd = 90;
+	spd = spd_set;
 	if(!adc0.value)
 		if(!adc1.value)
 			if(!adc3.value)

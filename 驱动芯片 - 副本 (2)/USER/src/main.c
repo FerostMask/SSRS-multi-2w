@@ -41,6 +41,7 @@ int main(void){
 	//此处编写用户代码(例如：外设初始化代码等)
 	icm20602_init_spi();
 	ips200_init();
+	seekfree_wireless_init();
 	uart_init(UART_7, 115200, UART7_TX_E08, UART7_RX_E07);
 	uart_init(UART_6, 115200, UART6_TX_C06, UART6_RX_C07);
 	uart_rx_irq(UART_7, 1);
@@ -54,7 +55,7 @@ int main(void){
 		Init_button();
 		menu_display();
 	}
-	tim_interrupt_init_ms(TIM_2, 1, 0, 0);
+	tim_interrupt_init_ms(TIM_2, 2, 0, 0);
 /*--------------------------------------------------------------*/
 /* 							 循环执行 							*/
 /*==============================================================*/	

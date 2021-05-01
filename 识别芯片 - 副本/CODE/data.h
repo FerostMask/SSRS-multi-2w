@@ -64,6 +64,7 @@ extern void(*adc_pfc[])(void);
 /*======================*/
 //	µç»ú
 extern short spd, spd_bias;
+extern short spd_set;
 extern short rad;
 /*----------------------*/
 /*	 	  PIDÄ£¿é		*/
