@@ -8,17 +8,6 @@
 #include "zf_gpio.h"
 #include "SEEKFREE_IPS200_PARALLEL8.h"
 /*--------------------------------------------------------------*/
-/*							  宏定义							*/
-/*==============================================================*/
-//	菜单行数
-#define rows 4
-//	菜单列限制
-#define limit0 2
-#define limit1 3
-#define limit2 2
-#define limit3 2
-#define index_limit 3
-/*--------------------------------------------------------------*/
 /* 							 函数定义 							*/
 /*==============================================================*/
 
@@ -33,10 +22,6 @@ static char info(char index, char num){
 //	变量定义
 	register unsigned char i;
 //	字模
-	unsigned char ti0[] = {0x08,0x40,0x08,0x40,0x08,0x40,0x10,0x40,0x17,0xFC,0x30,0x40,0x30,0xE0,0x50,0xE0,0x91,0x50,0x11,0x50,0x12,0x48,0x15,0xF4,0x18,0x42,0x10,0x40,0x10,0x40,0x10,0x40};//体
-	unsigned char you0[] = {0x00,0x00,0x00,0x00,0x10,0x20,0x10,0x20,0x21,0xF8,0x26,0x26,0x24,0x22,0x44,0x22,0x78,0x42,0x08,0x42,0x14,0x42,0x14,0x42,0x22,0x42,0x22,0x84,0x7E,0x84,0x03,0x3C};//幼
-	unsigned char yuan0[] = {0x00,0x00,0x00,0x00,0x7F,0xFE,0x47,0xE2,0x48,0x12,0x48,0x12,0x47,0xE2,0x4F,0xF2,0x50,0x12,0x50,0x12,0x51,0x12,0x51,0x12,0x42,0x92,0x44,0x72,0x58,0x0A,0x3F,0xFC};//圆
-	unsigned char hei0[] = {0x00,0x00,0x3F,0xFC,0x21,0x84,0x2D,0xB4,0x25,0xA4,0x27,0xE4,0x3F,0xFC,0x01,0x80,0x3F,0xFC,0x01,0x80,0x01,0x80,0x7F,0xFE,0x20,0x44,0x26,0x44,0x62,0x66,0x00,0x00};//黑
 	unsigned char cai0[] = {0x08,0x20,0x08,0x20,0xFF,0xFE,0x08,0x20,0x00,0x10,0x00,0xF8,0x3F,0x00,0x11,0x10,0x08,0x20,0x01,0x00,0x7F,0xFC,0x05,0x40,0x09,0x20,0x31,0x18,0xC1,0x06,0x01,0x00};//菜
 	unsigned char dan0[] = {0x10,0x10,0x08,0x20,0x04,0x40,0x3F,0xF8,0x21,0x08,0x21,0x08,0x3F,0xF8,0x21,0x08,0x21,0x08,0x3F,0xF8,0x01,0x00,0x01,0x00,0xFF,0xFE,0x01,0x00,0x01,0x00,0x01,0x00};//单
 	unsigned char jiao0[] = {0x00,0x00,0x04,0x00,0x0F,0xF0,0x10,0x10,0x30,0x20,0x5F,0xFC,0x20,0x84,0x20,0x84,0x3F,0xFC,0x20,0x84,0x20,0x84,0x20,0x84,0x3F,0xFC,0x20,0x84,0x20,0x84,0x40,0xBC};/*"角"*/
@@ -64,84 +49,64 @@ static char info(char index, char num){
 		//	列索引
 			switch(num){
 				case 0://图像显示
-					for(i = 0; i < 32; i++) first_nom[i] = tu0[i];
-					for(i = 0; i < 32; i++) first_nom[32+i] = xiang1[i];
-					for(i = 0; i < 32; i++) first_nom[64+i] = xian0[i];
-					for(i = 0; i < 32; i++) first_nom[96+i] = shi1[i];
+					for(i = 0; i < 32; i++) nom[i] = tu0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = xiang1[i];
+					for(i = 0; i < 32; i++) nom[64+i] = xian0[i];
+					for(i = 0; i < 32; i++) nom[96+i] = shi1[i];
 					return 4;
 					break;
 				case 1://数据发送
-					for(i = 0; i < 32; i++) first_nom[i] = shu0[i];
-					for(i = 0; i < 32; i++) first_nom[32+i] = ju0[i];
-					for(i = 0; i < 32; i++) first_nom[64+i] = fa0[i];
-					for(i = 0; i < 32; i++) first_nom[96+i] = song0[i];
+					for(i = 0; i < 32; i++) nom[i] = shu0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = ju0[i];
+					for(i = 0; i < 32; i++) nom[64+i] = fa0[i];
+					for(i = 0; i < 32; i++) nom[96+i] = song0[i];
 					return 4;
-				case 2://黑体
-					for(i = 0; i < 32; i++) first_nom[i] = hei0[i];
-					for(i = 0; i < 32; i++) first_nom[32+i] = ti0[i];
-					return 2;
 			}
 			break;
 		case 1:
 			switch(num){
 				case 0://角速度
-					for(i = 0; i < 32; i++) first_nom[i] = jiao0[i];
-					for(i = 0; i < 32; i++) first_nom[32+i] = su0[i];
-					for(i = 0; i < 32; i++) first_nom[64+i] = du0[i];
+					for(i = 0; i < 32; i++) nom[i] = jiao0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = su0[i];
+					for(i = 0; i < 32; i++) nom[64+i] = du0[i];
 					return 3;
 					break;
 				case 1://角度
-					for(i = 0; i < 32; i++) first_nom[i] = jiao0[i];
-					for(i = 0; i < 32; i++) first_nom[32+i] = du0[i];
+					for(i = 0; i < 32; i++) nom[i] = jiao0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = du0[i];
 					return 2;
 				case 2://速度
-					for(i = 0; i < 32; i++) first_nom[i] = su0[i];
-					for(i = 0; i < 32; i++) first_nom[32+i] = du0[i];
+					for(i = 0; i < 32; i++) nom[i] = su0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = du0[i];
 					return 2;
 				case 3://转向
-					for(i = 0; i < 32; i++) first_nom[i] = zhuan0[i];
-					for(i = 0; i < 32; i++) first_nom[32+i] = xiang0[i];
+					for(i = 0; i < 32; i++) nom[i] = zhuan0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = xiang0[i];
 					return 2;
 			}
 			break;
 		case 2:
 			switch(num){
 				case 0://姿态
-					for(i = 0; i < 32; i++) first_nom[i] = zi0[i];
-					for(i = 0; i < 32; i++) first_nom[32+i] = tai0[i];
+					for(i = 0; i < 32; i++) nom[i] = zi0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = tai0[i];
 					return 2;
 					break;
-				case 1://幼圆
-					for(i = 0; i < 32; i++) first_nom[i] = you0[i];
-					for(i = 0; i < 32; i++) first_nom[32+i] = yuan0[i];
-					return 2;
-				case 2://黑体
-					for(i = 0; i < 32; i++) first_nom[i] = hei0[i];
-					for(i = 0; i < 32; i++) first_nom[32+i] = ti0[i];
-					return 2;
 			}
 			break;
 		case 3:
 			switch(num){
 				case 0://监视器
-					for(i = 0; i < 32; i++) first_nom[i] = jian0[i];
-					for(i = 0; i < 32; i++) first_nom[32+i] = shi0[i];
-					for(i = 0; i < 32; i++) first_nom[64+i] = qi0[i];
+					for(i = 0; i < 32; i++) nom[i] = jian0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = shi0[i];
+					for(i = 0; i < 32; i++) nom[64+i] = qi0[i];
 					return 3;
 					break;
-				case 1://幼圆
-					for(i = 0; i < 32; i++) first_nom[i] = you0[i];
-					for(i = 0; i < 32; i++) first_nom[32+i] = yuan0[i];
-					return 2;
-				case 2://黑体
-					for(i = 0; i < 32; i++) first_nom[i] = hei0[i];
-					for(i = 0; i < 32; i++) first_nom[32+i] = ti0[i];
-					return 2;
 			}
 			break;
-		case 67://菜单
-			for(i = 0; i < 32; i++) first_nom[i] = cai0[i];
-			for(i = 0; i < 32; i++) first_nom[32+i] = dan0[i];
+		case 100://菜单
+			for(i = 0; i < 32; i++) nom[i] = cai0[i];
+			for(i = 0; i < 32; i++) nom[32+i] = dan0[i];
 			return 2;
 			break;
 	}
@@ -150,28 +115,28 @@ static char info(char index, char num){
 /*------------------------------*/
 /*		   菜单显示模块			*/
 /*==============================*/
-static void display(char index, char menu[rows]){
+void menu_display(void){
 //	变量定义
-	char show_index[rows];
+	char show_index[ROWS];
 //	清屏
 	ips200_clear(WHITE);
 //	计算显示索引
-	if(index-1<0) show_index[0] = rows-1;
-	else show_index[0] = index - 1;
+	if(menu_index-1<0) show_index[0] = ROWS-1;
+	else show_index[0] = menu_index - 1;
 
-	show_index[1] = index;
+	show_index[1] = menu_index;
 
-	if(index+1>rows-1) show_index[2] = 0,show_index[3] = 1;
-	else if(index+2>rows-1) show_index[2] = index+1,show_index[3] = 0;
-	else show_index[2] = index+1,show_index[3] = index+2;
+	if(menu_index+1>ROWS-1) show_index[2] = 0,show_index[3] = 1;
+	else if(menu_index+2>ROWS-1) show_index[2] = menu_index+1,show_index[3] = 0;
+	else show_index[2] = menu_index+1,show_index[3] = menu_index+2;
 //	菜单显示
-	ips200_display_chinese(0, 208, 16, first_nom, info(67, menu[show_index[0]]), 0XFDF8);
-	ips200_display_chinese(0, 224, 16, first_nom, info(show_index[0], menu[show_index[0]]), 0xB6DB);
+	ips200_display_chinese(0, 208, 16, nom, info(100, menu[show_index[0]]), 0XFDF8);
+	ips200_display_chinese(14, 224, 16, nom, info(show_index[0], menu[show_index[0]]), 0xB6DB);
 	
-	ips200_display_chinese(0, 256, 16, first_nom, info(show_index[1], menu[show_index[1]]), 0xB6DB);
+	ips200_display_chinese(20, 256, 16, nom, info(show_index[1], menu[show_index[1]]), 0xB6DB);
 	
-	ips200_display_chinese(0, 288, 16, first_nom, info(show_index[2], menu[show_index[2]]), 0xB6DB);
-	ips200_display_chinese(0, 304, 16, first_nom, info(show_index[3], menu[show_index[3]]), 0xB6DB);
+	ips200_display_chinese(10, 288, 16, nom, info(show_index[2], menu[show_index[2]]), 0xB6DB);
+	ips200_display_chinese(0, 304, 16, nom, info(show_index[3], menu[show_index[3]]), 0xB6DB);
 }
 /*------------------------------*/
 /*		 菜单阈值限制模块		*/
@@ -179,138 +144,49 @@ static void display(char index, char menu[rows]){
 static char menu_limit(char index, char num){
 //	限制列索引值
 	switch(index){
-		case 0:if(num<limit0) return 1;break;
-		case 1:if(num<limit1) return 1;break;
-		case 2:if(num<limit2) return 1;break;
-		case 3:if(num<limit3) return 1;break;
+		case 0:if(num<menu_limit0) return 1;break;
+		case 1:if(num<menu_limit1) return 1;break;
+		case 2:if(num<menu_limit2) return 1;break;
+		case 3:if(num<menu_limit3) return 1;break;
 	}
 	return 0;
 }
 /*------------------------------*/
-/*		 按键过渡菜单模块		*/
+/*		 一级菜单事件模块		*/
 /*==============================*/
-void menu_selection(unsigned char event){
-//	变量定义
-	static char menu[4];
-	static char index;
+void menu_select(unsigned char event){
 //	一级菜单
 	if(!menu_level){
 	//	菜单事件分支
 		switch(event){
 			case 6://右按键
-				if(menu_limit(index, menu[index])) menu[index]++;
+				if(menu_limit(menu_index, menu[menu_index])) menu[menu_index]++;
 				else return;
 				break;
 			
 			case 4://左按键
-				if(menu[index] > 0) menu[index]--;
+				if(menu[menu_index] > 0) menu[menu_index]--;
 				else return;
 				break;
 			
 			case 2://上按键
-				if(index>0) index--;
-				else index = index_limit;
+				if(menu_index>0) menu_index--;
+				else menu_index = ROWS-1;
 				break;
 			
 			case 5://下按键
-				if(index<index_limit) index++;
-				else index = 0;
+				if(menu_index<ROWS-1) menu_index++;
+				else menu_index = 0;
 				break;
 			
 			case 1://确定键
 			//	初始化二级菜单
-				menu2_init(index, menu[index]);
-				menu2display(index);
+				menu2_init();
+				menu2_display();
 				menu_level = 1;
 				return;
 			case 3:break;
 		}
-		display(index, &menu[0]);
+		menu_display();
 	}
-//	次级菜单
-//	else{	
-//		switch(event){
-//			case 3://返回键 
-//				menu_level = 0;
-//				menu2_slect(event);
-//				display(index, &menu[0]);
-//				break;
-//			
-//			default://其他按键
-//				menu2_slect(event);
-//				break; 
-//		}
-//	}
 }
-
-//----------------------------分割线----------------------------//
-/*--------------------------------------------------------------*/
-/* 							 按键部分 							*/
-/*==============================================================*/
-/*------------------------------*/
-/*		 引脚状态反转模块		*/
-/*==============================*/
-//void dir(unsigned char dirc){
-//	switch(dirc){
-//	//	默认方向
-//		case 0:
-//		//	变更方向
-//			gpio_dir(column1,GPO);
-//			gpio_dir(column2,GPO);
-//			gpio_dir(column3,GPO);		
-//			gpio_dir(row1,GPI);
-//			gpio_dir(row2,GPI);
-//		//	变更状态
-//			gpio_set(column1, 0);
-//			gpio_set(column2, 0);
-//			gpio_set(column3, 0);
-//			gpio_set(row1, 1);
-//			gpio_set(row2, 1);
-//		break;
-//	//	反转方向
-//		case 1:	
-//		//	变更方向
-//			gpio_dir(column1,GPI);
-//			gpio_dir(column2,GPI);
-//			gpio_dir(column3,GPI);			
-//			gpio_dir(row1,GPO);
-//			gpio_dir(row2,GPO);			
-//		//	变更状态
-//			gpio_set(column1, 1);
-//			gpio_set(column2, 1);
-//			gpio_set(column3, 1);
-//			gpio_set(row1, 0);
-//			gpio_set(row2, 0);
-//		break;
-//	}
-//}
-/*------------------------------*/
-/*		   列值判断模块			*/
-/*==============================*/
-//static unsigned char col_jug(void){
-////	返回触发列数
-//	if(gpio_get(column1) == 0) return 1;                                      				
-//	else if(gpio_get(column2) == 0) return 2;                                       			
-//	else return 3;                                       			
-//}
-/*------------------------------*/
-/*		   按键判断模块			*/
-/*==============================*/
-//void trig_jug(void){
-////	char menu[4] = {0,1,2,0};
-////	display(2, menu);
-////	第一行触发
-//	if(!(gpio_get(row1))){
-//		dir(1);
-//		menu_selection(0+col_jug());
-//		dir(0);
-//		while(!(gpio_get(row1)));
-//	}
-////	第二行触发
-//	if(!(gpio_get(row2))){
-//		dir(1);
-//		menu_selection(3+col_jug());
-//		dir(0);
-//		while(!(gpio_get(row2)));
-//	}
-//}

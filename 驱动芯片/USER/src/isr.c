@@ -16,13 +16,19 @@
 * @Taobao			https://seekfree.taobao.com/
 * @date				2021-02-22
 ********************************************************************************************************************/
-
+/*--------------------------------------------------------------*/
+/*							头文件加载							*/
+/*==============================================================*/
 #include "headfile.h"
 #include "isr.h"
 #include "motor.h"
 #include "menu.h"
 #include "data.h"
-
+#include "pid.h"
+#include "IMU.h"
+/*------------------------------*/
+/*		    定时器中断			*/
+/*==============================*/
 void TIM1_UP_IRQHandler (void)
 {
 	uint32 state = TIM1->SR;														// 读取中断状态
@@ -37,27 +43,39 @@ void TIM8_UP_IRQHandler (void)
 
 void TIM2_IRQHandler (void)
 {
+//	变量定义
+	static unsigned short TIM_count;
 	uint32 state = TIM2->SR;														// 读取中断状态
 	TIM2->SR &= ~state;																// 清空中断状态
 //	获取陀螺仪、加速度计数据
-//	get_icm20602_accdata_spi();
-//	get_icm20602_gyro_spi();
+	get_icm20602_accdata_spi();
+	get_icm20602_gyro_spi();
 //	获取编码器数据
 	encoder_get();
-	angle_ctrl();
+	if(1)
+		angle_ctrl();
+	else{
+		inc_pid(&acw, 0, -((lcod+rcod)>>1), 6000);
+		steer.rs = 0;
+		motor_act();
+		if(TIM_count < 1000){
+			TIM_count++;
+			uart_putbuff(UART_4, &launch_command[0], 3);
+		}
+	}
 }
-
+//	电机
 void TIM5_IRQHandler (void){
 	uint32 state = TIM5->SR;														// 读取中断状态
 	TIM5->SR &= ~state;																// 清空中断状态
 }
-
+//	编码器
 void TIM3_IRQHandler (void)
 {
 	uint32 state = TIM3->SR;														// 读取中断状态
 	TIM3->SR &= ~state;																// 清空中断状态
 }
-
+//	编码器
 void TIM4_IRQHandler (void)
 {
 	uint32 state = TIM4->SR;														// 读取中断状态
@@ -68,6 +86,7 @@ void TIM6_IRQHandler (void)
 {
 	uint32 state = TIM6->SR;														// 读取中断状态
 	TIM6->SR &= ~state;																// 清空中断状态
+	if(monitorflag) monitor();
 }
 
 void TIM7_IRQHandler (void)
@@ -75,7 +94,9 @@ void TIM7_IRQHandler (void)
 	uint32 state = TIM7->SR;														// 读取中断状态
 	TIM7->SR &= ~state;																// 清空中断状态
 }
-
+/*------------------------------*/
+/*		     串口中断			*/
+/*==============================*/
 void UART1_IRQHandler(void)
 {
 	if(UART1->ISR & UART_ISR_TX_INTF)												// 串口发送缓冲空中断
@@ -144,6 +165,14 @@ void UART6_IRQHandler(void)
 	}
 	if(UART6->ISR & UART_ISR_RX_INTF)												// 串口接收缓冲中断
 	{
+		uart_getchar(UART_6, &buff_get6);
+		if(buff_get6 != 255)
+			spd = (unsigned char)buff_get6;
+		else
+			dst_flag = 1;
+//		ips200_showint16(0, 1, spd);
+//		ips200_showstr(0, 0, "UART6 GET");
+//		ips200_showint8(0, 1, buff_get6);
 		UART6->ICR |= UART_ICR_RXICLR;												// 清除中断标志位
 	}
 }
@@ -156,6 +185,11 @@ void UART7_IRQHandler(void)
 	}
 	if(UART7->ISR & UART_ISR_RX_INTF)												// 串口接收缓冲中断
 	{
+		uart_getchar(UART_7, &buff_get7);
+		rad = (char)buff_get7;
+//		ips200_showint16(0, 0, rad);
+//		ips200_showstr(0, 2, "UART7 GET");
+//		ips200_showint8(0, 3, buff_get7);
 		UART7->ICR |= UART_ICR_RXICLR;												// 清除中断标志位
 	}
 }
@@ -182,20 +216,23 @@ void UART8_IRQHandler(void)
 		}
 	}
 }
-
+/*------------------------------*/
+/*		     外部中断			*/
+/*==============================*/
 void EXTI0_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line0);														// 清除 line0 触发标志
-	(*menu_pfc[menu_level])(2);
-	
+	(*menu_pfc[menu_level])(1);
+	while(!gpio_get(D0));
 }
 
 void EXTI1_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line1);														// 清除 line1 触发标志
-	(*menu_pfc[menu_level])(1);
+	(*menu_pfc[menu_level])(2);
+	while(!gpio_get(D1));
 }
 
 void EXTI2_IRQHandler(void)
@@ -203,13 +240,15 @@ void EXTI2_IRQHandler(void)
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line2);														// 清除 line2 触发标志
 	(*menu_pfc[menu_level])(3);
+	while(!gpio_get(D2));
 }
 
 void EXTI3_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line3);														// 清除 line3 触发标志
-	(*menu_pfc[menu_level])(5);
+	(*menu_pfc[menu_level])(4);
+	while(!gpio_get(D3));
 }
 
 void EXTI4_IRQHandler(void)
@@ -279,10 +318,14 @@ void EXTI15_10_IRQHandler (void)
 	if(EXTI_GetITStatus(EXTI_Line14))												// 检测 line14 是否触发
 	{
 		EXTI_ClearFlag(EXTI_Line14);												// 清除 line14 触发标志
+		(*menu_pfc[menu_level])(5);
+		while(!gpio_get(D14));
 	}
 	if(EXTI_GetITStatus(EXTI_Line15))												// 检测 line15 是否触发
 	{
 		EXTI_ClearFlag(EXTI_Line15);												// 清除 line15 触发标志
+		(*menu_pfc[menu_level])(6);
+		while(!gpio_get(D15));
 	}
 }
 

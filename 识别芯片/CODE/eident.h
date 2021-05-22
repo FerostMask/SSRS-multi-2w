@@ -13,8 +13,6 @@
 /* 						º¯ÊıÉùÃ÷ 						*/
 /*======================================================*/
 void eident_init(void);
-void adc_jug(void);
 void single_ch_filter(struct adcpara *para);
 void adc_extreme(struct adcpara *para);
-void adc_suminus(void);
 #endif

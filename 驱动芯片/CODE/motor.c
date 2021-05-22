@@ -23,43 +23,52 @@
 /* 							 函数定义 							*/
 /*==============================================================*/
 /*------------------------------*/
-/*		 编码器值获取模块		*/
+/*	     编码器值获取模块		*/
 /*==============================*/
 void encoder_get(void){
 //	获取编码器计数值后重置
 	lcod = tim_encoder_get_count(TIM_3);
 	rcod = -tim_encoder_get_count(TIM_4);
-//	在屏幕上显示编码器计数值	
-//	ips200_showint16(0, 0, lcod);                 
+	if(dst_flag){
+		distance += (lcod+rcod)>>1;
+		if(distance > 100000)
+			final_flag = 1, dst_flag = 0;
+	}
+//	显示计数值
+//	ips200_showint16(0, 0, lcod);
 //	ips200_showint16(0, 1, rcod);
-//	无线串口发送数据
-//	data_conversion(lcod, ltcod, rcod, rtcod, temp);
 }
-
 /*------------------------------*/
 /*		   电机驱动模块			*/
 /*==============================*/
 void motor_act(void){
-	short lg, rg;
-//	转向
-	if(steer.rs >= 0) rg = steer.rs, lg = 0;//左转
-	else lg = -steer.rs, rg = 0;//右转
-//	左、右电机占空比设置
-	if(acw.rs >= 0){	//正转
-	//	左电机
-		pwm_duty_updata(TIM_5, MOTOR_L1, acw.rs+lg);     		
+//	PWM计算
+	lef_pwm = acw.rs-steer.rs;
+	rig_pwm = acw.rs+steer.rs;
+	if(abs(lef_pwm > 7000)){
+		if(lef_pwm > 0) lef_pwm = 7000;
+		else lef_pwm = -7000;
+	}
+	if(abs(rig_pwm > 7000)){
+		if(rig_pwm > 0) rig_pwm = 7000;
+		else rig_pwm = -7000;
+	}
+//	左电机
+	if(lef_pwm >= 0){	//	正转
+		pwm_duty_updata(TIM_5, MOTOR_L1, lef_pwm);     		
 		pwm_duty_updata(TIM_5, MOTOR_L0, 0);
-	//	右电机
-		pwm_duty_updata(TIM_5, MOTOR_R1, acw.rs+rg);     		
+	}
+	else{	//	反转
+		pwm_duty_updata(TIM_5, MOTOR_L1, 0);                      		
+		pwm_duty_updata(TIM_5, MOTOR_L0, -lef_pwm);
+	}
+//	右电机
+	if(rig_pwm >= 0){
+		pwm_duty_updata(TIM_5, MOTOR_R1, rig_pwm);     		
 		pwm_duty_updata(TIM_5, MOTOR_R0, 0);
 	}
-	else{	//反转
-	//	左电机
-		pwm_duty_updata(TIM_5, MOTOR_L1, 0);                      		
-		pwm_duty_updata(TIM_5, MOTOR_L0, -acw.rs+rg);
-	//	右电机
+	else{
 		pwm_duty_updata(TIM_5, MOTOR_R1, 0);                      		
-		pwm_duty_updata(TIM_5, MOTOR_R0, -acw.rs+lg);
+		pwm_duty_updata(TIM_5, MOTOR_R0, -rig_pwm);
 	}
-//	data_conversion(lcod, rcod, lg, rg, temp);
 }

@@ -12,48 +12,6 @@
 /* 							 函数定义 							*/
 /*==============================================================*/
 /*----------------------*/
-/*	   电磁识别模块		*/
-/*======================*/
-void adc_jug(void){
-//	变量定义
-	short mid_dif, out_dif;
-	short oai_dif;
-//	差值计算
-	mid_dif = adc1.value*adc1.value - adc3.value*adc3.value;
-	out_dif = adc0.value*adc0.value - adc4.value*adc4.value;
-	oai_dif = adc0.value*adc0.value+adc4.value*adc4.value - adc1.value*adc1.value-adc3.value*adc3.value;
-//	元素识别
-	if(abs(mid_dif) < 600)
-		if(abs(out_dif) < 1800)	ajug_sta = 0;//直道
-		else ajug_sta = 1;//弯道
-	if(oai_dif > 15000) ajug_sta = 3;//环道
-	if(oai_dif < 1000) ajug_sta = 2;//十字
-}
-/*----------------------*/
-/*	   差比和差算法		*/
-/*======================*/
-void adc_suminus(void){
-//	变量定义
-	float divd, divs, mid_val;
-//	差比和差算法
-	mid_val = adc1.value - adc3.value;
-	divd = adc_err.alpha*(float)(adc0.value-adc4.value) + adc_err.beta*(float)mid_val;
-	divs = adc_err.alpha*(float)(adc0.value+adc4.value) + adc_err.omega*abs((float)mid_val);
-	adc_err.rs = adc_err.P*divd/divs;
-	pos_pid(&adc_steering, 0, -adc_err.rs, 30, -30);
-//	检测摄像头与电磁是否一致左转
-//	if(cjug_sta == 21 || cjug_sta == 22)
-//		if(adc_steering.rs < 0){
-//			adc_steering.rs = - adc_steering.rs;
-//			return;
-//		}
-//	if(cjug_sta == 29 || cjug_sta == 28)
-//		if(adc_steering.rs > 0){
-//			adc_steering.rs = - adc_steering.rs;
-//			return;
-//		}
-}
-/*----------------------*/
 /*	    单通道滤波		*/
 /*======================*/
 void single_ch_filter(struct adcpara *para){

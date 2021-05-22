@@ -26,6 +26,7 @@
 #include "menu.h"
 #include "data.h"
 #include "eident.h"
+#include "Init.h"
 /*------------------------------*/
 /*		    定时器中断			*/
 /*==============================*/
@@ -43,32 +44,23 @@ void TIM8_UP_IRQHandler (void)
 
 void TIM2_IRQHandler (void)
 {
+//	变量定义
+	register char i;
+	short error1;
 	uint32 state = TIM2->SR;														// 读取中断状态
 	TIM2->SR &= ~state;																// 清空中断状态
-//	代码编写区域
 /*----------------------*/
-/*	 	摄像头部分		*/
+/*	 	 循迹部分		*/
 /*======================*/
-
+//	spd -= (spd_slow>>1);//动态减速
 /*----------------------*/
-/*	 	 电磁部分		*/
+/*	 	 误差部分		*/
 /*======================*/
-//	电磁识别
-	single_ch_filter(&adc0);
-	single_ch_filter(&adc1);
-//	single_ch_filter(&adc2);
-	single_ch_filter(&adc3);
-	single_ch_filter(&adc4);
-	adc_jug();
-	adc_suminus();
-	uart_putchar(UART_7, adc_steering.rs);
-//	安全锁
-	spd = 70;
-	if(adc0.value == adc1.value)
-		if(adc1.value == adc3.value)
-			if(adc3.value == adc4.value)
-				spd = 0;
-	uart_putchar(UART_6, spd);
+	for(i = 6; i > -1; i--) error_flit[i+1] = error_flit[i];
+	ctrl_error2 = ctrl_error1;
+	ctrl_error1 = abs(80 - p_target[1]);
+	error_flit[0] =  abs(ctrl_error2*ctrl_error2-ctrl_error1*ctrl_error2);
+	spd_slow = (error_flit[0]+error_flit[1]+error_flit[2]+error_flit[3]+error_flit[4]+error_flit[5]+error_flit[6]+error_flit[7])>>3;
 }
 //	电机
 void TIM5_IRQHandler (void){
@@ -80,6 +72,12 @@ void TIM3_IRQHandler (void)
 {
 	uint32 state = TIM3->SR;														// 读取中断状态
 	TIM3->SR &= ~state;																// 清空中断状态
+//	代码编写区域
+	cooling_flag = 0;//状态冷却
+//	脆弱状态
+	if(act_flag_temp == act_flag) act_flag = 0, state_flag = 0, img_color = 0xAE9C;
+	fragile_flag = 0;
+	tim_interrupt_disabnle(TIM_3);
 }
 //	编码器
 void TIM4_IRQHandler (void)
@@ -93,24 +91,8 @@ void TIM6_IRQHandler (void)
 	uint32 state = TIM6->SR;														// 读取中断状态
 	TIM6->SR &= ~state;																// 清空中断状态
 //	代码编写区域
-	if(excollflag)
-	//	电磁最值获取
-		switch(excollflag){
-			case 6:
-				adc_extreme(&adc0);
-				adc_extreme(&adc1);
-				adc_extreme(&adc2);
-				adc_extreme(&adc3);
-				adc_extreme(&adc4);
-				break;
-			case 1:adc_extreme(&adc0);break;
-			case 2:adc_extreme(&adc1);break;
-			case 3:adc_extreme(&adc2);break;
-			case 4:adc_extreme(&adc3);break;
-			case 5:adc_extreme(&adc4);break;
-		}
-		if(monitorflag) monitor();
-		if(fixedflag) fixed_monitor();
+	if(monitorflag) monitor();
+	if(fixedflag) fixed_monitor();
 }
 
 void TIM7_IRQHandler (void)
@@ -155,14 +137,14 @@ void UART3_IRQHandler(void)
 	}
 	if(UART3->ISR & UART_ISR_RX_INTF)												// 串口接收缓冲中断
 	{
-		uart_getchar(UART_3, &subuff_arr[subuff_arr[subuff_num]]);
+		uart_getchar(UART_3, &subuff_arr[subuff_num]);
 		if(subuff_arr[0]!=0xA5) subuff_num = 0;
 		else subuff_num++;
 		if(subuff_num == 3){
 			subuff_num = 0;
 			subuff_ranging = subuff_arr[1] << 8 | subuff_arr[2];
-			ips200_showstr(0, 0, "range:");
-			ips200_showint16(0, 1, subuff_ranging);
+//			ips200_showstr(0, 0, "range:");
+//			ips200_showuint16(0, 1, subuff_ranging);
 		}
 		UART3->ICR |= UART_ICR_RXICLR;												// 清除中断标志位
 	}
@@ -201,11 +183,15 @@ void UART6_IRQHandler(void)
 	if(UART6->ISR & UART_ISR_RX_INTF)												// 串口接收缓冲中断
 	{
 		UART6->ICR |= UART_ICR_RXICLR;												// 清除中断标志位
+		uart_getchar(UART_6, &buff_get6);
+		if(yawa_flag) yawa+=(char)buff_get6;
 	}
 }
 
 void UART7_IRQHandler(void)
 {
+//	变量定义
+	static unsigned char pita_count, pita_flag;
 	if(UART7->ISR & UART_ISR_TX_INTF)												// 串口发送缓冲空中断
 	{
 		UART7->ICR |= UART_ICR_TXICLR;												// 清除中断标志位
@@ -213,6 +199,22 @@ void UART7_IRQHandler(void)
 	if(UART7->ISR & UART_ISR_RX_INTF)												// 串口接收缓冲中断
 	{
 		UART7->ICR |= UART_ICR_RXICLR;												// 清除中断标志位
+		uart_getchar(UART_7, &buff_get7);
+		pita = buff_get7;
+	//	检测状态是否稳定
+		if(!action_flag){
+			if(!pita_flag){
+				if(pita > 37 && pita < 46) pita_count++;
+				else pita_count = 0;
+			}
+			if(pita_count > 30) pita_flag = 1;
+	//		ips200_showint16(0, 0, pita);
+	//		ips200_showint16(0, 1, pita_count);
+		//	接力检测
+			if(pita_flag)
+				if(pita > 47)
+					action_flag = 1;
+		}
 	}
 }
 

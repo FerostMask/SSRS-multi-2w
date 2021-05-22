@@ -68,10 +68,10 @@ void menu2_init(void){
 					magflag = 1;
 					break;
 				case 2://差比和差
-					value0 = &adc_err.alpha;
-					value1 = &adc_err.beta;
-					value2 = &adc_err.omega;
-					value3 = &adc_err.P;
+//					value0 = &adc_err.alpha;
+//					value1 = &adc_err.beta;
+//					value2 = &adc_err.omega;
+//					value3 = &adc_err.P;
 					menu2_limit = 3;
 					menu2mode = 2;
 					magflag = 1;
@@ -88,9 +88,9 @@ void menu2_init(void){
 //			pit_close(PIT_CH0);
 			switch(menu[menu_index]){
 				case 0:
-//					shortvalue0 = &spd;
-//					shortvalue1 = &rad;
-//					shortvalue2 = &blcp;
+					shortvalue0 = &spd;
+					shortvalue1 = &spd;
+					shortvalue2 = &spd;
 					menu2_limit = 2;
 					menu2mode = 0;
 					magflag = 1;
@@ -117,16 +117,8 @@ static void menu2value_sup(void){
 			switch(menu2mode){
 				case 0:
 					ips200_showstr(140, 14, "SET ALL");
-					ips200_showint16(100, 15, adc0.max);
-					ips200_showint16(170, 15, adc0.min);
-					ips200_showint16(100, 16, adc1.max);
-					ips200_showint16(170, 16, adc1.min);
 					ips200_showint16(100, 17, adc2.max);
 					ips200_showint16(170, 17, adc2.min);
-					ips200_showint16(100, 18, adc3.max);
-					ips200_showint16(170, 18, adc3.min);
-					ips200_showint16(100, 19, adc4.max);
-					ips200_showint16(170, 19, adc4.min);
 					break;
 				case 1:
 					ips200_showfloat(120, 15, *value0, 2, 3);
@@ -159,40 +151,16 @@ void menu2value_hl(void){
 			switch(menu2mode){//页面选择
 				case 0:
 					if(excollflag == 6){
-						ips200_showint16(100, 15, adc0.max);
-						ips200_showint16(170, 15, adc0.min);
-						ips200_showint16(100, 16, adc1.max);
-						ips200_showint16(170, 16, adc1.min);
 						ips200_showint16(100, 17, adc2.max);
 						ips200_showint16(170, 17, adc2.min);
-						ips200_showint16(100, 18, adc3.max);
-						ips200_showint16(170, 18, adc3.min);
-						ips200_showint16(100, 19, adc4.max);
-						ips200_showint16(170, 19, adc4.min);
 					}
 					switch(menu2_index){
 						case 0:
 							ips200_showstr(140, 14, "SET ALL");
 							break;
-						case 1:
-							ips200_showint16(100, 15, adc0.max);
-							ips200_showint16(170, 15, adc0.min);
-							break;
-						case 2:
-							ips200_showint16(100, 16, adc1.max);
-							ips200_showint16(170, 16, adc1.min);
-							break;
 						case 3:
 							ips200_showint16(100, 17, adc2.max);
 							ips200_showint16(170, 17, adc2.min);
-							break;
-						case 4:
-							ips200_showint16(100, 18, adc3.max);
-							ips200_showint16(170, 18, adc3.min);
-							break;
-						case 5:
-							ips200_showint16(100, 19, adc4.max);
-							ips200_showint16(170, 19, adc4.min);
 							break;
 						}
 					break;
@@ -284,11 +252,6 @@ static char info(unsigned char index, unsigned char num){
 	unsigned char state0[] = {0x00,0x00,0x00,0x00,0x7F,0xFF,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x7F,0xFF};/*"□"*/
 	unsigned char state1[] = {0x00,0x00,0x00,0x00,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF};/*"■"*/
 	unsigned char xiang2[] = {0x00,0x00,0x00,0x00,0x10,0xFE,0x11,0x02,0x11,0x02,0x7F,0x02,0x19,0xFE,0x15,0x02,0x35,0x02,0x33,0x02,0x51,0xFE,0x51,0x02,0x11,0x02,0x11,0x02,0x11,0x02,0x00,0xFC};/*"相"*/
-	unsigned char tong0[] = {0x00,0x00,0x00,0x00,0x27,0xFC,0x23,0x08,0x10,0xF0,0x01,0xF8,0x06,0x46,0x74,0x42,0x17,0xFE,0x14,0x42,0x17,0xFE,0x14,0x42,0x14,0x42,0x14,0x12,0x28,0x0C,0x47,0xFE};/*"通"*/
-	unsigned char dao0[] = {0x00,0x00,0x00,0x00,0x41,0x10,0x2F,0xFE,0x10,0x40,0x01,0xF8,0x06,0x04,0x74,0x04,0x17,0xFC,0x14,0x04,0x17,0xFC,0x14,0x04,0x14,0x04,0x13,0xF8,0x2C,0x00,0x43,0xFE};/*"道"*/
-	unsigned char zui0[] = {0x00,0x00,0x00,0x00,0x3F,0xF8,0x3F,0xF8,0x20,0x08,0x3F,0xF8,0x00,0x00,0x7F,0xFE,0x21,0x00,0x3F,0xFC,0x21,0x44,0x3F,0x28,0x21,0x28,0x21,0x90,0x7F,0x2C,0x01,0xC2};/*"最"*/
-	unsigned char da0[] = {0x00,0x00,0x00,0x00,0x01,0x00,0x01,0x00,0x01,0x00,0x7F,0xFE,0x01,0x00,0x01,0x80,0x01,0x80,0x02,0x40,0x02,0x40,0x04,0x20,0x04,0x20,0x08,0x10,0x10,0x08,0x60,0x06};/*"大"*/
-	unsigned char xiao0[] = {0x00,0x00,0x00,0x00,0x01,0x00,0x01,0x00,0x01,0x00,0x11,0x08,0x11,0x08,0x11,0x04,0x21,0x04,0x21,0x04,0x21,0x04,0x41,0x02,0x41,0x02,0x81,0x02,0x01,0x00,0x0F,0x00};/*"小"*/
 //	变量定义
 	register unsigned char i;
 	switch(index){
@@ -321,20 +284,7 @@ static char info(unsigned char index, unsigned char num){
 			}
 		case 1:
 			switch(num){
-				case 2://通道
-					for(i = 0; i < 32; i++) nom[i] = tong0[i];
-					for(i = 0; i < 32; i++) nom[32+i] = dao0[i];
-					return 2;
-				case 3://最大值
-					for(i = 0; i < 32; i++) nom[i] = zui0[i];
-					for(i = 0; i < 32; i++) nom[32+i] = da0[i];
-					for(i = 0; i < 32; i++) nom[64+i] = zhi0[i];
-					return 3;
-				case 4://最小值
-					for(i = 0; i < 32; i++) nom[i] = zui0[i];
-					for(i = 0; i < 32; i++) nom[32+i] = xiao0[i];
-					for(i = 0; i < 32; i++) nom[64+i] = zhi0[i];
-					return 3;
+				
 			}
 			break;
 		case 2:
@@ -418,6 +368,11 @@ static char info_found(unsigned char index, unsigned char num){
 	unsigned char shu0[] = {0x00,0x00,0x00,0x00,0x25,0x20,0x25,0x20,0x26,0x3E,0x7F,0xA4,0x0E,0x64,0x35,0x64,0x44,0x24,0x08,0x24,0x7F,0x18,0x11,0x18,0x21,0x18,0x1A,0x14,0x06,0x24,0x79,0xC2};/*"数"*/
 	unsigned char ming0[] = {0x00,0x00,0x00,0x00,0x02,0x00,0x07,0xF8,0x18,0x08,0x28,0x08,0x46,0x10,0x01,0x20,0x00,0xC0,0x0F,0xFC,0xF8,0x02,0x08,0x02,0x08,0x02,0x08,0x02,0x08,0x02,0x0F,0xFE};/*"名"*/
 	unsigned char zhi0[] = {0x00,0x00,0x10,0x40,0x10,0x40,0x2F,0xFE,0x20,0x40,0x20,0x40,0x23,0xFC,0x64,0x04,0x63,0xFC,0xA4,0x04,0x23,0xFC,0x24,0x04,0x23,0xFC,0x24,0x04,0x24,0x04,0x2F,0xFE};/*"值"*/
+	unsigned char tong0[] = {0x00,0x00,0x00,0x00,0x27,0xFC,0x23,0x08,0x10,0xF0,0x01,0xF8,0x06,0x46,0x74,0x42,0x17,0xFE,0x14,0x42,0x17,0xFE,0x14,0x42,0x14,0x42,0x14,0x12,0x28,0x0C,0x47,0xFE};/*"通"*/
+	unsigned char dao0[] = {0x00,0x00,0x00,0x00,0x41,0x10,0x2F,0xFE,0x10,0x40,0x01,0xF8,0x06,0x04,0x74,0x04,0x17,0xFC,0x14,0x04,0x17,0xFC,0x14,0x04,0x14,0x04,0x13,0xF8,0x2C,0x00,0x43,0xFE};/*"道"*/
+	unsigned char zui0[] = {0x00,0x00,0x00,0x00,0x3F,0xF8,0x3F,0xF8,0x20,0x08,0x3F,0xF8,0x00,0x00,0x7F,0xFE,0x21,0x00,0x3F,0xFC,0x21,0x44,0x3F,0x28,0x21,0x28,0x21,0x90,0x7F,0x2C,0x01,0xC2};/*"最"*/
+	unsigned char da0[] = {0x00,0x00,0x00,0x00,0x01,0x00,0x01,0x00,0x01,0x00,0x7F,0xFE,0x01,0x00,0x01,0x80,0x01,0x80,0x02,0x40,0x02,0x40,0x04,0x20,0x04,0x20,0x08,0x10,0x10,0x08,0x60,0x06};/*"大"*/
+	unsigned char xiao0[] = {0x00,0x00,0x00,0x00,0x01,0x00,0x01,0x00,0x01,0x00,0x11,0x08,0x11,0x08,0x11,0x04,0x21,0x04,0x21,0x04,0x21,0x04,0x41,0x02,0x41,0x02,0x81,0x02,0x01,0x00,0x0F,0x00};/*"小"*/
 //	变量定义
 	register unsigned char i;
 	switch(index){
@@ -435,6 +390,23 @@ static char info_found(unsigned char index, unsigned char num){
 					return 3;
 			}
 			break;
+		case 2:
+			switch(num){
+				case 0://通道
+					for(i = 0; i < 32; i++) nom[i] = tong0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = dao0[i];
+					return 2;
+				case 1://最大值
+					for(i = 0; i < 32; i++) nom[i] = zui0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = da0[i];
+					for(i = 0; i < 32; i++) nom[64+i] = zhi0[i];
+					return 3;
+				case 2://最小值
+					for(i = 0; i < 32; i++) nom[i] = zui0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = xiao0[i];
+					for(i = 0; i < 32; i++) nom[64+i] = zhi0[i];
+					return 3;
+			}
 	}
 }
 /*------------------------------*/
@@ -469,9 +441,9 @@ void menu2_display(void){
 		case 1:
 			switch(menu2mode){
 				case 0:
-					ips200_display_chinese(0, 208, 16, nom, info(menu_index, 2), 0XFDF8);
-					ips200_display_chinese(100, 208, 16, nom, info(menu_index, 3), 0XFDF8);
-					ips200_display_chinese(170, 208, 16, nom, info(menu_index, 4), 0XFDF8);
+					ips200_display_chinese(0, 208, 16, nom, info_found(2, 0), 0XFDF8);//通道
+					ips200_display_chinese(100, 208, 16, nom, info_found(2, 1), 0XFDF8);//最大值
+					ips200_display_chinese(170, 208, 16, nom, info_found(2, 2), 0XFDF8);//最小值
 					ips200_showstr(0, 15, "ADC0");
 					ips200_showstr(0, 16, "ADC1");
 					ips200_showstr(0, 17, "ADC2");
@@ -512,8 +484,8 @@ void menu2_display(void){
 					ips200_showstr(0, 16, "result");
 					break;
 				case 1:
-					ips200_display_chinese(0, 208, 16, nom, info(1, 2), 0XFDF8);//通道
-					ips200_display_chinese(120, 208, 16, nom, info(1, 1), 0XFDF8);//参数值
+					ips200_display_chinese(0, 208, 16, nom, info_found(2, 0), 0XFDF8);//通道
+					ips200_display_chinese(120, 208, 16, nom, info_found(1, 1), 0XFDF8);//参数值
 					ips200_showstr(0, 15, "ADC0");
 					ips200_showstr(0, 16, "ADC1");
 					ips200_showstr(0, 17, "ADC2");
@@ -532,21 +504,9 @@ void menu2_display(void){
 void monitor(void){
 	switch(menu[menu_index]){
 		case 0:
-			ips200_showint16(120, 15, adc_err.rs);
-			ips200_showint16(120, 16, adc_steering.rs);
-			switch(ajug_sta){
-				case 0:ips200_showstr(120, 17, "direct");break;
-				case 1:ips200_showstr(120, 17, "bend  ");break;
-				case 2:ips200_showstr(120, 17, "cross ");break;
-				case 3:ips200_showstr(120, 17, "ring  ");break;
-			}
 			break;
 		case 1:
-			ips200_showuint8(120, 15, adc0.value);
-			ips200_showuint8(120, 16, adc1.value);
 			ips200_showuint8(120, 17, adc2.value);
-			ips200_showuint8(120, 18, adc3.value);
-			ips200_showuint8(120, 19, adc4.value);
 			break;
 	}
 }
@@ -560,8 +520,8 @@ void fixed_monitor(void){
 			ips200_showstr(0, 0, "error");
 			ips200_showstr(0, 1, "result");
 		//	数值显示
-			ips200_showint16(120, 0, adc_err.rs);
-			ips200_showint16(120, 1, adc_steering.rs);
+//			ips200_showint16(120, 0, adc_err.rs);
+//			ips200_showint16(120, 1, adc_steering.rs);
 			break;
 		case 1:
 		//	名称显示
@@ -571,11 +531,7 @@ void fixed_monitor(void){
 			ips200_showstr(0, 3, "ADC3");
 			ips200_showstr(0, 4, "ADC4");
 		//	数值显示
-			ips200_showuint8(120, 0, adc0.value);
-			ips200_showuint8(120, 1, adc1.value);
 			ips200_showuint8(120, 2, adc2.value);
-			ips200_showuint8(120, 3, adc3.value);
-			ips200_showuint8(120, 4, adc4.value);
 			break;
 	}
 }
@@ -742,18 +698,10 @@ void menu2_select(unsigned char event){
 						if(!excollflag){
 							switch(menu2_index){
 								case 0:
-									adc0.max = 0, adc0.min = 4095;
-									adc1.max = 0, adc1.min = 4095;
 									adc2.max = 0, adc2.min = 4095;
-									adc3.max = 0, adc3.min = 4095;
-									adc4.max = 0, adc4.min = 4095;
 									excollflag = 6;
 									break;
-								case 1:adc0.max = 0, adc0.min = 4095, excollflag = 1;break;
-								case 2:adc1.max = 0, adc1.min = 4095, excollflag = 2;break;
 								case 3:adc2.max = 0, adc2.min = 4095, excollflag = 3;break;
-								case 4:adc3.max = 0, adc3.min = 4095, excollflag = 4;break;
-								case 5:adc4.max = 0, adc4.min = 4095, excollflag = 5;break;
 							}
 							tim_interrupt_init(TIM_6, 40, 0, 3);
 						}

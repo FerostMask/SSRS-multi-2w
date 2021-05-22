@@ -21,6 +21,7 @@
 /*==============================================================*/
 #include "headfile.h"
 #include "CAM.h"
+#include "pid.h"
 #include "Init.h"
 #include "data.h"
 #include "eident.h" 
@@ -38,7 +39,7 @@ int main(void){
 /*----------------------*/
 /*	 	 逐飞初始化		*/
 /*======================*/
-	board_init(true);																// 初始化 debug 输出串口
+ 	board_init(true);																// 初始化 debug 输出串口
 	//此处编写用户代码(例如：外设初始化代码等)
 //	外设初始化
 	ips200_init();
@@ -48,8 +49,10 @@ int main(void){
 //	串口初始化
 	uart_init(UART_7, 115200, UART7_TX_B06, UART7_RX_B07);
 	uart_init(UART_6, 115200, UART6_TX_C06, UART6_RX_C07);
-//	uart_init(UART_3, 115200, UART3_TX_B10, UART3_RX_B11);
-//	uart_rx_irq(UART_3, 1);
+	uart_init(UART_3, 115200, UART3_TX_B10, UART3_RX_B11);
+	uart_rx_irq(UART_3, 1);
+	uart_rx_irq(UART_6, 1);
+	uart_rx_irq(UART_7, 1);
 /*----------------------*/
 /*	 	 用户初始化		*/
 /*======================*/
@@ -59,14 +62,40 @@ int main(void){
 		menu_display();
 	}
 	Init_para();
-	tim_interrupt_init_ms(TIM_2, 2, 0, 0);
+//	tim_interrupt_init_ms(TIM_2, 1, 0, 0);
+//  岔道方向确定
+    direction_fork = 1;//左0 右1
 /*--------------------------------------------------------------*/
 /* 							 循环执行 							*/
 /*==============================================================*/	
 	while(1){
 	//	此处编写需要循环执行的代码
-//			if(mt9v03x_finish_flag) camident();
-//			if(mt9v03x_finish_flag) cam_ident();
+		if(mt9v03x_finish_flag){
+		//	大津法二值化获取阈值、图像二值化
+			otsu();
+			img_binary();
+		//	边界寻找
+			left_fop_search();
+			lbor_search();
+			right_fop_search();
+			rbor_search();
+			if(ltraf_count) border_vertical_leftsearch();
+			if(rtraf_count) border_vertical_rightsearch();
+		//	状态机
+			state_machine();
+			if(state_temp!=state) state_pfc[state_flag]();
+		//	姿态控制
+			spd = 60, folc_flag = 1, folrow_f = 63;
+			ctrl_pfc[state_flag]();
+			if(folc_flag) p_target[0] = folrow_f, p_target[1] = (lefbor[folrow_f]+rigbor[folrow_f])>>1; 
+			pos_pid(&cam_steering, 80, p_target[1], 120, -120);
+			if(!action_flag) {spd = 0;p_target[0] = 70, p_target[1] = (lefbor[70]+rigbor[70])>>1;}
+			uart_putchar(UART_7, (char)cam_steering.rs);
+			uart_putchar(UART_6, (unsigned char)spd);
+		//	图像显示
+			if(csimenu_flag[0]) binary_disp();
+			if(csimenu_flag[1]) ips200_displayimage032(mt9v03x_image[0], MT9V03X_W, MT9V03X_H);
+		}
 	}
 }
 // **************************** 代码区域 ****************************

@@ -3,6 +3,7 @@
 .\objects\init.o: ..\CODE\Init.h
 .\objects\init.o: ..\CODE\data.h
 .\objects\init.o: ..\CODE\menu_2.h
+.\objects\init.o: ..\CODE\logo.h
 .\objects\init.o: ..\..\Libraries\seekfree_libraries\zf_pwm.h
 .\objects\init.o: ..\..\Libraries\seekfree_libraries\common\common.h
 .\objects\init.o: ..\..\Libraries\Device\MM32F327x\Include\reg_common.h
@@ -56,3 +57,5 @@
 .\objects\init.o: ..\..\Libraries\Device\MM32F327x\Include\reg_usb_otg_fs.h
 .\objects\init.o: ..\..\Libraries\Device\MM32F327x\Include\reg_wwdg.h
 .\objects\init.o: ..\..\Libraries\Device\MM32F327x\Include\mm32_reg_redefine_v1.h
+.\objects\init.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_IPS200_PARALLEL8.h
+.\objects\init.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_FONT.h

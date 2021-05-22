@@ -10,8 +10,9 @@
 /*------------------------------------------------------*/ 
 /* 						 宏定义 						*/
 /*======================================================*/
-#define MOTOR_R1 TIM_5_CH1_A00                   		//左电机 正转引脚
-#define MOTOR_R0 TIM_5_CH2_A01                   		//左电机 反转引脚
+#define MOTOR_R1 TIM_5_CH2_A01                   		//左电机 正转引脚
+#define MOTOR_R0 TIM_5_CH1_A00                   		//左电机 反转引脚
+
 #define MOTOR_L1 TIM_5_CH3_A02                   		//右电机 正转引脚
 #define MOTOR_L0 TIM_5_CH4_A03                   		//右电机 反转引脚                   
 
@@ -41,5 +42,6 @@
 /*======================================================*/
 void Init_encoder(void);
 void Init_motor(void);
+char core_select(void);
 void Init_button(void);
 #endif
