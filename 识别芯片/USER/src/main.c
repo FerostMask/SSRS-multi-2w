@@ -62,7 +62,7 @@ int main(void){
 		menu_display();
 	}
 	Init_para();
-//	tim_interrupt_init_ms(TIM_2, 1, 0, 0);
+	tim_interrupt_init_ms(TIM_2, 10, 0, 0);
 //  岔道方向确定
     direction_fork = 1;//左0 右1
 /*--------------------------------------------------------------*/
@@ -84,14 +84,6 @@ int main(void){
 		//	状态机
 			state_machine();
 			if(state_temp!=state) state_pfc[state_flag]();
-		//	姿态控制
-			spd = 60, folc_flag = 1, folrow_f = 63;
-			ctrl_pfc[state_flag]();
-			if(folc_flag) p_target[0] = folrow_f, p_target[1] = (lefbor[folrow_f]+rigbor[folrow_f])>>1; 
-			pos_pid(&cam_steering, 80, p_target[1], 120, -120);
-			if(!action_flag) {spd = 0;p_target[0] = 70, p_target[1] = (lefbor[70]+rigbor[70])>>1;}
-			uart_putchar(UART_7, (char)cam_steering.rs);
-			uart_putchar(UART_6, (unsigned char)spd);
 		//	图像显示
 			if(csimenu_flag[0]) binary_disp();
 			if(csimenu_flag[1]) ips200_displayimage032(mt9v03x_image[0], MT9V03X_W, MT9V03X_H);

@@ -44,23 +44,16 @@ void TIM8_UP_IRQHandler (void)
 
 void TIM2_IRQHandler (void)
 {
-//	变量定义
-	register char i;
-	short error1;
 	uint32 state = TIM2->SR;														// 读取中断状态
 	TIM2->SR &= ~state;																// 清空中断状态
-/*----------------------*/
-/*	 	 循迹部分		*/
-/*======================*/
-//	spd -= (spd_slow>>1);//动态减速
-/*----------------------*/
-/*	 	 误差部分		*/
-/*======================*/
-	for(i = 6; i > -1; i--) error_flit[i+1] = error_flit[i];
-	ctrl_error2 = ctrl_error1;
-	ctrl_error1 = abs(80 - p_target[1]);
-	error_flit[0] =  abs(ctrl_error2*ctrl_error2-ctrl_error1*ctrl_error2);
-	spd_slow = (error_flit[0]+error_flit[1]+error_flit[2]+error_flit[3]+error_flit[4]+error_flit[5]+error_flit[6]+error_flit[7])>>3;
+//	姿态控制
+	spd = 70, folc_flag = 1, folrow_f = 63;
+	ctrl_pfc[state_flag]();
+	if(folc_flag) p_target[0] = folrow_f, p_target[1] = (lefbor[folrow_f]+rigbor[folrow_f])>>1; 
+	pos_pid(&cam_steering, 80, p_target[1], 120, -120);
+	if(!action_flag) {spd = 0;p_target[0] = 70, p_target[1] = (lefbor[70]+rigbor[70])>>1;}
+	uart_putchar(UART_7, (char)cam_steering.rs);
+	uart_putchar(UART_6, (unsigned char)spd);
 }
 //	电机
 void TIM5_IRQHandler (void){

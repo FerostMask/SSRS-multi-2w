@@ -61,9 +61,11 @@ extern short p_target[2];
 extern short error_flit[8], ctrl_error1, ctrl_error2;
 extern short spd_slow;
 extern short spd, rad;
-extern short rad_temp;
+extern short rad_temp, rad_min, rad_max;
 extern unsigned char folrow_f;
 extern unsigned char ctrl_bias[];
+extern float filter_alpha;
+extern unsigned char filter_temp;
 extern char folc_flag, cooling_flag;
 extern void(*ctrl_pfc[])(void);
 //	结构体声明

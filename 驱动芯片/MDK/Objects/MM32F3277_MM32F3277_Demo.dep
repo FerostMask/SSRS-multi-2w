@@ -189,7 +189,7 @@ I (..\CODE\menu_2.h)(0x606DB760)
 I (..\CODE\logo.h)(0x608506B7)
 F (..\USER\inc\isr.h)(0x6047534D)()
 F (..\CODE\本文件夹作用.txt)(0x6047534D)()
-F (..\CODE\data.c)(0x60A918C7)(--c99 --gnu -c --cpu Cortex-M3 -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections --signed_chars -I ..\CODE -I ..\USER\src -I ..\USER\inc -I ..\..\Libraries\seekfree_libraries\common -I ..\..\\Libraries\seekfree_libraries\board -I ..\..\Libraries\seekfree_libraries\system -I ..\..\Libraries\seekfree_libraries -I ..\..\Libraries\seekfree_peripheral -I ..\..\Libraries\Device\CMSIS\KEIL_Core -I ..\..\Libraries\Device\MM32F327x\Include -I ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc-I.\RTE\_MM32F3277_Demo-ID:\Software\Keil_MDK5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DENABLEFSMC-o .\objects\data.o --omf_browse .\objects\data.crf --depend .\objects\data.d)
+F (..\CODE\data.c)(0x60AA06E1)(--c99 --gnu -c --cpu Cortex-M3 -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections --signed_chars -I ..\CODE -I ..\USER\src -I ..\USER\inc -I ..\..\Libraries\seekfree_libraries\common -I ..\..\\Libraries\seekfree_libraries\board -I ..\..\Libraries\seekfree_libraries\system -I ..\..\Libraries\seekfree_libraries -I ..\..\Libraries\seekfree_peripheral -I ..\..\Libraries\Device\CMSIS\KEIL_Core -I ..\..\Libraries\Device\MM32F327x\Include -I ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc-I.\RTE\_MM32F3277_Demo-ID:\Software\Keil_MDK5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DENABLEFSMC-o .\objects\data.o --omf_browse .\objects\data.crf --depend .\objects\data.d)
 I (..\CODE\data.h)(0x60A88FBC)
 I (..\CODE\menu.h)(0x606D9043)
 I (..\CODE\menu_2.h)(0x606DB760)

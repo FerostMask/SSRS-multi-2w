@@ -56,9 +56,10 @@ short p_target[2];
 short error_flit[8], ctrl_error1, ctrl_error2;
 short spd_slow;
 short spd, rad;
-short rad_temp;
+short rad_temp, rad_min, rad_max;
 unsigned char folrow_f = 63;
-unsigned char ctrl_bias[] = {16, 16, 16, 16};
+float filter_alpha = 0.1;
+unsigned char filter_temp;
 char folc_flag, cooling_flag = 0;
 void(*ctrl_pfc[])(void) = {cam_ctrl_direct, cam_ctrl_bend, cam_ctrl_ring, cam_ctrl_cross, cam_ctrl_fork};
 /*----------------------*/
@@ -106,8 +107,8 @@ struct adcpara adc2;
 /*======================*/
 void Init_para(void){
 //	ËÙ¶È¿ØÖÆ
-	speed.direct = 70;
-	speed.bend[0] = 60, speed.bend[1] = 60;
+	speed.direct = 80;
+	speed.bend[0] = 70, speed.bend[1] = 70;
 	speed.ring[0] = 70, speed.ring[1] = 70;
 	speed.ring[2] = 40, speed.ring[3] = 40, speed.ring[4] = 40;
 	speed.cross = 70;

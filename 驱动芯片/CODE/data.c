@@ -82,9 +82,9 @@ void Init_para(void){
 	
 //	转向
 	steer.alpha = 0.3;
-	steer.Kp = 196;//反应快慢 | 超调
+	steer.Kp = 167;//反应快慢 | 超调
 	steer.Ki = 0;//反应力度
-	steer.Kd = 6.5;
+	steer.Kd = 1.5;
 	steer.I = 0;
 	steer.e1 = 0, steer.e2 = 0, steer.e3 = 0;
 	steer.rs = 0;
@@ -92,7 +92,7 @@ void Init_para(void){
 //	角度
 	angle.Kp = 2.7;//力度
 	angle.Ki = 0;
-	angle.Kd = 16;//抖动
+	angle.Kd = 24;//抖动
 	angle.e1 = 0, angle.e2 = 0, angle.e3 = 0; 
 	angle.rs = 0;
 
@@ -100,7 +100,7 @@ void Init_para(void){
 	acw.alpha = 0.3;
 	acw.Kp = 26;//反应快慢 | 超调
 	acw.Ki = 0.9;//反应力度
-	acw.Kd = 2.4;
+	acw.Kd = 0.4;
 	acw.I = 0;
 	acw.e1 = 0, acw.e2 = 0, acw.e3 = 0;
 	acw.rs = 0;
