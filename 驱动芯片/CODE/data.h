@@ -49,6 +49,8 @@ typedef struct pidpara{
 
 //	电机
 extern struct pidpara speed;
+extern struct pidpara lefdif;
+extern struct pidpara rigdif;
 extern struct pidpara steer;
 //	角度调定参数
 extern struct pidpara angle;

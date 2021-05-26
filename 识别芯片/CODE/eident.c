@@ -28,6 +28,7 @@ void single_ch_filter(struct adcpara *para){
 		//	采集三次数据
 			for(j = 0; j < 3; j++)
 				value[j] = adc_convert(ADC_MOD1, para->pin);
+			ips200_showint16(0, 0, value[0]);
 		//	判断三个值是否相等
 			if(value[0] == value[1])
 				if(value[1] == value[2]){sum_val+= value[0];continue;}

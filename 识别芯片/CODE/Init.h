@@ -19,11 +19,11 @@
 #define KEY6 D15
 //	电磁引脚定义
 #define ADC_MOD1 ADC2
-#define ADC_PIN0 ADC2_CH04_A04
-#define ADC_PIN1 ADC2_CH05_A05
-#define ADC_PIN3 ADC2_CH06_A06
-#define ADC_PIN4 ADC2_CH07_A07
-#define ADC_PIN2 ADC2_CH10_C00
+//#define ADC_PIN0 ADC2_CH04_A04
+//#define ADC_PIN1 ADC2_CH05_A05
+//#define ADC_PIN3 ADC2_CH06_A06
+//#define ADC_PIN4 ADC2_CH07_A07
+#define ADC_PIN2 ADC2_CH04_A04
 /*------------------------------------------------------*/
 /* 					  外部变量声明 						*/
 /*======================================================*/

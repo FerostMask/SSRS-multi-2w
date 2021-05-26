@@ -33,5 +33,6 @@
 .\objects\cam.o: ..\..\Libraries\seekfree_libraries\zf_tim.h
 .\objects\cam.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_tim.h
 .\objects\cam.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_misc.h
+.\objects\cam.o: ..\CODE\eident.h
 .\objects\cam.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_IPS200_PARALLEL8.h
 .\objects\cam.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_FONT.h

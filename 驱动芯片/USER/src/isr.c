@@ -52,11 +52,13 @@ void TIM2_IRQHandler (void)
 	get_icm20602_gyro_spi();
 //	获取编码器数据
 	encoder_get();
-	if(1)
+	if(!final_flag)
 		angle_ctrl();
 	else{
 		inc_pid(&acw, 0, -((lcod+rcod)>>1), 6000);
 		steer.rs = 0;
+		lefdif.rs = 0;
+		rigdif.rs = 0;
 		motor_act();
 		if(TIM_count < 1000){
 			TIM_count++;

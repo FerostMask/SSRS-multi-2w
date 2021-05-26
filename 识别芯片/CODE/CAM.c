@@ -5,6 +5,7 @@
 #include "pid.h"
 #include "data.h"
 #include "zf_tim.h"
+#include "eident.h"
 #include "SEEKFREE_MT9V03X.h"
 #include "SEEKFREE_IPS200_PARALLEL8.h"
 /*--------------------------------------------------------------*/
@@ -64,11 +65,11 @@ void binary_disp(void){
 	}
 //	显示垂直边线
 	for(i = 0; i < lefbottom_cut; i++)
-		ips200_drawpoint(i, bottombor[i]-1, 0xFD10);
+		ips200_drawpoint(i, bottombor[i], 0xFD10);
 	for(i = 0; i < leftop_cut; i++)
 		ips200_drawpoint(i,topbor[i], 0xFD10);
 	for(i = 159; i > rigbottom_cut; i--)
-		ips200_drawpoint(i, bottombor[i]-1, 0xFD10);
+		ips200_drawpoint(i, bottombor[i], 0xFD10);
 	for(i = 159; i > rigtop_cut; i--)
 		ips200_drawpoint(i, topbor[i], 0xFD10);
 //	显示岔道边线
@@ -168,17 +169,13 @@ void state_machine(void){
 								show_value[1] = lef_toprate;
 								show_value[2] = lef_botrate;
 								show_value[3] = pita;
-//								if(lef_botrate < -100 && lef_toprate < 70)
-//									if(lef_widrate > 46 && leftop_cut > 33)
-//										{state = 22;return;}
-//							//	未检测到入环口，判断是否为出环口
-//								if(leftop_cut > 33)
-//									if(lef_toprate > 70 && lef_botrate > 90)
-//										{state = 21; return;}
-//								lef_toprate = (topbor[0]-topbor[leftop_cut>>1]);//借用变量存储
-//								lef_botrate = (topbor[leftop_cut>>1]-topbor[leftop_cut]);
-//								if(lef_toprate*lef_toprate-lef_botrate*lef_botrate < -24)
-//									{state = 21;return;}
+								if(lef_botrate < -100 && lef_toprate < 70)
+									if(lef_widrate > 46 && leftop_cut > 33)
+										{state = 22;return;}
+							//	未检测到入环口，判断是否为出环口
+								if(leftop_cut > 33)
+									if(lef_toprate > 70 && lef_botrate > 90)
+										{state = 21; return;}
 							}
 					}
 	}
@@ -187,25 +184,33 @@ void state_machine(void){
 			if(abs(rtraf_point_row[exti_rigtop] - lcut) < 5)//右弯
 				{state = 14; return;}
 		//	有直道延伸
-			if(righigh > 4)//9
-				if(!cooling_flag)
-					if(righigh < 23){//环道判断
-						if(found_point[0] > exti_lefp[0]+10)
-							slope_cal(4);
-							if(abs(line_slope_diff) < 120){//判断右边是直线
-//								show_value[0] = rig_widrate;
+//			if(righigh > 4)//9
+//				if(!cooling_flag)
+//					if(righigh < 26){//环道判断
+//						if(found_point[0] > exti_lefp[0]+10)
+//							slope_cal(4);
+//							if(abs(line_slope_diff) < 120){//判断右边是直线
+//								show_value[0] = rigtop_cut;
 //								show_value[1] = rig_toprate;
 //								show_value[2] = rig_botrate;
-//								show_value[3] = pita;
-								if(rig_botrate < -240 && rig_toprate < 100)
-									if(rig_widrate > 40 && rigtop_cut > 33)
-										{state = 27;return;}
-							//	未检测到入环口，判断是否为出环口
-								if(rigtop_cut < 127)
-									if(rig_toprate > 160 && rig_botrate > 300)
-										{state = 26; return;}
-							}
-					}
+//								if(rvet_trafcount)
+//									if(rigtop_cut < 137)
+//										if(rig_widrate > 30 && rig_botrate < -60)
+//											{state = 27;return;}
+//								if(rig_botrate < -120)
+//									if(rig_widrate > 40 && rigtop_cut < 137)
+//										{state = 27;return;}
+//							//	未检测到入环口，判断是否为出环口
+//								if(rigtop_cut < 137){
+//									if(rvet_trafcount){
+//											if(rig_toprate > 10 && rig_botrate > 30)
+//												{state = 26; return;}
+//									}
+//									if(rig_toprate > 160 && rig_botrate > 50)
+//										{state = 26; return;}
+//								}
+//							}
+//					}
 		}
 }
 /*------------------------------*/
@@ -328,14 +333,14 @@ void state_machine_enter(void){
 			act_flag = 14, state_flag = 1, img_color = 0x7EFE;
 			return;
 	//	圆环
-//		case 21://检测到圆环出口 | 脆弱状态
-//			act_flag = 21, state_flag = 2, img_color = 0x0250;
-//			act_flag_temp = act_flag;
-//			tim_interrupt_init_ms(TIM_3, 2000, 0, 0);//状态计时
-//			return;
-//		case 22://检测到圆环入口
-//			act_flag = 22, state_flag = 2, img_color = 0x8CF6;
-//			return;
+		case 21://检测到圆环出口 | 脆弱状态
+			act_flag = 21, state_flag = 2, img_color = 0x0250;
+			act_flag_temp = act_flag;
+			tim_interrupt_init_ms(TIM_3, 2000, 0, 0);//状态计时
+			return;
+		case 22://检测到圆环入口
+			act_flag = 22, state_flag = 2, img_color = 0x8CF6;
+			return;
 		case 26://检测到圆环出口 | 脆弱状态 | 右
 			act_flag = 26, state_flag = 2, img_color = 0x0250;
 			act_flag_temp = act_flag;
@@ -728,8 +733,8 @@ void border_vertical_leftsearch(void){
 				if(ltraf_flag[i-1] == 0){ 
 					exti_lefp[exti_lefcount] = (ltraf_point_row[i]+ltraf_point_row[i-1])>>1, exti_lefcount++;
 					if(!vetflag){
-						if(i+1 < ltraf_count) {vetflag = 1, exti_leftop = i, lefhigh = ltraf_point_row[i-1] - ltraf_point_row[i];vert_leftsearch(ltraf_point_row[i+1], ltraf_point_row[i-1]+15);}
-						else {vetflag = 1, exti_leftop = i, lefhigh = ltraf_point_row[i-1] - ltraf_point_row[i];vert_leftsearch(ltraf_point_row[i]-7, ltraf_point_row[i-1]+15);}
+						if(i+1 < ltraf_count) {vetflag = 1, exti_leftop = i, lefhigh = ltraf_point_row[i-1] - ltraf_point_row[i];vert_leftsearch(ltraf_point_row[i+1], ltraf_point_row[i-1]+20);}
+						else {vetflag = 1, exti_leftop = i, lefhigh = ltraf_point_row[i-1] - ltraf_point_row[i];vert_leftsearch(ltraf_point_row[i]-7, ltraf_point_row[i-1]+20);}
 					}
 				}
 		}
@@ -756,8 +761,8 @@ void border_vertical_rightsearch(void){
 			if(rtraf_flag[i] == 1){
 				if(rtraf_flag[i-1] == 0) exti_rigp[exti_rigcount] = (rtraf_point_row[i]+rtraf_point_row[i-1])>>1, exti_rigcount++;
 				if(!vetflag){
-					if(i+1 < rtraf_count){vetflag = 1, exti_rigtop = i, righigh = rtraf_point_row[i-1] - rtraf_point_row[i];vert_rightsearch(rtraf_point_row[i+1], rtraf_point_row[i-1]+15);}
-					else {vetflag = 1, exti_rigtop = i, righigh = rtraf_point_row[i-1] - rtraf_point_row[i];vert_rightsearch(rtraf_point_row[i]-7, rtraf_point_row[i-1]+15);}
+					if(i+1 < rtraf_count){vetflag = 1, exti_rigtop = i, righigh = rtraf_point_row[i-1] - rtraf_point_row[i];vert_rightsearch(rtraf_point_row[i+1], rtraf_point_row[i-1]+20);}
+					else {vetflag = 1, exti_rigtop = i, righigh = rtraf_point_row[i-1] - rtraf_point_row[i];vert_rightsearch(rtraf_point_row[i]-7, rtraf_point_row[i-1]+20);}
 				}
 			}
 		}

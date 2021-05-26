@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\MM32F3277.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\MM32F3277.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun May 23 15:54:32 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed May 26 16:40:36 2021
 <BR><P>
 <H3>Maximum Stack Usage =       1136 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -779,7 +779,7 @@ Global Symbols
 <P><STRONG><a name="[2d]"></a>TIM1_UP_IRQHandler</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, isr.o(i.TIM1_UP_IRQHandler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_mm32f327x_keil.o(RESET)
 </UL>
-<P><STRONG><a name="[30]"></a>TIM2_IRQHandler</STRONG> (Thumb, 170 bytes, Stack size 16 bytes, isr.o(i.TIM2_IRQHandler))
+<P><STRONG><a name="[30]"></a>TIM2_IRQHandler</STRONG> (Thumb, 132 bytes, Stack size 16 bytes, isr.o(i.TIM2_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = TIM2_IRQHandler &rArr; pos_pid &rArr; __aeabi_fadd &rArr; _float_epilogue
 </UL>
 <BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_putchar
@@ -918,7 +918,7 @@ Global Symbols
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;camera_tim_etr_init
 </UL>
 
-<P><STRONG><a name="[8e]"></a>binary_disp</STRONG> (Thumb, 632 bytes, Stack size 24 bytes, cam.o(i.binary_disp))
+<P><STRONG><a name="[8e]"></a>binary_disp</STRONG> (Thumb, 624 bytes, Stack size 24 bytes, cam.o(i.binary_disp))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = binary_disp &rArr; ips200_showint16 &rArr; ips200_showchar &rArr; ips200_address_set &rArr; ips200_wr_data16
 </UL>
 <BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data16
@@ -957,16 +957,16 @@ Global Symbols
 <P><STRONG><a name="[6]"></a>cam_ctrl_bend</STRONG> (Thumb, 130 bytes, Stack size 0 bytes, ctrl.o(i.cam_ctrl_bend))
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>
-<P><STRONG><a name="[8]"></a>cam_ctrl_cross</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, ctrl.o(i.cam_ctrl_cross))
+<P><STRONG><a name="[8]"></a>cam_ctrl_cross</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, ctrl.o(i.cam_ctrl_cross))
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>
-<P><STRONG><a name="[5]"></a>cam_ctrl_direct</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, ctrl.o(i.cam_ctrl_direct))
+<P><STRONG><a name="[5]"></a>cam_ctrl_direct</STRONG> (Thumb, 74 bytes, Stack size 0 bytes, ctrl.o(i.cam_ctrl_direct))
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>
 <P><STRONG><a name="[9]"></a>cam_ctrl_fork</STRONG> (Thumb, 62 bytes, Stack size 0 bytes, ctrl.o(i.cam_ctrl_fork))
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>
-<P><STRONG><a name="[7]"></a>cam_ctrl_ring</STRONG> (Thumb, 308 bytes, Stack size 0 bytes, ctrl.o(i.cam_ctrl_ring))
+<P><STRONG><a name="[7]"></a>cam_ctrl_ring</STRONG> (Thumb, 544 bytes, Stack size 0 bytes, ctrl.o(i.cam_ctrl_ring))
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>
 <P><STRONG><a name="[9a]"></a>camera_dma_init</STRONG> (Thumb, 122 bytes, Stack size 56 bytes, zf_camera.o(i.camera_dma_init))
@@ -1325,9 +1325,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 320<LI>Call Chain = menu2value_hl &rArr; ips200_showfloat &rArr; zf_sprintf &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showstr
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showfloat
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value
 </UL>
@@ -1520,7 +1520,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;state_machine
 </UL>
 
-<P><STRONG><a name="[d5]"></a>state_machine</STRONG> (Thumb, 730 bytes, Stack size 8 bytes, cam.o(i.state_machine))
+<P><STRONG><a name="[d5]"></a>state_machine</STRONG> (Thumb, 670 bytes, Stack size 8 bytes, cam.o(i.state_machine))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = state_machine &rArr; slope_cal &rArr; __aeabi_fdiv
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vetsearch_fork_support
@@ -1536,7 +1536,7 @@ Global Symbols
 <P><STRONG><a name="[3]"></a>state_machine_cross</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, cam.o(i.state_machine_cross))
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>
-<P><STRONG><a name="[0]"></a>state_machine_enter</STRONG> (Thumb, 330 bytes, Stack size 8 bytes, cam.o(i.state_machine_enter))
+<P><STRONG><a name="[0]"></a>state_machine_enter</STRONG> (Thumb, 410 bytes, Stack size 8 bytes, cam.o(i.state_machine_enter))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = state_machine_enter &rArr; tim_interrupt_init_ms &rArr; NVIC_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_init_ms
@@ -1745,10 +1745,10 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 1088<LI>Call Chain = menu2value_sup &rArr; swdisplay &rArr; info
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showstr
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showfloat
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swdisplay
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value
 </UL>

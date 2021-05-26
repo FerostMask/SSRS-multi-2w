@@ -26,13 +26,15 @@ short rad = 0;
 short lef_pwm, rig_pwm;
 //	PID
 struct pidpara speed;
+struct pidpara lefdif;
+struct pidpara rigdif;
 struct pidpara steer;
 struct pidpara angle;
 struct pidpara acw;
 /*----------------------*/
 /*	   角度控制模块		*/
 /*======================*/
-short blcp = 400;
+short blcp = 360;
 short pita, yawa, yawa_temp;
 short gy, gz;
 short yfilt[4] = {0, 0, 0, 0};
@@ -80,14 +82,41 @@ void Init_para(void){
 	speed.e1 = 0, speed.e2 = 0, speed.e3 = 0;
 	speed.rs = 0;
 	
+//	左轮差速
+	lefdif.alpha = 0.3;
+	lefdif.Kp = 30;//反应快慢 | 超调
+	lefdif.Ki = 1.25;//反应力度
+	lefdif.Kd = 0;
+	lefdif.I = 0;
+	lefdif.e1 = 0, lefdif.e2 = 0, lefdif.e3 = 0;
+	lefdif.rs = 0;
+
+//	右轮差速
+	rigdif.alpha = 0.3;
+	rigdif.Kp = 30;//反应快慢 | 超调
+	rigdif.Ki = 1.25;//反应力度
+	rigdif.Kd = 0;
+	rigdif.I = 0;
+	rigdif.e1 = 0, rigdif.e2 = 0, rigdif.e3 = 0;
+	rigdif.rs = 0;
+	
 //	转向
 	steer.alpha = 0.3;
-	steer.Kp = 167;//反应快慢 | 超调
+	steer.Kp = 5;//反应快慢 | 超调
 	steer.Ki = 0;//反应力度
-	steer.Kd = 1.5;
+	steer.Kd = 0.2;
 	steer.I = 0;
 	steer.e1 = 0, steer.e2 = 0, steer.e3 = 0;
-	steer.rs = 0;
+	steer.rs = 0;	
+	
+////	转向
+//	steer.alpha = 0.3;
+//	steer.Kp = 167;//反应快慢 | 超调
+//	steer.Ki = 0;//反应力度
+//	steer.Kd = 1.5;
+//	steer.I = 0;
+//	steer.e1 = 0, steer.e2 = 0, steer.e3 = 0;
+//	steer.rs = 0;
 	
 //	角度
 	angle.Kp = 2.7;//力度
