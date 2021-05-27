@@ -74,7 +74,7 @@ int distance = 0;
 //	PID
 void Init_para(void){
 //	速度
-	speed.alpha = 0.3;
+	speed.alpha = 0.1;
 	speed.Kp = 0.2;//反应快慢 | 超调
 	speed.Ki = 0.05;//反应力度
 	speed.Kd = 0;
@@ -119,17 +119,17 @@ void Init_para(void){
 //	steer.rs = 0;
 	
 //	角度
-	angle.Kp = 2.7;//力度
+	angle.Kp = 9.7;//力度
 	angle.Ki = 0;
-	angle.Kd = 24;//抖动
+	angle.Kd = 4;//抖动
 	angle.e1 = 0, angle.e2 = 0, angle.e3 = 0; 
 	angle.rs = 0;
 
 //	角速度
-	acw.alpha = 0.3;
+	acw.alpha = 0.1;
 	acw.Kp = 26;//反应快慢 | 超调
-	acw.Ki = 0.9;//反应力度
-	acw.Kd = 0.4;
+	acw.Ki = 0.35;//反应力度
+	acw.Kd = 0.0;
 	acw.I = 0;
 	acw.e1 = 0, acw.e2 = 0, acw.e3 = 0;
 	acw.rs = 0;
