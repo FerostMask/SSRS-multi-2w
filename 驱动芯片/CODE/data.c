@@ -85,7 +85,7 @@ void Init_para(void){
 //	左轮差速
 	lefdif.alpha = 0.3;
 	lefdif.Kp = 30;//反应快慢 | 超调
-	lefdif.Ki = 1.25;//反应力度
+	lefdif.Ki = 0.75;//反应力度
 	lefdif.Kd = 0;
 	lefdif.I = 0;
 	lefdif.e1 = 0, lefdif.e2 = 0, lefdif.e3 = 0;
@@ -94,7 +94,7 @@ void Init_para(void){
 //	右轮差速
 	rigdif.alpha = 0.3;
 	rigdif.Kp = 30;//反应快慢 | 超调
-	rigdif.Ki = 1.25;//反应力度
+	rigdif.Ki = 0.75;//反应力度
 	rigdif.Kd = 0;
 	rigdif.I = 0;
 	rigdif.e1 = 0, rigdif.e2 = 0, rigdif.e3 = 0;
@@ -119,15 +119,15 @@ void Init_para(void){
 //	steer.rs = 0;
 	
 //	角度
-	angle.Kp = 9.7;//力度
+	angle.Kp = 1.7;//力度
 	angle.Ki = 0;
-	angle.Kd = 4;//抖动
+	angle.Kd = 1.6;//抖动
 	angle.e1 = 0, angle.e2 = 0, angle.e3 = 0; 
 	angle.rs = 0;
 
 //	角速度
 	acw.alpha = 0.1;
-	acw.Kp = 26;//反应快慢 | 超调
+	acw.Kp = 23;//反应快慢 | 超调
 	acw.Ki = 0.35;//反应力度
 	acw.Kd = 0.0;
 	acw.I = 0;

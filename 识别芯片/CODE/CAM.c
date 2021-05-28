@@ -184,33 +184,24 @@ void state_machine(void){
 			if(abs(rtraf_point_row[exti_rigtop] - lcut) < 5)//右弯
 				{state = 14; return;}
 		//	有直道延伸
-//			if(righigh > 4)//9
-//				if(!cooling_flag)
-//					if(righigh < 26){//环道判断
-//						if(found_point[0] > exti_lefp[0]+10)
-//							slope_cal(4);
-//							if(abs(line_slope_diff) < 120){//判断右边是直线
-//								show_value[0] = rigtop_cut;
-//								show_value[1] = rig_toprate;
-//								show_value[2] = rig_botrate;
-//								if(rvet_trafcount)
-//									if(rigtop_cut < 137)
-//										if(rig_widrate > 30 && rig_botrate < -60)
-//											{state = 27;return;}
-//								if(rig_botrate < -120)
-//									if(rig_widrate > 40 && rigtop_cut < 137)
-//										{state = 27;return;}
-//							//	未检测到入环口，判断是否为出环口
-//								if(rigtop_cut < 137){
-//									if(rvet_trafcount){
-//											if(rig_toprate > 10 && rig_botrate > 30)
-//												{state = 26; return;}
-//									}
-//									if(rig_toprate > 160 && rig_botrate > 50)
-//										{state = 26; return;}
-//								}
-//							}
-//					}
+			if(righigh > 4)//9
+				if(!cooling_flag)
+					if(righigh < 23){//环道判断
+						if(found_point[0] > exti_rigp[0]+10)
+							slope_cal(4);
+							if(abs(line_slope_diff) < 120){//判断右边是直线
+								show_value[0] = rigtop_cut;
+								show_value[1] = rig_toprate;
+								show_value[2] = rig_botrate;
+								if(rig_botrate < -100 && rig_toprate < 70)
+									if(rig_widrate > 46 && rigtop_cut < 127)
+										{state = 27;return;}
+							//	未检测到入环口，判断是否为出环口
+								if(rigtop_cut < 127)
+									if(rig_toprate > 70 && rig_botrate > 90)
+										{state = 26; return;}
+							}
+					}
 		}
 }
 /*------------------------------*/

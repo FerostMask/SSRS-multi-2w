@@ -47,11 +47,12 @@ void TIM2_IRQHandler (void)
 	uint32 state = TIM2->SR;														// ¶ÁÈ¡ÖÐ¶Ï×´Ì¬
 	TIM2->SR &= ~state;	// Çå¿ÕÖÐ¶Ï×´Ì¬
 //	×ËÌ¬¿ØÖÆ
-	spd = 110, folc_flag = 1, folrow_f = 63;
+	spd = 65, folc_flag = 1, folrow_f = 63;
 	ctrl_pfc[state_flag]();
 	if(folc_flag) p_target[0] = folrow_f, p_target[1] = (lefbor[folrow_f]+rigbor[folrow_f])>>1; 
 	pos_pid(&cam_steering, 80, p_target[1], 120, -120);
 	if(0) {spd = 0;p_target[0] = 70, p_target[1] = (lefbor[70]+rigbor[70])>>1;}
+//	if(total_count_fork == 0) spd = 50; 
 	uart_putchar(UART_7, (char)cam_steering.rs);
 	uart_putchar(UART_6, (unsigned char)spd);
 }

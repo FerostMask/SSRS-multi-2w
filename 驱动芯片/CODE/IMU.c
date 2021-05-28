@@ -49,9 +49,9 @@ void angle_ctrl(void){
 	}
 //	角速度、电机、航向角控制
 	gz = icm_gyro_z/(16.4*5.73);
-	inc_pid(&lefdif, ((lcod+rcod)>>1)-steer.rs, lcod, 3000);
-	inc_pid(&rigdif, ((lcod+rcod)>>1)+steer.rs, rcod, 3000);
-	inc_pid(&acw, angle.rs, gy, 5000);
+//	inc_pid(&lefdif, ((lcod+rcod)>>1)-steer.rs, lcod, 3000);
+//	inc_pid(&rigdif, ((lcod+rcod)>>1)+steer.rs, rcod, 3000);
+	inc_pid(&acw, 0, gy, 5000);
 	motor_act();
 //	串口发送角度变化
 	if(!sbuf_count){
