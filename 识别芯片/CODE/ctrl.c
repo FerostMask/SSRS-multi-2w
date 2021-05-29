@@ -61,11 +61,13 @@ void cam_ctrl_ring(void){
 			folc_flag = 0;
 			break;
 		case 23://环内
-		//	加权算法
-			for(i = 0; i < 8; i++)
-				bias_temp += (lefbor[55+(i<<2)+i]+rigbor[55+(i<<2)+i] - 160)*bend_bias[i];
-			p_target[1] = (bias_temp>>7)+80;
+			p_target[1] = ((lefbor[56]+rigbor[56]))+((lefbor[63]+rigbor[63]))>>2;
 			folc_flag = 0;
+		//	加权算法
+//			for(i = 0; i < 8; i++)
+//				bias_temp += (lefbor[55+(i<<2)+i]+rigbor[55+(i<<2)+i] - 160)*bend_bias[i];
+//			p_target[1] = (bias_temp>>7)+80;
+//			folc_flag = 0;
 			if(p_target[1] < rad_min) rad_min = p_target[1];
 			if(p_target[1] > rad_max) rad_max = p_target[1];
 			folc_flag = 0;
@@ -113,11 +115,11 @@ void cam_ctrl_bend(void){
 	register unsigned char i;
 	unsigned char point_temp;
 	short bias_temp;
-//	加权算法
-	for(i = 0; i < 8; i++)
-		bias_temp += (lefbor[55+(i<<2)+i]+rigbor[55+(i<<2)+i] - 160)*bend_bias[i];
-	p_target[1] = (bias_temp>>7)+80;
-	folc_flag = 0;
+////	加权算法
+//	for(i = 0; i < 8; i++)
+//		bias_temp += (lefbor[55+(i<<2)+i]+rigbor[55+(i<<2)+i] - 160)*bend_bias[i];
+//	p_target[1] = (bias_temp>>7)+80;
+//	folc_flag = 0;
 //	控制
 	switch(act_flag){
 		case 11://左转丢边
@@ -127,12 +129,12 @@ void cam_ctrl_bend(void){
 			folrow_f = 45;
 			break;
 		case 13://左弯
-//			p_target[1] = ((lefbor[56]+rigbor[56]))+((lefbor[63]+rigbor[63]))>>2;
-//			folc_flag = 0;
+			p_target[1] = ((lefbor[56]+rigbor[56]))+((lefbor[63]+rigbor[63]))>>2;
+			folc_flag = 0;
 			break;
 		case 14://右弯
-//			p_target[1] = ((lefbor[56]+rigbor[56]))+((lefbor[63]+rigbor[63]))>>2;
-//			folc_flag = 0;
+			p_target[1] = ((lefbor[56]+rigbor[56]))+((lefbor[63]+rigbor[63]))>>2;
+			folc_flag = 0;
 			break;
 	}
 }
@@ -145,20 +147,33 @@ void cam_ctrl_direct(void){
 	unsigned char point_temp;
 	short bias_temp, cal_temp;
 	short neg_add = 0, pos_add = 0;
-//	加权算法
-	for(i = 0; i < 8; i++){
-		cal_temp = (lefbor[55+(i<<2)+i]+rigbor[55+(i<<2)+i] - 160);
-		bias_temp += cal_temp*bend_bias[i];
-	//	对左右偏置积分
-		if(cal_temp < 0) neg_add += cal_temp;
-		else pos_add += cal_temp;
-	}
-	p_target[1] = (bias_temp>>7)+80;
-	if(abs(pos_add + neg_add) < 20) p_target[1] = (p_target[1]+80)>>1;
+
+////	加权算法
+//	for(i = 0; i < 8; i++){
+//		cal_temp = (lefbor[55+(i<<2)+i]+rigbor[55+(i<<2)+i] - 160);
+//		bias_temp += cal_temp*bend_bias[i];
+//	//	对左右偏置积分
+//		if(cal_temp < 0) neg_add += cal_temp;
+//		else pos_add += cal_temp;
+//	}
+//	p_target[1] = (bias_temp>>7)+80;
+//	if(abs(pos_add + neg_add) < 20) p_target[1] = (p_target[1]+80)>>1;
+//	folc_flag = 0;
+
+	p_target[1] = ((lefbor[45]+rigbor[45]))+((lefbor[63]+rigbor[63]))>>2;
 	folc_flag = 0;
-//	波浪辅助
-	
 //	特殊控制
 	if(lvet_trafcount)
 		p_target[1] = (lefbor[lvet_trafpoint_row[0]]+rigbor[lvet_trafpoint_row[0]])>>1;
+	if(rvet_trafcount)
+		p_target[1] = (lefbor[rvet_trafpoint_row[0]]+rigbor[rvet_trafpoint_row[0]])>>1;
+//	环岛控制
+	if(ring_out_flag == 1){
+		if(found_point[0] < 60)
+			p_target[1] = (lefbor[found_point[0]-10]+rigbor[found_point[0]-10])>>1;
+		spd = 30;
+	}
+//	终点
+	if(count_fork > 7)
+		p_target[1] = 80;
 }

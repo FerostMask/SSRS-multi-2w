@@ -24,7 +24,7 @@
 void angle_ctrl(void){
 //	变量定义
 	register char i ;
-	static unsigned char imu_count, sbuf_count;
+	static unsigned char imu_count, sbuf_count, spd_count;
 //	计数器循环
 	imu_count = (imu_count+1)&3;
 	sbuf_count = (sbuf_count+1)&15;
@@ -33,9 +33,12 @@ void angle_ctrl(void){
 	yfilt[0] = icm_gyro_y;
 	gy = (yfilt[0] + yfilt[1] + yfilt[2] + yfilt[3])/65.6;
 //	串级PID
-	if(imu_count == 3)
+	if(imu_count == 3){
+		spd_count = (spd_count+1)&1;
+		if(spd_count)
 	//	速度PID
-		inc_pid(&speed, spd<<1, (lcod+rcod)>>1, 120);
+			pos_pid(&speed, spd<<1, (lcod+rcod)>>1, 320, -320);
+	}
 //	角度
 	if(imu_count == 1 || imu_count == 3){
 	//	姿态解算
@@ -45,13 +48,13 @@ void angle_ctrl(void){
 		pflit[0] = (asin(-2*q1*q3 + 2*q0*q2))*573;
 		pita = (pflit[0]+pflit[1]+pflit[2]+pflit[3])/4;
 		pos_pid(&steer, rad, gz, 90, -90);
-		pos_pid(&angle, blcp+speed.rs, pita, 40, -40);
+		pos_pid(&angle, blcp, pita, 300, -300);
 	}
 //	角速度、电机、航向角控制
 	gz = icm_gyro_z/(16.4*5.73);
-//	inc_pid(&lefdif, ((lcod+rcod)>>1)-steer.rs, lcod, 3000);
-//	inc_pid(&rigdif, ((lcod+rcod)>>1)+steer.rs, rcod, 3000);
-	inc_pid(&acw, 0, gy, 5000);
+	inc_pid(&lefdif, ((lcod+rcod)>>1)-steer.rs, lcod, 3000);
+	inc_pid(&rigdif, ((lcod+rcod)>>1)+steer.rs, rcod, 3000);
+	inc_pid(&acw, angle.rs+speed.rs, gy, 5000);
 	motor_act();
 //	串口发送角度变化
 	if(!sbuf_count){

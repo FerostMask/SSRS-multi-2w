@@ -47,6 +47,7 @@ unsigned char direction_fork, border_top[MT9V03X_W-4]; //0 左 1 右
 unsigned char cnt_left, cnt_right;//数左右倾斜
 unsigned char total_count_fork = 0;
 unsigned short cut_fork_lef, cut_fork_rig, cut_fork_bottom;
+unsigned char count_fork = 0;//终点检测
 /*----------------------*/
 /*	 	 控制模块		*/
 /*======================*/
@@ -60,7 +61,7 @@ short rad_temp, rad_min, rad_max;
 unsigned char folrow_f = 63;
 float filter_alpha = 0.1;
 unsigned char filter_temp;
-char folc_flag, cooling_flag = 0;
+char folc_flag, cooling_flag = 0, ring_out_flag = 0;
 void(*ctrl_pfc[])(void) = {cam_ctrl_direct, cam_ctrl_bend, cam_ctrl_ring, cam_ctrl_cross, cam_ctrl_fork};
 /*----------------------*/
 /*	 	 菜单模块		*/
@@ -115,7 +116,7 @@ void Init_para(void){
 	speed.fork = 60;
 //	CAM转向
 	cam_steering.Kp = 1.2;
-	cam_steering.Kd = 0.9;	
+	cam_steering.Kd = 0.3;	
 //	电磁模块
 	adc2.max = 4095, adc2.min = 0;
 }

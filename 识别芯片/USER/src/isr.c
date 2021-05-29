@@ -47,11 +47,11 @@ void TIM2_IRQHandler (void)
 	uint32 state = TIM2->SR;														// ∂¡»°÷–∂œ◊¥Ã¨
 	TIM2->SR &= ~state;	// «Âø’÷–∂œ◊¥Ã¨
 //	◊ÀÃ¨øÿ÷∆
-	spd = 65, folc_flag = 1, folrow_f = 63;
+	spd = 105, folc_flag = 1, folrow_f = 63;
 	ctrl_pfc[state_flag]();
 	if(folc_flag) p_target[0] = folrow_f, p_target[1] = (lefbor[folrow_f]+rigbor[folrow_f])>>1; 
 	pos_pid(&cam_steering, 80, p_target[1], 120, -120);
-	if(0) {spd = 0;p_target[0] = 70, p_target[1] = (lefbor[70]+rigbor[70])>>1;}
+	if(!action_flag) {spd = 0;p_target[0] = 70, p_target[1] = (lefbor[70]+rigbor[70])>>1;}
 //	if(total_count_fork == 0) spd = 50; 
 	uart_putchar(UART_7, (char)cam_steering.rs);
 	uart_putchar(UART_6, (unsigned char)spd);
@@ -67,7 +67,8 @@ void TIM3_IRQHandler (void)
 	uint32 state = TIM3->SR;														// ∂¡»°÷–∂œ◊¥Ã¨
 	TIM3->SR &= ~state;																// «Âø’÷–∂œ◊¥Ã¨
 //	¥˙¬Î±‡–¥«¯”Ú
-	cooling_flag = 0;//◊¥Ã¨¿‰»¥
+//	◊¥Ã¨¿‰»¥
+	cooling_flag = 0, ring_out_flag = 0;
 //	¥‡»ı◊¥Ã¨
 	if(act_flag_temp == act_flag) act_flag = 0, state_flag = 0, img_color = 0xAE9C;
 	fragile_flag = 0;
@@ -198,10 +199,10 @@ void UART7_IRQHandler(void)
 	//	ºÏ≤‚◊¥Ã¨ «∑ÒŒ»∂®
 		if(!action_flag){
 			if(!pita_flag){
-				if(pita > 33 && pita < 42) pita_count++;
+				if(pita > 30 && pita < 39) pita_count++;
 				else pita_count = 0;
 			}
-			if(pita_count > 26) pita_flag = 1;
+			if(pita_count > 23) pita_flag = 1;
 	//		ips200_showint16(0, 0, pita);
 	//		ips200_showint16(0, 1, pita_count);
 		//	Ω”¡¶ºÏ≤‚

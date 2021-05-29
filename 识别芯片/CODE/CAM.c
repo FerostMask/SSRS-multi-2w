@@ -250,7 +250,7 @@ void state_machine_ring(void){
 		case 24://出环 -> 环外
 			if(state == 24)
 				act_flag = 0, yawa_flag = 0, state_flag = 0, img_color = 0xAE9C;
-				cooling_flag = 1;
+				cooling_flag = 1, ring_out_flag = 1;
 				tim_interrupt_init_ms(TIM_3, 3000, 0, 0);
 			return;
 	//	右环
@@ -464,9 +464,9 @@ void vetsearch_fork_support(void){
 	unsigned char *p;
 	unsigned char search_flag = 0, bottom_col;
 	unsigned char found_flag, view_temp;
-	unsigned char count_fork = 0;
+
 //	变量初始化
-	cut_fork_lef = 159, cut_fork_rig = 0;
+	cut_fork_lef = 159, cut_fork_rig = 0, count_fork = 0;
 //	寻找边界基点
 	cut_fork_bottom = 0;
 	p = &binary_img[MT9V03X_H-1][6];
@@ -503,7 +503,7 @@ void vetsearch_fork_support(void){
 				break;
 		}
 //	检测单行跳变点
-	p = &binary_img[cut_fork_bottom-7][0];
+	p = &binary_img[bottom_point-7][0];
 	for(j = 0; j < 20; j++,p++){
     //	一般情况
         if(*p == 0x00) continue;//全黑

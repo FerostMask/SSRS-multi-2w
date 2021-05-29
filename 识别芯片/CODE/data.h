@@ -53,6 +53,7 @@ extern unsigned char direction_fork, border_top[MT9V03X_W-4]; //0 左 1 右
 extern unsigned char cnt_left, cnt_right;//数左右倾斜
 extern unsigned char total_count_fork;
 extern unsigned short cut_fork_lef, cut_fork_rig, cut_fork_bottom;
+extern unsigned char count_fork;
 /*----------------------*/
 /*	 	 控制模块		*/
 /*======================*/
@@ -66,7 +67,7 @@ extern unsigned char folrow_f;
 extern unsigned char ctrl_bias[];
 extern float filter_alpha;
 extern unsigned char filter_temp;
-extern char folc_flag, cooling_flag;
+extern char folc_flag, cooling_flag, ring_out_flag;
 extern void(*ctrl_pfc[])(void);
 //	结构体声明
 typedef struct spdpara{
