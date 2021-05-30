@@ -116,7 +116,7 @@ void Init_para(void){
 	speed.fork = 60;
 //	CAM转向
 	cam_steering.Kp = 1.2;
-	cam_steering.Kd = 0.3;	
+	cam_steering.Kd = 0.1;	
 //	电磁模块
 	adc2.max = 4095, adc2.min = 0;
 }

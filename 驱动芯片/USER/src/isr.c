@@ -168,7 +168,7 @@ void UART6_IRQHandler(void)
 	if(UART6->ISR & UART_ISR_RX_INTF)												// 串口接收缓冲中断
 	{
 		uart_getchar(UART_6, &buff_get6);
-		if(buff_get6 != 255)
+		if((unsigned char)buff_get6 != 255)
 			spd = (unsigned char)buff_get6;
 		else
 			dst_flag = 1;

@@ -55,7 +55,9 @@ void cam_ctrl_ring(void){
 			break;
 		case 22://入环口
 			p_target[1] = ((leftop_cut+lefbottom_cut)>>1);
-			p_target[1] = ((p_target[1]+95)>>1);
+			p_target[1] = ((p_target[1]+80)>>1);
+//			p_target[1] = (lefbor[30]+rigbor[30])>>1;
+//			p_target[1] = ((p_target[1]+80)>>1);
 			rad_min = 159, rad_max = 0;
 			spd = speed.ring[1];
 			folc_flag = 0;
@@ -171,7 +173,7 @@ void cam_ctrl_direct(void){
 	if(ring_out_flag == 1){
 		if(found_point[0] < 60)
 			p_target[1] = (lefbor[found_point[0]-10]+rigbor[found_point[0]-10])>>1;
-		spd = 30;
+		spd = 50;
 	}
 //	终点
 	if(count_fork > 7)

@@ -31,7 +31,7 @@ void encoder_get(void){
 	rcod = -tim_encoder_get_count(TIM_4);
 	if(dst_flag){
 		distance += (lcod+rcod)>>1;
-		if(distance > 100000)
+		if(distance > 95000)
 			final_flag = 1, dst_flag = 0;
 	}
 //	显示计数值

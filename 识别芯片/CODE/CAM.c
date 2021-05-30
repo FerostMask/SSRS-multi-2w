@@ -143,7 +143,7 @@ void state_machine(void){
 				if(abs(exti_lefp[0] - exti_rigp[0]) < 10)
 					{state = 31;return;}
 		}
-	vetsearch_fork_support();
+	if(!cooling_flag) vetsearch_fork_support();
 	if(cut_fork_rig) vertsearch_frok();
 	if(state == 41) return;
 	if(!exti_lefcount)
@@ -331,6 +331,8 @@ void state_machine_enter(void){
 			return;
 		case 22://检测到圆环入口
 			act_flag = 22, state_flag = 2, img_color = 0x8CF6;
+			act_flag_temp = act_flag;
+			tim_interrupt_init_ms(TIM_3, 1000, 0, 0);//状态计时
 			return;
 		case 26://检测到圆环出口 | 脆弱状态 | 右
 			act_flag = 26, state_flag = 2, img_color = 0x0250;
@@ -353,7 +355,7 @@ void state_machine_enter(void){
 				total_count_fork++;
 				if(total_count_fork == 2){
 					uart_putchar(UART_6, 255);
-					direction_fork = 0;
+					direction_fork = 1;
 				}
 //				show_value[0] = total_count_fork;
 				cooling_flag = 1;
@@ -464,7 +466,7 @@ void vetsearch_fork_support(void){
 	unsigned char *p;
 	unsigned char search_flag = 0, bottom_col;
 	unsigned char found_flag, view_temp;
-
+	unsigned char stop_flag1 = 0, stop_flag2 = 0;
 //	变量初始化
 	cut_fork_lef = 159, cut_fork_rig = 0, count_fork = 0;
 //	寻找边界基点

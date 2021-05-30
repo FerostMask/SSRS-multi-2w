@@ -35,9 +35,9 @@ void angle_ctrl(void){
 //	串级PID
 	if(imu_count == 3){
 		spd_count = (spd_count+1)&1;
-		if(spd_count)
+//		if(spd_count)
 	//	速度PID
-			pos_pid(&speed, spd<<1, (lcod+rcod)>>1, 320, -320);
+//			pos_pid(&speed, spd<<1, (lcod+rcod)>>1, 320, -320);
 	}
 //	角度
 	if(imu_count == 1 || imu_count == 3){
@@ -47,7 +47,7 @@ void angle_ctrl(void){
 		for(i = 2; i >= 0; i--) pflit[i+1] = pflit[i];
 		pflit[0] = (asin(-2*q1*q3 + 2*q0*q2))*573;
 		pita = (pflit[0]+pflit[1]+pflit[2]+pflit[3])/4;
-		pos_pid(&steer, rad, gz, 90, -90);
+//		pos_pid(&steer, rad, gz, 90, -90);
 		pos_pid(&angle, blcp, pita, 300, -300);
 	}
 //	角速度、电机、航向角控制
