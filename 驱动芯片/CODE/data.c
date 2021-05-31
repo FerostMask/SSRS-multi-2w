@@ -76,8 +76,8 @@ void Init_para(void){
 //	速度
 	speed.alpha = 0.1;
 	speed.Kp = 1.1;//反应快慢 | 超调
-	speed.Ki = 0.01;//反应力度
-	speed.Kd = 0.0;
+	speed.Ki = 0.0;//反应力度
+	speed.Kd = 0.3;
 	speed.I = 0;
 	speed.e1 = 0, speed.e2 = 0, speed.e3 = 0;
 	speed.rs = 0;
@@ -85,7 +85,7 @@ void Init_para(void){
 //	左轮差速
 	lefdif.alpha = 0.3;
 	lefdif.Kp = 30;//反应快慢 | 超调
-	lefdif.Ki = 0.75;//反应力度
+	lefdif.Ki = 1.2;//反应力度
 	lefdif.Kd = 0;
 	lefdif.I = 0;
 	lefdif.e1 = 0, lefdif.e2 = 0, lefdif.e3 = 0;
@@ -94,7 +94,7 @@ void Init_para(void){
 //	右轮差速
 	rigdif.alpha = 0.3;
 	rigdif.Kp = 30;//反应快慢 | 超调
-	rigdif.Ki = 0.75;//反应力度
+	rigdif.Ki = 1.1;//反应力度
 	rigdif.Kd = 0;
 	rigdif.I = 0;
 	rigdif.e1 = 0, rigdif.e2 = 0, rigdif.e3 = 0;
@@ -102,9 +102,9 @@ void Init_para(void){
 	
 //	转向
 	steer.alpha = 0.3;
-	steer.Kp = 4.8;//反应快慢 | 超调
+	steer.Kp = 0.6;//反应快慢 | 超调
 	steer.Ki = 0;//反应力度
-	steer.Kd = 0.6;
+	steer.Kd = 0.2;
 	steer.I = 0;
 	steer.e1 = 0, steer.e2 = 0, steer.e3 = 0;
 	steer.rs = 0;	
@@ -119,16 +119,16 @@ void Init_para(void){
 //	steer.rs = 0;
 	
 //	角度
-	angle.Kp = 2.6;//力度
+	angle.Kp = 1.9;//力度
 	angle.Ki = 0;
-	angle.Kd = 0.15;//抖动
+	angle.Kd = 0.09;//抖动
 	angle.e1 = 0, angle.e2 = 0, angle.e3 = 0; 
 	angle.rs = 0;
 
 //	角速度
-	acw.alpha = 0.05;
-	acw.Kp = 37;//反应快慢 | 超调
-	acw.Ki = 0.29;//反应力度
+	acw.alpha = 0.02;
+	acw.Kp = 27;//反应快慢 | 超调
+	acw.Ki = 0.32;//反应力度
 	acw.Kd = 0.0;
 	acw.I = 0;
 	acw.e1 = 0, acw.e2 = 0, acw.e3 = 0;

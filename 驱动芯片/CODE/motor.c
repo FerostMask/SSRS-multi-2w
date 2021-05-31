@@ -74,37 +74,3 @@ void motor_act(void){
 		pwm_duty_updata(TIM_5, MOTOR_R0, -rigpwm);	
 	}
 }
-///*------------------------------*/
-///*		   电机驱动模块			*/
-///*==============================*/
-//void motor_act(void){
-////	PWM计算
-//	lef_pwm = acw.rs-steer.rs;
-//	rig_pwm = acw.rs+steer.rs;
-//	if(abs(lef_pwm > 7000)){
-//		if(lef_pwm > 0) lef_pwm = 7000;
-//		else lef_pwm = -7000;
-//	}
-//	if(abs(rig_pwm > 7000)){
-//		if(rig_pwm > 0) rig_pwm = 7000;
-//		else rig_pwm = -7000;
-//	}
-////	左电机
-//	if(lef_pwm >= 0){	//	正转
-//		pwm_duty_updata(TIM_5, MOTOR_L1, lef_pwm);     		
-//		pwm_duty_updata(TIM_5, MOTOR_L0, 0);
-//	}
-//	else{	//	反转
-//		pwm_duty_updata(TIM_5, MOTOR_L1, 0);                      		
-//		pwm_duty_updata(TIM_5, MOTOR_L0, -lef_pwm);
-//	}
-////	右电机
-//	if(rig_pwm >= 0){
-//		pwm_duty_updata(TIM_5, MOTOR_R1, rig_pwm);     		
-//		pwm_duty_updata(TIM_5, MOTOR_R0, 0);
-//	}
-//	else{
-//		pwm_duty_updata(TIM_5, MOTOR_R1, 0);                      		
-//		pwm_duty_updata(TIM_5, MOTOR_R0, -rig_pwm);
-//	}
-//}

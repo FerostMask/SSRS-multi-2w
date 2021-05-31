@@ -225,7 +225,9 @@ void EXTI0_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line0);														// 清除 line0 触发标志
-	(*menu_pfc[menu_level])(1);
+	systick_delay_ms(20);
+	if(!gpio_get(D0))
+		(*menu_pfc[menu_level])(1);
 	while(!gpio_get(D0));
 }
 
@@ -233,7 +235,9 @@ void EXTI1_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line1);														// 清除 line1 触发标志
-	(*menu_pfc[menu_level])(2);
+	systick_delay_ms(20);
+	if(!gpio_get(D1))		
+		(*menu_pfc[menu_level])(2);
 	while(!gpio_get(D1));
 }
 
@@ -241,7 +245,9 @@ void EXTI2_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line2);														// 清除 line2 触发标志
-	(*menu_pfc[menu_level])(3);
+	systick_delay_ms(20);
+	if(!gpio_get(D2))		
+		(*menu_pfc[menu_level])(3);
 	while(!gpio_get(D2));
 }
 
@@ -249,7 +255,9 @@ void EXTI3_IRQHandler(void)
 {
 	// 检测与清除中断标志可以根据实际应用进行删改
 	EXTI_ClearFlag(EXTI_Line3);														// 清除 line3 触发标志
-	(*menu_pfc[menu_level])(4);
+	systick_delay_ms(20);
+	if(!gpio_get(D3))
+		(*menu_pfc[menu_level])(4);
 	while(!gpio_get(D3));
 }
 
@@ -320,12 +328,16 @@ void EXTI15_10_IRQHandler (void)
 	if(EXTI_GetITStatus(EXTI_Line14))												// 检测 line14 是否触发
 	{
 		EXTI_ClearFlag(EXTI_Line14);												// 清除 line14 触发标志
-		(*menu_pfc[menu_level])(5);
+		systick_delay_ms(20);
+		if(!gpio_get(D14))		
+			(*menu_pfc[menu_level])(5);
 		while(!gpio_get(D14));
 	}
 	if(EXTI_GetITStatus(EXTI_Line15))												// 检测 line15 是否触发
 	{
 		EXTI_ClearFlag(EXTI_Line15);												// 清除 line15 触发标志
+		systick_delay_ms(20);
+		if(!gpio_get(D15))	
 		(*menu_pfc[menu_level])(6);
 		while(!gpio_get(D15));
 	}

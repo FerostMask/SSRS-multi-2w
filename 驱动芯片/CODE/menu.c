@@ -65,21 +65,21 @@ static char info(char index, char num){
 			break;
 		case 1:
 			switch(num){
-				case 0://角速度
+				case 0://速度 | PD
+					for(i = 0; i < 32; i++) nom[i] = su0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = du0[i];
+					return 2;
+					break;
+				case 1://角度 | PD
+					for(i = 0; i < 32; i++) nom[i] = jiao0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = du0[i];
+					return 2;
+				case 2://角速度 | PI 
 					for(i = 0; i < 32; i++) nom[i] = jiao0[i];
 					for(i = 0; i < 32; i++) nom[32+i] = su0[i];
 					for(i = 0; i < 32; i++) nom[64+i] = du0[i];
 					return 3;
-					break;
-				case 1://角度
-					for(i = 0; i < 32; i++) nom[i] = jiao0[i];
-					for(i = 0; i < 32; i++) nom[32+i] = du0[i];
-					return 2;
-				case 2://速度
-					for(i = 0; i < 32; i++) nom[i] = su0[i];
-					for(i = 0; i < 32; i++) nom[32+i] = du0[i];
-					return 2;
-				case 3://转向
+				case 3://转向 
 					for(i = 0; i < 32; i++) nom[i] = zhuan0[i];
 					for(i = 0; i < 32; i++) nom[32+i] = xiang0[i];
 					return 2;

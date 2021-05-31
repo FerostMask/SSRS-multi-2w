@@ -11,7 +11,7 @@
 //	Ò»¼¶²Ëµ¥
 #define ROWS 4
 #define menu_limit0 1
-#define menu_limit1 3
+#define menu_limit1 2
 #define menu_limit2 0
 #define menu_limit3 0
 /*------------------------------------------------------*/
