@@ -30,6 +30,7 @@
 .\objects\menu.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\menu.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_uart.h
 .\objects\menu.o: ..\CODE\eident.h
+.\objects\menu.o: ..\CODE\fontlib.h
 .\objects\menu.o: ..\..\Libraries\seekfree_libraries\zf_gpio.h
 .\objects\menu.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_gpio.h
 .\objects\menu.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_IPS200_PARALLEL8.h

@@ -47,7 +47,7 @@ void TIM2_IRQHandler (void)
 	uint32 state = TIM2->SR;														// 读取中断状态
 	TIM2->SR &= ~state;	// 清空中断状态
 //	姿态控制
-	spd = 230, folc_flag = 1, folrow_f = 63;
+	spd = 130, folc_flag = 1, folrow_f = 63;
 	ctrl_pfc[state_flag]();
 	if(folc_flag) p_target[0] = folrow_f, p_target[1] = (lefbor[folrow_f]+rigbor[folrow_f])>>1; 
 	pos_pid(&cam_steering, 80, p_target[1], 120, -120);
@@ -95,7 +95,7 @@ void TIM7_IRQHandler (void)
 	uint32 state = TIM7->SR;														// 读取中断状态
 	TIM7->SR &= ~state;																// 清空中断状态
 //	代码编写区域
-	
+
 }
 /*------------------------------*/
 /*		     串口中断			*/

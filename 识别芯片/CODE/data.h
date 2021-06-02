@@ -12,11 +12,16 @@
 //	一级菜单
 #define ROWS 4
 #define menu_limit0 0
-#define menu_limit1 2
+#define menu_limit1 0
 #define menu_limit2 0
 #define menu_limit3 1
 //	摄像头
 #define EFF_ROW 54
+//	菜单属性编号
+#define MENU_SWITCH 0
+#define PARASET_PID 1
+#define PARASET_OPER 2
+#define MONITOR_MENU 3
 /*------------------------------------------------------*/
 /* 					  外部变量声明 						*/
 /*======================================================*/

@@ -41,8 +41,10 @@ void Init_motor(void){
 	pwm_init(TIM_5, MOTOR_L1, 17000, 0);
 	pwm_init(TIM_5, MOTOR_L0, 17000, 0);
 //	PID参数初始化
-	Init_para();
-}
+	if(flash_init()){
+		Init_para();
+		first_flash_init();
+}   }
 /*------------------------------*/
 /*		 核心选择模块模块		*/
 /*==============================*/

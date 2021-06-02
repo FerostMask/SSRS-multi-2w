@@ -37,7 +37,7 @@ void angle_ctrl(void){
 	if(spd_count == 4){
 	//	ËÙ¶ÈPID
 			spd_count = 0;
-			pos_pid(&speed, 120, (lcod+rcod)>>1, 320, -320);
+			pos_pid(&speed, spd, (lcod+rcod)>>1, 320, -320);
 	}
 //	½Ç¶È
 	if(imu_count){

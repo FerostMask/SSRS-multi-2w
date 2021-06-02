@@ -7,13 +7,22 @@
 /*==============================================================*/
 //	按键标志位
 #define CSIMENU_FLAG 2
-#define WIRELESS_FLAG 2
+#define STATE_FLAG 3
 //	一级菜单
-#define ROWS 4
+#define ROWS 5
 #define menu_limit0 1
 #define menu_limit1 2
-#define menu_limit2 0
+#define menu_limit2 2
 #define menu_limit3 0
+#define menu_limit4 0
+//	菜单属性编号
+#define MENU_SWITCH 0
+#define PARASET_PID1 1
+#define PARASET_PID2 2
+#define PARASET_OPER 3
+#define MONITOR_MENU 4
+//	flash参数存储
+#define FLASH_NUM 19
 /*------------------------------------------------------*/
 /* 					  外部变量声明 						*/
 /*======================================================*/
@@ -76,7 +85,7 @@ extern unsigned char nom[128];
 extern unsigned char fixedflag;
 extern unsigned char monitorflag;
 extern unsigned char csimenu_flag[CSIMENU_FLAG];
-extern unsigned char wireless_flag[WIRELESS_FLAG];
+extern unsigned char state_flag[STATE_FLAG];
 extern unsigned char menu_level;
 //	二级菜单
 extern unsigned char menu2_index;
@@ -94,5 +103,7 @@ extern int distance;
 /* 						函数声明 						*/
 /*======================================================*/
 void Init_para(void);
-
+char flash_init(void);
+void first_flash_init(void);
+void flash_memory_write(row, col);
 #endif

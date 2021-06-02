@@ -52,8 +52,13 @@ void TIM2_IRQHandler (void)
 	get_icm20602_gyro_spi();
 //	获取编码器数据
 	encoder_get();
-	if(!final_flag)
+	if(!final_flag){
+		if(state_flag[0]){
+			if(state_flag[1]) spd = 0;
+			if(state_flag[2]) rad = 0;
+		}
 		angle_ctrl();
+	}
 	else{
 		inc_pid(&acw, 0, -((lcod+rcod)>>1), 6000);
 		steer.rs = 0;

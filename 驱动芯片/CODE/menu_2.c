@@ -17,7 +17,7 @@ unsigned char menu2mode = 0;//菜单显示模式
 //	修改倍数相关
 unsigned char magflag = 1;
 unsigned char magindex = 1;
-float mag[] = {10,1,0.1,0.01,0.001};
+float mag[] = {10, 1, 0.1, 0.01, 0.001};
 //	数值修改相关
 short *shortvalue0, *shortvalue1, *shortvalue2;
 float *value0, *value1, *value2, *value3, *value4;
@@ -35,7 +35,7 @@ void menu2_init(void){
 	menu2_index = 0;
 //	初始化模块
 	switch(menu_index){
-		case 0:
+		case MENU_SWITCH:
 			menu2flag = 3;//切换为开关
 			switch(menu[menu_index]){
 				case 0:
@@ -44,31 +44,30 @@ void menu2_init(void){
 					break;
 				case 1:
 					menu2mode = 1;//显示模式
-					menu2_limit = WIRELESS_FLAG-1;//索引限制
+					menu2_limit = STATE_FLAG-1;//索引限制
 					break;
 			}
 			break;
-		case 1:
+		case PARASET_PID1:
 		//	关闭角度控制
 			acw.rs = 0;
 			steer.rs = 0;
 			motor_act();
 			magflag = 1;
+			menu2_index = 1;
 			tim_interrupt_disabnle(TIM_2);
 			switch(menu[menu_index]){
 				case 0://速度
-					value1 = &speed.Kp;
-					value3 = &speed.Kd;
+					value0 = &speed.Kp;
+					value1 = &speed.Kd;
 					menu2_limit = 2;
 					menu2mode = 1;
-					menu2_index = 1;
 					break;
 				case 1://角度
 					value0 = &angle.Kp;
 					value1 = &angle.Kd;
 					menu2_limit = 2;
 					menu2mode = 1;
-					menu2_index = 1;
 					break;
 				case 2://角速度
 					value0 = &acw.alpha;
@@ -77,19 +76,43 @@ void menu2_init(void){
 					value3 = &acw.Kd;
 					menu2_limit = 4;
 					menu2mode = 0;
-					menu2_index = 1;
 					break;
-				case 3://转向
-					value0 = &steer.alpha;
-					value1 = &steer.Kp;
-					value2 = &steer.Ki;
-					value3 = &steer.Kd;
+			}
+			break;
+		case PARASET_PID2:
+		//	关闭角度控制
+			acw.rs = 0;
+			steer.rs = 0;
+			motor_act();
+			magflag = 1;
+			menu2_index = 1;
+			tim_interrupt_disabnle(TIM_2);
+			switch(menu[menu_index]){
+				case 0://转向
+					value0 = &steer.Kp;
+					value1 = &steer.Kd;
+					menu2_limit = 2;
+					menu2mode = 1;
+					break;
+				case 1://左差速
+					value0 = &lefdif.alpha;
+					value1 = &lefdif.Kp;
+					value2 = &lefdif.Ki;
+					value3 = &lefdif.Kd;
+					menu2_limit = 4;
+					menu2mode = 0;
+					break;
+				case 2://右差速
+					value0 = &rigdif.alpha;
+					value1 = &rigdif.Kp;
+					value2 = &rigdif.Ki;
+					value3 = &rigdif.Kd;
 					menu2_limit = 4;
 					menu2mode = 0;
 					break;
 			}
 			break;
-		case 2://姿态
+		case PARASET_OPER://姿态
 			acw.rs = 0;
 			steer.rs = 0;
 			motor_act();
@@ -106,7 +129,7 @@ void menu2_init(void){
 					break;
 			}
 			break;
-		case 3://监视器
+		case MONITOR_MENU://监视器
 		//	开启中断显示
 			tim_interrupt_init_ms(TIM_6, 40, 1, 3);
 			menu2flag = 2;
@@ -142,46 +165,46 @@ static char info(unsigned char index, unsigned char num){
 	unsigned char neng0[] = {0x00,0x00,0x10,0x00,0x10,0x40,0x22,0x44,0x21,0x78,0x7F,0x40,0x00,0xC2,0x3F,0x42,0x41,0x3C,0x7F,0x40,0x41,0x46,0x41,0x78,0x7F,0x40,0x41,0x42,0x41,0x42,0x4F,0x7E};/*"能"*/
 	unsigned char kai0[] = {0x00,0x00,0x00,0x00,0x3F,0xFC,0x08,0x10,0x08,0x10,0x08,0x10,0x08,0x10,0x08,0x10,0x7F,0xFE,0x08,0x10,0x08,0x10,0x08,0x10,0x08,0x10,0x10,0x10,0x10,0x10,0x20,0x10};/*"开"*/
 	unsigned char guan0[] = {0x00,0x00,0x00,0x00,0x08,0x10,0x04,0x20,0x3F,0xFC,0x01,0x00,0x01,0x00,0x01,0x00,0x7F,0xFE,0x01,0x80,0x01,0x80,0x02,0x40,0x02,0x20,0x0C,0x10,0x10,0x08,0x60,0x06};/*"关"*/
-	unsigned char cai0[] = {0x00,0x00,0x00,0x00,0x07,0x08,0x78,0x88,0x49,0x10,0x29,0x60,0x2E,0x04,0x08,0x08,0x7F,0x10,0x0C,0x20,0x1C,0xC2,0x1A,0x04,0x29,0x08,0x48,0x10,0x08,0x60,0x09,0x80};/*"彩"*/
-	unsigned char se0[] = {0x00,0x00,0x00,0x00,0x04,0x00,0x0F,0xF0,0x10,0x20,0x20,0x20,0x7F,0xFC,0x20,0x84,0x20,0x84,0x20,0x84,0x20,0x84,0x3F,0xF8,0x20,0x00,0x20,0x02,0x20,0x02,0x1F,0xFE};/*"色"*/
-	unsigned char hui0[] = {0x00,0x00,0x08,0x00,0x08,0x00,0x7F,0xFE,0x08,0x40,0x08,0x40,0x0A,0x48,0x0A,0x48,0x12,0x48,0x12,0x50,0x10,0x50,0x20,0xA0,0x20,0xA0,0x43,0x10,0x44,0x0C,0x18,0x02};/*"灰"*/
-	unsigned char du0[] = {0x00,0x00,0x00,0x00,0x00,0x80,0x3F,0xFE,0x44,0x10,0x5F,0xFC,0x44,0x10,0x44,0x10,0x43,0xF0,0x40,0x00,0x5F,0xF8,0x44,0x08,0x42,0x30,0x41,0xC0,0x43,0x60,0xBC,0x1E};/*"度"*/
-	unsigned char tu0[] = {0x00,0x00,0x00,0x00,0x3F,0xFE,0x44,0x02,0x47,0xF2,0x4C,0x22,0x53,0x62,0x40,0x82,0x43,0x62,0x5E,0x1A,0x41,0x82,0x40,0x62,0x43,0x02,0x40,0xC2,0x40,0x22,0x3F,0xFC};/*"图"*/
-	unsigned char xiang1[] = {0x00,0x00,0x10,0x80,0x11,0xF0,0x1E,0x10,0x23,0xF8,0x2C,0x46,0x28,0x42,0x67,0xFA,0x60,0x84,0x23,0x46,0x2C,0xB8,0x23,0x20,0x2C,0xF0,0x23,0x28,0x2C,0x26,0x23,0x40};/*"像"*/
 	unsigned char state0[] = {0x00,0x00,0x00,0x00,0x7F,0xFF,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x40,0x01,0x7F,0xFF};/*"□"*/
 	unsigned char state1[] = {0x00,0x00,0x00,0x00,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF,0x7F,0xFF};/*"■"*/
 	unsigned char xiang2[] = {0x00,0x00,0x00,0x00,0x10,0xFE,0x11,0x02,0x11,0x02,0x7F,0x02,0x19,0xFE,0x15,0x02,0x35,0x02,0x33,0x02,0x51,0xFE,0x51,0x02,0x11,0x02,0x11,0x02,0x11,0x02,0x00,0xFC};/*"相"*/
+	unsigned char huan0[] = {0x00,0x00,0x00,0x00,0x27,0xFE,0x20,0x20,0x10,0x20,0x00,0x40,0x60,0x50,0x10,0xC8,0x10,0xC8,0x11,0x44,0x12,0x44,0x14,0x42,0x10,0x40,0x28,0x40,0x24,0x40,0x43,0xFE};/*"还"*/
+	unsigned char yuan0[] = {0x00,0x00,0x00,0x00,0x7F,0xFE,0x40,0x80,0x4F,0xFC,0x48,0x04,0x48,0x04,0x4F,0xFC,0x48,0x04,0x48,0x04,0x47,0xF8,0x44,0x50,0x44,0x48,0x48,0x44,0x50,0x44,0x03,0x82};/*"原"*/
+	unsigned char bao0[] = {0x00,0x00,0x10,0x00,0x17,0xFC,0x14,0x04,0x24,0x04,0x24,0x04,0x25,0xFC,0x62,0x40,0x60,0x40,0x2F,0xFE,0x20,0x60,0x20,0xD0,0x21,0x58,0x22,0x4C,0x2C,0x42,0x20,0x40};/*"保"*/
+	unsigned char cun0[] = {0x00,0x00,0x00,0x00,0x02,0x00,0x7F,0xFE,0x04,0x00,0x07,0xF8,0x08,0x04,0x10,0x18,0x30,0x60,0xD0,0x20,0x17,0xFE,0x10,0x10,0x10,0x10,0x10,0x10,0x10,0x10,0x11,0xE0};/*"存"*/
 //	变量定义
 	register unsigned char i;
 	switch(index){
-		case 0:
+		case MENU_SWITCH:
 			switch(num){
-				case 0://彩色图像
-					for(i = 0; i < 32; i++) nom[i] = cai0[i];
-					for(i = 0; i < 32; i++) nom[32+i] = se0[i];
-					for(i = 0; i < 32; i++) nom[64+i] = tu0[i];
-					for(i = 0; i < 32; i++) nom[96+i] = xiang1[i];
+				case 0://参数保存
+					for(i = 0; i < 32; i++) nom[i] = can0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = shu0[i];
+					for(i = 0; i < 32; i++) nom[64+i] = bao0[i];
+					for(i = 0; i < 32; i++) nom[96+i] = cun0[i];
 					return 4;
-				case 1://灰度图像
-					for(i = 0; i < 32; i++) nom[i] = hui0[i];
-					for(i = 0; i < 32; i++) nom[32+i] = du0[i];
-					for(i = 0; i < 32; i++) nom[64+i] = tu0[i];
-					for(i = 0; i < 32; i++) nom[96+i] = xiang1[i];
+				case 1://参数还原
+					for(i = 0; i < 32; i++) nom[i] = can0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = shu0[i];
+					for(i = 0; i < 32; i++) nom[64+i] = huan0[i];
+					for(i = 0; i < 32; i++) nom[96+i] = yuan0[i];
 					return 4;
-				case 10://平衡相关
-					for(i = 0; i < 32; i++) nom[i] = ping0[i];
-					for(i = 0; i < 32; i++) nom[32+i] = heng0[i];
-					for(i = 0; i < 32; i++) nom[64+i] = xiang2[i];
-					for(i = 0; i < 32; i++) nom[96+i] = guan0[i];
-					return 4;
-				case 11://转速相关
-					for(i = 0; i < 32; i++) nom[i] = zhuan0[i];
-					for(i = 0; i < 32; i++) nom[32+i] = su0[i];
-					for(i = 0; i < 32; i++) nom[64+i] = xiang2[i];
-					for(i = 0; i < 32; i++) nom[96+i] = guan0[i];
-					return 4;
+				case 10://开关
+					for(i = 0; i < 32; i++) nom[i] = kai0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = guan0[i];
+					return 2;
+				case 11://关转速
+					for(i = 0; i < 32; i++) nom[i] = guan0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = zhuan0[i];
+					for(i = 0; i < 32; i++) nom[64+i] = su0[i];
+					return 3;
+				case 12://关转向
+					for(i = 0; i < 32; i++) nom[i] = guan0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = zhuan0[i];
+					for(i = 0; i < 32; i++) nom[64+i] = xiang0[i];
+					return 3;
 			}
-		case 2:
+		case PARASET_OPER:
 			switch(num){
 				case 0://转速
 					for(i = 0; i < 32; i++) nom[i] = zhuan0[i];
@@ -198,7 +221,7 @@ static char info(unsigned char index, unsigned char num){
 					for(i = 0; i < 32; i++) nom[64+i] = dian0[i];
 					return 3;
 			}
-		case 3:
+		case MONITOR_MENU:
 			switch(num){
 				case 0://俯仰角
 					for(i = 0; i < 32; i++) nom[i] = fu0[i];
@@ -300,10 +323,11 @@ static info_found(unsigned char index, unsigned char num){
 /*==============================*/
 static void menu2value_sup(void){
 	switch(menu_index){
-		case 0:
+		case MENU_SWITCH:
 			swdisplay();
 			break;
-		case 1:
+		case PARASET_PID1:
+		case PARASET_PID2:
 			switch(menu2mode){
 				case 0:
 					ips200_display_chinese(176, 192, 16, nom, info_found(1, 2), 0XFFFF);
@@ -319,7 +343,7 @@ static void menu2value_sup(void){
 					break;
 			}
 			break;
-		case 2:
+		case PARASET_OPER:
 			switch(menu2mode){
 				case 0:
 					ips200_display_chinese(176, 192, 16, nom, info_found(1, 2), 0XFFFF);
@@ -335,7 +359,8 @@ static void menu2value_sup(void){
 /*==============================*/
 void menu2value_hl(void){
 	switch(menu_index){
-		case 1:
+		case PARASET_PID1:
+		case PARASET_PID2:
 			switch(menu2_index){
 				case 0:ips200_display_chinese(176, 192, 16, nom, info_found(1, 2), 0xAE9C);break;
 				case 1:ips200_showfloat(120, 15, *value0, 3, 3);break;
@@ -344,7 +369,7 @@ void menu2value_hl(void){
 				case 4:ips200_showfloat(120, 18, *value3, 3, 3);break;
 			}
 			break;
-		case 2:
+		case PARASET_OPER:
 			switch(menu2_index){
 				case 0:ips200_display_chinese(176, 192, 16, nom, info_found(1, 2), 0xAE9C);break;
 				case 1:ips200_showint16(120, 15, *shortvalue0);break;
@@ -389,7 +414,7 @@ void menu2_display(void){
 //	显示名称
 	switch(menu_index){
 	//	开关
-		case 0:
+		case MENU_SWITCH:
 			switch(menu2mode){
 				case 0:
 					ips200_display_chinese(0, 208, 16, nom, info(100, 4), 0XFDF8);
@@ -403,19 +428,21 @@ void menu2_display(void){
 					ips200_display_chinese(0, 208, 16, nom, info(100, 4), 0XFDF8);
 					ips200_display_chinese(120, 208, 16, nom, info(100, 5), 0XFDF8);
 					ips200_display_chinese(90, 224, 16, nom, info(100, 0), 0XFDF8);
-					ips200_display_chinese(150, 224, 16, nom, info(100, 1), 0XFDF8);
+					ips200_display_chinese(170, 224, 16, nom, info(100, 1), 0XFDF8);
 					ips200_display_chinese(0, 240, 16, nom, info(menu_index, 10), 0xB6DB);
 					ips200_display_chinese(0, 256, 16, nom, info(menu_index, 11), 0xB6DB);
+					ips200_display_chinese(0, 272, 16, nom, info(menu_index, 12), 0xB6DB);
 					break;
 			}
 			break;
 	//	PID
-		case 1:
+		case PARASET_PID1:
+		case PARASET_PID2:
 			switch(menu2mode){
 			//	面板选择
 				case 0:
-					ips200_display_chinese(0, 208, 16, nom, info_found(menu_index, 0), 0XFDF8);
-					ips200_display_chinese(120, 208, 16, nom, info_found(menu_index, 1), 0XFDF8);
+					ips200_display_chinese(0, 208, 16, nom, info_found(1, 0), 0XFDF8);
+					ips200_display_chinese(120, 208, 16, nom, info_found(1, 1), 0XFDF8);
 					ips200_showstr(0, 15, "alpha");
 					ips200_showstr(0, 16, "Kp");
 					ips200_showstr(0, 17, "Ki");
@@ -423,14 +450,14 @@ void menu2_display(void){
 					break;
 				case 1:
 					ips200_display_chinese(80, 192, 16, nom, info(100, 4), 0XFFFF);
-					ips200_display_chinese(0, 208, 16, nom, info_found(menu_index, 0), 0XFDF8);
-					ips200_display_chinese(120, 208, 16, nom, info_found(menu_index, 1), 0XFDF8);
+					ips200_display_chinese(0, 208, 16, nom, info_found(1, 0), 0XFDF8);
+					ips200_display_chinese(120, 208, 16, nom, info_found(1, 1), 0XFDF8);
 					ips200_showstr(0, 15, "Kp");
 					ips200_showstr(0, 16, "Kd");
 					break;
 			}
 			break;
-		case 2:
+		case PARASET_OPER:
 			switch(menu2mode){
 				case 0:
 					ips200_display_chinese(0, 208, 16, nom, info(1, 0), 0XFDF8);
@@ -441,7 +468,7 @@ void menu2_display(void){
 					break;
 			}
 			break;
-		case 3:
+		case MONITOR_MENU:
 			switch(menu2mode){
 				case 0:
 					ips200_display_chinese(0, 208, 16, nom, info(1, 0), 0XFDF8);
@@ -513,8 +540,8 @@ void swdisplay(void){
 			else ips200_display_chinese(170, 240+16*menu2_index, 16, nom, info(100, 2), 0XF5BA);
 			break;
 		case 1:
-			for(i=0; i<WIRELESS_FLAG; i++){
-				if(wireless_flag[i]){
+			for(i=0; i<STATE_FLAG; i++){
+				if(state_flag[i]){
 					ips200_display_chinese(90, 240+16*i, 16, nom, info(100, 2), 0xB6DB);
 					ips200_display_chinese(170, 240+16*i, 16, nom, info(100, 3), 0xB6DB);
 				}
@@ -524,7 +551,7 @@ void swdisplay(void){
 				}
 			}
 			//	高亮选项
-			if(wireless_flag[menu2_index]) ips200_display_chinese(90, 240+16*menu2_index, 16, nom, info(100, 2), 0XB7BD);
+			if(state_flag[menu2_index]) ips200_display_chinese(90, 240+16*menu2_index, 16, nom, info(100, 2), 0XB7BD);
 			else ips200_display_chinese(170, 240+16*menu2_index, 16, nom, info(100, 2), 0XF5BA);
 			break;
 	}
@@ -539,17 +566,18 @@ static void swmode(void){
 	switch(menu[menu_index]){
 		case 0:
 			fixedflag = 0;
-//			pit_close(PIT_CH2);
 			temp = csimenu_flag[menu2_index];
 			for(i=0; i<CSIMENU_FLAG; i++) csimenu_flag[i] = 0;
 			csimenu_flag[menu2_index] = !temp;
+		//	执行按键功能	
+			switch(menu2_index){
+				case 0:first_flash_init();break;
+				case 1:Init_para();break;
+			}
 			break;
 		case 1:
-			temp = wireless_flag[menu2_index];
-			for(i=0; i<WIRELESS_FLAG; i++) wireless_flag[i] = 0;
-			wireless_flag[menu2_index] = !temp;
-//			if(!temp) pit_interrupt_ms(PIT_CH3,20);
-//			else pit_close(PIT_CH3);
+			temp = state_flag[menu2_index];
+			state_flag[menu2_index] = !temp;
 			break;
 	}
 }
@@ -558,7 +586,8 @@ static void swmode(void){
 /*==============================*/
 static void modify(unsigned char index, unsigned char event, unsigned char mode){
 	switch(mode){
-		case 1:
+		case PARASET_PID1:
+		case PARASET_PID2:
 			if(event){
 		//	数值增加
 				switch(index){
@@ -580,7 +609,7 @@ static void modify(unsigned char index, unsigned char event, unsigned char mode)
 				}
 			}
 			break;
-		case 2:
+		case PARASET_OPER:
 			if(event){
 				switch(index){
 					case 1: *shortvalue0+=mag[magindex];break;
@@ -637,6 +666,7 @@ void menu2_select(unsigned char event){
 				//	参数修改
 					case 1:
 						if(!menu2_index){
+							flash_memory_write(menu_index, menu[menu_index]);
 							ips200_display_chinese(109, 192, 16, nom, info_found(1, 3), 0xAE9C);
 						}
 						else

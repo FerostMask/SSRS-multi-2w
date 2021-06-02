@@ -50,7 +50,7 @@ void binary_disp(void){
 		}
 	}
 //	显示边界
-	for(i = MT9V03X_H - 1; i > lcut; i--) ips200_drawpoint(lefbor[i], i, 0x00);
+	for(i = MT9V03X_H - 1; i > lcut; i--) ips200_drawpoint(lefbor[i], i, 0xB20E);
 	for(i = MT9V03X_H - 1; i > rcut; i--) ips200_drawpoint(rigbor[i], i, 0x00);
 //	显示出口
 	for(i = 0; i < exti_lefcount; i++){
@@ -238,11 +238,11 @@ void state_machine_ring(void){
 		case 21://出环口 -> 入环
 			if(state == 22)
 				act_flag = 22, img_color = 0x8CF6;
-				return;
+			return;
 		case 22://入环 -> 环内
 			if(state == 11 || state == 13)
 				act_flag = 23, yawa_flag = 1, yawa = 0, img_color = 0x46D0;
-				return;
+			return;
 		case 23://环内 -> 出环
 			if(state == 23)
 				act_flag = 24, yawa = 0, img_color = 0xB6DB;
@@ -271,6 +271,7 @@ void state_machine_ring(void){
 				act_flag = 0, yawa_flag = 0, state_flag = 0, img_color = 0xAE9C;
 				cooling_flag = 1;
 				tim_interrupt_init_ms(TIM_3, 3000, 0, 0);
+			return;
 	}
 }
 /*-
@@ -349,18 +350,18 @@ void state_machine_enter(void){
 			tim_interrupt_init_ms(TIM_3, 2000, 0, 0);//状态计时
 			return;
 	//	岔道
-		case 41:
-			act_flag = 41, state_flag = 4, img_color = 0xEFBE;
-			if(!cooling_flag){
-				total_count_fork++;
-				if(total_count_fork == 2){
-					uart_putchar(UART_6, 255);
-					direction_fork = 1;
-				}
+//		case 41:
+//			act_flag = 41, state_flag = 4, img_color = 0xEFBE;
+//			if(!cooling_flag){
+//				total_count_fork++;
+//				if(total_count_fork == 2){
+//					uart_putchar(UART_6, 255);
+//					direction_fork = 1;
+//				}
 //				show_value[0] = total_count_fork;
-				cooling_flag = 1;
-				tim_interrupt_init_ms(TIM_3, 3000, 0, 0);						
-			}
+//				cooling_flag = 1;
+//				tim_interrupt_init_ms(TIM_3, 3000, 0, 0);						
+//			}
 			return;
 	}
 }
@@ -797,7 +798,7 @@ void lbor_search(void){
 	//	初始化换行、方向检测
 		p -= col;
 		if(traf_flag!=traf_flag_temp) 
-			if(i < 90)//不检测最底下的转变点
+			if(i < 80)//不检测最底下的转变点
 				if(ltraf_point_row[ltraf_count-1]-i>3 || ltraf_count == 0){//限制转变点高度
 					if(traf_flag == 1) ltraf_flag[ltraf_count] = 0;//从右到左转变
 					else ltraf_flag[ltraf_count] = 1;//从左到右转变
@@ -1106,7 +1107,7 @@ void otsu(void){
 		MK[i] = sumMK+i*P[i];//灰度值累加均值
 		sumMK = MK[i];
 	}
-	for(i = 115; i < 200; i++){
+	for(i = 30; i < 220; i++){
 		vartmp = ((MK[grayscale-1]*PK[i] - MK[i])*(MK[grayscale-1]*PK[i] - MK[i])) / (PK[i]*(1 - PK[i]));
 		if(vartmp > var){
 			var = vartmp;

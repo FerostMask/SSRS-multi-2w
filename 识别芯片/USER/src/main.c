@@ -62,7 +62,7 @@ int main(void){
 		menu_display();
 	}
 	Init_para();
-	tim_interrupt_init_ms(TIM_2, 10, 0, 0);
+	tim_interrupt_init_ms(TIM_2, 25, 0, 0);
 //  岔道方向确定
     direction_fork = 0;//左0 右1
 /*--------------------------------------------------------------*/
@@ -74,11 +74,14 @@ int main(void){
 		//	大津法二值化获取阈值、图像二值化
 			otsu();
 			img_binary();
-		//	边界寻找
+		//	边界寻找  
 			left_fop_search();
 			lbor_search();
 			right_fop_search();
 			rbor_search();
+		//	边界限制
+			if(lefbor[rcut-3] > 10) lcut = rcut+1;
+			if(rigbor[lcut-3] < 149) rcut = lcut+1;
 			if(ltraf_count) border_vertical_leftsearch();
 			if(rtraf_count) border_vertical_rightsearch();
 		//	状态机
