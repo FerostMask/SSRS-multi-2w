@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\MM32F3277.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\MM32F3277.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Jun 02 12:40:13 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Jun 02 13:37:51 2021
 <BR><P>
 <H3>Maximum Stack Usage =        588 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1072,11 +1072,11 @@ Global Symbols
 <P><STRONG><a name="[8e]"></a>gpio_init</STRONG> (Thumb, 322 bytes, Stack size 24 bytes, zf_gpio.o(i.gpio_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = gpio_init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc_pin_init
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exti_interrupt_init
+<BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exti_interrupt_init
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;core_select
 <LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc_pin_init
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mt9v03x_exti_init
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mt9v03x_dma_init
 </UL>
@@ -1793,8 +1793,8 @@ Local Symbols
 <P><STRONG><a name="[7f]"></a>SetSysClockToXX</STRONG> (Thumb, 396 bytes, Stack size 32 bytes, system_mm32f327x.o(i.SetSysClockToXX))
 <BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = SetSysClockToXX &rArr; AutoCalPllFactor
 </UL>
-<BR>[Calls]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AutoCalPllFactor
-<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DELAY_xUs
+<BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DELAY_xUs
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AutoCalPllFactor
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
 </UL>

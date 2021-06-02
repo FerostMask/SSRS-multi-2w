@@ -4,6 +4,7 @@
 .\objects\menu.o: ..\CODE\data.h
 .\objects\menu.o: ..\CODE\menu_2.h
 .\objects\menu.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\menu.o: ..\..\Libraries\fontlib.h
 .\objects\menu.o: ..\..\Libraries\seekfree_libraries\zf_gpio.h
 .\objects\menu.o: ..\..\Libraries\seekfree_libraries\common\common.h
 .\objects\menu.o: ..\..\Libraries\Device\MM32F327x\Include\reg_common.h

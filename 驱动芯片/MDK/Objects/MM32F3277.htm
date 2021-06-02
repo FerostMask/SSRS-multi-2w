@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Objects\MM32F3277.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\MM32F3277.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Jun 01 19:30:23 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Jun 02 13:29:41 2021
 <BR><P>
-<H3>Maximum Stack Usage =       1072 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        992 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-menu2_select &rArr; menu2value &rArr; menu2value_sup &rArr; swdisplay &rArr; info
+main &rArr; core_select &rArr; logo_display200 &rArr; ips200_address_set &rArr; ips200_wr_data16
 <P>
 <H3>
 Mutually Recursive functions
@@ -225,14 +225,11 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_mm32f327x_keil.o(RESET)
 </UL>
 <P><STRONG><a name="[ed]"></a>__aeabi_memcpy</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, memcpya.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
+<BR><BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
 </UL>
 
-<P><STRONG><a name="[c5]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info_found
-<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info
-<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;logo_display200
+<P><STRONG><a name="[d1]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;logo_display200
 </UL>
 
 <P><STRONG><a name="[f6]"></a>__aeabi_memcpy8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text), UNUSED)
@@ -243,7 +240,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_float_round
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_float_epilogue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;modify
+<BR>[Called By]<UL><LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;modify
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_frsub
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pos_pid
 <LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fsub
@@ -257,7 +254,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;modify
+<BR>[Called By]<UL><LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;modify
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MadgwickAHRSupdateIMU
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;inc_pid
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;angle_ctrl
@@ -299,10 +296,10 @@ Global Symbols
 <P><STRONG><a name="[55]"></a>__aeabi_dadd</STRONG> (Thumb, 322 bytes, Stack size 48 bytes, dadd.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
-<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_lasr
+<BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_lasr
 <LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
@@ -327,7 +324,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
+<BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan2
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
@@ -338,7 +335,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
+<BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;angle_ctrl
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atan
@@ -362,7 +359,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_float_epilogue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;modify
+<BR>[Called By]<UL><LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;modify
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pos_pid
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_init
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;inc_pid
@@ -382,12 +379,12 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
+<BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;angle_ctrl
 </UL>
 
 <P><STRONG><a name="[ae]"></a>__aeabi_f2iz</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, ffixi.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;modify
+<BR><BR>[Called By]<UL><LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;modify
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pos_pid
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_memory_write
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_init
@@ -405,27 +402,27 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
+<BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;angle_ctrl
 </UL>
 
 <P><STRONG><a name="[9a]"></a>__aeabi_f2d</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, f2d.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_hl
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_sup
-<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value
+<BR><BR>[Called By]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_hl
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_sup
+<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;angle_ctrl
 </UL>
 
 <P><STRONG><a name="[ef]"></a>__aeabi_cdcmpeq</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, cdcmple.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
+<BR><BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
 </UL>
 
 <P><STRONG><a name="[ee]"></a>__aeabi_cdcmple</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, cdcmple.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
+<BR><BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
 </UL>
 
-<P><STRONG><a name="[d1]"></a>__aeabi_cdrcmple</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, cdrcmple.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showfloat
+<P><STRONG><a name="[cd]"></a>__aeabi_cdrcmple</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, cdrcmple.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showfloat
 </UL>
 
 <P><STRONG><a name="[63]"></a>__aeabi_d2f</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, d2f.o(.text))
@@ -491,9 +488,9 @@ Global Symbols
 <P><STRONG><a name="[58]"></a>_double_epilogue</STRONG> (Thumb, 156 bytes, Stack size 32 bytes, depilogue.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = _double_epilogue &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
-<LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
+<BR>[Calls]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
 <LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
 </UL>
 <BR>[Called By]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
 <LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
@@ -514,8 +511,8 @@ Global Symbols
 <P><STRONG><a name="[64]"></a>_dsqrt</STRONG> (Thumb, 162 bytes, Stack size 32 bytes, dsqrt.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = _dsqrt &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
-<LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
+<BR>[Calls]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
 </UL>
@@ -844,7 +841,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[7e]"></a>Init_para</STRONG> (Thumb, 94 bytes, Stack size 0 bytes, data.o(i.Init_para))
-<BR><BR>[Called By]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swmode
+<BR><BR>[Called By]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swmode
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_motor
 </UL>
 
@@ -872,7 +869,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nvic_init
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exti_interrupt_init
-<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_init_ms
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_init_ms
 </UL>
 
 <P><STRONG><a name="[a]"></a>PendSV_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, common.o(i.PendSV_Handler))
@@ -1030,10 +1027,10 @@ Global Symbols
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
 </UL>
 
-<P><STRONG><a name="[cd]"></a>afio_init</STRONG> (Thumb, 218 bytes, Stack size 20 bytes, zf_gpio.o(i.afio_init))
+<P><STRONG><a name="[c9]"></a>afio_init</STRONG> (Thumb, 218 bytes, Stack size 20 bytes, zf_gpio.o(i.afio_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = afio_init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
+<BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
 <LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_pin_init
 <LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_encoder_pin_init
 <LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_pin_init
@@ -1069,6 +1066,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
 <LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_fpclassify
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_underflow
@@ -1078,7 +1076,6 @@ Global Symbols
 <LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbn
-<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;angle_ctrl
 </UL>
@@ -1160,7 +1157,7 @@ Global Symbols
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2iz
 </UL>
-<BR>[Called By]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swmode
+<BR>[Called By]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swmode
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_motor
 </UL>
 
@@ -1235,7 +1232,7 @@ Global Symbols
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FSMC_NORSRAMInit
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FSMC_NORSRAMB_BankStructInit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
+<BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
 </UL>
 
 <P><STRONG><a name="[88]"></a>get_icm20602_accdata_spi</STRONG> (Thumb, 72 bytes, Stack size 16 bytes, seekfree_icm20602.o(i.get_icm20602_accdata_spi))
@@ -1267,8 +1264,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = gpio_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exti_interrupt_init
-<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;seekfree_wireless_init
-<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
+<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;seekfree_wireless_init
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;icm20602_init_spi
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;core_select
 </UL>
@@ -1308,136 +1305,136 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MadgwickAHRSupdateIMU
 </UL>
 
-<P><STRONG><a name="[c8]"></a>ips200_address_set</STRONG> (Thumb, 54 bytes, Stack size 20 bytes, seekfree_ips200_parallel8.o(i.ips200_address_set))
+<P><STRONG><a name="[c4]"></a>ips200_address_set</STRONG> (Thumb, 54 bytes, Stack size 20 bytes, seekfree_ips200_parallel8.o(i.ips200_address_set))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = ips200_address_set &rArr; ips200_wr_data16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data16
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_reg
+<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data16
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_reg
 </UL>
-<BR>[Called By]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_display_chinese
+<BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_display_chinese
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;logo_display200
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_clear
-<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showchar
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showchar
 </UL>
 
 <P><STRONG><a name="[a7]"></a>ips200_clear</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, seekfree_ips200_parallel8.o(i.ips200_clear))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = ips200_clear &rArr; ips200_address_set &rArr; ips200_wr_data16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data16
-<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_address_set
+<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data16
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_address_set
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_display
-<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_display
-<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
+<BR>[Called By]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_display
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_display
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;core_select
 </UL>
 
-<P><STRONG><a name="[cb]"></a>ips200_display_chinese</STRONG> (Thumb, 164 bytes, Stack size 60 bytes, seekfree_ips200_parallel8.o(i.ips200_display_chinese))
+<P><STRONG><a name="[c7]"></a>ips200_display_chinese</STRONG> (Thumb, 164 bytes, Stack size 60 bytes, seekfree_ips200_parallel8.o(i.ips200_display_chinese))
 <BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = ips200_display_chinese &rArr; ips200_address_set &rArr; ips200_wr_data16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data16
-<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_address_set
+<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data16
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_address_set
 </UL>
-<BR>[Called By]<UL><LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swdisplay
-<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_hl
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_sup
-<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_display
+<BR>[Called By]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swdisplay
+<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_hl
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_sup
+<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_display
 <LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_select
-<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_display
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_display
 </UL>
 
-<P><STRONG><a name="[cc]"></a>ips200_init</STRONG> (Thumb, 610 bytes, Stack size 8 bytes, seekfree_ips200_parallel8.o(i.ips200_init))
+<P><STRONG><a name="[c8]"></a>ips200_init</STRONG> (Thumb, 610 bytes, Stack size 8 bytes, seekfree_ips200_parallel8.o(i.ips200_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = ips200_init &rArr; fsmc_init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_clear
+<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;afio_init
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_clear
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init
 <LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;systick_delay_ms
 <LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsmc_init
-<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;afio_init
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_reg
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_reg
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[cf]"></a>ips200_showchar</STRONG> (Thumb, 106 bytes, Stack size 28 bytes, seekfree_ips200_parallel8.o(i.ips200_showchar))
+<P><STRONG><a name="[cb]"></a>ips200_showchar</STRONG> (Thumb, 106 bytes, Stack size 28 bytes, seekfree_ips200_parallel8.o(i.ips200_showchar))
 <BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = ips200_showchar &rArr; ips200_address_set &rArr; ips200_wr_data16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data16
-<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_address_set
+<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data16
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_address_set
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
+<BR>[Called By]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showstr
 </UL>
 
-<P><STRONG><a name="[d0]"></a>ips200_showfloat</STRONG> (Thumb, 184 bytes, Stack size 96 bytes, seekfree_ips200_parallel8.o(i.ips200_showfloat))
+<P><STRONG><a name="[cc]"></a>ips200_showfloat</STRONG> (Thumb, 184 bytes, Stack size 96 bytes, seekfree_ips200_parallel8.o(i.ips200_showfloat))
 <BR><BR>[Stack]<UL><LI>Max Depth = 296<LI>Call Chain = ips200_showfloat &rArr; zf_sprintf &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
+<BR>[Calls]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showstr
-<LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdrcmple
+<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdrcmple
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_hl
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_sup
-<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value
+<BR>[Called By]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_hl
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_sup
+<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value
 </UL>
 
-<P><STRONG><a name="[d3]"></a>ips200_showint16</STRONG> (Thumb, 190 bytes, Stack size 28 bytes, seekfree_ips200_parallel8.o(i.ips200_showint16))
+<P><STRONG><a name="[cf]"></a>ips200_showint16</STRONG> (Thumb, 190 bytes, Stack size 28 bytes, seekfree_ips200_parallel8.o(i.ips200_showint16))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = ips200_showint16 &rArr; ips200_showchar &rArr; ips200_address_set &rArr; ips200_wr_data16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showchar
+<BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showchar
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_hl
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_sup
+<BR>[Called By]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_hl
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_sup
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;monitor
 </UL>
 
 <P><STRONG><a name="[a6]"></a>ips200_showstr</STRONG> (Thumb, 46 bytes, Stack size 20 bytes, seekfree_ips200_parallel8.o(i.ips200_showstr))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = ips200_showstr &rArr; ips200_showchar &rArr; ips200_address_set &rArr; ips200_wr_data16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showchar
+<BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showchar
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showfloat
-<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_display
+<BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showfloat
+<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_display
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;core_select
 </UL>
 
-<P><STRONG><a name="[d4]"></a>ips200_w_data</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, seekfree_ips200_parallel8.o(i.ips200_w_data))
-<BR><BR>[Called By]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data16
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data
+<P><STRONG><a name="[d0]"></a>ips200_w_data</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, seekfree_ips200_parallel8.o(i.ips200_w_data))
+<BR><BR>[Called By]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data16
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data
 </UL>
 
-<P><STRONG><a name="[ce]"></a>ips200_wr_data</STRONG> (Thumb, 60 bytes, Stack size 4 bytes, seekfree_ips200_parallel8.o(i.ips200_wr_data))
+<P><STRONG><a name="[ca]"></a>ips200_wr_data</STRONG> (Thumb, 60 bytes, Stack size 4 bytes, seekfree_ips200_parallel8.o(i.ips200_wr_data))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = ips200_wr_data
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_w_data
+<BR>[Calls]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_w_data
 </UL>
-<BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
+<BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
 </UL>
 
-<P><STRONG><a name="[ca]"></a>ips200_wr_data16</STRONG> (Thumb, 98 bytes, Stack size 4 bytes, seekfree_ips200_parallel8.o(i.ips200_wr_data16))
+<P><STRONG><a name="[c6]"></a>ips200_wr_data16</STRONG> (Thumb, 98 bytes, Stack size 4 bytes, seekfree_ips200_parallel8.o(i.ips200_wr_data16))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = ips200_wr_data16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_w_data
+<BR>[Calls]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_w_data
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_address_set
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_display_chinese
+<BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_address_set
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_display_chinese
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;logo_display200
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_clear
-<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showchar
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showchar
 </UL>
 
-<P><STRONG><a name="[c9]"></a>ips200_wr_reg</STRONG> (Thumb, 58 bytes, Stack size 0 bytes, seekfree_ips200_parallel8.o(i.ips200_wr_reg))
-<BR><BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_address_set
-<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
+<P><STRONG><a name="[c5]"></a>ips200_wr_reg</STRONG> (Thumb, 58 bytes, Stack size 0 bytes, seekfree_ips200_parallel8.o(i.ips200_wr_reg))
+<BR><BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_address_set
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
 </UL>
 
 <P><STRONG><a name="[a8]"></a>logo_display200</STRONG> (Thumb, 148 bytes, Stack size 960 bytes, logo.o(i.logo_display200))
 <BR><BR>[Stack]<UL><LI>Max Depth = 984<LI>Call Chain = logo_display200 &rArr; ips200_address_set &rArr; ips200_wr_data16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data16
-<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_address_set
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
+<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data16
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_address_set
+<LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;core_select
 </UL>
@@ -1445,12 +1442,12 @@ Global Symbols
 <P><STRONG><a name="[4a]"></a>main</STRONG> (Thumb, 104 bytes, Stack size 0 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 992<LI>Call Chain = main &rArr; core_select &rArr; logo_display200 &rArr; ips200_address_set &rArr; ips200_wr_data16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_rx_irq
+<BR>[Calls]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_rx_irq
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_init
-<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_init_ms
-<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;seekfree_wireless_init
-<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_display
-<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_init_ms
+<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;seekfree_wireless_init
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_display
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;icm20602_init_spi
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;core_select
 <LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_init
@@ -1460,62 +1457,62 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
-<P><STRONG><a name="[d9]"></a>menu2_display</STRONG> (Thumb, 1112 bytes, Stack size 16 bytes, menu_2.o(i.menu2_display))
-<BR><BR>[Stack]<UL><LI>Max Depth = 1064<LI>Call Chain = menu2_display &rArr; menu2value &rArr; menu2value_sup &rArr; swdisplay &rArr; info
+<P><STRONG><a name="[d6]"></a>menu2_display</STRONG> (Thumb, 1112 bytes, Stack size 16 bytes, menu_2.o(i.menu2_display))
+<BR><BR>[Stack]<UL><LI>Max Depth = 360<LI>Call Chain = menu2_display &rArr; menu2value &rArr; menu2value_hl &rArr; ips200_showfloat &rArr; zf_sprintf &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info_found
-<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_display_chinese
+<BR>[Calls]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info_found
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_display_chinese
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showstr
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_clear
 </UL>
 <BR>[Called By]<UL><LI><a href="#[0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_select
 </UL>
 
-<P><STRONG><a name="[db]"></a>menu2_init</STRONG> (Thumb, 500 bytes, Stack size 8 bytes, menu_2.o(i.menu2_init))
+<P><STRONG><a name="[da]"></a>menu2_init</STRONG> (Thumb, 500 bytes, Stack size 8 bytes, menu_2.o(i.menu2_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = menu2_init &rArr; motor_act &rArr; pwm_duty_updata &rArr; __aeabi_fmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_disabnle
-<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_init_ms
+<BR>[Calls]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_disabnle
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_init_ms
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;motor_act
 </UL>
 <BR>[Called By]<UL><LI><a href="#[0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_select
 </UL>
 
 <P><STRONG><a name="[1]"></a>menu2_select</STRONG> (Thumb, 402 bytes, Stack size 24 bytes, menu_2.o(i.menu2_select))
-<BR><BR>[Stack]<UL><LI>Max Depth = 1072<LI>Call Chain = menu2_select &rArr; menu2value &rArr; menu2value_sup &rArr; swdisplay &rArr; info
+<BR><BR>[Stack]<UL><LI>Max Depth = 368<LI>Call Chain = menu2_select &rArr; menu2value &rArr; menu2value_hl &rArr; ips200_showfloat &rArr; zf_sprintf &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_disabnle
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swdisplay
-<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swmode
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;modify
-<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info_found
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_display_chinese
+<BR>[Calls]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_disabnle
+<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swdisplay
+<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swmode
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;modify
+<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info_found
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_display_chinese
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_memory_write
-<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_init_ms
-<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_display
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_init_ms
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_display
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>
-<P><STRONG><a name="[e1]"></a>menu2value_hl</STRONG> (Thumb, 318 bytes, Stack size 24 bytes, menu_2.o(i.menu2value_hl))
+<P><STRONG><a name="[e0]"></a>menu2value_hl</STRONG> (Thumb, 318 bytes, Stack size 24 bytes, menu_2.o(i.menu2value_hl))
 <BR><BR>[Stack]<UL><LI>Max Depth = 320<LI>Call Chain = menu2value_hl &rArr; ips200_showfloat &rArr; zf_sprintf &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
-<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showfloat
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info_found
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_display_chinese
+<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showfloat
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info_found
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_display_chinese
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 </UL>
-<BR>[Called By]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value
+<BR>[Called By]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value
 </UL>
 
-<P><STRONG><a name="[d6]"></a>menu_display</STRONG> (Thumb, 332 bytes, Stack size 24 bytes, menu.o(i.menu_display))
-<BR><BR>[Stack]<UL><LI>Max Depth = 776<LI>Call Chain = menu_display &rArr; info
+<P><STRONG><a name="[d3]"></a>menu_display</STRONG> (Thumb, 332 bytes, Stack size 24 bytes, menu.o(i.menu_display))
+<BR><BR>[Stack]<UL><LI>Max Depth = 108<LI>Call Chain = menu_display &rArr; ips200_display_chinese &rArr; ips200_address_set &rArr; ips200_wr_data16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_display_chinese
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info
+<BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_display_chinese
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_clear
 </UL>
 <BR>[Called By]<UL><LI><a href="#[0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_select
@@ -1524,19 +1521,19 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[0]"></a>menu_select</STRONG> (Thumb, 196 bytes, Stack size 8 bytes, menu.o(i.menu_select))
-<BR><BR>[Stack]<UL><LI>Max Depth = 1072<LI>Call Chain = menu_select &rArr; menu2_display &rArr; menu2value &rArr; menu2value_sup &rArr; swdisplay &rArr; info
+<BR><BR>[Stack]<UL><LI>Max Depth = 368<LI>Call Chain = menu_select &rArr; menu2_display &rArr; menu2value &rArr; menu2value_hl &rArr; ips200_showfloat &rArr; zf_sprintf &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_init
-<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_display
+<BR>[Calls]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_init
+<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_display
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_limit
-<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_display
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_display
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>
 <P><STRONG><a name="[8f]"></a>monitor</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, menu_2.o(i.monitor))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = monitor &rArr; ips200_showint16 &rArr; ips200_showchar &rArr; ips200_address_set &rArr; ips200_wr_data16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
+<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM6_IRQHandler
 </UL>
@@ -1546,7 +1543,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pwm_duty_updata
 </UL>
-<BR>[Called By]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_init
+<BR>[Called By]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_init
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;angle_ctrl
 <LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_IRQHandler
 </UL>
@@ -1566,7 +1563,7 @@ Global Symbols
 <P><STRONG><a name="[eb]"></a>number_conversion_ascii</STRONG> (Thumb, 136 bytes, Stack size 20 bytes, seekfree_printf.o(i.number_conversion_ascii))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = number_conversion_ascii
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
+<BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
 </UL>
 
 <P><STRONG><a name="[e4]"></a>nvic_init</STRONG> (Thumb, 36 bytes, Stack size 24 bytes, common.o(i.nvic_init))
@@ -1574,7 +1571,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_rx_irq
+<BR>[Called By]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_rx_irq
 </UL>
 
 <P><STRONG><a name="[91]"></a>ov7725_cof_uart_interrupt</STRONG> (Thumb, 66 bytes, Stack size 0 bytes, seekfree_uart_7725.o(i.ov7725_cof_uart_interrupt))
@@ -1611,7 +1608,7 @@ Global Symbols
 <P><STRONG><a name="[ec]"></a>printf_reverse_order</STRONG> (Thumb, 34 bytes, Stack size 12 bytes, seekfree_printf.o(i.printf_reverse_order))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = printf_reverse_order
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
+<BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
 </UL>
 
 <P><STRONG><a name="[e3]"></a>pwm_duty_updata</STRONG> (Thumb, 168 bytes, Stack size 40 bytes, zf_pwm.o(i.pwm_duty_updata))
@@ -1637,11 +1634,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_motor
 </UL>
 
-<P><STRONG><a name="[d7]"></a>seekfree_wireless_init</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, seekfree_wireless.o(i.seekfree_wireless_init))
+<P><STRONG><a name="[d4]"></a>seekfree_wireless_init</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, seekfree_wireless.o(i.seekfree_wireless_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = seekfree_wireless_init &rArr; uart_init &rArr; uart_pin_init &rArr; afio_init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_rx_irq
+<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_rx_irq
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -1666,19 +1663,19 @@ Global Symbols
 <P><STRONG><a name="[a0]"></a>sqrt</STRONG> (Thumb, 76 bytes, Stack size 24 bytes, sqrt.o(i.sqrt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = sqrt &rArr; _dsqrt &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsqrt
-<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
+<BR>[Calls]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
+<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsqrt
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;asin
 </UL>
 
-<P><STRONG><a name="[de]"></a>swdisplay</STRONG> (Thumb, 514 bytes, Stack size 24 bytes, menu_2.o(i.swdisplay))
-<BR><BR>[Stack]<UL><LI>Max Depth = 1000<LI>Call Chain = swdisplay &rArr; info
+<P><STRONG><a name="[dd]"></a>swdisplay</STRONG> (Thumb, 514 bytes, Stack size 24 bytes, menu_2.o(i.swdisplay))
+<BR><BR>[Stack]<UL><LI>Max Depth = 108<LI>Call Chain = swdisplay &rArr; ips200_display_chinese &rArr; ips200_address_set &rArr; ips200_wr_data16
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_display_chinese
+<BR>[Calls]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_display_chinese
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_sup
+<BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_sup
 <LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_select
 </UL>
 
@@ -1691,7 +1688,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;systick_delay
 </UL>
-<BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
+<BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;icm20602_init_spi
 <LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI3_IRQHandler
 <LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI2_IRQHandler
@@ -1715,17 +1712,17 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_encoder
 </UL>
 
-<P><STRONG><a name="[dc]"></a>tim_interrupt_disabnle</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, zf_pit.o(i.tim_interrupt_disabnle))
-<BR><BR>[Called By]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_init
+<P><STRONG><a name="[db]"></a>tim_interrupt_disabnle</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, zf_pit.o(i.tim_interrupt_disabnle))
+<BR><BR>[Called By]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_init
 <LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_select
 </UL>
 
-<P><STRONG><a name="[d8]"></a>tim_interrupt_init_ms</STRONG> (Thumb, 226 bytes, Stack size 40 bytes, zf_pit.o(i.tim_interrupt_init_ms))
+<P><STRONG><a name="[d5]"></a>tim_interrupt_init_ms</STRONG> (Thumb, 226 bytes, Stack size 40 bytes, zf_pit.o(i.tim_interrupt_init_ms))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = tim_interrupt_init_ms &rArr; NVIC_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_init
+<BR>[Called By]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_init
 <LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_select
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1740,7 +1737,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_pin_init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;seekfree_wireless_init
+<BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;seekfree_wireless_init
 <LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_init
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1755,16 +1752,16 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;angle_ctrl
 </UL>
 
-<P><STRONG><a name="[d5]"></a>uart_rx_irq</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, zf_uart.o(i.uart_rx_irq))
+<P><STRONG><a name="[d2]"></a>uart_rx_irq</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, zf_uart.o(i.uart_rx_irq))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = uart_rx_irq &rArr; nvic_init &rArr; NVIC_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nvic_init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;seekfree_wireless_init
+<BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;seekfree_wireless_init
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[d2]"></a>zf_sprintf</STRONG> (Thumb, 736 bytes, Stack size 112 bytes, seekfree_printf.o(i.zf_sprintf))
+<P><STRONG><a name="[ce]"></a>zf_sprintf</STRONG> (Thumb, 736 bytes, Stack size 112 bytes, seekfree_printf.o(i.zf_sprintf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = zf_sprintf &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
@@ -1777,70 +1774,64 @@ Global Symbols
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
 <LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showfloat
+<BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showfloat
 </UL>
 <P>
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[c4]"></a>info</STRONG> (Thumb, 1804 bytes, Stack size 752 bytes, menu.o(i.info))
-<BR><BR>[Stack]<UL><LI>Max Depth = 752<LI>Call Chain = info
+<P><STRONG><a name="[e1]"></a>info</STRONG> (Thumb, 870 bytes, Stack size 12 bytes, menu.o(i.info))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = info
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
-</UL>
-<BR>[Called By]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_display
+<BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_display
 </UL>
 
 <P><STRONG><a name="[e2]"></a>menu_limit</STRONG> (Thumb, 72 bytes, Stack size 0 bytes, menu.o(i.menu_limit))
 <BR><BR>[Called By]<UL><LI><a href="#[0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu_select
 </UL>
 
-<P><STRONG><a name="[c6]"></a>info</STRONG> (Thumb, 2504 bytes, Stack size 976 bytes, menu_2.o(i.info))
-<BR><BR>[Stack]<UL><LI>Max Depth = 976<LI>Call Chain = info
+<P><STRONG><a name="[d7]"></a>info</STRONG> (Thumb, 1318 bytes, Stack size 12 bytes, menu_2.o(i.info))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = info
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
-</UL>
-<BR>[Called By]<UL><LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swdisplay
-<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_display
+<BR>[Called By]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swdisplay
+<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_display
 </UL>
 
-<P><STRONG><a name="[c7]"></a>info_found</STRONG> (Thumb, 418 bytes, Stack size 240 bytes, menu_2.o(i.info_found))
-<BR><BR>[Stack]<UL><LI>Max Depth = 240<LI>Call Chain = info_found
+<P><STRONG><a name="[d8]"></a>info_found</STRONG> (Thumb, 360 bytes, Stack size 12 bytes, menu_2.o(i.info_found))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = info_found
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
-</UL>
-<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_hl
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_sup
-<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_display
+<BR>[Called By]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_hl
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_sup
+<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_display
 <LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_select
 </UL>
 
-<P><STRONG><a name="[da]"></a>menu2value</STRONG> (Thumb, 130 bytes, Stack size 24 bytes, menu_2.o(i.menu2value))
-<BR><BR>[Stack]<UL><LI>Max Depth = 1048<LI>Call Chain = menu2value &rArr; menu2value_sup &rArr; swdisplay &rArr; info
+<P><STRONG><a name="[d9]"></a>menu2value</STRONG> (Thumb, 130 bytes, Stack size 24 bytes, menu_2.o(i.menu2value))
+<BR><BR>[Stack]<UL><LI>Max Depth = 344<LI>Call Chain = menu2value &rArr; menu2value_hl &rArr; ips200_showfloat &rArr; zf_sprintf &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showfloat
-<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_hl
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_sup
+<BR>[Calls]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showfloat
+<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_hl
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value_sup
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_display
+<BR>[Called By]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_display
 <LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_select
 </UL>
 
-<P><STRONG><a name="[e0]"></a>menu2value_sup</STRONG> (Thumb, 386 bytes, Stack size 24 bytes, menu_2.o(i.menu2value_sup))
-<BR><BR>[Stack]<UL><LI>Max Depth = 1024<LI>Call Chain = menu2value_sup &rArr; swdisplay &rArr; info
+<P><STRONG><a name="[df]"></a>menu2value_sup</STRONG> (Thumb, 386 bytes, Stack size 24 bytes, menu_2.o(i.menu2value_sup))
+<BR><BR>[Stack]<UL><LI>Max Depth = 320<LI>Call Chain = menu2value_sup &rArr; ips200_showfloat &rArr; zf_sprintf &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
-<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showfloat
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swdisplay
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info_found
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_display_chinese
+<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showint16
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_showfloat
+<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;swdisplay
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;info_found
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_display_chinese
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 </UL>
-<BR>[Called By]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value
+<BR>[Called By]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2value
 </UL>
 
-<P><STRONG><a name="[df]"></a>modify</STRONG> (Thumb, 664 bytes, Stack size 24 bytes, menu_2.o(i.modify))
+<P><STRONG><a name="[de]"></a>modify</STRONG> (Thumb, 664 bytes, Stack size 24 bytes, menu_2.o(i.modify))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = modify &rArr; __aeabi_fsub &rArr; __aeabi_fadd &rArr; _float_epilogue
 </UL>
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fsub
@@ -1851,7 +1842,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_select
 </UL>
 
-<P><STRONG><a name="[dd]"></a>swmode</STRONG> (Thumb, 124 bytes, Stack size 16 bytes, menu_2.o(i.swmode))
+<P><STRONG><a name="[dc]"></a>swmode</STRONG> (Thumb, 124 bytes, Stack size 16 bytes, menu_2.o(i.swmode))
 <BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = swmode &rArr; first_flash_init &rArr; flash_page_program &rArr; FLASH_ProgramWord &rArr; FLASH_ProgramHalfWord &rArr; FLASH_WaitForLastOperation
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;first_flash_init
@@ -1884,7 +1875,7 @@ Local Symbols
 <P><STRONG><a name="[e6]"></a>pwm_pin_init</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, zf_pwm.o(i.pwm_pin_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = pwm_pin_init &rArr; afio_init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;afio_init
+<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;afio_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pwm_init
 </UL>
@@ -1892,7 +1883,7 @@ Local Symbols
 <P><STRONG><a name="[e7]"></a>spi_pin_init</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, zf_spi.o(i.spi_pin_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = spi_pin_init &rArr; afio_init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;afio_init
+<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;afio_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_init
 </UL>
@@ -1900,7 +1891,7 @@ Local Symbols
 <P><STRONG><a name="[e9]"></a>tim_encoder_pin_init</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, zf_tim.o(i.tim_encoder_pin_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = tim_encoder_pin_init &rArr; afio_init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;afio_init
+<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;afio_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_encoder_init
 </UL>
@@ -1908,7 +1899,7 @@ Local Symbols
 <P><STRONG><a name="[ea]"></a>uart_pin_init</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, zf_uart.o(i.uart_pin_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = uart_pin_init &rArr; afio_init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;afio_init
+<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;afio_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_init
 </UL>

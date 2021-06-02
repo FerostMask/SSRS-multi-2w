@@ -61,6 +61,11 @@
 #define zui0 font_youyuan1[20]		/*"最"*/
 #define da0 font_youyuan1[21]		/*"大"*/
 #define xiao0 font_youyuan1[22]		/*"小"*/
+#define huan0 font_youyuan1[23]		/*"还"*/
+#define yuan0 font_youyuan1[24]		/*"原"*/
+#define bao0 font_youyuan1[25]		/*"保"*/
+#define cun0 font_youyuan1[26]		/*"存"*/
+#define yi0 font_youyuan1[27]		/*"已"*/
 /*------------------------------------------------------*/
 /* 					  外部变量声明 						*/
 /*======================================================*/

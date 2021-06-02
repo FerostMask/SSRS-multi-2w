@@ -23,6 +23,7 @@
 #define MONITOR_MENU 4
 //	flash参数存储
 #define FLASH_NUM 19
+#define FLASH_MEMORY_SLECTION FLASH_SECTION_112
 /*------------------------------------------------------*/
 /* 					  外部变量声明 						*/
 /*======================================================*/

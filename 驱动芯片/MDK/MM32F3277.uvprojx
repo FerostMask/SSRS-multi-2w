@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>ENABLEFSMC</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CODE;..\USER\src;..\USER\inc;..\..\Libraries\seekfree_libraries\common;..\..\\Libraries\seekfree_libraries\board;..\..\Libraries\seekfree_libraries\system;..\..\Libraries\seekfree_libraries;..\..\Libraries\seekfree_peripheral;..\..\Libraries\Device\CMSIS\KEIL_Core;..\..\Libraries\Device\MM32F327x\Include;..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc</IncludePath>
+              <IncludePath>..\CODE;..\USER\src;..\USER\inc;..\..\Libraries\seekfree_libraries\common;..\..\\Libraries\seekfree_libraries\board;..\..\Libraries\seekfree_libraries\system;..\..\Libraries\seekfree_libraries;..\..\Libraries\seekfree_peripheral;..\..\Libraries\Device\CMSIS\KEIL_Core;..\..\Libraries\Device\MM32F327x\Include;..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc;..\..\Libraries</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -456,6 +456,11 @@
               <FileName>logo.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\CODE\logo.c</FilePath>
+            </File>
+            <File>
+              <FileName>fontlib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Libraries\fontlib.c</FilePath>
             </File>
           </Files>
         </Group>

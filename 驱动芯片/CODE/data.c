@@ -115,9 +115,9 @@ void Init_para(void){
 /*======================*/
 char flash_init(void){
 //	确认是否有提前保存的参数
-	if(!(flash_check(FLASH_SECTION_70, FLASH_PAGE_0))) return 1;
+	if(!(flash_check(FLASH_MEMORY_SLECTION, FLASH_PAGE_0))) return 1;
 //	读取、启用参数
-	flash_page_read(FLASH_SECTION_70, FLASH_PAGE_0, flash_memory, FLASH_NUM);
+	flash_page_read(FLASH_MEMORY_SLECTION, FLASH_PAGE_0, flash_memory, FLASH_NUM);
 //	转向
 	steer.Kp = (float)flash_memory[0]/1000;
 	steer.Kd = (float)flash_memory[1]/1000;
@@ -177,8 +177,8 @@ void first_flash_init(void){
 //	其他参数
 	flash_memory[18] = blcp*1000;
 //	擦除后写入
-	flash_erase_page(FLASH_SECTION_70, FLASH_PAGE_0);
-	flash_page_program(FLASH_SECTION_70, FLASH_PAGE_0, flash_memory, FLASH_NUM);
+	flash_erase_page(FLASH_MEMORY_SLECTION, FLASH_PAGE_0);
+	flash_page_program(FLASH_MEMORY_SLECTION, FLASH_PAGE_0, flash_memory, FLASH_NUM);
 }
 /*----------------------*/
 /*	  flash参数写入 	*/
@@ -234,6 +234,6 @@ void flash_memory_write(row, col){
 			break;
 	}
 //	擦除后写入
-	flash_erase_page(FLASH_SECTION_70, FLASH_PAGE_0);
-	flash_page_program(FLASH_SECTION_70, FLASH_PAGE_0, flash_memory, FLASH_NUM);
+	flash_erase_page(FLASH_MEMORY_SLECTION, FLASH_PAGE_0);
+	flash_page_program(FLASH_MEMORY_SLECTION, FLASH_PAGE_0, flash_memory, FLASH_NUM);
 }

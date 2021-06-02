@@ -41,7 +41,6 @@ void menu2_init(void){
 		case MENU_SWITCH:
 			magflag = 0;
 			menu2flag = 3;//切换为开关
-//			tim_interrupt_init(TIM_8, 20, 0, 3);
 			switch(menu[menu_index]){
 				case 0:
 					menu2mode = 0;//显示页面0
