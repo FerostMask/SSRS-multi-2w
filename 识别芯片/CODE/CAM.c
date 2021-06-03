@@ -131,9 +131,25 @@ void state_machine(void){
 			break;
 		case 29:
 			if(yawa > 55) {state = 29; return;}
+			break;
 	//	出十字检测
 		case 31:
 			if(found_point[0] < 60 && found_point[2] < 60) {state = 32; return;}
+			break;
+	//	出库检测
+		case 56://左
+			if(yawa < -40){
+				act_flag = 0, state_flag = 0, yawa_flag = 0, img_color = 0xAE9C;
+				run_flag[0] = 0;
+				return;
+			}
+			break;
+		case 55://右
+			if(yawa > 40){
+				act_flag = 0, state_flag = 0, yawa_flag = 0, img_color = 0xAE9C;
+				run_flag[1] = 0;
+				return;
+			}
 			break;
 	}
 //	检测赛道类型
@@ -203,6 +219,17 @@ void state_machine(void){
 							}
 					}
 		}
+}
+/*------------------------------*/
+/*	    	终点状态机			*/
+/*==============================*/
+void state_machine_final(void){
+	switch(act_flag){
+		case 51:
+			if(state == 52)
+				act_flag = 52, state_flag = 0, img_color = 0xEFBE;
+			return;
+	}
 }
 /*------------------------------*/
 /*	    	岔道状态机			*/
@@ -332,8 +359,6 @@ void state_machine_enter(void){
 			return;
 		case 22://检测到圆环入口
 			act_flag = 22, state_flag = 2, img_color = 0x8CF6;
-			act_flag_temp = act_flag;
-			tim_interrupt_init_ms(TIM_3, 1000, 0, 0);//状态计时
 			return;
 		case 26://检测到圆环出口 | 脆弱状态 | 右
 			act_flag = 26, state_flag = 2, img_color = 0x0250;

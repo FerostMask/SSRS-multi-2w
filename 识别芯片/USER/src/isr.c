@@ -41,25 +41,46 @@ void TIM8_UP_IRQHandler (void)
 	uint32 state = TIM8->SR;														// 读取中断状态
 	TIM8->SR &= ~state;																// 清空中断状态
 }
-
+/*----------------------*/
+/*	 	 控制代码1		*/
+/*======================*/
 void TIM2_IRQHandler (void)
 {
 	uint32 state = TIM2->SR;														// 读取中断状态
 	TIM2->SR &= ~state;	// 清空中断状态
-//	姿态控制
-	spd = 130, folc_flag = 1, folrow_f = 63;
+//	代码编写区域
+	spd = spd_set, folc_flag = 0, folrow_f = 63;
 	ctrl_pfc[state_flag]();
 	if(folc_flag) p_target[0] = folrow_f, p_target[1] = (lefbor[folrow_f]+rigbor[folrow_f])>>1; 
 	pos_pid(&cam_steering, 80, p_target[1], 120, -120);
 	if(!action_flag) {spd = 0;p_target[0] = 70, p_target[1] = (lefbor[70]+rigbor[70])>>1;}
-//	if(total_count_fork == 0) spd = 50; 
 	uart_putchar(UART_7, (char)cam_steering.rs);
 	uart_putchar(UART_6, (unsigned char)spd);
 }
-//	电机
+/*----------------------*/
+/*	 	 控制代码2		*/
+/*======================*/
+void TIM4_IRQHandler (void)
+{
+	uint32 state = TIM4->SR;														// 读取中断状态
+	TIM4->SR &= ~state;																// 清空中断状态
+//	代码编写区域
+	spd = spd_set, folc_flag = 0, folrow_f = 63;
+	ctrl_pfc_alter1[state_flag]();
+	if(folc_flag) p_target[0] = folrow_f, p_target[1] = (lefbor[folrow_f]+rigbor[folrow_f])>>1; 
+	pos_pid(&cam_steering, 80, p_target[1], 120, -120);
+	if(!action_flag) {spd = 0;p_target[0] = 70, p_target[1] = (lefbor[70]+rigbor[70])>>1;}
+	uart_putchar(UART_7, (char)cam_steering.rs);
+	uart_putchar(UART_6, (unsigned char)spd);
+}
+/*----------------------*/
+/*	 	 控制代码3		*/
+/*======================*/
 void TIM5_IRQHandler (void){
 	uint32 state = TIM5->SR;														// 读取中断状态
 	TIM5->SR &= ~state;																// 清空中断状态
+//	代码编写区域
+
 }
 //	编码器
 void TIM3_IRQHandler (void)
@@ -73,12 +94,6 @@ void TIM3_IRQHandler (void)
 	if(act_flag_temp == act_flag) act_flag = 0, state_flag = 0, img_color = 0xAE9C;
 	fragile_flag = 0;
 	tim_interrupt_disabnle(TIM_3);
-}
-//	编码器
-void TIM4_IRQHandler (void)
-{
-	uint32 state = TIM4->SR;														// 读取中断状态
-	TIM4->SR &= ~state;																// 清空中断状态
 }
 //	监视器、电磁极值采集
 void TIM6_IRQHandler (void)

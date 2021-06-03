@@ -10,6 +10,7 @@
 ".\objects\cam.o"
 ".\objects\ctrl.o"
 ".\objects\fontlib.o"
+".\objects\ctrl_alter1.o"
 ".\objects\board.o"
 ".\objects\common.o"
 ".\objects\seekfree_printf.o"

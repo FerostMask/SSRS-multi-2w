@@ -35,6 +35,10 @@ static char info(char index, char num){
 					for(i = 0; i < 32; i++) nom[64+i] = xian0[i];
 					for(i = 0; i < 32; i++) nom[96+i] = shi1[i];
 					return 4;
+				case 1://发车
+					for(i = 0; i < 32; i++) nom[i] = fa0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = che0[i];
+					return 2;
 			}
 			break;
 		case PARASET_PID:
@@ -61,10 +65,16 @@ static char info(char index, char num){
 		case PARASET_OPER:
 			switch(num){
 			//	姿态修改逻辑
-				case 0:
+				case 0://姿态
 					for(i = 0; i < 32; i++) nom[i] = zi0[i];
 					for(i = 0; i < 32; i++) nom[32+i] = tai0[i];
 					return 2;
+				case 1://车速设置
+					for(i = 0; i < 32; i++) nom[i] = che0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = su0[i];
+					for(i = 0; i < 32; i++) nom[64+i] = she0[i];
+					for(i = 0; i < 32; i++) nom[96+i] = zhi0[i];
+					return 4;
 			}
 			break;
 		case MONITOR_MENU:

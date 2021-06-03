@@ -31,3 +31,4 @@
 .\objects\data.o: ..\CODE\eident.h
 .\objects\data.o: ..\CODE\CAM.h
 .\objects\data.o: ..\CODE\ctrl.h
+.\objects\data.o: ..\CODE\ctrl_alter1.h

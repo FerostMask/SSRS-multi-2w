@@ -57,12 +57,12 @@ int main(void){
 /*	 	 用户初始化		*/
 /*======================*/
 	eident_init();
+//	菜单选择
 	if(core_select()){
 		Init_button();
 		menu_display();
 	}
-	Init_para();
-	tim_interrupt_init_ms(TIM_2, 25, 0, 0);
+	code_select();
 //  岔道方向确定
     direction_fork = 0;//左0 右1
 /*--------------------------------------------------------------*/

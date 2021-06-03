@@ -5,6 +5,7 @@
 #include "eident.h"
 #include "CAM.h"
 #include "ctrl.h"
+#include "ctrl_alter1.h"
 /*--------------------------------------------------------------*/
 /*							  宏定义							*/
 /*==============================================================*/
@@ -41,7 +42,7 @@ unsigned char act_flag, act_flag_temp, fragile_flag;
 unsigned char state, state_temp;
 unsigned char state_flag;
 unsigned short img_color = 0xAE9C;
-void(*state_pfc[])(void) = {state_machine_enter, state_machine_bend, state_machine_ring, state_machine_cross, state_machine_fork};
+void(*state_pfc[])(void) = {state_machine_enter, state_machine_bend, state_machine_ring, state_machine_cross, state_machine_fork, state_machine_final};
 //  岔道相关
 unsigned char direction_fork, border_top[MT9V03X_W-4]; //0 左 1 右
 unsigned char cnt_left, cnt_right;//数左右倾斜
@@ -51,18 +52,16 @@ unsigned char count_fork = 0;//终点检测
 /*----------------------*/
 /*	 	 控制模块		*/
 /*======================*/
-struct spdpara speed;
 struct pidpara cam_steering;
 short p_target[2];
-short error_flit[8], ctrl_error1, ctrl_error2;
-short spd_slow;
+short spd_set;
 short spd, rad;
 short rad_temp, rad_min, rad_max;
 unsigned char folrow_f = 63;
-float filter_alpha = 0.1;
-unsigned char filter_temp;
 char folc_flag, cooling_flag = 0, ring_out_flag = 0;
-void(*ctrl_pfc[])(void) = {cam_ctrl_direct, cam_ctrl_bend, cam_ctrl_ring, cam_ctrl_cross, cam_ctrl_fork};
+unsigned char ctrl_pointer = 0, dir_run_out; 
+void(*ctrl_pfc[])(void) = {cam_ctrl_direct, cam_ctrl_bend, cam_ctrl_ring, cam_ctrl_cross, cam_ctrl_fork, cam_ctrl_final};
+void(*ctrl_pfc_alter1[])(void) = {cam_ctrl_direct_alter1, cam_ctrl_bend_alter1, cam_ctrl_ring_alter1, cam_ctrl_cross_alter1, cam_ctrl_fork_alter1, cam_ctrl_final_alter1};
 /*----------------------*/
 /*	 	 菜单模块		*/
 /*======================*/
@@ -80,7 +79,7 @@ unsigned char excollflag = 0;//电磁极值采集标志位
 unsigned char fixedflag = 0;//固定显示
 unsigned char monitorflag = 0;//监视器
 unsigned char csimenu_flag[CSIMENU_FLAG] = {0, 0};//摄像头
-unsigned char wireless_flag[WIRELESS_FLAG] = {0, 0};//无线数据
+unsigned char run_flag[RUN_FLAG] = {0, 0};//无线数据
 //	指针函数
 void(*menu_pfc[])(unsigned char) = {menu_select, menu2_select};
 /*----------------------*/
@@ -108,12 +107,23 @@ struct adcpara adc2;
 /*======================*/
 void Init_para(void){
 //	速度控制
-	speed.direct = 80;
-	speed.bend[0] = 70, speed.bend[1] = 70;
-	speed.ring[0] = 70, speed.ring[1] = 70;
-	speed.ring[2] = 40, speed.ring[3] = 40, speed.ring[4] = 40;
-	speed.cross = 70;
-	speed.fork = 60;
+	spd_set = 130;
+//	出库方向
+	dir_run_out = 0;
+//	CAM转向
+	cam_steering.Kp = 1.2;
+	cam_steering.Kd = 0.1;	
+//	电磁模块
+	adc2.max = 4095, adc2.min = 0;
+}
+/*----------------------*/
+/*	 	参数初始化1		*/
+/*======================*/
+void Init_para_alter1(void){
+//	速度控制
+	spd_set = 130;
+//	出库方向
+	dir_run_out = 0;
 //	CAM转向
 	cam_steering.Kp = 1.2;
 	cam_steering.Kd = 0.1;	

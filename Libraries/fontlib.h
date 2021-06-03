@@ -66,9 +66,25 @@
 #define bao0 font_youyuan1[25]		/*"保"*/
 #define cun0 font_youyuan1[26]		/*"存"*/
 #define yi0 font_youyuan1[27]		/*"已"*/
+#define che0 font_youyuan1[28]      /*"车"*/
+#define qing0 font_youyuan1[29]     /*"清"*/
+//	幼圆2
+#define chu0 font_youyuan2[0]       /*"除"*/
+#define yan0 font_youyuan2[1]       /*"延"*/
+#define shi2 font_youyuan2[2]       /*"时"*/
+#define fa0 font_youyuan2[3]       	/*"发"*/
+#define qi1 font_youyuan2[4]		/*"启"*/
+#define yong0 font_youyuan2[5]		/*"用"*/
+#define bi1 font_youyuan2[6]		/*"闭"*/
+#define yi0 font_youyuan2[7]        /*"一"*/
+#define er0 font_youyuan2[8]        /*"二"*/
+#define hao0 font_youyuan2[9]       /*"号"*/
+#define dai0 font_youyuan2[10]      /*"代"*/
+#define ma0 font_youyuan2[11]       /*"码"*/
 /*------------------------------------------------------*/
 /* 					  外部变量声明 						*/
 /*======================================================*/
 extern unsigned char font_youyuan0[][32];
 extern unsigned char font_youyuan1[][32];
+extern unsigned char font_youyuan2[][32];
 #endif

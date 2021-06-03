@@ -1,15 +1,15 @@
 /*------------------------------------------------------*/
 /* 					   头文件声明 						*/
 /*======================================================*/
-#ifndef _CTRL_H
-#define _CTRL_H
+#ifndef _CTRLALTER1_H
+#define _CTRLALTER1_H
 /*------------------------------------------------------*/ 
 /* 						函数声明 						*/
 /*======================================================*/
-void cam_ctrl_final(void);
-void cam_ctrl_fork(void);
-void cam_ctrl_cross(void);
-void cam_ctrl_ring(void);
-void cam_ctrl_bend(void);
-void cam_ctrl_direct(void);
+void cam_ctrl_final_alter1(void);
+void cam_ctrl_fork_alter1(void);
+void cam_ctrl_cross_alter1(void);
+void cam_ctrl_ring_alter1(void);
+void cam_ctrl_bend_alter1(void);
+void cam_ctrl_direct_alter1(void);
 #endif

@@ -11,6 +11,7 @@
 /* 						º¯ÊýÉùÃ÷ 						*/
 /*======================================================*/
 void state_machine(void);
+void state_machine_final(void);
 void state_machine_fork(void);
 void state_machine_cross(void);
 void state_machine_ring(void);

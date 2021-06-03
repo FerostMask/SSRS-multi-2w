@@ -457,6 +457,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\Libraries\fontlib.c</FilePath>
             </File>
+            <File>
+              <FileName>ctrl_alter1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CODE\ctrl_alter1.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -35,5 +35,6 @@
 /* 						º¯ÊýÉùÃ÷ 						*/
 /*======================================================*/
 char core_select(void);
+void code_select(void);
 void Init_button(void);
 #endif

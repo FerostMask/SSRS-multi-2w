@@ -7,13 +7,13 @@
 /*							  宏定义							*/
 /*==============================================================*/
 //	按键标志位
-#define CSIMENU_FLAG 2
-#define WIRELESS_FLAG 2
+#define CSIMENU_FLAG 3
+#define RUN_FLAG 4
 //	一级菜单
 #define ROWS 4
-#define menu_limit0 0
+#define menu_limit0 1
 #define menu_limit1 0
-#define menu_limit2 0
+#define menu_limit2 1
 #define menu_limit3 1
 //	摄像头
 #define EFF_ROW 54
@@ -64,25 +64,15 @@ extern unsigned char count_fork;
 /*======================*/
 extern unsigned short cut_fork, cut_fork_bottom;
 extern short p_target[2];
-extern short error_flit[8], ctrl_error1, ctrl_error2;
-extern short spd_slow;
+extern short spd_set;
 extern short spd, rad;
 extern short rad_temp, rad_min, rad_max;
 extern unsigned char folrow_f;
 extern unsigned char ctrl_bias[];
-extern float filter_alpha;
-extern unsigned char filter_temp;
 extern char folc_flag, cooling_flag, ring_out_flag;
+extern unsigned char ctrl_pointer, dir_run_out;
 extern void(*ctrl_pfc[])(void);
-//	结构体声明
-typedef struct spdpara{
-	unsigned char direct;
-	unsigned char bend[2];
-	unsigned char ring[5];
-	unsigned char cross;
-	unsigned char fork;
-}spdpara;
-extern struct spdpara speed;
+extern void(*ctrl_pfc_alter1[])(void);
 /*----------------------*/
 /*	 	  PID模块		*/
 /*======================*/
@@ -122,7 +112,7 @@ extern unsigned char nom[128];
 extern unsigned char fixedflag;
 extern unsigned char monitorflag;
 extern unsigned char csimenu_flag[CSIMENU_FLAG];
-extern unsigned char wireless_flag[WIRELESS_FLAG];
+extern unsigned char run_flag[RUN_FLAG];
 extern unsigned char excollflag;
 extern unsigned char menu_level;
 //	二级菜单
@@ -130,6 +120,7 @@ extern unsigned char menu2_index;
 extern unsigned char menu2_level;
 //	函数指针
 extern void(*menu_pfc[])(unsigned char);
+extern void(*ctrl_pfc_alter1[])(void);
 /*----------------------*/
 /*	 	 电磁模块		*/
 /*======================*/
@@ -146,5 +137,5 @@ extern struct adcpara adc2;
 /* 						函数声明 						*/
 /*======================================================*/
 void Init_para(void);
-
+void Init_para_alter1(void);
 #endif

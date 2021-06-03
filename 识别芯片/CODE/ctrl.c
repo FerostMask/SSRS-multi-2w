@@ -12,16 +12,48 @@ unsigned char bend_bias[] = {16, 20, 14, 12, 10, 10, 8, 6};
 /* 							 函数定义 							*/
 /*==============================================================*/
 /*------------------------------*/
+/*		   终点控制模块 		*/
+/*==============================*/
+void cam_ctrl_final(void){
+//  控制
+    folc_flag = 0;
+//    if(cut_fork_bottom > 92) cnt_start++;
+        switch(act_flag){
+            case 56://左出库
+
+            break;
+            case 55://右出库
+                p_target[1] = ((80+rigbottom_cut)>>1);
+
+            break;
+            case 51://右入库
+                p_target[1] = ((rigtop_cut+rigbottom_cut)>>1);
+                p_target[1] = ((p_target[1]+125)>>1);
+                if(p_target[1] < 95) p_target[1] = 95;
+    //            else{
+//                p_target[0]=cut_fork_bottom;
+//                p_target[1]=MT9V03X_W-20; 
+    //            }
+            break;
+//            case 50:
+//                p_target[0]=cut_fork_bottom;
+//                p_target[1]=20; 
+//            break;
+        }
+        
+    if( yawa >= 78 ) spd = 0,  p_target[1] = 80;
+}
+/*------------------------------*/
 /*		   岔道控制模块 		*/
 /*==============================*/
 void cam_ctrl_fork(void){
-
+	folc_flag = 1;
 }
 /*------------------------------*/
 /*		   十字控制模块 		*/
 /*==============================*/
 void cam_ctrl_cross(void){
-
+	folc_flag = 1;
 }
 /*------------------------------*/
 /*		   环道控制模块 		*/
