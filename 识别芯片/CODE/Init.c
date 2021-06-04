@@ -40,6 +40,16 @@ char core_select(void){
 		}
 		if(!gpio_get(KEY2)){
 			ips200_clear(0x00);
+			switch(dir_run_out){
+				case 0://左出库
+					act_flag = 56, state_flag = 5, img_color = 0XFD78;
+					yawa_flag = 1, yawa = 0;
+					break;
+				case 1://右出库
+					act_flag = 55, state_flag = 5, img_color = 0XFD78;
+					yawa_flag = 1, yawa = 0;
+					break;
+			}
 			return 0;
 		}
 		if(!gpio_get(KEY3)) {action_flag = 0;return 1;}
@@ -72,18 +82,26 @@ void code_select(void){
 	tim_interrupt_disabnle(TIM_2);
 	tim_interrupt_disabnle(TIM_4);
 	tim_interrupt_disabnle(TIM_5);
+	uart_putchar(UART_7, 0);
+	uart_putchar(UART_6, 0);
 //	发车延时确认
 	if(act_flag == 56 || act_flag == 55) systick_delay_ms(3000);
 //	代码选择
 	switch(ctrl_pointer){
 		case 0:
 			run_flag[2] = 1, run_flag[3] = 0;
-			Init_para();
+			if(flash_init_pfc[ctrl_pointer]()){
+				Init_para_pfc[ctrl_pointer]();
+				first_flash_init_pfc[ctrl_pointer]();
+			}
 			tim_interrupt_init_ms(TIM_2, 25, 0, 0);
 			break;
 		case 1:
 			run_flag[2] = 0, run_flag[3] = 1;
-			Init_para_alter1();
+			if(flash_init_pfc[ctrl_pointer]()){
+				Init_para_pfc[ctrl_pointer]();
+				first_flash_init_pfc[ctrl_pointer]();
+			}
 			tim_interrupt_init_ms(TIM_4, 25, 0, 0);
 			break;
 		case 2:

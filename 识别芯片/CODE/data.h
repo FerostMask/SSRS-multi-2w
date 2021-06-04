@@ -9,11 +9,12 @@
 //	按键标志位
 #define CSIMENU_FLAG 3
 #define RUN_FLAG 4
+#define FLASH_MEMORY_FLAG 2
 //	一级菜单
 #define ROWS 4
-#define menu_limit0 1
+#define menu_limit0 2
 #define menu_limit1 0
-#define menu_limit2 1
+#define menu_limit2 0
 #define menu_limit3 1
 //	摄像头
 #define EFF_ROW 54
@@ -22,6 +23,10 @@
 #define PARASET_PID 1
 #define PARASET_OPER 2
 #define MONITOR_MENU 3
+//	flash参数存储
+#define FLASH_NUM 19
+#define FLASH_NUM1 19
+#define FLASH_MEMORY_SLECTION FLASH_SECTION_112
 /*------------------------------------------------------*/
 /* 					  外部变量声明 						*/
 /*======================================================*/
@@ -35,6 +40,7 @@ extern unsigned char img_thrsod;
 //	基准点寻找
 extern unsigned char found_point[4];
 extern unsigned char fop_flag;
+extern unsigned char border_flag;
 //	水平边线寻找
 extern unsigned char lefbor[MT9V03X_H], rigbor[MT9V03X_H], mid_point[MT9V03X_H];
 extern unsigned char ltraf_point_row[10], rtraf_point_row[10], ltraf_point_col[10], rtraf_point_col[10];
@@ -71,8 +77,11 @@ extern unsigned char folrow_f;
 extern unsigned char ctrl_bias[];
 extern char folc_flag, cooling_flag, ring_out_flag;
 extern unsigned char ctrl_pointer, dir_run_out;
+extern unsigned char bend_bias[];
 extern void(*ctrl_pfc[])(void);
 extern void(*ctrl_pfc_alter1[])(void);
+//	一号代码
+extern unsigned short point_folrow;
 /*----------------------*/
 /*	 	  PID模块		*/
 /*======================*/
@@ -102,6 +111,14 @@ extern unsigned char yawa_flag, action_flag;
 extern short yawa, pita;
 extern char buff_get6, buff_get7;
 /*----------------------*/
+/*	     flash存储		*/
+/*======================*/
+extern int flash_memory[256];
+extern void(*Init_para_pfc[])(void);
+extern char(*flash_init_pfc[])(void);
+extern void(*first_flash_init_pfc[])(void);
+extern void(*flash_memory_write_pfc[])(unsigned char, unsigned char);
+/*----------------------*/
 /*	 	 菜单模块		*/
 /*======================*/
 //	一级菜单
@@ -113,6 +130,7 @@ extern unsigned char fixedflag;
 extern unsigned char monitorflag;
 extern unsigned char csimenu_flag[CSIMENU_FLAG];
 extern unsigned char run_flag[RUN_FLAG];
+extern unsigned char flash_memory_flag[RUN_FLAG];
 extern unsigned char excollflag;
 extern unsigned char menu_level;
 //	二级菜单

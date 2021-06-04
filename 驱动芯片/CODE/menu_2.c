@@ -188,7 +188,7 @@ static char info(unsigned char index, unsigned char num){
 				case 2://Æ½ºâµã
 					for(i = 0; i < 32; i++) nom[i] = ping0[i];
 					for(i = 0; i < 32; i++) nom[32+i] = heng0[i];
-					for(i = 0; i < 32; i++) nom[64+i] = dian0[i];
+					for(i = 0; i < 32; i++) nom[64+i] = dian1[i];
 					return 3;
 			}
 		case MONITOR_MENU:

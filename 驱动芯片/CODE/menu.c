@@ -33,7 +33,6 @@ static char info(char index, char num){
 					for(i = 0; i < 32; i++) nom[64+i] = she0[i];
 					for(i = 0; i < 32; i++) nom[96+i] = zhi0[i];
 					return 4;
-					break;
 				case 1://×ªËÙÉèÖÃ
 					for(i = 0; i < 32; i++) nom[i] = zhuan0[i];
 					for(i = 0; i < 32; i++) nom[32+i] = su0[i];

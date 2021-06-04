@@ -30,3 +30,5 @@
 .\objects\ctrl_alter1.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\ctrl_alter1.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_uart.h
 .\objects\ctrl_alter1.o: ..\CODE\pid.h
+.\objects\ctrl_alter1.o: ..\..\Libraries\seekfree_libraries\zf_flash.h
+.\objects\ctrl_alter1.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_flash.h

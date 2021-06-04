@@ -4,6 +4,7 @@
 #include "ctrl_alter1.h"
 #include "data.h"
 #include "pid.h"
+#include "zf_flash.h"
 /*--------------------------------------------------------------*/
 /* 							 变量定义 							*/
 /*==============================================================*/
@@ -186,4 +187,59 @@ void cam_ctrl_direct_alter1(void){
 			p_target[1] = (lefbor[found_point[0]-10]+rigbor[found_point[0]-10])>>1;
 		spd = 30;
 	}
+}
+/*----------------------*/
+/*	 flash参数初始化	*/
+/*======================*/
+char flash_init_alter1(void){
+//	确认是否有提前保存的参数
+	if(!(flash_check(FLASH_MEMORY_SLECTION, FLASH_PAGE_1))) return 1;
+//	读取、启用参数
+	flash_page_read(FLASH_MEMORY_SLECTION, FLASH_PAGE_1, flash_memory, FLASH_NUM);
+//	CAM转向
+	cam_steering.Kp = (float)flash_memory[0]/1000;
+	cam_steering.Kd = (float)flash_memory[1]/1000;
+//	速度控制
+	spd_set = (float)flash_memory[2]/1000;
+	return 0;
+}
+/*----------------------*/
+/*	  初次参数初始化	*/
+/*======================*/
+void first_flash_init_alter1(void){
+//	CAM转向
+	flash_memory[0] = cam_steering.Kp*1000;
+	flash_memory[1] = cam_steering.Kd*1000;
+//	速度控制
+	flash_memory[2] = spd_set*1000;
+//	擦除后写入
+	flash_erase_page(FLASH_MEMORY_SLECTION, FLASH_PAGE_1);
+	flash_page_program(FLASH_MEMORY_SLECTION, FLASH_PAGE_1, flash_memory, FLASH_NUM);
+}
+/*----------------------*/
+/*	  flash参数写入 	*/
+/*======================*/
+void flash_memory_write_alter1(unsigned char row, unsigned char col){
+//	行选择
+	switch(row){
+	//	列选择
+		case PARASET_PID:
+			switch(col){
+				case 0:
+					flash_memory[0] = cam_steering.Kp*1000;
+					flash_memory[1] = cam_steering.Kd*1000;	
+					break;
+			}
+			break;
+		case PARASET_OPER:
+			switch(col){
+				case 1:
+					flash_memory[2] = spd_set*1000;
+					break;
+			}
+			break;
+	}
+//	擦除后写入
+	flash_erase_page(FLASH_MEMORY_SLECTION, FLASH_PAGE_1);
+	flash_page_program(FLASH_MEMORY_SLECTION, FLASH_PAGE_1, flash_memory, FLASH_NUM);
 }

@@ -39,6 +39,12 @@ static char info(char index, char num){
 					for(i = 0; i < 32; i++) nom[i] = fa0[i];
 					for(i = 0; i < 32; i++) nom[32+i] = che0[i];
 					return 2;
+				case 2://²ÎÊýÉèÖÃ
+					for(i = 0; i < 32; i++) nom[i] = can0[i];
+					for(i = 0; i < 32; i++) nom[32+i] = shu0[i];
+					for(i = 0; i < 32; i++) nom[64+i] = she0[i];
+					for(i = 0; i < 32; i++) nom[96+i] = zhi0[i];
+					return 4;
 			}
 			break;
 		case PARASET_PID:

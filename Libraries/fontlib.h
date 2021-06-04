@@ -76,11 +76,13 @@
 #define qi1 font_youyuan2[4]		/*"启"*/
 #define yong0 font_youyuan2[5]		/*"用"*/
 #define bi1 font_youyuan2[6]		/*"闭"*/
-#define yi0 font_youyuan2[7]        /*"一"*/
+#define yi1 font_youyuan2[7]        /*"一"*/
 #define er0 font_youyuan2[8]        /*"二"*/
 #define hao0 font_youyuan2[9]       /*"号"*/
 #define dai0 font_youyuan2[10]      /*"代"*/
 #define ma0 font_youyuan2[11]       /*"码"*/
+#define zhui0 font_youyuan2[12]     /*"追"*/
+#define zong0 font_youyuan2[13]     /*"踪"*/
 /*------------------------------------------------------*/
 /* 					  外部变量声明 						*/
 /*======================================================*/

@@ -155,9 +155,9 @@ void state_machine(void){
 //	检测赛道类型
 	if(exti_lefcount)
 		if(exti_rigcount){//两边都有出口 | 十字 | 岔道
-			if(lef_widrate < 20 || rig_widrate < 20)
-				if(abs(exti_lefp[0] - exti_rigp[0]) < 10)
-					{state = 31;return;}
+//			if(lef_widrate < 20 || rig_widrate < 20)
+//				if(abs(exti_lefp[0] - exti_rigp[0]) < 10)
+//					{state = 31;return;}
 		}
 	if(!cooling_flag) vetsearch_fork_support();
 	if(cut_fork_rig) vertsearch_frok();
@@ -181,10 +181,10 @@ void state_machine(void){
 						if(found_point[2] > exti_lefp[0]+10)
 							slope_cal(3);
 							if(abs(line_slope_diff) < 120){//判断右边是直线
-								show_value[0] = lef_widrate;
-								show_value[1] = lef_toprate;
-								show_value[2] = lef_botrate;
-								show_value[3] = pita;
+//								show_value[0] = lef_widrate;
+//								show_value[1] = lef_toprate;
+//								show_value[2] = lef_botrate;
+//								show_value[3] = pita;
 								if(lef_botrate < -100 && lef_toprate < 70)
 									if(lef_widrate > 46 && leftop_cut > 33)
 										{state = 22;return;}
@@ -352,22 +352,22 @@ void state_machine_enter(void){
 			act_flag = 14, state_flag = 1, img_color = 0x7EFE;
 			return;
 	//	圆环
-		case 21://检测到圆环出口 | 脆弱状态
-			act_flag = 21, state_flag = 2, img_color = 0x0250;
-			act_flag_temp = act_flag;
-			tim_interrupt_init_ms(TIM_3, 2000, 0, 0);//状态计时
-			return;
-		case 22://检测到圆环入口
-			act_flag = 22, state_flag = 2, img_color = 0x8CF6;
-			return;
-		case 26://检测到圆环出口 | 脆弱状态 | 右
-			act_flag = 26, state_flag = 2, img_color = 0x0250;
-			act_flag_temp = act_flag;
-			tim_interrupt_init_ms(TIM_3, 2000, 0, 0);//状态计时
-			return;
-		case 27://检测到圆环入口 | 右
-			act_flag = 27, state_flag = 2, img_color = 0x8CF6;
-			return;
+//		case 21://检测到圆环出口 | 脆弱状态
+//			act_flag = 21, state_flag = 2, img_color = 0x0250;
+//			act_flag_temp = act_flag;
+//			tim_interrupt_init_ms(TIM_3, 2000, 0, 0);//状态计时
+//			return;
+//		case 22://检测到圆环入口
+//			act_flag = 22, state_flag = 2, img_color = 0x8CF6;
+//			return;
+//		case 26://检测到圆环出口 | 脆弱状态 | 右
+//			act_flag = 26, state_flag = 2, img_color = 0x0250;
+//			act_flag_temp = act_flag;
+//			tim_interrupt_init_ms(TIM_3, 2000, 0, 0);//状态计时
+//			return;
+//		case 27://检测到圆环入口 | 右
+//			act_flag = 27, state_flag = 2, img_color = 0x8CF6;
+//			return;
 	//	十字、十字丢边
 		case 31:
 			act_flag = 31, state_flag = 3, img_color = 0x8D9B;
@@ -785,6 +785,22 @@ void border_vertical_rightsearch(void){
 				}
 			}
 		}
+}
+/*------------------------------*/
+/*		  边界点限制模块		*/
+/*==============================*/
+void border_limit(void){
+//	变量定义
+	register unsigned char i;
+//	边界限制
+	if(lefbor[rcut-3] > 10){
+		lcut = rcut+1, border_flag = 0;
+		for(i = 0; i < lcut; i++) lefbor[i] = 0, rigbor[i] = 0;
+	}
+	if(rigbor[lcut-3] < 149){
+		rcut = lcut+1, border_flag = 0;
+		for(i = 0; i < rcut; i++) lefbor[i] = 159, rigbor[i] = 159;
+	}
 }
 /*------------------------------*/
 /*		 左边界点寻找模块		*/

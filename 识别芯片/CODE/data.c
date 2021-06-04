@@ -25,6 +25,7 @@ unsigned char img_thrsod;
 //	基准点寻找
 unsigned char found_point[4];
 unsigned char fop_flag;
+unsigned char border_flag = 0;
 //	水平边线寻找
 unsigned char lefbor[MT9V03X_H], rigbor[MT9V03X_H], mid_point[MT9V03X_H];
 unsigned char ltraf_point_row[10], rtraf_point_row[10], ltraf_point_col[10], rtraf_point_col[10];
@@ -59,9 +60,21 @@ short spd, rad;
 short rad_temp, rad_min, rad_max;
 unsigned char folrow_f = 63;
 char folc_flag, cooling_flag = 0, ring_out_flag = 0;
-unsigned char ctrl_pointer = 0, dir_run_out; 
+unsigned char ctrl_pointer = 0, dir_run_out;
 void(*ctrl_pfc[])(void) = {cam_ctrl_direct, cam_ctrl_bend, cam_ctrl_ring, cam_ctrl_cross, cam_ctrl_fork, cam_ctrl_final};
 void(*ctrl_pfc_alter1[])(void) = {cam_ctrl_direct_alter1, cam_ctrl_bend_alter1, cam_ctrl_ring_alter1, cam_ctrl_cross_alter1, cam_ctrl_fork_alter1, cam_ctrl_final_alter1};
+//	一号代码
+unsigned short point_folrow;
+//	二号代码
+unsigned char bend_bias[] = {16, 20, 14, 12, 10, 10, 8, 6}; 
+/*----------------------*/
+/*	     flash存储		*/
+/*======================*/
+int flash_memory[256];
+void(*Init_para_pfc[])(void) = {Init_para, Init_para_alter1};
+char(*flash_init_pfc[])(void) = {flash_init, flash_init_alter1};
+void(*first_flash_init_pfc[])(void) = {first_flash_init, first_flash_init_alter1};
+void(*flash_memory_write_pfc[])(unsigned char, unsigned char) = {flash_memory_write, flash_memory_write_alter1};
 /*----------------------*/
 /*	 	 菜单模块		*/
 /*======================*/
@@ -78,8 +91,9 @@ unsigned char menu2_level = 0;
 unsigned char excollflag = 0;//电磁极值采集标志位
 unsigned char fixedflag = 0;//固定显示
 unsigned char monitorflag = 0;//监视器
-unsigned char csimenu_flag[CSIMENU_FLAG] = {0, 0};//摄像头
-unsigned char run_flag[RUN_FLAG] = {0, 0};//无线数据
+unsigned char csimenu_flag[CSIMENU_FLAG] = {0, 0, 0};//摄像头
+unsigned char run_flag[RUN_FLAG] = {0, 0, 0, 0};//发车
+unsigned char flash_memory_flag[RUN_FLAG] = {0, 0};//数据存储
 //	指针函数
 void(*menu_pfc[])(unsigned char) = {menu_select, menu2_select};
 /*----------------------*/
@@ -112,7 +126,9 @@ void Init_para(void){
 	dir_run_out = 0;
 //	CAM转向
 	cam_steering.Kp = 1.2;
-	cam_steering.Kd = 0.1;	
+	cam_steering.Kd = 0.1;
+//	追踪点
+	point_folrow = 70;
 //	电磁模块
 	adc2.max = 4095, adc2.min = 0;
 }
