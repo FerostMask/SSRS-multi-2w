@@ -22,7 +22,6 @@
 #include "headfile.h"
 #include "isr.h"
 #include "CAM.h"
-#include "motor.h"
 #include "menu.h"
 #include "data.h"
 #include "eident.h"
@@ -218,8 +217,6 @@ void UART7_IRQHandler(void)
 				else pita_count = 0;
 			}
 			if(pita_count > 23) pita_flag = 1;
-	//		ips200_showint16(0, 0, pita);
-	//		ips200_showint16(0, 1, pita_count);
 		//	½ÓÁ¦¼ì²â
 			if(pita_flag)
 				if(pita > 47)

@@ -3,7 +3,6 @@
 /*==============================================================*/
 #include "menu.h"
 #include "Init.h"
-#include "motor.h"
 #include "zf_adc.h"
 #include "menu_2.h"
 #include "zf_pit.h"
@@ -639,7 +638,7 @@ static void swmode(void){
 		//	按键功能执行
 			if(menu2_index == 2){//清除状态
 				act_flag = 0, yawa_flag = 0, state_flag = 0, img_color = 0xAE9C;
-				cooling_flag = 1;
+				cooling_flag = 1, total_count_fork = 0;
 				tim_interrupt_init_ms(TIM_3, 1000, 0, 0);
 				csimenu_flag[menu2_index] = !csimenu_flag[menu2_index];
 				return;

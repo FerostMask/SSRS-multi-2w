@@ -49,11 +49,11 @@ void cam_ctrl_final_alter1(void){
 /*==============================*/
 void cam_ctrl_fork_alter1(void){
 //	¿ØÖÆ
-    p_target[0] = topbor[cut_fork_bottom];
+    p_target[0] = topbor[cut_fork_bottom_col];
     if(direction_fork){
-        p_target[1] = (MT9V03X_W + cut_fork_bottom) >> 1;
+        p_target[1] = (MT9V03X_W + cut_fork_bottom_col) >> 1;
     }else{
-        p_target[1] = cut_fork_bottom >> 1;
+        p_target[1] = cut_fork_bottom_col >> 1;
     }
 }
 /*------------------------------*/

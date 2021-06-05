@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\MM32F3277.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\MM32F3277.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Jun 04 16:38:04 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sat Jun 05 13:10:31 2021
 <BR><P>
 <H3>Maximum Stack Usage =        588 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -310,7 +310,8 @@ Global Symbols
 <P><STRONG><a name="[c9]"></a>__aeabi_fmul</STRONG> (Thumb, 100 bytes, Stack size 8 bytes, fmul.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __aeabi_fmul
 </UL>
-<BR>[Called By]<UL><LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;slope_cal
+<BR>[Called By]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vertsearch_frok
+<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;slope_cal
 <LI><a href="#[19]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_memory_write_alter1
 <LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_memory_write
 <LI><a href="#[17]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;first_flash_init_alter1
@@ -324,7 +325,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_float_round
 </UL>
-<BR>[Called By]<UL><LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;slope_cal
+<BR>[Called By]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vertsearch_frok
+<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;slope_cal
 <LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_init_alter1
 <LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_init
 <LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;otsu
@@ -367,7 +369,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_float_epilogue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;slope_cal
+<BR>[Called By]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vertsearch_frok
+<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;slope_cal
 <LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;modify
 <LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_init_alter1
 <LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_init
@@ -392,7 +395,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[ca]"></a>__aeabi_f2iz</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, ffixi.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;slope_cal
+<BR><BR>[Called By]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vertsearch_frok
+<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;slope_cal
 <LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;modify
 <LI><a href="#[19]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_memory_write_alter1
 <LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_memory_write
@@ -482,9 +486,9 @@ Global Symbols
 <P><STRONG><a name="[75]"></a>_double_epilogue</STRONG> (Thumb, 156 bytes, Stack size 32 bytes, depilogue.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = _double_epilogue &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
@@ -1013,7 +1017,7 @@ Global Symbols
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;camera_tim_etr_init
 </UL>
 
-<P><STRONG><a name="[a4]"></a>binary_disp</STRONG> (Thumb, 626 bytes, Stack size 24 bytes, cam.o(i.binary_disp))
+<P><STRONG><a name="[a4]"></a>binary_disp</STRONG> (Thumb, 740 bytes, Stack size 24 bytes, cam.o(i.binary_disp))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = binary_disp &rArr; ips200_showint16 &rArr; ips200_showchar &rArr; ips200_address_set &rArr; ips200_wr_data16
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data16
@@ -1033,7 +1037,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[f0]"></a>border_limit</STRONG> (Thumb, 114 bytes, Stack size 0 bytes, cam.o(i.border_limit))
+<P><STRONG><a name="[f0]"></a>border_limit</STRONG> (Thumb, 138 bytes, Stack size 0 bytes, cam.o(i.border_limit))
 <BR><BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -1081,7 +1085,9 @@ Global Symbols
 <P><STRONG><a name="[11]"></a>cam_ctrl_final_alter1</STRONG> (Thumb, 108 bytes, Stack size 0 bytes, ctrl_alter1.o(i.cam_ctrl_final_alter1))
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>
-<P><STRONG><a name="[a]"></a>cam_ctrl_fork</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, ctrl.o(i.cam_ctrl_fork))
+<P><STRONG><a name="[a]"></a>cam_ctrl_fork</STRONG> (Thumb, 152 bytes, Stack size 12 bytes, ctrl.o(i.cam_ctrl_fork))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = cam_ctrl_fork
+</UL>
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>
 <P><STRONG><a name="[10]"></a>cam_ctrl_fork_alter1</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, ctrl_alter1.o(i.cam_ctrl_fork_alter1))
@@ -1775,8 +1781,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;state_machine
 </UL>
 
-<P><STRONG><a name="[f1]"></a>state_machine</STRONG> (Thumb, 852 bytes, Stack size 8 bytes, cam.o(i.state_machine))
-<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = state_machine &rArr; slope_cal &rArr; __aeabi_fdiv
+<P><STRONG><a name="[f1]"></a>state_machine</STRONG> (Thumb, 926 bytes, Stack size 8 bytes, cam.o(i.state_machine))
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = state_machine &rArr; vertsearch_frok &rArr; __aeabi_fdiv
 </UL>
 <BR>[Calls]<UL><LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vetsearch_fork_support
 <LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vertsearch_frok
@@ -1791,7 +1797,7 @@ Global Symbols
 <P><STRONG><a name="[3]"></a>state_machine_cross</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, cam.o(i.state_machine_cross))
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>
-<P><STRONG><a name="[0]"></a>state_machine_enter</STRONG> (Thumb, 168 bytes, Stack size 8 bytes, cam.o(i.state_machine_enter))
+<P><STRONG><a name="[0]"></a>state_machine_enter</STRONG> (Thumb, 258 bytes, Stack size 8 bytes, cam.o(i.state_machine_enter))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = state_machine_enter &rArr; tim_interrupt_init_ms &rArr; NVIC_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_init_ms
@@ -1801,11 +1807,7 @@ Global Symbols
 <P><STRONG><a name="[5]"></a>state_machine_final</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, cam.o(i.state_machine_final))
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>
-<P><STRONG><a name="[4]"></a>state_machine_fork</STRONG> (Thumb, 84 bytes, Stack size 4 bytes, cam.o(i.state_machine_fork))
-<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = state_machine_fork &rArr; vertsearch_frok
-</UL>
-<BR>[Calls]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vertsearch_frok
-</UL>
+<P><STRONG><a name="[4]"></a>state_machine_fork</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, cam.o(i.state_machine_fork))
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>
 <P><STRONG><a name="[2]"></a>state_machine_ring</STRONG> (Thumb, 332 bytes, Stack size 8 bytes, cam.o(i.state_machine_ring))
@@ -1935,14 +1937,18 @@ Global Symbols
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vert_leftsearch
 </UL>
 
-<P><STRONG><a name="[10a]"></a>vertsearch_frok</STRONG> (Thumb, 444 bytes, Stack size 24 bytes, cam.o(i.vertsearch_frok))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = vertsearch_frok
+<P><STRONG><a name="[10a]"></a>vertsearch_frok</STRONG> (Thumb, 684 bytes, Stack size 48 bytes, cam.o(i.vertsearch_frok))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = vertsearch_frok &rArr; __aeabi_fdiv
 </UL>
-<BR>[Called By]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;state_machine_fork
-<LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;state_machine
+<BR>[Calls]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2f
+<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2iz
+</UL>
+<BR>[Called By]<UL><LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;state_machine
 </UL>
 
-<P><STRONG><a name="[109]"></a>vetsearch_fork_support</STRONG> (Thumb, 1124 bytes, Stack size 36 bytes, cam.o(i.vetsearch_fork_support))
+<P><STRONG><a name="[109]"></a>vetsearch_fork_support</STRONG> (Thumb, 1330 bytes, Stack size 36 bytes, cam.o(i.vetsearch_fork_support))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = vetsearch_fork_support
 </UL>
 <BR>[Called By]<UL><LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;state_machine
@@ -2030,7 +2036,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;menu2_select
 </UL>
 
-<P><STRONG><a name="[f8]"></a>swmode</STRONG> (Thumb, 472 bytes, Stack size 16 bytes, menu_2.o(i.swmode))
+<P><STRONG><a name="[f8]"></a>swmode</STRONG> (Thumb, 476 bytes, Stack size 16 bytes, menu_2.o(i.swmode))
 <BR><BR>[Stack]<UL><LI>Max Depth = 124<LI>Call Chain = swmode &rArr; swdisplay &rArr; ips200_display_chinese &rArr; ips200_address_set &rArr; ips200_wr_data16
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_init_ms

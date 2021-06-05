@@ -90,9 +90,8 @@
 .\objects\isr.o: ..\..\Libraries\seekfree_peripheral\SEEKFREE_MT9V03X.h
 .\objects\isr.o: ..\USER\inc\isr.h
 .\objects\isr.o: ..\CODE\CAM.h
-.\objects\isr.o: ..\CODE\motor.h
-.\objects\isr.o: ..\CODE\data.h
 .\objects\isr.o: ..\CODE\menu.h
+.\objects\isr.o: ..\CODE\data.h
 .\objects\isr.o: ..\CODE\menu_2.h
 .\objects\isr.o: ..\CODE\data.h
 .\objects\isr.o: ..\CODE\eident.h

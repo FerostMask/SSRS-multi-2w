@@ -26,7 +26,6 @@ unsigned char exti_leftop, exti_rigtop;
 unsigned char lefhigh, righigh;
 short lef_widrate, lef_toprate, lef_botrate, rig_widrate, rig_toprate, rig_botrate;//左右宽度变化
 //	岔道
-unsigned char bottom_point, bottom_cut;
 /*--------------------------------------------------------------*/
 /* 							 函数定义 							*/
 /*==============================================================*/
@@ -50,7 +49,7 @@ void binary_disp(void){
 		}
 	}
 //	显示边界
-	for(i = MT9V03X_H - 1; i > lcut; i--) ips200_drawpoint(lefbor[i], i, 0xB20E);
+	for(i = MT9V03X_H - 1; i > lcut; i--) ips200_drawpoint(lefbor[i], i, 0x00);
 	for(i = MT9V03X_H - 1; i > rcut; i--) ips200_drawpoint(rigbor[i], i, 0x00);
 //	显示出口
 	for(i = 0; i < exti_lefcount; i++){
@@ -73,14 +72,14 @@ void binary_disp(void){
 	for(i = 159; i > rigtop_cut; i--)
 		ips200_drawpoint(i, topbor[i], 0xFD10);
 //	显示岔道边线
-//	for(i = cut_fork_bottom; i < cut_fork_rig; i++)//17
-//		ips200_drawpoint(i, border_top[i], 0xB20E);
-//	for(i = cut_fork_lef; i < cut_fork_bottom; i++)//17
-//		ips200_drawpoint(i, border_top[i], 0xED2A);
-//	for(i = 0; i < 99; i++)
-//		ips200_drawpoint(cut_fork_bottom, i, 0xA759);
-//	for(i = 0; i < 159; i++)
-//		ips200_drawpoint(i, bottom_point, 0xA759);
+	for(i = cut_fork_bottom_col; i < cut_fork_rig; i++)//17
+		ips200_drawpoint(i, border_top[i], 0xB20E);
+	for(i = cut_fork_lef; i < cut_fork_bottom_col; i++)//17
+		ips200_drawpoint(i, border_top[i], 0xED2A);
+	for(i = 0; i < 89; i++)
+		ips200_drawpoint(cut_fork_bottom_col, i, 0xA759);
+	for(i = 0; i < 159; i++)
+		ips200_drawpoint(i, bottom_point_row, 0xA759);
 //	显示状态
 	ips200_showstr(160, 0, "state");
 	ips200_showint16(160, 1, state);
@@ -121,13 +120,13 @@ void state_machine(void){
 	switch(act_flag){
 	//	出环检测
 		case 23://环内 -> 出环前
-			if(exti_rigcount > 0 && yawa < -30) {state = 23; return;}
+			if(exti_rigcount > 0 && yawa < -20) {state = 23; return;}
 			break;
 		case 24://出环前 -> 出环后
 			if(yawa < -55) {state = 24; return;}
 			break;
 		case 28:
-			if(exti_lefcount > 0 && yawa > 30) {state = 28; return;}
+			if(exti_lefcount > 0 && yawa > 20) {state = 28; return;}
 			break;
 		case 29:
 			if(yawa > 55) {state = 29; return;}
@@ -135,6 +134,23 @@ void state_machine(void){
 	//	出十字检测
 		case 31:
 			if(found_point[0] < 60 && found_point[2] < 60) {state = 32; return;}
+			break;
+	//	出岔道检测
+		case 41:
+			if(direction_fork){//右
+				if(cut_fork_bottom_col < 18 || yawa > 30){
+					act_flag = 0, state_flag = 0, img_color = 0xAE9C;
+					yawa_flag = 0;
+					return;
+				}
+			}
+			else{//左
+				if(cut_fork_bottom_col > 141 || yawa < -30){
+					act_flag = 0, state_flag = 0, img_color = 0xAE9C;
+					yawa_flag = 0;
+					return;
+				}
+			}
 			break;
 	//	出库检测
 		case 56://左
@@ -159,7 +175,7 @@ void state_machine(void){
 //				if(abs(exti_lefp[0] - exti_rigp[0]) < 10)
 //					{state = 31;return;}
 		}
-	if(!cooling_flag) vetsearch_fork_support();
+	vetsearch_fork_support();
 	if(cut_fork_rig) vertsearch_frok();
 	if(state == 41) return;
 	if(!exti_lefcount)
@@ -206,9 +222,9 @@ void state_machine(void){
 						if(found_point[0] > exti_rigp[0]+10)
 							slope_cal(4);
 							if(abs(line_slope_diff) < 120){//判断右边是直线
-								show_value[0] = rigtop_cut;
-								show_value[1] = rig_toprate;
-								show_value[2] = rig_botrate;
+//								show_value[0] = rigtop_cut;
+//								show_value[1] = rig_toprate;
+//								show_value[2] = rig_botrate;
 								if(rig_botrate < -100 && rig_toprate < 70)
 									if(rig_widrate > 46 && rigtop_cut < 127)
 										{state = 27;return;}
@@ -237,11 +253,11 @@ void state_machine_final(void){
 void state_machine_fork(void){
 	switch(act_flag){
 		case 41:
-			if(state == 0 && cut_fork_bottom < 20  || state != 41 ){
-                vertsearch_frok();
-                if( cnt_left < 4 || cnt_right < 4 || state!=41)
-                    act_flag = 0, state_flag = 0, img_color = 0xAE9C;
-            }
+//			if(state == 0 && cut_fork_bottom_col < 20  || state != 41 ){
+//                vertsearch_frok();
+//                if( cnt_left < 4 || cnt_right < 4 || state!=41)
+//                    act_flag = 0, state_flag = 0, img_color = 0xAE9C;
+//            }
 			break;
 	}
 }
@@ -375,18 +391,19 @@ void state_machine_enter(void){
 			tim_interrupt_init_ms(TIM_3, 2000, 0, 0);//状态计时
 			return;
 	//	岔道
-//		case 41:
-//			act_flag = 41, state_flag = 4, img_color = 0xEFBE;
-//			if(!cooling_flag){
-//				total_count_fork++;
-//				if(total_count_fork == 2){
+		case 41:
+			act_flag = 41, state_flag = 4, img_color = 0xEFBE;
+			yawa_flag = 1, yawa = 0;
+			if(!cooling_flag){
+				total_count_fork++;
+				if(total_count_fork == 2){
 //					uart_putchar(UART_6, 255);
-//					direction_fork = 1;
-//				}
+					direction_fork = 1;
+				}
 //				show_value[0] = total_count_fork;
-//				cooling_flag = 1;
-//				tim_interrupt_init_ms(TIM_3, 3000, 0, 0);						
-//			}
+				cooling_flag = 1;
+				tim_interrupt_init_ms(TIM_3, 3000, 0, 0);						
+			}
 			return;
 	}
 }
@@ -496,13 +513,13 @@ void vetsearch_fork_support(void){
 //	变量初始化
 	cut_fork_lef = 159, cut_fork_rig = 0, count_fork = 0;
 //	寻找边界基点
-	cut_fork_bottom = 0;
+	cut_fork_bottom_col = 0;
 	p = &binary_img[MT9V03X_H-1][6];
 	for(i = MT9V03X_H-1; i > 0; i--, p-=col){
 		if(*(unsigned long *)p == 0xffffffff && *(unsigned long *)(p+4) == 0xffffffff) continue;
-		bottom_point = i;
-		if(bottom_point < 10) return;
-		p = &binary_img[bottom_point][6];
+		bottom_point_row = i;
+		if(bottom_point_row < 10) return;
+		p = &binary_img[bottom_point_row][6];
 	//	检测是否有平行线
 		if((*p>>7)&0x01 == 0)
 			if(*(p+7)&0x01 == 1)//左边是平行线
@@ -518,20 +535,20 @@ void vetsearch_fork_support(void){
 					if(*p != 0x00)
 						if(*p != 0xff){//左突变
 							for(k = 0; k < 7; k++)
-								if(((*p>>(k+1))&0x01)^((*p>>k)&0x01)){cut_fork_bottom = (j<<3)+6-k;bottom_col = j;break;}
+								if(((*p>>(k+1))&0x01)^((*p>>k)&0x01)){cut_fork_bottom_col = (j<<3)+6-k;bottom_col = j;break;}
 								break;
 						}
 					if(*(p+1) != 0x00)
 						if(*(p+1) != 0xff){//右突变
 							for(k = 0; k < 7; k++)
-								if(((*(p+1)>>(k+1))&0x01)^((*(p+1)>>k)&0x01)){cut_fork_bottom = ((j+1)<<3)+6-k;bottom_col = j+1;break;}
+								if(((*(p+1)>>(k+1))&0x01)^((*(p+1)>>k)&0x01)){cut_fork_bottom_col = ((j+1)<<3)+6-k;bottom_col = j+1;break;}
 								break;
 						}
 				}
 				break;
 		}
 //	检测单行跳变点
-	p = &binary_img[bottom_point-7][0];
+	p = &binary_img[bottom_point_row-7][0];
 	for(j = 0; j < 20; j++,p++){
     //	一般情况
         if(*p == 0x00) continue;//全黑
@@ -545,14 +562,17 @@ void vetsearch_fork_support(void){
 //	show_value[0] = count_fork;
 //	寻找边界（左、右
 	for(j = bottom_col-1; j > 1; j--){
-		found_flag = 0, p = &binary_img[bottom_point][j];
-		for(i = bottom_point; i > 10; i--, p-=col){
+		found_flag = 0, p = &binary_img[bottom_point_row][j];
+		for(i = bottom_point_row; i > 10; i--, p-=col){
 			view_temp = *(p)^*(p+col);
-			for(k = 7; k > -1; k--){
+			for(k = 0; k < 8; k++){
 				if(!((found_flag>>k)&0x01))
 					if((view_temp>>k)&0x01){     
 						border_top[(j<<3)+7-k] = i;
 						if(cut_fork_lef > (j<<3)+7-k) cut_fork_lef = (j<<3)+7-k;
+						if(!stop_flag1 && (j<<3) < cut_fork_bottom_col)
+							if(border_top[(j<<3)+8-k]-border_top[(j<<3)+7-k] > 6)
+								stop_flag1 = (j<<3)+7-k;
 					}
 			}
 			found_flag |= view_temp;
@@ -562,14 +582,17 @@ void vetsearch_fork_support(void){
 		if(found_flag != 0xFF) break;	
 	}
 	for(j = bottom_col; j < 18; j++){
-		found_flag = 0, p = &binary_img[bottom_point][j];
-		for(i = bottom_point; i > 10; i--, p-=col){
+		found_flag = 0, p = &binary_img[bottom_point_row][j];
+		for(i = bottom_point_row; i > 10; i--, p-=col){
 			view_temp = *(p)^*(p+col);
 			for(k = 7; k > -1; k--){
 				if(!((found_flag>>k)&0x01))
 					if((view_temp>>k)&0x01){     
 						border_top[(j<<3)+7-k] = i;
 						if(cut_fork_rig < (j<<3)+7-k) cut_fork_rig = (j<<3)+7-k;
+						if(!stop_flag2 && (j<<3) > cut_fork_bottom_col)
+							if(border_top[(j<<3)+6-k]-border_top[(j<<3)+7-k] > 6)
+								stop_flag2 = (j<<3)+7-k;
 					}
 			}
 			found_flag |= view_temp;
@@ -578,6 +601,8 @@ void vetsearch_fork_support(void){
 		}
 		if(found_flag != 0xFF) break;	
 	}
+	if(stop_flag1) cut_fork_lef = stop_flag1;
+	if(stop_flag2) cut_fork_rig = stop_flag2;
 		break;
 	}
 }
@@ -586,38 +611,42 @@ void vetsearch_fork_support(void){
 /*==============================*/
 void vertsearch_frok(void){
 //	变量定义
-	register unsigned char i;
-	register char j, k;
-	unsigned char col = (MT9V03X_W-4)>>3;//换行
-	unsigned char *p;
-    unsigned char cnt_level_change_points;
-    unsigned short sum_left=0,sum_right=0;
-//	变量初始化
-	cnt_left = 0, cnt_right = 0;
-//	**寻找边界基点**  //
-	if(bottom_point < 19 || bottom_point > 75) return;
-    for(i = cut_fork_bottom; i < cut_fork_rig; i++){//右边
-        if( border_top[i] < 15 ||  border_top[i] > 75) continue;
-    //  间隔小 & 左点在右点的下面
-        j = abs(border_top[i+1] - border_top[i]);
-        if(j < 3 && (border_top[i+1]  < border_top[i]) ) 
-            {cnt_right++;sum_right+=j*j ;}
-    }
-    for(i = cut_fork_lef; i < cut_fork_bottom; i++){
-        if( border_top[i] < 15 ||  border_top[i] > 75) continue;
-        j = abs(border_top[i+1] - border_top[i]);
-        if(j < 3 && (border_top[i+1] > border_top[i]) )//间隔小 & 左点在右点的上面
-            {cnt_left++;sum_left+=j*j ;}
-    }
-//    show_value[1]=cnt_left;
-//    show_value[2]=sum_left;
-//    show_value[3]=cnt_right;
-//    show_value[4]=sum_right;
-/********** 终点、岔道判断开始 **********/    
-    if(abs(sum_left-cnt_left) < 8 && abs(sum_right-cnt_right) < 8 && abs(cnt_left -cnt_right) < 10 && cnt_left > 5 && cnt_right <28 && cnt_right > 5 && cnt_right <28){
-        if(cnt_left > 10 && cnt_right>2 || cnt_right >10 && cnt_left >2 || abs(cnt_left -cnt_right) < 6)
-            state = 41;
-    }
+	register char i;
+	unsigned char mp[5];
+	short cut_lef_slope = 0, cut_rig_slope = 0;
+	short lef_slope, rig_slope;
+	short slope[2];
+//	左边界检测
+	if(cut_fork_bottom_col - cut_fork_lef > 6){
+		mp[0] = cut_fork_lef+3, mp[4] = cut_fork_bottom_col;
+		mp[2] = (mp[0]+mp[4])>>1;
+		mp[1] = (mp[0]+mp[2])>>1, mp[3] = (mp[2]+mp[4])>>1;
+		slope[0] = (float)(border_top[mp[2]]-border_top[mp[0]])/(float)(mp[2]-mp[0])*1000;
+		slope[1] = (float)(border_top[mp[3]]-border_top[mp[1]])/(float)(mp[3]-mp[1])*1000;
+		cut_lef_slope = abs(slope[0] - slope[1]);
+		lef_slope = (float)(border_top[mp[0]]-border_top[mp[3]])/(float)(mp[0]-mp[3])*1000;
+	}
+	else return;
+//	右边界检测
+	if(cut_fork_rig - cut_fork_bottom_col > 6){
+		mp[0] = cut_fork_rig-3;
+		mp[2] = (mp[0]+mp[4])>>1;
+		mp[1] = (mp[0]+mp[2])>>1, mp[3] = (mp[2]+mp[4])>>1;
+		slope[0] = (float)(border_top[mp[0]]-border_top[mp[2]])/(float)(mp[2]-mp[0])*1000;
+		slope[1] = (float)(border_top[mp[1]]-border_top[mp[3]])/(float)(mp[3]-mp[1])*1000;
+		cut_rig_slope = abs(slope[0] - slope[1]);
+		rig_slope = (float)(border_top[mp[0]]-border_top[mp[3]])/(float)(mp[3]-mp[0])*1000;
+	}
+	else return;
+//	岔道判断
+	if(cut_fork_lef < 40 && cut_fork_lef > 10)
+		if(cut_fork_rig < 149 && cut_fork_rig > 119)
+			if(cut_lef_slope < 50 && cut_rig_slope < 50)
+				if(lef_slope > 90 && lef_slope < 300)
+					if(rig_slope > 90 && rig_slope < 300)
+						state = 41;
+//						if(abs(lef_slope - cut_rig_slope) < 60)
+	return;
 }
 /*------------------------------*/
 /*	  垂直边界点寻找模块（左）	*/
@@ -793,14 +822,16 @@ void border_limit(void){
 //	变量定义
 	register unsigned char i;
 //	边界限制
-	if(lefbor[rcut-3] > 10){
-		lcut = rcut+1, border_flag = 0;
-		for(i = 0; i < lcut; i++) lefbor[i] = 0, rigbor[i] = 0;
-	}
-	if(rigbor[lcut-3] < 149){
+	if(lefbor[rcut-3] > 10)
+		if(rigbor[rcut] < 40){
+			lcut = rcut+1, border_flag = 0;
+			for(i = 0; i < lcut; i++) lefbor[i] = 0, rigbor[i] = 0;
+		}
+	if(rigbor[lcut-3] < 149)
+		if(lefbor[lcut] > 119){
 		rcut = lcut+1, border_flag = 0;
 		for(i = 0; i < rcut; i++) lefbor[i] = 159, rigbor[i] = 159;
-	}
+		}
 }
 /*------------------------------*/
 /*		 左边界点寻找模块		*/

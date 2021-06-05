@@ -48,7 +48,8 @@ void(*state_pfc[])(void) = {state_machine_enter, state_machine_bend, state_machi
 unsigned char direction_fork, border_top[MT9V03X_W-4]; //0 ×ó 1 ÓÒ
 unsigned char cnt_left, cnt_right;//Êý×óÓÒÇãÐ±
 unsigned char total_count_fork = 0;
-unsigned short cut_fork_lef, cut_fork_rig, cut_fork_bottom;
+unsigned short cut_fork_lef, cut_fork_rig, cut_fork_bottom_col;
+unsigned char bottom_point_row;
 unsigned char count_fork = 0;//ÖÕµã¼ì²â
 /*----------------------*/
 /*	 	 ¿ØÖÆÄ£¿é		*/
@@ -58,15 +59,15 @@ short p_target[2];
 short spd_set;
 short spd, rad;
 short rad_temp, rad_min, rad_max;
-unsigned char folrow_f = 63;
 char folc_flag, cooling_flag = 0, ring_out_flag = 0;
+unsigned char folrow_f = 63;
 unsigned char ctrl_pointer = 0, dir_run_out;
-void(*ctrl_pfc[])(void) = {cam_ctrl_direct, cam_ctrl_bend, cam_ctrl_ring, cam_ctrl_cross, cam_ctrl_fork, cam_ctrl_final};
-void(*ctrl_pfc_alter1[])(void) = {cam_ctrl_direct_alter1, cam_ctrl_bend_alter1, cam_ctrl_ring_alter1, cam_ctrl_cross_alter1, cam_ctrl_fork_alter1, cam_ctrl_final_alter1};
 //	Ò»ºÅ´úÂë
 unsigned short point_folrow;
+void(*ctrl_pfc[])(void) = {cam_ctrl_direct, cam_ctrl_bend, cam_ctrl_ring, cam_ctrl_cross, cam_ctrl_fork, cam_ctrl_final};
 //	¶þºÅ´úÂë
 unsigned char bend_bias[] = {16, 20, 14, 12, 10, 10, 8, 6}; 
+void(*ctrl_pfc_alter1[])(void) = {cam_ctrl_direct_alter1, cam_ctrl_bend_alter1, cam_ctrl_ring_alter1, cam_ctrl_cross_alter1, cam_ctrl_fork_alter1, cam_ctrl_final_alter1};
 /*----------------------*/
 /*	     flash´æ´¢		*/
 /*======================*/

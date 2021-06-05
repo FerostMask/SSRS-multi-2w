@@ -29,7 +29,6 @@
 .\objects\menu_2.o: ..\..\Libraries\seekfree_libraries\zf_uart.h
 .\objects\menu_2.o: D:\Software\Keil_MDK5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\menu_2.o: ..\..\Libraries\Device\MM32F327x\HAL_Lib\Inc\hal_uart.h
-.\objects\menu_2.o: ..\CODE\motor.h
 .\objects\menu_2.o: ..\..\Libraries\seekfree_libraries\zf_adc.h
 .\objects\menu_2.o: ..\..\Libraries\seekfree_libraries\zf_pit.h
 .\objects\menu_2.o: ..\..\Libraries\seekfree_libraries\zf_tim.h

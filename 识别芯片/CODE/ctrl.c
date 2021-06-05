@@ -48,7 +48,32 @@ void cam_ctrl_final(void){
 /*		   岔道控制模块 		*/
 /*==============================*/
 void cam_ctrl_fork(void){
-	folc_flag = 1;
+//	变量定义
+	register unsigned char i;
+	unsigned char i_limit, max_col = 159, min_col = 0;
+//	控制
+	if(bottom_point_row > 30){
+		if(direction_fork){//右
+			if(found_point[2] > 60){
+				i_limit = (bottom_point_row+89)>>1;
+				for(i = 89; i > i_limit; i--)
+					if(max_col > rigbor[i]) max_col = rigbor[i];
+				p_target[1] = (cut_fork_bottom_col+max_col)>>1;
+			}
+			else
+				p_target[1] = (cut_fork_bottom_col+MT9V03X_W)>>1;
+		}
+		else{//左
+			if(found_point[0] > 60){
+				i_limit = (bottom_point_row+89)>>1;
+				for(i = 89; i > i_limit; i--)
+					if(min_col < lefbor[i]) min_col = lefbor[i];
+				p_target[1] = (cut_fork_bottom_col+min_col)>>1;
+			}
+			else
+				cut_fork_bottom_col>>1;
+		}
+	}
 }
 /*------------------------------*/
 /*		   十字控制模块 		*/

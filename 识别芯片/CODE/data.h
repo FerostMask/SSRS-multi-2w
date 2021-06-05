@@ -63,12 +63,12 @@ extern void(*state_pfc[])(void);
 extern unsigned char direction_fork, border_top[MT9V03X_W-4]; //0 左 1 右
 extern unsigned char cnt_left, cnt_right;//数左右倾斜
 extern unsigned char total_count_fork;
-extern unsigned short cut_fork_lef, cut_fork_rig, cut_fork_bottom;
+extern unsigned short cut_fork_lef, cut_fork_rig, cut_fork_bottom_col;
+extern unsigned char bottom_point_row;
 extern unsigned char count_fork;
 /*----------------------*/
 /*	 	 控制模块		*/
 /*======================*/
-extern unsigned short cut_fork, cut_fork_bottom;
 extern short p_target[2];
 extern short spd_set;
 extern short spd, rad;
@@ -138,7 +138,6 @@ extern unsigned char menu2_index;
 extern unsigned char menu2_level;
 //	函数指针
 extern void(*menu_pfc[])(unsigned char);
-extern void(*ctrl_pfc_alter1[])(void);
 /*----------------------*/
 /*	 	 电磁模块		*/
 /*======================*/
