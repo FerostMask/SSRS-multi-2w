@@ -52,7 +52,7 @@ void cam_ctrl_fork(void){
 	register unsigned char i;
 	unsigned char i_limit, max_col = 159, min_col = 0;
 //	控制
-	if(bottom_point_row > 30){
+	if(bottom_point_row > 35){
 		if(direction_fork){//右
 			if(found_point[2] > 60){
 				i_limit = (bottom_point_row+89)>>1;
@@ -86,40 +86,56 @@ void cam_ctrl_cross(void){
 /*==============================*/
 void cam_ctrl_ring(void){
 //	变量定义
-	unsigned char mp;
-	float slope_temp;
 	register unsigned char i;
-	unsigned char point_temp;
-	short bias_temp;
+	unsigned char i_limit, max_col = 159, min_col = 0;
+	unsigned char ring_flag = 0;
 //	控制
 	switch(act_flag){
 	//	左环
 		case 21://出环口
-		//	特殊控制
-
+			for(i = MT9V03X_H-1; i > 0; i--){
+				if(lefbor[i] > 20) ring_flag = 1;
+				if(ring_flag){
+					if(lefbor[i] > min_col) min_col = lefbor[i], i_limit = i;
+					if(lefbor[i]< 20) break;
+				}
+			}
+			p_target[1] = (lefbor[i_limit]+rigbor[i_limit])>>1;
+			p_target[1] = (p_target[1]+77)>>1;
 			break;
 		case 22://入环口
-
+			max_col = 159-((float)(159-cut_fork_bottom_col)/(float)(89-cut_fork_bottom_col))*(89-point_folrow);//计算右边界
+			p_target[1] = (lefbor[point_folrow]+max_col)>>1;
 			break;
 		case 23://环内
-
+			folc_flag = 1;
 			break;
 		case 24://出环
-
+			max_col = 159-(159.0/(float)(89-rcut))*(82-point_folrow);//计算右边界
+			p_target[1] = (lefbor[point_folrow]+max_col)>>1;
 			break;
 	//	右环
 		case 26://出环口
-
+			for(i = MT9V03X_H-1; i > 0; i--){
+				if(rigbor[i] < 139) ring_flag = 1;
+				if(ring_flag){
+					if(rigbor[i] < max_col) max_col = rigbor[i], i_limit = i;
+					if(rigbor[i] > 139) break;
+				}
+			}
+			p_target[1] = (lefbor[i_limit]+rigbor[i_limit])>>1;
+			p_target[1] = (p_target[1]+83)>>1;
 			break;
 		case 27://入环口
-
-
+			min_col = ((float)cut_fork_bottom_col/(float)(89-bottom_point_row))*(89-point_folrow);
+			p_target[1] = (min_col+rigbor[point_folrow])>>1;
 			break;
 		case 28://环内
-
+			folc_flag = 1;
 			break;
 		case 29://出环
-	
+			min_col = (159.0/(float)(89-lcut))*(82-point_folrow);
+			p_target[1] = (min_col+rigbor[point_folrow])>>1;
 			break;
 	}
 }
@@ -133,21 +149,26 @@ void cam_ctrl_bend(void){
 /*		   直道控制模块 		*/
 /*==============================*/
 void cam_ctrl_direct(void){
-//	特殊控制
-	if(lvet_trafcount){
-		p_target[1] = (lefbor[lvet_trafpoint_row[0]]+rigbor[lvet_trafpoint_row[0]])>>1;
-		return;
-	}
-	if(rvet_trafcount){
-		p_target[1] = (lefbor[rvet_trafpoint_row[0]]+rigbor[rvet_trafpoint_row[0]])>>1;
-		return;
-	}
+//	变量定义
+	register unsigned char i;
+	unsigned char max_col = 159, min_col = 0;
+	unsigned char i_temp;
 //	环岛控制
-	if(ring_out_flag == 1){
-		if(found_point[0] < 60)
-			p_target[1] = (lefbor[found_point[0]-10]+rigbor[found_point[0]-10])>>1;
-		spd = 50;
-		return;
+	if(ring_out_flag){
+		if(ring_out_flag == 1){
+			if(lefbor[point_folrow] < 5){
+				p_target[1] = (lefbor[bottom_point_row-16]+rigbor[bottom_point_row-16])>>1;
+				p_target[1] = (p_target[1]+80)>>1;
+				return;
+			}
+		}
+		else{
+			if(rigbor[point_folrow] > 154){
+				p_target[1] = (lefbor[bottom_point_row-16]+rigbor[bottom_point_row-16])>>1;
+				p_target[1] = (p_target[1]+80)>>1;
+				return;
+			}
+		}
 	}
 //	终点
 	if(count_fork > 7) {p_target[1] = 80; return;}
