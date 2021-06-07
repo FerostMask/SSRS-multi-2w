@@ -104,16 +104,14 @@ void cam_ctrl_ring(void){
 			p_target[1] = (p_target[1]+77)>>1;
 			break;
 		case 22://入环口
-			max_col = 159-((float)(159-cut_fork_bottom_col)/(float)(89-cut_fork_bottom_col))*(82-point_folrow);//计算右边界
+			max_col = 159-((float)(159-cut_fork_bottom_col)/(float)(89-bottom_point_row))*(89-point_folrow);//计算右边界
 			p_target[1] = (lefbor[point_folrow]+max_col)>>1;
-			if(p_target[1] < 80) return;
-			else folc_flag = 1;
 			break;
 		case 23://环内
 			folc_flag = 1;
 			break;
 		case 24://出环
-			max_col = 159-(159.0/(float)(89-rcut))*(80-point_folrow);//计算右边界
+			max_col = 159-(159.0/(float)(89-rcut))*(82-point_folrow);//计算右边界
 			p_target[1] = (lefbor[point_folrow]+max_col)>>1;
 			break;
 	//	右环

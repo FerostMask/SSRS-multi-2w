@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\MM32F3277.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\MM32F3277.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Jun 07 18:26:44 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Jun 07 21:30:08 2021
 <BR><P>
 <H3>Maximum Stack Usage =        588 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -359,8 +359,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
-<LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_ring
+<BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_ring
+<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
 </UL>
 
 <P><STRONG><a name="[79]"></a>__aeabi_dmul</STRONG> (Thumb, 228 bytes, Stack size 48 bytes, dmul.o(.text))
@@ -368,8 +368,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
-<LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_ring
+<BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_ring
+<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
 </UL>
 
 <P><STRONG><a name="[7a]"></a>__aeabi_ddiv</STRONG> (Thumb, 222 bytes, Stack size 32 bytes, ddiv.o(.text))
@@ -409,8 +409,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
-<LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_ring
+<BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_ring
+<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;zf_sprintf
 </UL>
 
 <P><STRONG><a name="[ce]"></a>__aeabi_f2iz</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, ffixi.o(.text))
@@ -1043,9 +1043,9 @@ Global Symbols
 <P><STRONG><a name="[be]"></a>afio_init</STRONG> (Thumb, 218 bytes, Stack size 20 bytes, zf_gpio.o(i.afio_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = afio_init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_pin_init
+<BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
+<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_pin_init
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;camera_tim_etr_init
-<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
 </UL>
 
 <P><STRONG><a name="[a6]"></a>binary_disp</STRONG> (Thumb, 740 bytes, Stack size 24 bytes, cam.o(i.binary_disp))
@@ -1126,7 +1126,7 @@ Global Symbols
 <P><STRONG><a name="[10]"></a>cam_ctrl_fork_alter1</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, ctrl_alter1.o(i.cam_ctrl_fork_alter1))
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>
-<P><STRONG><a name="[8]"></a>cam_ctrl_ring</STRONG> (Thumb, 622 bytes, Stack size 72 bytes, ctrl.o(i.cam_ctrl_ring))
+<P><STRONG><a name="[8]"></a>cam_ctrl_ring</STRONG> (Thumb, 598 bytes, Stack size 72 bytes, ctrl.o(i.cam_ctrl_ring))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = cam_ctrl_ring &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
@@ -1214,10 +1214,10 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = exti_interrupt_init &rArr; gpio_init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_Init
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init
 <LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI_StructInit
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI_LineConfig
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI_Init
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_button
 <LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mt9v03x_exti_init
@@ -1373,10 +1373,10 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = gpio_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exti_interrupt_init
-<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc_pin_init
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_init
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;core_select
 <LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc_pin_init
 <LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mt9v03x_exti_init
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mt9v03x_dma_init
 </UL>
@@ -1449,10 +1449,10 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = ips200_init &rArr; fsmc_init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_clear
-<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsmc_init
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;afio_init
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;systick_delay_ms
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsmc_init
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;afio_init
 <LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_reg
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ips200_wr_data
 </UL>
@@ -1689,9 +1689,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = mt9v03x_dma_init &rArr; camera_dma_init &rArr; DMA_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nvic_init
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHBPeriphClockCmd
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;camera_dma_init
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mt9v03x_init
 </UL>
@@ -1821,10 +1821,10 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[106]"></a>set_config</STRONG> (Thumb, 110 bytes, Stack size 24 bytes, seekfree_mt9v03x.o(i.set_config))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = set_config &rArr; uart_putbuff
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = set_config &rArr; systick_delay_ms
 </UL>
-<BR>[Calls]<UL><LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_putbuff
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;systick_delay_ms
+<BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;systick_delay_ms
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_putbuff
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mt9v03x_init
 </UL>
