@@ -148,9 +148,6 @@ void state_machine(void){
 	state_temp = state, state = 0;
 	switch(act_flag){
 	//	出环检测
-		case 22:
-			if(yawa < -30) {state = 13; return;}
-			break;
 		case 23://环内 -> 出环前
 			if(exti_rigcount > 0 && yawa < -20) {state = 23; return;}
 			break;
@@ -311,7 +308,6 @@ void state_machine_ring(void){
 		case 21://出环口 -> 入环
 			if(state == 22)
 				act_flag = 22, img_color = 0x8CF6;
-				yawa_flag = 1, yawa = 0;
 			return;
 		case 22://入环 -> 环内
 			if(state == 11 || state == 13)
