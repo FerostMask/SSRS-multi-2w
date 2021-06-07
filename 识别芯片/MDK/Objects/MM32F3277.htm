@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\MM32F3277.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\MM32F3277.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Jun 07 21:30:08 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Jun 07 23:37:33 2021
 <BR><P>
 <H3>Maximum Stack Usage =        588 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1829,8 +1829,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mt9v03x_init
 </UL>
 
-<P><STRONG><a name="[10b]"></a>slope_cal</STRONG> (Thumb, 580 bytes, Stack size 40 bytes, cam.o(i.slope_cal))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = slope_cal &rArr; __aeabi_fdiv
+<P><STRONG><a name="[10b]"></a>slope_cal</STRONG> (Thumb, 1216 bytes, Stack size 48 bytes, cam.o(i.slope_cal))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = slope_cal &rArr; __aeabi_fdiv
 </UL>
 <BR>[Calls]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2f
@@ -1840,7 +1840,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;state_machine
 </UL>
 
-<P><STRONG><a name="[f5]"></a>state_machine</STRONG> (Thumb, 936 bytes, Stack size 8 bytes, cam.o(i.state_machine))
+<P><STRONG><a name="[f5]"></a>state_machine</STRONG> (Thumb, 1206 bytes, Stack size 8 bytes, cam.o(i.state_machine))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = state_machine &rArr; vertsearch_frok &rArr; __aeabi_fdiv
 </UL>
 <BR>[Calls]<UL><LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vetsearch_fork_support
@@ -1869,7 +1869,7 @@ Global Symbols
 <P><STRONG><a name="[4]"></a>state_machine_fork</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, cam.o(i.state_machine_fork))
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>
-<P><STRONG><a name="[2]"></a>state_machine_ring</STRONG> (Thumb, 338 bytes, Stack size 8 bytes, cam.o(i.state_machine_ring))
+<P><STRONG><a name="[2]"></a>state_machine_ring</STRONG> (Thumb, 354 bytes, Stack size 8 bytes, cam.o(i.state_machine_ring))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = state_machine_ring &rArr; tim_interrupt_init_ms &rArr; NVIC_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_interrupt_init_ms
@@ -2007,7 +2007,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;state_machine
 </UL>
 
-<P><STRONG><a name="[10c]"></a>vetsearch_fork_support</STRONG> (Thumb, 1306 bytes, Stack size 36 bytes, cam.o(i.vetsearch_fork_support))
+<P><STRONG><a name="[10c]"></a>vetsearch_fork_support</STRONG> (Thumb, 1322 bytes, Stack size 36 bytes, cam.o(i.vetsearch_fork_support))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = vetsearch_fork_support
 </UL>
 <BR>[Called By]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;state_machine

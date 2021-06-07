@@ -19,7 +19,7 @@ float show_flvalue[5];
 short show_value[5];
 short traf_slope[4];
 short ave_slope[4];
-short line_slope_diff;
+short line_slope_diff, line_slope_ave;
 unsigned char show_point;
 unsigned char ac_flag[4];
 unsigned char exti_leftop, exti_rigtop;
@@ -80,35 +80,6 @@ void binary_disp(void){
 		ips200_drawpoint(cut_fork_bottom_col, i, 0xA759);
 	for(i = 0; i < 159; i++)
 		ips200_drawpoint(i, bottom_point_row, 0xA759);
-//	显示转变点
-//	for(i = 0; i < ltraf_count; i++){//左边界转变
-//		ips200_drawpoint(ltraf_point_col[i], ltraf_point_row[i], 0x32D5);
-//		ips200_drawpoint(ltraf_point_col[i]+1, ltraf_point_row[i], 0x32D5);
-//		ips200_drawpoint(ltraf_point_col[i]+2, ltraf_point_row[i], 0x32D5);
-//		ips200_drawpoint(ltraf_point_col[i]+3, ltraf_point_row[i], 0x32D5);
-//		ips200_drawpoint(ltraf_point_col[i]+4, ltraf_point_row[i], 0x32D5);
-//	}
-//	for(i = 0; i < lvet_trafcount; i++){//左转变点
-//		ips200_drawpoint(lvet_trafpoint_col[i], lvet_trafpoint_row[i], 0xFD10);
-//		ips200_drawpoint(lvet_trafpoint_col[i]+1, lvet_trafpoint_row[i], 0xFD10);
-//		ips200_drawpoint(lvet_trafpoint_col[i]+2, lvet_trafpoint_row[i], 0xFD10);
-//		ips200_drawpoint(lvet_trafpoint_col[i]+3, lvet_trafpoint_row[i], 0xFD10);
-//		ips200_drawpoint(lvet_trafpoint_col[i]+4, lvet_trafpoint_row[i], 0xFD10);
-//	}
-//	for(i = 0; i < rtraf_count; i++){//右边界转变
-//		ips200_drawpoint(rtraf_point_col[i], rtraf_point_row[i], 0x32D5);
-//		ips200_drawpoint(rtraf_point_col[i]-1, rtraf_point_row[i], 0x32D5);
-//		ips200_drawpoint(rtraf_point_col[i]-2, rtraf_point_row[i], 0x32D5);
-//		ips200_drawpoint(rtraf_point_col[i]-3, rtraf_point_row[i], 0x32D5);
-//		ips200_drawpoint(rtraf_point_col[i]-4, rtraf_point_row[i], 0x32D5);
-//	}
-//	for(i = 0; i < rvet_trafcount; i++){//右转变点
-//		ips200_drawpoint(rvet_trafpoint_col[i], rvet_trafpoint_row[i], 0xFD10);
-//		ips200_drawpoint(rvet_trafpoint_col[i]-1, rvet_trafpoint_row[i], 0xFD10);
-//		ips200_drawpoint(rvet_trafpoint_col[i]-2, rvet_trafpoint_row[i], 0xFD10);
-//		ips200_drawpoint(rvet_trafpoint_col[i]-3, rvet_trafpoint_row[i], 0xFD10);
-//		ips200_drawpoint(rvet_trafpoint_col[i]-4, rvet_trafpoint_row[i], 0xFD10);
-//	}
 //	显示状态
 	ips200_showstr(160, 0, "state");
 	ips200_showint16(160, 1, state);
@@ -152,13 +123,23 @@ void state_machine(void){
 			if(exti_rigcount > 0 && yawa < -20) {state = 23; return;}
 			break;
 		case 24://出环前 -> 出环后
-			if(yawa < -55) {state = 24; return;}
+			slope_cal(1);
+			if(abs(line_slope_diff) < 120)
+				if(line_slope_ave < 1400 && line_slope_ave > 330)
+					if(bottom_point_row > 9 && bottom_point_row < 30)
+						{state = 24; return;}
+//			show_value[0] = line_slope_diff, show_value[1] = line_slope_ave, show_value[2] = bottom_point_row;
 			break;
 		case 28:
 			if(exti_lefcount > 0 && yawa > 20) {state = 28; return;}
 			break;
 		case 29:
-			if(yawa > 55) {state = 29; return;}
+			slope_cal(2);
+			if(abs(line_slope_diff) < 120)
+				if(line_slope_ave < 1400 && line_slope_ave > 330)
+					if(bottom_point_row > 9 && bottom_point_row < 30)
+						{state = 29; return;}
+//			show_value[0] = line_slope_diff, show_value[1] = line_slope_ave, show_value[2] = bottom_point_row;
 			break;
 	//	出十字检测
 		case 31:
@@ -311,7 +292,8 @@ void state_machine_ring(void){
 			return;
 		case 22://入环 -> 环内
 			if(state == 11 || state == 13)
-				act_flag = 23, yawa_flag = 1, yawa = 0, img_color = 0x46D0;
+				if(found_point[2] > 60)
+					act_flag = 23, yawa_flag = 1, yawa = 0, img_color = 0x46D0;
 			return;
 		case 23://环内 -> 出环
 			if(state == 23)
@@ -330,7 +312,8 @@ void state_machine_ring(void){
 			return;
 		case 27://入环 -> 环内
 			if(state == 12 || state == 14)
-				act_flag = 28, yawa_flag = 1, yawa = 0, img_color = 0x46D0;
+				if(found_point[0] > 60)
+					act_flag = 28, yawa_flag = 1, yawa = 0, img_color = 0x46D0;
 			return;
 		case 28://环内 -> 出环
 			if(state == 28)
@@ -446,6 +429,38 @@ char slope_cal(char num){
 	short angle;
 //	计算斜率
 	switch(num){
+	//	出环辅助 | 右直道判断
+		case 1:
+			mp[0] = bottom_point_row;
+			mp[2] = mp[0]+found_point[2] >> 1;
+			mp[1] = (mp[0]+mp[2]) >> 1, mp[3] = mp[2]>>1;
+		//	单调性判断
+			if(rigbor[mp[0]]<rigbor[mp[1]])
+				if(rigbor[mp[1]]<rigbor[mp[2]])
+					if(rigbor[mp[2]]<rigbor[mp[3]])
+						line_flag = 1;
+			if(!line_flag) {line_slope_diff = 300;return;}
+			slope[0] = (float)(rigbor[mp[0]]-rigbor[mp[2]])/(float)(mp[0]-mp[2])*1000;
+			slope[1] = (float)(rigbor[mp[1]]-rigbor[mp[3]])/(float)(mp[1]-mp[3])*1000;
+			line_slope_diff = slope[0]-slope[1];
+			line_slope_ave = (slope[0]+slope[1])>>1;
+			break;
+	//	出环辅助 | 左直道判断
+		case 2:
+			mp[0] = bottom_point_row;
+			mp[2] = mp[0]+found_point[0] >> 1;
+			mp[1] = (mp[0]+mp[2]) >> 1, mp[3] = mp[2]>>1;
+		//	单调性判断
+			if(lefbor[mp[0]]<lefbor[mp[1]])
+				if(lefbor[mp[1]]<lefbor[mp[2]])
+					if(lefbor[mp[2]]<lefbor[mp[3]])
+						line_flag = 1;
+			if(!line_flag) {line_slope_diff = 300;return;}
+			slope[0] = (float)(lefbor[mp[0]]-lefbor[mp[2]])/(float)(mp[2]-mp[0])*1000;
+			slope[1] = (float)(lefbor[mp[1]]-lefbor[mp[3]])/(float)(mp[3]-mp[1])*1000;
+			line_slope_diff = slope[0]-slope[1];
+			line_slope_ave = (slope[0]+slope[1])>>1;
+			break;
 	//	圆环辅助 | 右直道检测
 		case 3:
 			mp[0] = ltraf_point_row[exti_leftop];
@@ -544,9 +559,11 @@ void vetsearch_fork_support(void){
 	p = &binary_img[MT9V03X_H-1][6];
 	switch(act_flag){
 		case 22:
+		case 24:
 			p = &binary_img[MT9V03X_H-1][4];
 			break;
 		case 27:
+		case 29:
 			p = &binary_img[MT9V03X_H-1][8];
 			break;
 	}
