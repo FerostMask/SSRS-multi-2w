@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\MM32F3277.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\MM32F3277.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Jun 07 23:37:33 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Jun 08 13:54:44 2021
 <BR><P>
 <H3>Maximum Stack Usage =        588 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -290,6 +290,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_frsub
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;modify
 <LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fsub
+<LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_fork
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;otsu
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pos_pid
 </UL>
@@ -300,6 +301,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
 </UL>
 <BR>[Called By]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;modify
+<LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_fork
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;otsu
 </UL>
 
@@ -321,6 +323,7 @@ Global Symbols
 <LI><a href="#[17]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;first_flash_init_alter1
 <LI><a href="#[16]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;first_flash_init
 <LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_ring
+<LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_fork
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;otsu
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pos_pid
 </UL>
@@ -335,6 +338,7 @@ Global Symbols
 <LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_init_alter1
 <LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_init
 <LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_ring
+<LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_fork
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;otsu
 </UL>
 
@@ -391,6 +395,7 @@ Global Symbols
 <LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_init_alter1
 <LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_init
 <LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_ring
+<LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_fork
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;otsu
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pos_pid
 </UL>
@@ -401,6 +406,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_float_epilogue
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_ring
+<LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_fork
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;otsu
 </UL>
 
@@ -429,6 +435,7 @@ Global Symbols
 <P><STRONG><a name="[b3]"></a>__aeabi_f2uiz</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, ffixui.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_init
 <LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_ring
+<LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cam_ctrl_fork
 </UL>
 
 <P><STRONG><a name="[7e]"></a>__aeabi_d2iz</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, dfixi.o(.text))
@@ -1118,8 +1125,16 @@ Global Symbols
 <P><STRONG><a name="[11]"></a>cam_ctrl_final_alter1</STRONG> (Thumb, 108 bytes, Stack size 0 bytes, ctrl_alter1.o(i.cam_ctrl_final_alter1))
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>
-<P><STRONG><a name="[a]"></a>cam_ctrl_fork</STRONG> (Thumb, 152 bytes, Stack size 12 bytes, ctrl.o(i.cam_ctrl_fork))
-<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = cam_ctrl_fork
+<P><STRONG><a name="[a]"></a>cam_ctrl_fork</STRONG> (Thumb, 238 bytes, Stack size 40 bytes, ctrl.o(i.cam_ctrl_fork))
+<BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = cam_ctrl_fork &rArr; __aeabi_fsub &rArr; __aeabi_fadd &rArr; _float_epilogue
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2uiz
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2f
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2f
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fsub
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> data.o(.data)
 </UL>

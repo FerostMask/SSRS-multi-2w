@@ -52,27 +52,13 @@ void cam_ctrl_fork(void){
 	register unsigned char i;
 	unsigned char i_limit, max_col = 159, min_col = 0;
 //	¿ØÖÆ
-	if(bottom_point_row > 35){
-		if(direction_fork){//ÓÒ
-			if(found_point[2] > 60){
-				i_limit = (bottom_point_row+89)>>1;
-				for(i = 89; i > i_limit; i--)
-					if(max_col > rigbor[i]) max_col = rigbor[i];
-				p_target[1] = (cut_fork_bottom_col+max_col)>>1;
-			}
-			else
-				p_target[1] = (cut_fork_bottom_col+MT9V03X_W)>>1;
-		}
-		else{//×ó
-			if(found_point[0] > 60){
-				i_limit = (bottom_point_row+89)>>1;
-				for(i = 89; i > i_limit; i--)
-					if(min_col < lefbor[i]) min_col = lefbor[i];
-				p_target[1] = (cut_fork_bottom_col+min_col)>>1;
-			}
-			else
-				cut_fork_bottom_col>>1;
-		}
+	if(direction_fork){//ÓÒ
+		min_col = cut_fork_bottom_col - ((float)(border_top[cut_fork_rig] - bottom_point_row)/(float)(cut_fork_bottom_col - cut_fork_rig))*(point_folrow-bottom_point_row);//½âËã×ó±ß½ç
+		p_target[1] = (min_col+rigbor[point_folrow])>>1;
+	}
+	else{//×ó
+		max_col = cut_fork_bottom_col + ((float)(border_top[cut_fork_lef] - bottom_point_row)/(float)(cut_fork_lef - cut_fork_bottom_col))*(point_folrow-bottom_point_row);//½âËãÓÒ±ß½ç
+		p_target[1] = (lefbor[point_folrow]+max_col)>>1;
 	}
 }
 /*------------------------------*/
