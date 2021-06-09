@@ -117,6 +117,8 @@ void binary_disp(void){
 void state_machine(void){
 //	初始化
 	state_temp = state, state = 0;
+	show_value[0] = total_count_fork;
+	show_value[1] = direction_fork;
 	switch(act_flag){
 	//	出环检测
 		case 23://环内 -> 出环前
@@ -124,9 +126,9 @@ void state_machine(void){
 			break;
 		case 24://出环前 -> 出环后
 			slope_cal(1);
-			if(abs(line_slope_diff) < 120)
-				if(line_slope_ave < 1400 && line_slope_ave > 330)
-					if(bottom_point_row > 9 && bottom_point_row < 30)
+			if(abs(line_slope_diff) < 140)
+				if(line_slope_ave < 1600 && line_slope_ave > 330)
+					if(bottom_point_row > 9 && bottom_point_row < 40)
 						{state = 24; return;}
 //			show_value[0] = line_slope_diff, show_value[1] = line_slope_ave, show_value[2] = bottom_point_row;
 			break;
@@ -135,9 +137,9 @@ void state_machine(void){
 			break;
 		case 29:
 			slope_cal(2);
-			if(abs(line_slope_diff) < 120)
-				if(line_slope_ave < 1400 && line_slope_ave > 330)
-					if(bottom_point_row > 9 && bottom_point_row < 30)
+			if(abs(line_slope_diff) < 140)
+				if(line_slope_ave < 1600 && line_slope_ave > 330)
+					if(bottom_point_row > 9 && bottom_point_row < 40)
 						{state = 29; return;}
 //			show_value[0] = line_slope_diff, show_value[1] = line_slope_ave, show_value[2] = bottom_point_row;
 			break;
@@ -164,14 +166,14 @@ void state_machine(void){
 			break;
 	//	出库检测
 		case 56://左
-			if(yawa < -40){
+			if(yawa < -35){
 				act_flag = 0, state_flag = 0, yawa_flag = 0, img_color = 0xAE9C;
 				run_flag[0] = 0;
 				return;
 			}
 			break;
 		case 55://右
-			if(yawa > 40){
+			if(yawa > 35){
 				act_flag = 0, state_flag = 0, yawa_flag = 0, img_color = 0xAE9C;
 				run_flag[1] = 0;
 				return;

@@ -85,7 +85,7 @@ void code_select(void){
 	uart_putchar(UART_7, 0);
 	uart_putchar(UART_6, 0);
 //	发车延时确认
-	if(act_flag == 56 || act_flag == 55) systick_delay_ms(3000);
+//	if(act_flag == 56 || act_flag == 55) systick_delay_ms(3000);
 //	代码选择
 	switch(ctrl_pointer){
 		case 0:
