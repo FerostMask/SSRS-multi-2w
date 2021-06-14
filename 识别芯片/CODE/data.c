@@ -51,6 +51,9 @@ unsigned char total_count_fork = 0;
 unsigned short cut_fork_lef, cut_fork_rig, cut_fork_bottom_col;
 unsigned char bottom_point_row;
 unsigned char count_fork = 0;//终点检测
+//	拐点相关
+unsigned char infle_lefcount, infle_rigcount;
+unsigned char infle_lefp[90], infle_rigp[90];
 /*----------------------*/
 /*	 	 控制模块		*/
 /*======================*/
@@ -63,6 +66,7 @@ char folc_flag, cooling_flag = 0, ring_out_flag = 0;
 unsigned char folrow_f = 63;
 unsigned char ctrl_pointer = 0, dir_run_out;
 //	一号代码
+char ring_bias = -14;
 unsigned short point_folrow;
 void(*ctrl_pfc[])(void) = {cam_ctrl_direct, cam_ctrl_bend, cam_ctrl_ring, cam_ctrl_cross, cam_ctrl_fork, cam_ctrl_final};
 //	二号代码

@@ -66,6 +66,9 @@ extern unsigned char total_count_fork;
 extern unsigned short cut_fork_lef, cut_fork_rig, cut_fork_bottom_col;
 extern unsigned char bottom_point_row;
 extern unsigned char count_fork;
+//	拐点相关
+extern unsigned char infle_lefcount, infle_rigcount;
+extern unsigned char infle_lefp[90], infle_rigp[90];
 /*----------------------*/
 /*	 	 控制模块		*/
 /*======================*/
@@ -81,6 +84,7 @@ extern unsigned char bend_bias[];
 extern void(*ctrl_pfc[])(void);
 extern void(*ctrl_pfc_alter1[])(void);
 //	一号代码
+extern char ring_bias;
 extern unsigned short point_folrow;
 /*----------------------*/
 /*	 	  PID模块		*/

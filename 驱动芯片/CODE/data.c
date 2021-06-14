@@ -38,9 +38,9 @@ struct pidpara acw;
 /*----------------------*/
 /*	   ½Ç¶È¿ØÖÆÄ£¿é		*/
 /*======================*/
+int gy, gz;
 short blcp;
 short pita, yawa, yawa_temp;
-short gy, gz;
 short yfilt[4] = {0, 0, 0, 0};
 short pflit[4] = {0, 0, 0, 0};
 /*----------------------*/

@@ -25,7 +25,6 @@ unsigned char ac_flag[4];
 unsigned char exti_leftop, exti_rigtop;
 unsigned char lefhigh, righigh;
 short lef_widrate, lef_toprate, lef_botrate, rig_widrate, rig_toprate, rig_botrate;//左右宽度变化
-//	岔道
 /*--------------------------------------------------------------*/
 /* 							 函数定义 							*/
 /*==============================================================*/
@@ -72,14 +71,25 @@ void binary_disp(void){
 	for(i = 159; i > rigtop_cut; i--)
 		ips200_drawpoint(i, topbor[i], 0xFD10);
 //	显示岔道边线
-	for(i = cut_fork_bottom_col; i < cut_fork_rig; i++)//17
+	for(i = cut_fork_bottom_col; i < cut_fork_rig; i++)
 		ips200_drawpoint(i, border_top[i], 0xB20E);
-	for(i = cut_fork_lef; i < cut_fork_bottom_col; i++)//17
+	for(i = cut_fork_lef; i < cut_fork_bottom_col; i++)
 		ips200_drawpoint(i, border_top[i], 0xED2A);
 	for(i = 0; i < 89; i++)
 		ips200_drawpoint(cut_fork_bottom_col, i, 0xA759);
 	for(i = 0; i < 159; i++)
 		ips200_drawpoint(i, bottom_point_row, 0xA759);
+//	显示拐点
+//	for(i = 0; i < infle_lefcount; i++){
+//		ips200_drawpoint(lefbor[infle_lefp[i]], infle_lefp[i], RED);
+//		ips200_drawpoint(lefbor[infle_lefp[i]]+1, infle_lefp[i], RED);
+//		ips200_drawpoint(lefbor[infle_lefp[i]]+2, infle_lefp[i], RED);
+//	}
+//	for(i = 0; i < infle_rigcount; i++){
+//		ips200_drawpoint(rigbor[infle_rigp[i]], infle_rigp[i], RED);
+//		ips200_drawpoint(rigbor[infle_rigp[i]]-1, infle_rigp[i], RED);
+//		ips200_drawpoint(rigbor[infle_rigp[i]]-2, infle_rigp[i], RED);
+//	}
 //	显示状态
 	ips200_showstr(160, 0, "state");
 	ips200_showint16(160, 1, state);
@@ -117,6 +127,7 @@ void binary_disp(void){
 void state_machine(void){
 //	初始化
 	state_temp = state, state = 0;
+	infle_lefcount = 0, infle_rigcount = 0;
 	show_value[0] = total_count_fork;
 	show_value[1] = direction_fork;
 	switch(act_flag){
@@ -180,25 +191,34 @@ void state_machine(void){
 			}
 			break;
 	}
-//	检测赛道类型
+/*------------------------------*/
+/*	       检测赛道类型			*/
+/*==============================*/
+//	两边都有出口 | 十字
 	if(exti_lefcount)
-		if(exti_rigcount){//两边都有出口 | 十字 | 岔道
+		if(exti_rigcount){
 //			if(lef_widrate < 20 || rig_widrate < 20)
 //				if(abs(exti_lefp[0] - exti_rigp[0]) < 10)
 //					{state = 31;return;}
 		}
+//	岔道检测
 	vetsearch_fork_support();
 	if(cut_fork_rig) vertsearch_frok();
 	if(state == 41) return;
+//	没有出口 | 直道 | 弯道丢边
 	if(!exti_lefcount)
-		if(!exti_rigcount){//没有出口 | 直道 | 弯道丢边 | 弯入岔道
+		if(!exti_rigcount){
+		//	拐点检测
+//			inflexion_search();
+		//	弯道检测
 			if(abs(found_point[0]-rcut)<5)
 				if(abs(found_point[0] - found_point[2])>45) {state = 11;return;}
 			if(abs(found_point[2]-lcut)<5)
 				if(abs(found_point[0] - found_point[2])>45) {state = 12;return;}
 		}
+//	只有左边有出口 | 左弯 | 左环 | 十字丢边
 	if(exti_lefcount)
-		if(!exti_rigcount){//只有左边有出口 | 左弯 | 左环 | 十字丢边
+		if(!exti_rigcount){
 		//	没有直道延伸
 			if(abs(ltraf_point_row[exti_leftop] - rcut) < 5)
 				{state = 13;return;}//左弯
@@ -305,7 +325,7 @@ void state_machine_ring(void){
 			if(state == 24)
 				act_flag = 0, yawa_flag = 0, state_flag = 0, img_color = 0xAE9C;
 				cooling_flag = 1, ring_out_flag = 1;
-				tim_interrupt_init_ms(TIM_3, 3000, 0, 0);
+				tim_interrupt_init_ms(TIM_3, 1000, 0, 0);
 			return;
 	//	右环
 		case 26://出环口 -> 入环
@@ -325,7 +345,7 @@ void state_machine_ring(void){
 			if(state == 29)
 				act_flag = 0, yawa_flag = 0, state_flag = 0, img_color = 0xAE9C;
 				cooling_flag = 1, ring_out_flag = 2;
-				tim_interrupt_init_ms(TIM_3, 3000, 0, 0);
+				tim_interrupt_init_ms(TIM_3, 1000, 0, 0);
 			return;
 	}
 }
@@ -540,6 +560,47 @@ void vert_width_analysis(char num, unsigned char end_set){
 //			show_value[1] = rig_toprate;
 //			show_value[2] = rig_botrate;
 			break;
+	}
+}
+/*------------------------------*/
+/*	  	   拐点寻找模块			*/
+/*==============================*/
+void inflexion_search(void){
+//	变量定义、初始化
+	register unsigned char i;
+	unsigned char zero_flag;
+	short infle_diff = 0, infle_difftemp = 0, i_temp = 0;
+//	拐点寻找
+	for(i = MT9V03X_H-2; i > 10; i--){//左
+		if(!zero_flag) infle_difftemp = infle_diff;
+		infle_diff = lefbor[i]-lefbor[i+1];
+		zero_flag = 0;
+		if(infle_diff == 0){zero_flag = 1;continue;}
+		if(infle_diff > 0){
+			if(infle_difftemp < 0) infle_lefp[infle_lefcount] = (i+i_temp)>>1, infle_lefcount++;
+			else i_temp = i;
+		}
+		else{
+			if(infle_difftemp > 0) infle_lefp[infle_lefcount] = (i+i_temp)>>1, infle_lefcount++;
+			else i_temp = i;
+		}
+	}
+//	重置、寻找右拐点
+	infle_diff = 0, infle_difftemp = 0, i_temp = 0;
+	zero_flag = 0;
+	for(i = MT9V03X_H-2; i > 10; i--){
+		if(!zero_flag) infle_difftemp = infle_diff;
+		infle_diff = rigbor[i]-rigbor[i+1];
+		zero_flag = 0;
+		if(infle_diff == 0){zero_flag = 1;continue;}
+		if(infle_diff > 0){
+			if(infle_difftemp < 0) infle_rigp[infle_rigcount] = (i+i_temp)>>1, infle_rigcount++;
+			else i_temp = i;
+		}
+		else{
+			if(infle_difftemp > 0) infle_rigp[infle_rigcount] = (i+i_temp)>>1, infle_rigcount++;
+			else i_temp = i;
+		}
 	}
 }
 /*------------------------------*/

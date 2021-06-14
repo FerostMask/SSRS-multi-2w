@@ -37,7 +37,7 @@ void angle_ctrl(void){
 	if(spd_count == 4){
 	//	速度PID
 			spd_count = 0;
-			pos_pid(&speed, spd, (lcod+rcod)>>1, 320, -320);
+			pos_pid(&speed, spd, (lcod+rcod)>>1, 360, -360);
 	}
 //	角度
 	if(imu_count){
@@ -47,13 +47,13 @@ void angle_ctrl(void){
 		for(i = 2; i >= 0; i--) pflit[i+1] = pflit[i];
 		pflit[0] = (asin(-2*q1*q3 + 2*q0*q2))*573;
 		pita = (pflit[0]+pflit[1]+pflit[2]+pflit[3])/4;
-		pos_pid(&steer, rad*((lcod+rcod)>>1), gz, 90, -90);
-		pos_pid(&angle, blcp, pita-speed.rs, 300, -300);
+		pos_pid(&steer, rad, gz, 200, -200);
+		pos_pid(&angle, blcp, pita-speed.rs, 400, -400);
 	}
 //	角速度、电机、航向角控制
-	gz = icm_gyro_z/(16.4*5.73);
-	inc_pid(&lefdif, ((lcod+rcod)>>1)-steer.rs, lcod, 3000);
-	inc_pid(&rigdif, ((lcod+rcod)>>1)+steer.rs, rcod, 3000);
+	gz = (icm_gyro_z/(164*573))/(float)(((lcod+rcod)>>1));
+	inc_pid(&lefdif, ((lcod+rcod)>>1)-steer.rs, lcod, 3500);
+	inc_pid(&rigdif, ((lcod+rcod)>>1)+steer.rs, rcod, 3500);
 	inc_pid(&acw, angle.rs, gy, 5000);
 	motor_act();
 //	串口发送角度变化

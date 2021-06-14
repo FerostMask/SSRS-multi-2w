@@ -46,7 +46,7 @@ void TIM8_UP_IRQHandler (void)
 void TIM2_IRQHandler (void)
 {
 	uint32 state = TIM2->SR;														// 读取中断状态
-	TIM2->SR &= ~state;	// 清空中断状态
+	TIM2->SR &= ~state;																// 清空中断状态
 //	代码编写区域
 	spd = spd_set, folc_flag = 0, folrow_f = point_folrow;
 	ctrl_pfc[state_flag]();

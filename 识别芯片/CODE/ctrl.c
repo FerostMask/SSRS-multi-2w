@@ -92,14 +92,14 @@ void cam_ctrl_ring(void){
 			p_target[1] = (p_target[1]+77)>>1;
 			break;
 		case 22://入环口
-			max_col = 159-((float)(159-cut_fork_bottom_col)/(float)(89-bottom_point_row))*(89-point_folrow);//计算右边界
+			max_col = 159-((float)(159-cut_fork_bottom_col)/(float)(89-bottom_point_row))*(89-point_folrow+ring_bias);//计算右边界
 			p_target[1] = (lefbor[point_folrow]+max_col)>>1;
 			break;
 		case 23://环内
 			folc_flag = 1;
 			break;
 		case 24://出环
-			max_col = 159-(159.0/(float)(89-rcut))*(82-point_folrow);//计算右边界
+			max_col = 159-(159.0/(float)(89-rcut))*(89-point_folrow+ring_bias);//计算右边界
 			p_target[1] = (lefbor[point_folrow]+max_col)>>1;
 			break;
 	//	右环
@@ -115,14 +115,14 @@ void cam_ctrl_ring(void){
 			p_target[1] = (p_target[1]+83)>>1;
 			break;
 		case 27://入环口
-			min_col = ((float)cut_fork_bottom_col/(float)(89-bottom_point_row))*(89-point_folrow);
+			min_col = ((float)cut_fork_bottom_col/(float)(89-bottom_point_row))*(89-point_folrow+ring_bias);
 			p_target[1] = (min_col+rigbor[point_folrow])>>1;
 			break;
 		case 28://环内
 			folc_flag = 1;
 			break;
 		case 29://出环
-			min_col = (159.0/(float)(89-lcut))*(82-point_folrow);
+			min_col = (159.0/(float)(89-lcut))*(89-point_folrow+ring_bias);
 			p_target[1] = (min_col+rigbor[point_folrow])>>1;
 			break;
 	}
@@ -150,13 +150,19 @@ void cam_ctrl_direct(void){
 				return;
 			}
 		}
-		if(ring_out_flag){
+		else{
 			if(rigbor[point_folrow] > 154){
 				p_target[1] = (lefbor[bottom_point_row-16]+rigbor[bottom_point_row-16])>>1;
 				p_target[1] = (p_target[1]+80)>>1;
 				return;
 			}
 		}
+	}
+//	小波浪
+	if(infle_lefcount > 1 && infle_rigcount > 1){
+		p_target[1] = (lefbor[point_folrow]+rigbor[point_folrow])>>1;
+		p_target[1] = (p_target[1]+((lefbor[point_folrow-20]+rigbor[point_folrow-20])>>1))>>1;
+		return;
 	}
 //	终点
 	if(count_fork > 7) {p_target[1] = 80; return;}

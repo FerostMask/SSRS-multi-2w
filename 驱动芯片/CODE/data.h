@@ -70,9 +70,9 @@ extern struct pidpara acw;
 /*----------------------*/
 /*	   ½Ç¶È¿ØÖÆÄ£¿é		*/
 /*======================*/
+extern int gy, gz;
 extern short blcp;
 extern short pita, yawa, yawa_temp;
-extern short gy, gz;
 extern short yfilt[4];
 extern short pflit[4];
 
